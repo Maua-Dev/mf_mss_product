@@ -2,12 +2,13 @@ from enum import Enum
 
 
 class MEAL_TYPE(Enum):
-    SNACKS = "SNACKS"
+    SANDWICHES = "SANDWICHES"
     DRINKS = "DRINKS"
-    CANDY = "CANDY"
+    CANDIES = "CANDIES"
     PLATES = "PLATES"
     PORTIONS = "PORTIONS"
-    TIDBIT = "TIDBIT"
+    SNACKS = "SNACKS"
     PASTAS = "PASTAS"
-    SALAD = "SALAD"
+    SALADS = "SALADS"
+    
     
