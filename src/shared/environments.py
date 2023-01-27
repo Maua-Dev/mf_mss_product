@@ -2,7 +2,7 @@ import enum
 from enum import Enum
 import os
 
-from src.shared.domain.repositories.user_repository_interface import IUserRepository
+from src.shared.domain.repositories.product_repository_interface import IUserRepository
 
 
 class STAGE(Enum):
