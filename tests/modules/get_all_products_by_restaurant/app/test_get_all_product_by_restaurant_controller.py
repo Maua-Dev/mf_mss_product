@@ -23,3 +23,31 @@ class Test_GetAllProductsByRestaurantController:
         assert response.status_code == 200
         assert len(response.body['all_products']) == 93
         assert response.body['message'] == "the products were retrieved"
+
+    def test_get_all_product_by_restaurant_controller_missing(self):
+        repo = ProductRepositoryMock()
+        usecase = GetAllProductsByRestaurantUsecase(repo=repo)
+        controller = GetAllProductByRestaurantController(usecase=usecase)
+
+        request = HttpRequest()
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Field restaurant is missing"
+
+    def test_get_all_product_by_restaurant_controller_EntityError(self):
+        repo = ProductRepositoryMock()
+        usecase = GetAllProductsByRestaurantUsecase(repo=repo)
+        controller = GetAllProductByRestaurantController(usecase=usecase)
+
+        request = HttpRequest(
+            query_params={
+                'restaurant': 5
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "Field restaurant is not valid"
