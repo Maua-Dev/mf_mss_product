@@ -1,4 +1,4 @@
-from lib2to3.pytree import Base
+
 from src.shared.helpers.errors.base_error import BaseError
 
 class NoItemsFound(BaseError):

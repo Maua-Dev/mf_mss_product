@@ -2,7 +2,7 @@ import enum
 from enum import Enum
 import os
 
-from src.shared.domain.repositories.product_repository_interface import IUserRepository
+from src.shared.domain.repositories.product_repository_interface import IProductRepository
 
 
 class STAGE(Enum):
@@ -58,10 +58,10 @@ class Environments:
             self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
 
     @staticmethod
-    def get_user_repo() -> IUserRepository:
+    def get_user_repo() -> IProductRepository:
         if Environments.get_envs().stage == STAGE.TEST:
-            from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
-            return UserRepositoryMock
+            from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
+            return ProductRepositoryMock
         # elif Environments.get_envs().stage == STAGE.PROD:
         #     from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
         #     return UserRepositoryDynamo
