@@ -2,6 +2,6 @@ from enum import Enum
 
 
 class RESTAURANT(Enum):
-    SOUZA_DE_ABREU = "Souza de Abreu"
-    RESTAURANTE_DO_H = "Restaurante do H"
+    SOUZA_DE_ABREU = "SOUZA_DE_ABREU"
+    RESTAURANTE_DO_H = "RESTAURANTE_DO_H"
     

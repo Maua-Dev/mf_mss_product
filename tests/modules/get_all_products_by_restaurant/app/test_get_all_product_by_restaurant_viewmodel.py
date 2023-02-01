@@ -20,7 +20,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':0,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -32,7 +32,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':1,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -44,7 +44,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':2,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -56,7 +56,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':3,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -68,7 +68,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':4,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -80,7 +80,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':5,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -92,7 +92,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':6,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -104,7 +104,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':7,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -116,7 +116,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':8,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -128,7 +128,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':9,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -140,7 +140,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':10,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -152,7 +152,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':11,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -164,7 +164,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':12,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -176,7 +176,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':13,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -188,7 +188,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':14,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -200,7 +200,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':15,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -212,7 +212,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':16,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -224,7 +224,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':17,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -236,7 +236,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':18,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -248,7 +248,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':19,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -260,7 +260,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':20,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -272,7 +272,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':21,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -284,7 +284,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':22,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -296,7 +296,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':23,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -308,7 +308,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':24,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -320,7 +320,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':25,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -332,7 +332,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':26,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -344,7 +344,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':27,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -356,7 +356,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':28,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -368,7 +368,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':29,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -380,7 +380,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':30,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -392,7 +392,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':31,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -404,7 +404,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':32,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -416,7 +416,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':33,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -428,7 +428,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':34,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -440,7 +440,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':35,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -452,7 +452,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':36,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -464,7 +464,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':37,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -476,7 +476,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':38,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -488,7 +488,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':39,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -500,7 +500,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':40,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -512,7 +512,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':41,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -524,7 +524,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':42,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -536,7 +536,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':43,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -548,7 +548,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':44,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -560,7 +560,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':45,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -572,7 +572,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':46,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -584,7 +584,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':47,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -596,7 +596,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':48,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -608,7 +608,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':49,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -620,7 +620,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':50,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -632,7 +632,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':51,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -644,7 +644,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':52,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -656,7 +656,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':53,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -668,7 +668,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':54,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -680,7 +680,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':55,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -692,7 +692,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':56,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -704,7 +704,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':57,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -716,7 +716,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':58,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -728,7 +728,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':59,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -740,7 +740,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':60,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -752,7 +752,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':61,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -764,7 +764,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':62,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -776,7 +776,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':63,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -788,7 +788,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':64,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -800,7 +800,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':65,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -812,7 +812,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':66,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -824,7 +824,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':67,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -836,7 +836,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':68,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -848,7 +848,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':69,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -860,7 +860,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':70,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -872,7 +872,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':71,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -884,7 +884,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':72,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -896,7 +896,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':73,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -908,7 +908,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':74,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -920,7 +920,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':75,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -932,7 +932,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':76,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -944,7 +944,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':77,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -956,7 +956,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':78,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -968,7 +968,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':79,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -980,7 +980,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':80,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -992,7 +992,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':81,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1004,7 +1004,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':82,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1016,7 +1016,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':83,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1028,7 +1028,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':84,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1040,7 +1040,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':85,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1052,7 +1052,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':86,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1064,7 +1064,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':87,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1076,7 +1076,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':88,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1088,7 +1088,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':89,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1100,7 +1100,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':90,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1112,7 +1112,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':91,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1124,7 +1124,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':92,
                 'last_update':1674835337393,
-                'restaurant':'Souza de Abreu',
+                'restaurant':'SOUZA_DE_ABREU',
                 'prepareTime':20
             },
             {
@@ -1136,7 +1136,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':0,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1148,7 +1148,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':1,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1160,7 +1160,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':2,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1172,7 +1172,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':3,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1184,7 +1184,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':4,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1196,7 +1196,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':5,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1208,7 +1208,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':6,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1220,7 +1220,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':7,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1232,7 +1232,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':8,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1244,7 +1244,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':9,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1256,7 +1256,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':10,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1268,7 +1268,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':11,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1280,7 +1280,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':12,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1292,7 +1292,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':13,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1304,7 +1304,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':14,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1316,7 +1316,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':15,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1328,7 +1328,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':16,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1340,7 +1340,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':17,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1352,7 +1352,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':18,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1364,7 +1364,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':19,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1376,7 +1376,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':20,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1388,7 +1388,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':21,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1400,7 +1400,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':22,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1412,7 +1412,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':23,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1424,7 +1424,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':24,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1436,7 +1436,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':25,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1448,7 +1448,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':26,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1460,7 +1460,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':27,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1472,7 +1472,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':28,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1484,7 +1484,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':29,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1496,7 +1496,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':30,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1508,7 +1508,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':31,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1520,7 +1520,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':32,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1532,7 +1532,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':33,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1544,7 +1544,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':34,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1556,7 +1556,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':35,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1568,7 +1568,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':36,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1580,7 +1580,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':37,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1592,7 +1592,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':38,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1604,7 +1604,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':39,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1616,7 +1616,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':40,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1628,7 +1628,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':41,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1640,7 +1640,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':42,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1652,7 +1652,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':43,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             },
             {
@@ -1664,7 +1664,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
                 'product_id':44,
                 'last_update':1674835337393,
-                'restaurant':'Restaurante do H',
+                'restaurant':'RESTAURANTE_DO_H',
                 'prepareTime':20
             }
         ],

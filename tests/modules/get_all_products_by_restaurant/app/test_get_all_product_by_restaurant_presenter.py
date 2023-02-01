@@ -19,7 +19,7 @@ class Test_GetAllProductByRestaurantPresenter:
             "header2": "value1,value2"
           },
           "queryStringParameters": {
-            "parameter2": "value"
+            "restaurant": "SOUZA_DE_ABREU"
           },
           "requestContext": {
             "accountId": "123456789012",

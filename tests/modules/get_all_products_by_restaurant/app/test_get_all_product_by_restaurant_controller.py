@@ -14,12 +14,12 @@ class Test_GetAllProductsByRestaurantController:
 
         request = HttpRequest(
             query_params={
-                'restaurant': repo.products[0].restaurant
+                'restaurant': repo.products[0].restaurant.value
                 }
             )
         
         response = controller(request=request)
 
         assert response.status_code == 200
-        assert len(response.body['all_products']) == all(len(repo.products[0].restaurant))
+        assert len(response.body['all_products']) == 93
         assert response.body['message'] == "the products were retrieved"
