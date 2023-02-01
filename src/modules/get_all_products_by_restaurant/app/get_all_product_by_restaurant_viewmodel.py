@@ -31,9 +31,8 @@ class GetAllProductsByRestaurantViewmodel:
 
     def to_dict(self) -> dict:
         return{
-            "Souza de Abreu": [ProductViewmodel(product).to_dict() for product in self.products if product.restaurant == RESTAURANT.SOUZA_DE_ABREU],
-            "Restaurante do H": [ProductViewmodel(product).to_dict() for product in self.products if product.restaurant == RESTAURANT.RESTAURANTE_DO_H],
-            "message": "the products were retrived"
+            "all_products": [ProductViewmodel(product).to_dict() for product in self.products],
+            "message": "the products were retrieved"
         }
 
     

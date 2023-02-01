@@ -60,8 +60,8 @@ class Environments:
     @staticmethod
     def get_user_repo() -> IUserRepository:
         if Environments.get_envs().stage == STAGE.TEST:
-            from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
-            return UserRepositoryMock
+            from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
+            return ProductRepositoryMock
         # elif Environments.get_envs().stage == STAGE.PROD:
         #     from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
         #     return UserRepositoryDynamo

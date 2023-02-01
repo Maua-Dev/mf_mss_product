@@ -8,9 +8,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
         repo = ProductRepositoryMock()
         all_products = repo.products
         viewmodel = GetAllProductsByRestaurantViewmodel(all_products=all_products)
-
+        
         expected = {
-        'Souza de Abreu':[
+        'all_products':[
             {
                 'available':True,
                 'price':14.0,
@@ -1126,9 +1126,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'last_update':1674835337393,
                 'restaurant':'Souza de Abreu',
                 'prepareTime':20
-            }
-        ],
-        'Restaurante do H':[
+            },
             {
                 'available':True,
                 'price':5.0,
@@ -1670,9 +1668,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'prepareTime':20
             }
         ],
-        'message':'the products were retrived'
+        'message':'the products were retrieved'
         }
-
+        
         assert viewmodel.to_dict() == expected
 
 
