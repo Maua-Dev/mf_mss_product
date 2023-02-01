@@ -5,14 +5,19 @@ from src.shared.infra.repositories.product_repository_mock import ProductReposit
 
 
 
-class Test_GetAllProductByRestaurant:
-    def test_get_all_product_by_restarant(self):
+class Test_GetAllProductByRestaurantUsecase:
+    def test_get_all_product_by_restarant_usecase_rest1(self):
         repo = ProductRepositoryMock()
         usecase = GetAllProductsByRestaurantUsecase(repo=repo)
 
         product_rest1 = usecase(restaurant=RESTAURANT.SOUZA_DE_ABREU)
-        product_rest2 = usecase(restaurant=RESTAURANT.RESTAURANTE_DO_H)
 
         assert all([product.restaurant == RESTAURANT.SOUZA_DE_ABREU for product in product_rest1])
+
+    def test_get_all_product_by_restarant_usecase_rest2(self):
+        repo = ProductRepositoryMock()
+        usecase = GetAllProductsByRestaurantUsecase(repo=repo)
+
+        product_rest2 = usecase(restaurant=RESTAURANT.RESTAURANTE_DO_H)
+
         assert all([product.restaurant == RESTAURANT.RESTAURANTE_DO_H for product in product_rest2])
-         

@@ -1,11 +1,10 @@
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.modules.get_all_products_by_restaurant.app.get_all_product_by_restaurant_usecase import GetAllProductsByRestaurantUsecase
-from src.modules.get_all_products_by_restaurant.app.get_all_product_by_restaurant_viewmodel import GetAllProductsByRestaurantViewmodel
+from .get_all_product_by_restaurant_usecase import GetAllProductsByRestaurantUsecase
+from .get_all_product_by_restaurant_viewmodel import GetAllProductsByRestaurantViewmodel
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
-from src.shared.helpers.external_interfaces.http_codes import InternalServerError, OK, BadRequest, NotFound
-from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
+from src.shared.helpers.external_interfaces.http_codes import InternalServerError, OK, BadRequest
+from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound
 
 
 class GetAllProductByRestaurantController:

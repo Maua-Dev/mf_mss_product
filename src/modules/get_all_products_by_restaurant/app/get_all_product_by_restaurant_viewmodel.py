@@ -10,7 +10,7 @@ class ProductViewmodel:
 
     def to_dict(self) -> dict:
         return{
-            "available": self.product.available,
+             "available": self.product.available,
              "price": self.product.price,
              "name": self.product.name,
              "description": self.product.description,
@@ -27,7 +27,7 @@ class GetAllProductsByRestaurantViewmodel:
     all_products: List[ProductViewmodel]
     
     def __init__(self, all_products: List[Product]):
-        self.products = [product for product in all_products]
+        self.products = all_products
 
     def to_dict(self) -> dict:
         return{
