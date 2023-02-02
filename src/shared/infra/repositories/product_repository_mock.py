@@ -155,13 +155,5 @@ class ProductRepositoryMock(IProductRepository):
     
    
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
-        all_products = dict()
-        
-        for restaurant in [restaurant for restaurant in RESTAURANT]:
-            all_products[restaurant] = []
-            
-        for product in self.products:
-            all_products[product.restaurant].append(product)
-        
-        return all_products
+        return {restaurant: [product for product in self.products if product.restaurant == restaurant] for restaurant in RESTAURANT}
     
