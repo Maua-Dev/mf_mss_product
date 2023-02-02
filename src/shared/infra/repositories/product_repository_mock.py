@@ -153,9 +153,7 @@ class ProductRepositoryMock(IProductRepository):
             Product(available=True, price=36.0, name='Strogonoff Carne', description='', prepareTime=20, meal_type=MEAL_TYPE.PLATES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', product_id=44, last_update=1674835337393, restaurant=RESTAURANT.RESTAURANTE_DO_H) 
         ]
     
-    def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
-        return [product for product in self.products if product.restaurant == restaurant]
-    
+   
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
         all_products = dict()
         
