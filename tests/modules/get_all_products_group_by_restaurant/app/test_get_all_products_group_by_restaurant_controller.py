@@ -12,3 +12,4 @@ class Test_GetAllProductsGroupByRestaurantController:
         response = controller(request={})
         
         assert response.status_code == 200
+        assert response.data["message"] == "the products were retrieved"
