@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
@@ -155,3 +155,15 @@ class ProductRepositoryMock(IProductRepository):
     
     def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
         return [product for product in self.products if product.restaurant == restaurant]
+    
+    def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
+        all_products = dict()
+        
+        for restaurant in [restaurant for restaurant in RESTAURANT]:
+            all_products[restaurant] = []
+            
+        for product in self.products:
+            all_products[product.restaurant].append(product)
+        
+        return all_products
+    

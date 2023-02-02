@@ -71,4 +71,5 @@ class Product(abc.ABC):
     
     
     
-    
+    def __repr__(self):
+        return f"Product(available={self.available}, price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepareTime={self.prepareTime})"
