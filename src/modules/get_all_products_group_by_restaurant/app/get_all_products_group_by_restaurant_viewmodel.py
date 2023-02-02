@@ -29,11 +29,7 @@ class GetAllProductsGroupByRestaurantViewmodel:
         self.all_products = all_products
 
     def to_dict(self) -> dict:
-        dict_return = {
-            k.value: [ProductViewmodel(product=product).to_dict() for product in v] for k, v in self.all_products.items()     
-        }
-        dict_return["message"] = "the products were retrieved"
-        return dict_return
+        return {**{k.value: [ProductViewmodel(product=product).to_dict() for product in v] for k, v in self.all_products.items()}, **{"message": "the products were retrieved"}}
         
 
 
