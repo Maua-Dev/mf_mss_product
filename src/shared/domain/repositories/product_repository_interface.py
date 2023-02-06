@@ -10,3 +10,6 @@ class IProductRepository(ABC):
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
         pass
     
+    @abstractmethod
+    def delete_products_group_by_restaurant(self, product_id: int, restaurant: RESTAURANT) -> Dict[RESTAURANT, List[Product]]:
+        pass
