@@ -17,10 +17,9 @@ class DeleteProductsByRestaurantUsecase:
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")
 
-        if product_id is None:
-            raise NoItemsFound("product_id")
+        product = self.repo.delete_products_by_restaurant(product_id=product_id,restaurant=restaurant)
 
-        if restaurant is None:
-            raise NoItemsFound("restaurant")
+        if product is None:
+            raise NoItemsFound("product_id and restaurant")
         
-        return self.repo.delete_products_by_restaurant(product_id=product_id, restaurant=restaurant)
+        return product

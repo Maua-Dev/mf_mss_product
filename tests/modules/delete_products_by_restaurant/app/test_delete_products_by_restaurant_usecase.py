@@ -11,10 +11,13 @@ class Test_DeleteProductsByRestaurantUsecase:
         repo = ProductRepositoryMock()
         usecase = DeleteProductsByRestaurantUsecase(repo=repo)
         lenBefore = len(repo.products)
-        product = usecase(product_id=0, restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        product_id = 0
+
+        product = usecase(product_id=product_id, restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
         assert len(repo.products) == lenBefore - 1
-        assert [product.product_id, product.restaurant] == [0, repo.products[0].restaurant]
+        assert [product.product_id, product.restaurant] == [product_id, repo.products[0].restaurant]
 
     def test_delete_products_by_restaurant_diff_type_product_id(self):
         repo = ProductRepositoryMock()
@@ -30,17 +33,10 @@ class Test_DeleteProductsByRestaurantUsecase:
         with pytest.raises(EntityError):
             product = usecase(product_id=0, restaurant="SOUZA_DE_ABREU")
 
-    # def test_delete_products_by_restaurant_not_found_product_id(self):
-    #     repo = ProductRepositoryMock()
-    #     usecase = DeleteProductsByRestaurantUsecase(repo=repo)
+    def test_delete_products_by_restaurant_not_found_product_id(self):
+        repo = ProductRepositoryMock()
+        usecase = DeleteProductsByRestaurantUsecase(repo=repo)
 
-    #     with pytest.raises(NoItemsFound):
-    #         product = usecase(product_id=-2, restaurant=RESTAURANT.SOUZA_DE_ABREU)
-
-    # def test_delete_products_by_restaurant_not_found_restaurant(self):
-    #     repo = ProductRepositoryMock()
-    #     usecase = DeleteProductsByRestaurantUsecase(repo=repo)
-
-    #     with pytest.raises(NoItemsFound):
-    #         product = usecase(product_id=0, restaurant=RESTAURANT.SOUZA_DE_ABREUD)
+        with pytest.raises(NoItemsFound):
+            product = usecase(product_id=1000, restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
