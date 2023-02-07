@@ -1,14 +1,14 @@
-from src.modules.delete_product.app.delete_product_controller import DeleteProductsByRestaurantController
-from src.modules.delete_product.app.delete_product_usecase import DeleteProductsByRestaurantUsecase
+from src.modules.delete_product.app.delete_product_controller import DeleteProductController
+from src.modules.delete_product.app.delete_product_usecase import DeleteProductUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 
 
-class Test_DeleteProductsByRestaurantController:
-    def test_delete_products_by_restaurant_controller(self):
+class Test_DeleteProductController:
+    def test_delete_product_controller(self):
         repo = ProductRepositoryMock()
-        usecase = DeleteProductsByRestaurantUsecase(repo=repo)
-        controller = DeleteProductsByRestaurantController(usecase=usecase)
+        usecase = DeleteProductUsecase(repo=repo)
+        controller = DeleteProductController(usecase=usecase)
 
         request = HttpRequest(
             body={
@@ -24,10 +24,10 @@ class Test_DeleteProductsByRestaurantController:
         assert response.body['product']['restaurant'] == "SOUZA_DE_ABREU"
         assert response.body['message'] == "the product was deleted"
         
-    def test_delete_products_by_restaurant_product_id_is_missing(self):
+    def test_delete_product_product_id_is_missing(self):
         repo = ProductRepositoryMock()
-        usecase = DeleteProductsByRestaurantUsecase(repo=repo)
-        controller = DeleteProductsByRestaurantController(usecase=usecase)
+        usecase = DeleteProductUsecase(repo=repo)
+        controller = DeleteProductController(usecase=usecase)
         
         request = HttpRequest(
             body={
@@ -40,10 +40,10 @@ class Test_DeleteProductsByRestaurantController:
         assert response.status_code == 400
         assert response.body == "Field product_id is missing"
 
-    def test_delete_products_by_restaurant_restaurant_is_missing(self):
+    def test_delete_product_restaurant_is_missing(self):
         repo = ProductRepositoryMock()
-        usecase = DeleteProductsByRestaurantUsecase(repo=repo)
-        controller = DeleteProductsByRestaurantController(usecase=usecase)
+        usecase = DeleteProductUsecase(repo=repo)
+        controller = DeleteProductController(usecase=usecase)
         
         request = HttpRequest(
             body={
@@ -56,10 +56,10 @@ class Test_DeleteProductsByRestaurantController:
         assert response.status_code == 400
         assert response.body == "Field restaurant is missing"
 
-    def test_delete_products_by_restaurant_not_found(self):
+    def test_delete_product_restaurant_not_valid(self):
         repo = ProductRepositoryMock()
-        usecase = DeleteProductsByRestaurantUsecase(repo=repo)
-        controller = DeleteProductsByRestaurantController(usecase=usecase)
+        usecase = DeleteProductUsecase(repo=repo)
+        controller = DeleteProductController(usecase=usecase)
         
         request = HttpRequest(
             body={

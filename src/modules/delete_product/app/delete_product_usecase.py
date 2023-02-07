@@ -6,7 +6,7 @@ from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound
 
 
-class DeleteProductsByRestaurantUsecase:
+class DeleteProductUsecase:
     def __init__(self, repo: IProductRepository):
         self.repo = repo
 

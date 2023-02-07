@@ -1,8 +1,8 @@
 import json
 from src.modules.delete_product.app.delete_product_presenter import lambda_handler
 
-class Test_DeleteProductsByRestaurantPresenter:
-    def test_delete_product_by_restaurant_presenter(self):
+class Test_DeleteProductPresenter:
+    def test_delete_product_presenter(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -59,7 +59,7 @@ class Test_DeleteProductsByRestaurantPresenter:
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['message'] == "the product was deleted"
 
-    def test_delete_product_by_restaurant_presenter_missing_product_id(self):
+    def test_delete_product_presenter_product_id_is_missing(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -116,7 +116,7 @@ class Test_DeleteProductsByRestaurantPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field product_id is missing"
 
-    def test_delete_product_by_restaurant_presenter_missing_restaurant(self):
+    def test_delete_product_presenter_restaurant_is_missing(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -173,7 +173,7 @@ class Test_DeleteProductsByRestaurantPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field restaurant is missing"
 
-    def test_delete_product_by_restaurant_presenter_restaurant_not_valid(self):
+    def test_delete_product_presenter_restaurant_not_valid(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",

@@ -1,13 +1,13 @@
-from src.modules.delete_product.app.delete_product_viewmodel import DeleteProductsByRestaurantViewmodel
+from src.modules.delete_product.app.delete_product_viewmodel import DeleteProductViewmodel
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 
 
-class Test_DeleteProductsByRestaurantViewmodel:
-    def test_delete_products_by_restaurant_viewmodel(self):
+class Test_DeleteProductViewmodel:
+    def test_delete_product_viewmodel(self):
         repo = ProductRepositoryMock()
-        viewmodel = DeleteProductsByRestaurantViewmodel(repo.products[0])
+        viewmodel = DeleteProductViewmodel(repo.products[0])
 
         expected = {
             'product': {

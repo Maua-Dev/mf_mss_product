@@ -21,7 +21,7 @@ class ProductFullViewmodel:
              "restaurant": self.product.restaurant.value       
             }
 
-class DeleteProductsByRestaurantViewmodel:
+class DeleteProductViewmodel:
     product: ProductFullViewmodel
 
     def __init__(self, product: Product):
