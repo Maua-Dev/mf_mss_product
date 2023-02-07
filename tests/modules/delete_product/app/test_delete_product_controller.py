@@ -1,5 +1,5 @@
-from src.modules.delete_products_by_restaurant.app.delete_products_by_restaurant_controller import DeleteProductsByRestaurantController
-from src.modules.delete_products_by_restaurant.app.delete_products_by_restaurant_usecase import DeleteProductsByRestaurantUsecase
+from src.modules.delete_product.app.delete_product_controller import DeleteProductsByRestaurantController
+from src.modules.delete_product.app.delete_product_usecase import DeleteProductsByRestaurantUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 

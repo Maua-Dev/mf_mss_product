@@ -1,7 +1,7 @@
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
-from .delete_products_by_restaurant_controller import DeleteProductsByRestaurantController
-from .delete_products_by_restaurant_usecase import DeleteProductsByRestaurantUsecase
+from .delete_product_controller import DeleteProductsByRestaurantController
+from .delete_product_usecase import DeleteProductsByRestaurantUsecase
 
 repo = Environments.get_user_repo()()
 usecase = DeleteProductsByRestaurantUsecase(repo=repo)

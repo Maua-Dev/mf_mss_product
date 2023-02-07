@@ -11,5 +11,5 @@ class IProductRepository(ABC):
         pass
     
     @abstractmethod
-    def delete_products_by_restaurant(self, product_id: int, restaurant: RESTAURANT) -> Dict[RESTAURANT, List[Product]]:
+    def delete_product(self, product_id: int, restaurant: RESTAURANT) -> Product:
         pass

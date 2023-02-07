@@ -1,5 +1,5 @@
 import pytest
-from src.modules.delete_products_by_restaurant.app.delete_products_by_restaurant_usecase import DeleteProductsByRestaurantUsecase
+from src.modules.delete_product.app.delete_product_usecase import DeleteProductsByRestaurantUsecase
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.helpers.errors.usecase_errors import NoItemsFound

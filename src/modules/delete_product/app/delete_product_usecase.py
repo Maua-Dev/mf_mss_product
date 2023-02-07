@@ -10,14 +10,14 @@ class DeleteProductsByRestaurantUsecase:
     def __init__(self, repo: IProductRepository):
         self.repo = repo
 
-    def __call__(self, product_id: int, restaurant: RESTAURANT) -> Dict[RESTAURANT, List[Product]]:
+    def __call__(self, product_id: int, restaurant: RESTAURANT) -> Product:
         if type(product_id) != int:
             raise EntityError("product_id")
 
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")
 
-        product = self.repo.delete_products_by_restaurant(product_id=product_id,restaurant=restaurant)
+        product = self.repo.delete_product(product_id=product_id,restaurant=restaurant)
 
         if product is None:
             raise NoItemsFound("product_id and restaurant")

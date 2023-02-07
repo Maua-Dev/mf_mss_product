@@ -1,4 +1,4 @@
-from src.modules.delete_products_by_restaurant.app.delete_products_by_restaurant_viewmodel import DeleteProductsByRestaurantViewmodel
+from src.modules.delete_product.app.delete_product_viewmodel import DeleteProductsByRestaurantViewmodel
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock

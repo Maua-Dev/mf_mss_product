@@ -1,5 +1,5 @@
 import json
-from src.modules.delete_products_by_restaurant.app.delete_products_by_restaurant_presenter import lambda_handler
+from src.modules.delete_product.app.delete_product_presenter import lambda_handler
 
 class Test_DeleteProductsByRestaurantPresenter:
     def test_delete_product_by_restaurant_presenter(self):
