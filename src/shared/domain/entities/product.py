@@ -29,7 +29,7 @@ class Product(abc.ABC):
                 prepareTime: int = None):
         
         if type(available) != bool:
-            raise EntityError("avaiable")
+            raise EntityError("available")
         self.available = available
         
         if type(price) != float:

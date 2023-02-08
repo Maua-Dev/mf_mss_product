@@ -40,3 +40,4 @@ class Test_CreateProductViewmodel:
         
         
         assert expected == product_viewmodel
+        assert type(product_viewmodel["product"]["last_update"]) == int
