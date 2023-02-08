@@ -12,7 +12,9 @@ class IProductRepository(ABC):
     
     @abstractmethod
     def delete_product(self, product_id: int, restaurant: RESTAURANT) -> Product:
+        pass
 
+    @abstractmethod
     def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
         pass
 
