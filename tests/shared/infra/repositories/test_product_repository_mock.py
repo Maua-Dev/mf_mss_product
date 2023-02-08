@@ -18,6 +18,16 @@ class Test_ProductRepositoryMock():
                 lenght_products += 1      
         assert lenght_products == len(repo.products)
 
+
+    def test_delete_product(self):
+        repo = ProductRepositoryMock()
+        lenBefore = len(repo.products)
+        product = repo.delete_product(product_id=0, restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        assert product.product_id == 0
+        assert product.restaurant.value == "SOUZA_DE_ABREU"
+        assert len(repo.products) == lenBefore - 1
+
     def test_create_product(self):
         repo = ProductRepositoryMock()
         len_before = len(repo.products)
