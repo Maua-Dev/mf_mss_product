@@ -34,6 +34,17 @@ class Test_ProductRepositoryMock():
             restaurant=RESTAURANT.SOUZA_DE_ABREU
         ))
 
+        assert product.available == True
+        assert product.price == 14.0
+        assert product.name == 'Lanche Mortadela'
+        assert product.description == 'Mortadela'
+        assert product.prepareTime == 20
+        assert product.meal_type == MEAL_TYPE.SANDWICHES
+        assert product.photo == 'https://avatars.githubusercontent.com/u/30812461?v=4'
+        assert product.product_id == 0
+        assert product.last_update == 1674835337393
+        assert product.restaurant == RESTAURANT.SOUZA_DE_ABREU
+
         assert type(product) == Product
         assert len(repo.products) == len_before + 1
         
