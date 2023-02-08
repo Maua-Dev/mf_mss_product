@@ -34,7 +34,6 @@ class CreateProductController:
             meal_type = request.data.get('meal_type')
             if meal_type not in [meal_type_value.value for meal_type_value in MEAL_TYPE]:
                 raise EntityError('meal_type')
-            meal_type = MEAL_TYPE[meal_type]
 
             if request.data.get("photo") is None:
                 raise MissingParameters("photo")
@@ -45,7 +44,6 @@ class CreateProductController:
             restaurant = request.data.get('restaurant')
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise EntityError('restaurant')
-            restaurant = RESTAURANT[restaurant]
 
             if request.data.get("prepareTime") is None:
                 raise MissingParameters("prepareTime")
@@ -54,9 +52,9 @@ class CreateProductController:
                 price=request.data.get("price"),
                 name=request.data.get("name"),
                 description=request.data.get("description"),
-                meal_type=MEAL_TYPE[request.data.get("meal_type")],
+                meal_type=MEAL_TYPE[meal_type],
                 photo=request.data.get("photo"),
-                restaurant=RESTAURANT[request.data.get("restaurant")],
+                restaurant=RESTAURANT[restaurant],
                 prepareTime=request.data.get("prepareTime"))
             viewmodel = CreateProductViewmodel(product=product)
 
