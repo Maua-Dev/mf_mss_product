@@ -162,3 +162,18 @@ class ProductRepositoryMock(IProductRepository):
             if product.restaurant == restaurant and product.product_id == product_id:
                 return self.products.pop(idx)
         return None
+    
+    def create_product(self, product:Product) -> Product:
+        self.products.append(product)
+
+        return product
+
+    def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
+        products = list()
+        for product in self.products:
+            if product.restaurant == restaurant:
+                products.append(product)
+        return products
+            
+
+        
