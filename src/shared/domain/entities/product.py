@@ -11,10 +11,11 @@ class Product(abc.ABC):
     description: str
     meal_type: MEAL_TYPE
     photo: str
-    product_id: int
+    product_id: str
     last_update: int  #miliseconds
     restaurant: RESTAURANT
     prepareTime: int = None #min
+    PRODUCT_ID_LENGHT = 36
     
     def __init__(self,
                 available: bool,
@@ -23,7 +24,7 @@ class Product(abc.ABC):
                 description: str,
                 meal_type: MEAL_TYPE,
                 photo: str,
-                product_id: int,
+                product_id: str,
                 last_update: int,
                 restaurant: RESTAURANT,
                 prepareTime: int = None):
@@ -52,7 +53,7 @@ class Product(abc.ABC):
             raise EntityError("photo")
         self.photo = photo
         
-        if type(product_id) != int:
+        if not self.validate_product_id(product_id=product_id):
             raise EntityError("product_id")
         self.product_id = product_id
         
@@ -69,7 +70,12 @@ class Product(abc.ABC):
         self.prepareTime = prepareTime
         
     
-    
-    
+    @staticmethod
+    def validate_product_id(product_id: str) -> bool:
+        if type(product_id) != str: return False
+        if len(product_id) != Product.PRODUCT_ID_LENGHT: return False
+        return True
+            
+                
     def __repr__(self):
         return f"Product(available={self.available}, price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepareTime={self.prepareTime})"

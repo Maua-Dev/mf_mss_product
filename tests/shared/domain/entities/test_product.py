@@ -15,7 +15,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=7
@@ -28,7 +28,7 @@ class Test_Product:
         assert product.description == "Um lanche de Carne"
         assert product.meal_type == MEAL_TYPE.PORTIONS
         assert product.photo == "https://avatars.githubusercontent.com/u/30812461?v=4"
-        assert product.product_id == 5
+        assert product.product_id == "22cfca1a-dd56-4fd9-9c62-9a5aad49879c"
         assert product.last_update == 1639323013000
         assert product.restaurant == RESTAURANT.SOUZA_DE_ABREU
         assert product.prepareTime == 7
@@ -41,7 +41,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -54,7 +54,7 @@ class Test_Product:
         assert product.description == "Um lanche de Carne"
         assert product.meal_type == MEAL_TYPE.PORTIONS
         assert product.photo == "https://avatars.githubusercontent.com/u/30812461?v=4"
-        assert product.product_id == 5
+        assert product.product_id == "22cfca1a-dd56-4fd9-9c62-9a5aad49879c"
         assert product.last_update == 1639323013000
         assert product.restaurant == RESTAURANT.SOUZA_DE_ABREU
         assert product.prepareTime == None
@@ -68,7 +68,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -83,7 +83,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -98,7 +98,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -113,7 +113,7 @@ class Test_Product:
             description=8,
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -128,7 +128,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=True,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -143,7 +143,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo=None,
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -162,6 +162,21 @@ class Test_Product:
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
+        )
+             
+    def test_product_product_id_invalid_wrong_length(self): 
+        with pytest.raises(EntityError):
+            Product(
+            available=True,
+            price=20.00,
+            name="Carne",
+            description="Um lanche de Carne",
+            meal_type=MEAL_TYPE.PORTIONS,
+            photo="https://avatars.githubusercontent.com/u/30812461?v=4",
+            product_id="22cfca1a-dd56-4fd9-9c62",
+            last_update=1639323013000,
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            prepareTime=None
         ) 
     
     def test_product_last_update_invalid(self): 
@@ -173,7 +188,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update={},
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=None
@@ -188,7 +203,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=MEAL_TYPE.SNACKS,
             prepareTime=None
@@ -203,7 +218,7 @@ class Test_Product:
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=5,
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=()
