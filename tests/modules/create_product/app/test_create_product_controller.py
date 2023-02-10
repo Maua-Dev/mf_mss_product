@@ -22,7 +22,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -38,7 +38,7 @@ class Test_CreteProductController:
         assert type(response.body["product"]["product_id"]) == str
         assert type(response.body["product"]["last_update"]) == int
         assert response.body["product"]["restaurant"] == "SOUZA_DE_ABREU"
-        assert response.body["product"]["prepareTime"] == 20
+        assert response.body["product"]["prepare_time"] == 20
 
     def test_create_product_controller_available_is_missing(self):
         repo = ProductRepositoryMock()
@@ -52,7 +52,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
         
         response = controller(request=request)
@@ -72,7 +72,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
         
         response = controller(request=request)
@@ -92,7 +92,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
         
         response = controller(request=request)
@@ -112,7 +112,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
         
         response = controller(request=request)
@@ -132,7 +132,7 @@ class Test_CreteProductController:
             "description":"Mortadela",
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
         
         response = controller(request=request)
@@ -152,7 +152,7 @@ class Test_CreteProductController:
             "description":"Mortadela",
             "meal_type":repo.products[0].meal_type.value,
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
         
         response = controller(request=request)
@@ -172,7 +172,7 @@ class Test_CreteProductController:
             "description":"Mortadela",
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "prepareTime":20
+            "prepare_time":20
         })
         
         response = controller(request=request)
@@ -198,7 +198,7 @@ class Test_CreteProductController:
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field prepareTime is missing"
+        assert response.body == "Field prepare_time is missing"
 
     def test_create_product_controller_invalid_meal_type(self):
         repo = ProductRepositoryMock()
@@ -213,7 +213,7 @@ class Test_CreteProductController:
             "meal_type":"INVALID_TYPE",
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
         
     def test_create_product_controller_meal_type_is_not_str(self):
@@ -229,7 +229,7 @@ class Test_CreteProductController:
             "meal_type":{},
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -250,7 +250,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":"RESTAURANT[BANANA]",
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -271,7 +271,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":1,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -292,7 +292,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -313,7 +313,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -334,7 +334,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -355,7 +355,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -376,7 +376,7 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":False,
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":20
+            "prepare_time":20
         })
 
         response = controller(request=request)
@@ -384,7 +384,7 @@ class Test_CreteProductController:
         assert response.status_code == 400
         assert response.body == "Field photo is not valid"
 
-    def test_create_product_controller_invalid_prepareTime(self):
+    def test_create_product_controller_invalid_prepare_time(self):
         repo = ProductRepositoryMock()
         usecase = CreateProductUsecase(repo=repo)
         controller = CreateProductController(usecase=usecase)
@@ -397,10 +397,10 @@ class Test_CreteProductController:
             "meal_type":repo.products[0].meal_type.value,
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
             "restaurant":repo.products[0].restaurant.value,
-            "prepareTime":"EH O CRUDAS"
+            "prepare_time":"EH O CRUDAS"
         })
 
         response = controller(request=request)
 
         assert response.status_code == 400
-        assert response.body == "Field prepareTime is not valid"
+        assert response.body == "Field prepare_time is not valid"

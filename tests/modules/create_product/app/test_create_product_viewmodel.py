@@ -17,7 +17,7 @@ class Test_CreateProductViewmodel:
             product_id="926a6368-806c-4845-bc4b-61bad0978ddf",
             last_update=1674835337393,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=20
+            prepare_time=20
         )
 
         product_viewmodel = CreateProductViewmodel(product=product).to_dict()
@@ -33,7 +33,7 @@ class Test_CreateProductViewmodel:
             "product_id":"926a6368-806c-4845-bc4b-61bad0978ddf",
             "last_update":product_viewmodel["product"]["last_update"],
             "restaurant":"SOUZA_DE_ABREU",
-            "prepareTime":20,
+            "prepare_time":20,
             },
             "message":"the product was created"
             }

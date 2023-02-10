@@ -12,7 +12,7 @@ class ProductViewmodel:
     product_id: str
     last_update: int 
     restaurant: RESTAURANT
-    prepareTime: int = None
+    prepare_time: int = None
 
     def __init__(self, product: Product):
         self.available = product.available
@@ -24,7 +24,7 @@ class ProductViewmodel:
         self.product_id = product.product_id
         self.last_update = product.last_update
         self.restaurant = product.restaurant
-        self.prepareTime = product.prepareTime
+        self.prepare_time = product.prepare_time
 
     def to_dict(self) -> dict:
         return{
@@ -37,7 +37,7 @@ class ProductViewmodel:
             "product_id": self.product_id,
             "last_update": self.last_update,
             "restaurant": self.restaurant.value,
-            "prepareTime": self.prepareTime,
+            "prepare_time": self.prepare_time,
         }
 
 class CreateProductViewmodel:

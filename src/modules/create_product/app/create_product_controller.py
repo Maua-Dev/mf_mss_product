@@ -45,8 +45,8 @@ class CreateProductController:
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise EntityError('restaurant')
 
-            if request.data.get("prepareTime") is None:
-                raise MissingParameters("prepareTime")
+            if request.data.get("prepare_time") is None:
+                raise MissingParameters("prepare_time")
 
             product = self.CreateProductUsecase(available=request.data.get("available"),
                 price=request.data.get("price"),
@@ -55,7 +55,7 @@ class CreateProductController:
                 meal_type=MEAL_TYPE[meal_type],
                 photo=request.data.get("photo"),
                 restaurant=RESTAURANT[restaurant],
-                prepareTime=request.data.get("prepareTime"))
+                prepare_time=request.data.get("prepare_time"))
             viewmodel = CreateProductViewmodel(product=product)
 
             return Created(viewmodel.to_dict())
@@ -67,7 +67,7 @@ class CreateProductController:
             return BadRequest(body=err.message)
         
         except Exception as err:
-            return InternalServerError(bodpcy=err.args[0])
+            return InternalServerError(body=err.args[0])
 
         
 
