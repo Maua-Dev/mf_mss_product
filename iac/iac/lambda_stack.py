@@ -43,4 +43,18 @@ class LambdaStack(Construct):
             environment_variables=environment_variables
         )
 
+        self.delete_product = self.create_lambda_api_gateway_integration(
+            module_name="delete_product",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables
+        )
+
+        self.create_product = self.create_lambda_api_gateway_integration(
+            module_name="create_product",
+            method="POST",
+            mss_student_api_resource=api_gateway_resource,
+            environment_variables=environment_variables
+        )
+
         
