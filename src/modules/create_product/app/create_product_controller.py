@@ -67,7 +67,7 @@ class CreateProductController:
             return BadRequest(body=err.message)
         
         except Exception as err:
-            return InternalServerError(body=err.args[0])
+            return InternalServerError(bodpcy=err.args[0])
 
         
 

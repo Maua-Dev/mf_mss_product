@@ -1,4 +1,3 @@
-from typing import Dict, List
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
@@ -10,8 +9,8 @@ class DeleteProductUsecase:
     def __init__(self, repo: IProductRepository):
         self.repo = repo
 
-    def __call__(self, product_id: int, restaurant: RESTAURANT) -> Product:
-        if type(product_id) != int:
+    def __call__(self, product_id: str, restaurant: RESTAURANT) -> Product:
+        if not Product.validate_product_id(product_id=product_id):
             raise EntityError("product_id")
 
         if type(restaurant) != RESTAURANT:

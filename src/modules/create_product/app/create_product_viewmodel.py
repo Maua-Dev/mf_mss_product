@@ -9,7 +9,7 @@ class ProductViewmodel:
     description: str
     meal_type: MEAL_TYPE
     photo: str
-    product_id: int
+    product_id: str
     last_update: int 
     restaurant: RESTAURANT
     prepareTime: int = None

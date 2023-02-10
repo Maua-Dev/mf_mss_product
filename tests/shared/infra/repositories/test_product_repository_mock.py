@@ -12,19 +12,19 @@ class Test_ProductRepositoryMock():
         
         assert list(products.keys()) == [restaurant for restaurant in RESTAURANT]
         
-        lenght_products = 0
+        length_products = 0
         for list_of_products in products.values():
             for product in list_of_products:
-                lenght_products += 1      
-        assert lenght_products == len(repo.products)
+                length_products += 1      
+        assert length_products == len(repo.products)
 
 
     def test_delete_product(self):
         repo = ProductRepositoryMock()
         lenBefore = len(repo.products)
-        product = repo.delete_product(product_id=0, restaurant=RESTAURANT.SOUZA_DE_ABREU)
+        product = repo.delete_product(product_id="6d6b38c0-927d-4c43-93b7-b33ea9278cba", restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
-        assert product.product_id == 0
+        assert product.product_id == "6d6b38c0-927d-4c43-93b7-b33ea9278cba"
         assert product.restaurant.value == "SOUZA_DE_ABREU"
         assert len(repo.products) == lenBefore - 1
 
@@ -39,7 +39,7 @@ class Test_ProductRepositoryMock():
             prepareTime=20, 
             meal_type=MEAL_TYPE.SANDWICHES, 
             photo='https://avatars.githubusercontent.com/u/30812461?v=4', 
-            product_id=0, 
+            product_id="1825f29d-78fe-4f0d-aa88-b8d44a9a0e1f", 
             last_update=1674835337393, 
             restaurant=RESTAURANT.SOUZA_DE_ABREU
         ))
@@ -51,7 +51,7 @@ class Test_ProductRepositoryMock():
         assert product.prepareTime == 20
         assert product.meal_type == MEAL_TYPE.SANDWICHES
         assert product.photo == 'https://avatars.githubusercontent.com/u/30812461?v=4'
-        assert product.product_id == 0
+        assert product.product_id == "1825f29d-78fe-4f0d-aa88-b8d44a9a0e1f"
         assert product.last_update == 1674835337393
         assert product.restaurant == RESTAURANT.SOUZA_DE_ABREU
 

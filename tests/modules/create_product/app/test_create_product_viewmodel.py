@@ -14,7 +14,7 @@ class Test_CreateProductViewmodel:
             description="Hamburguer/Mussarela/Maionese/Alface/Tomate",
             meal_type=MEAL_TYPE.SANDWICHES,
             photo="https://avatars.githubusercontent.com/u/30812461?v=4",
-            product_id=1,
+            product_id="926a6368-806c-4845-bc4b-61bad0978ddf",
             last_update=1674835337393,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepareTime=20
@@ -30,7 +30,7 @@ class Test_CreateProductViewmodel:
             "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate",
             "meal_type":"SANDWICHES",
             "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "product_id":1,
+            "product_id":"926a6368-806c-4845-bc4b-61bad0978ddf",
             "last_update":product_viewmodel["product"]["last_update"],
             "restaurant":"SOUZA_DE_ABREU",
             "prepareTime":20,

@@ -49,7 +49,7 @@ class Test_DeleteProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "0", "restaurant": "SOUZA_DE_ABREU"}',
+            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -163,7 +163,7 @@ class Test_DeleteProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "0"}',
+            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -220,7 +220,7 @@ class Test_DeleteProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "0", "restaurant": ""}',
+            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": ""}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None

@@ -20,7 +20,7 @@ class Test_DeleteProductController:
         response = controller(request=request)
 
         assert response.status_code == 200
-        assert response.body['product']['product_id'] == 0
+        assert response.body['product']['product_id'] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert response.body['product']['restaurant'] == "SOUZA_DE_ABREU"
         assert response.body['message'] == "the product was deleted"
         
