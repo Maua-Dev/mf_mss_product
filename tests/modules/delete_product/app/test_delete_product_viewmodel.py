@@ -15,7 +15,7 @@ class Test_DeleteProductViewmodel:
             'price':16.0,
             'name':'X-Salada',
             'description':'Hamburguer/Mussarela/Maionese/Alface/Tomate',
-            'prepareTime':20,
+            'prepare_time':20,
             'meal_type':'SANDWICHES',
             'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
             'product_id':'8a705b91-c9e9-4353-a755-07f13afafed3',

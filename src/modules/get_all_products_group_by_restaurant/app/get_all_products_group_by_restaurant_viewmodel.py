@@ -18,7 +18,7 @@ class ProductViewmodel:
              "photo": self.product.photo,
              "product_id": self.product.product_id,
              "last_update": self.product.last_update,
-             "prepareTime": self.product.prepareTime 
+             "prepare_time": self.product.prepare_time 
             }
 
 

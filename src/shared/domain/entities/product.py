@@ -14,7 +14,7 @@ class Product(abc.ABC):
     product_id: str
     last_update: int  #miliseconds
     restaurant: RESTAURANT
-    prepareTime: int = None #min
+    prepare_time: int = None #min
     PRODUCT_ID_LENGTH = 36
     
     def __init__(self,
@@ -27,7 +27,7 @@ class Product(abc.ABC):
                 product_id: str,
                 last_update: int,
                 restaurant: RESTAURANT,
-                prepareTime: int = None):
+                prepare_time: int = None):
         
         if type(available) != bool:
             raise EntityError("available")
@@ -65,9 +65,10 @@ class Product(abc.ABC):
             raise EntityError("restaurant")
         self.restaurant = restaurant
         
-        if type(prepareTime) != int and prepareTime is not None:
-            raise EntityError("prepareTime")
-        self.prepareTime = prepareTime
+        if prepare_time is not None:
+            if type(prepare_time) != int:
+                raise EntityError("prepare_time")
+        self.prepare_time = prepare_time
         
     
     @staticmethod
@@ -78,4 +79,4 @@ class Product(abc.ABC):
             
                 
     def __repr__(self):
-        return f"Product(available={self.available}, price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepareTime={self.prepareTime})"
+        return f"Product(available={self.available}, price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepare_time={self.prepare_time})"

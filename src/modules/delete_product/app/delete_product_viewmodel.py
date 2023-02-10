@@ -13,7 +13,7 @@ class ProductViewmodel:
              "price": self.product.price,
              "name": self.product.name,
              "description": self.product.description,
-             "prepareTime": self.product.prepareTime,
+             "prepare_time": self.product.prepare_time,
              "meal_type": self.product.meal_type.value,
              "photo": self.product.photo,
              "product_id": self.product.product_id,

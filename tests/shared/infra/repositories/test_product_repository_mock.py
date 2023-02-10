@@ -36,7 +36,7 @@ class Test_ProductRepositoryMock():
             price=14.0, 
             name='Lanche Mortadela', 
             description='Mortadela', 
-            prepareTime=20, 
+            prepare_time=20, 
             meal_type=MEAL_TYPE.SANDWICHES, 
             photo='https://avatars.githubusercontent.com/u/30812461?v=4', 
             product_id="1825f29d-78fe-4f0d-aa88-b8d44a9a0e1f", 
@@ -48,7 +48,7 @@ class Test_ProductRepositoryMock():
         assert product.price == 14.0
         assert product.name == 'Lanche Mortadela'
         assert product.description == 'Mortadela'
-        assert product.prepareTime == 20
+        assert product.prepare_time == 20
         assert product.meal_type == MEAL_TYPE.SANDWICHES
         assert product.photo == 'https://avatars.githubusercontent.com/u/30812461?v=4'
         assert product.product_id == "1825f29d-78fe-4f0d-aa88-b8d44a9a0e1f"

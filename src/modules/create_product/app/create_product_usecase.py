@@ -9,10 +9,10 @@ class CreateProductUsecase:
     def __init__(self, repo: IProductRepository):
         self.repo = repo
 
-    def __call__(self, available: bool, price: float, name:str, description: str, meal_type: MEAL_TYPE, photo: str, restaurant: RESTAURANT, prepareTime: int) -> Product:
+    def __call__(self, available: bool, price: float, name:str, description: str, meal_type: MEAL_TYPE, photo: str, restaurant: RESTAURANT, prepare_time: int) -> Product:
 
         product_id = str(uuid.uuid4())
 
-        product = Product(available=available, price=price, name=name, description=description, meal_type=meal_type, photo=photo, product_id=product_id, last_update=int(datetime.datetime.now().timestamp()*1000), restaurant=restaurant, prepareTime=prepareTime)
+        product = Product(available=available, price=price, name=name, description=description, meal_type=meal_type, photo=photo, product_id=product_id, last_update=int(datetime.datetime.now().timestamp()*1000), restaurant=restaurant, prepare_time=prepare_time)
 
         return self.repo.create_product(product)

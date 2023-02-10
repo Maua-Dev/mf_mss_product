@@ -9,7 +9,7 @@ class Test_CreateProductUsecase:
         repo = ProductRepositoryMock()
         usecase = CreateProductUsecase(repo=repo)
 
-        product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepareTime=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU)
+        product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU)
         
         assert type(product) == Product
         assert type(product.product_id) == str

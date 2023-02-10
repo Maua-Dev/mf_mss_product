@@ -18,7 +18,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=7
+            prepare_time=8
         )
         
         assert type(product) == Product
@@ -31,9 +31,9 @@ class Test_Product:
         assert product.product_id == "22cfca1a-dd56-4fd9-9c62-9a5aad49879c"
         assert product.last_update == 1639323013000
         assert product.restaurant == RESTAURANT.SOUZA_DE_ABREU
-        assert product.prepareTime == 7
+        assert product.prepare_time == 8
     
-    def test_product_prepareTime_None(self): 
+    def test_product_prepare_time_None(self): 
         product = Product(
             available=True,
             price=20.00,
@@ -44,7 +44,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
         
         assert type(product) == Product
@@ -57,7 +57,7 @@ class Test_Product:
         assert product.product_id == "22cfca1a-dd56-4fd9-9c62-9a5aad49879c"
         assert product.last_update == 1639323013000
         assert product.restaurant == RESTAURANT.SOUZA_DE_ABREU
-        assert product.prepareTime == None
+        assert product.prepare_time == None
     
     def test_product_available_invalid(self): 
         with pytest.raises(EntityError):
@@ -71,7 +71,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
     
     def test_product_price_invalid(self): 
@@ -86,7 +86,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
     
     def test_product_name_invalid(self):
@@ -101,7 +101,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
     
     def test_product_description_invalid(self):
@@ -116,7 +116,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
     
     def test_product_meal_type_invalid(self): 
@@ -131,7 +131,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
     
     def test_product_photo_invalid(self): 
@@ -146,7 +146,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
     
     def test_product_product_id_invalid(self): 
@@ -161,7 +161,7 @@ class Test_Product:
             product_id=[],
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
              
     def test_product_product_id_invalid_wrong_length(self): 
@@ -176,7 +176,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         ) 
     
     def test_product_last_update_invalid(self): 
@@ -191,7 +191,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update={},
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=None
+            prepare_time=None
         )
     
     def test_product_restaurant_invalid(self): 
@@ -206,10 +206,10 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=MEAL_TYPE.SNACKS,
-            prepareTime=None
+            prepare_time=None
         )
     
-    def test_product_prepareTime_invalid(self): 
+    def test_product_prepare_time_invalid(self): 
         with pytest.raises(EntityError):
             Product(
             available=True,
@@ -221,7 +221,7 @@ class Test_Product:
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            prepareTime=()
+            prepare_time=()
         )
         
     
