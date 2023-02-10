@@ -157,7 +157,7 @@ class ProductRepositoryMock(IProductRepository):
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
         return {restaurant: [product for product in self.products if product.restaurant == restaurant] for restaurant in RESTAURANT}
 
-    def delete_product(self, product_id: int, restaurant: RESTAURANT) -> Product:
+    def delete_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         for idx, product in enumerate(self.products):
             if product.restaurant == restaurant and product.product_id == product_id:
                 return self.products.pop(idx)

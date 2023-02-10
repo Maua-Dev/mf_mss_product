@@ -26,7 +26,7 @@ class DeleteProductController:
             if request.data["restaurant"] not in restaurants:
                 raise EntityError("restaurant")
 
-            product = self.DeleteProductUsecase(product_id=int(request.data.get("product_id")), restaurant=RESTAURANT(request.data.get("restaurant")))
+            product = self.DeleteProductUsecase(product_id=request.data.get("product_id"), restaurant=RESTAURANT(request.data.get("restaurant")))
             viewmodel = DeleteProductViewmodel(product=product)
             return OK(viewmodel.to_dict())
 

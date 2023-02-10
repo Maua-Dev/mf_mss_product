@@ -1,7 +1,7 @@
 from src.shared.domain.entities.product import Product
 
 
-class ProductFullViewmodel:
+class ProductViewmodel:
     product: Product
 
     def __init__(self, product: Product):
@@ -22,10 +22,10 @@ class ProductFullViewmodel:
             }
 
 class DeleteProductViewmodel:
-    product: ProductFullViewmodel
+    product: ProductViewmodel
 
     def __init__(self, product: Product):
-        self.product = ProductFullViewmodel(product=product)
+        self.product = ProductViewmodel(product=product)
 
     def to_dict(self):
         return{

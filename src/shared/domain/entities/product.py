@@ -15,7 +15,7 @@ class Product(abc.ABC):
     last_update: int  #miliseconds
     restaurant: RESTAURANT
     prepareTime: int = None #min
-    PRODUCT_ID_LENGHT = 36
+    PRODUCT_ID_LENGTH = 36
     
     def __init__(self,
                 available: bool,
@@ -73,7 +73,7 @@ class Product(abc.ABC):
     @staticmethod
     def validate_product_id(product_id: str) -> bool:
         if type(product_id) != str: return False
-        if len(product_id) != Product.PRODUCT_ID_LENGHT: return False
+        if len(product_id) != Product.PRODUCT_ID_LENGTH: return False
         return True
             
                 

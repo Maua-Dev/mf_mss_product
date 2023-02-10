@@ -12,19 +12,19 @@ class Test_ProductRepositoryMock():
         
         assert list(products.keys()) == [restaurant for restaurant in RESTAURANT]
         
-        lenght_products = 0
+        length_products = 0
         for list_of_products in products.values():
             for product in list_of_products:
-                lenght_products += 1      
-        assert lenght_products == len(repo.products)
+                length_products += 1      
+        assert length_products == len(repo.products)
 
 
     def test_delete_product(self):
         repo = ProductRepositoryMock()
         lenBefore = len(repo.products)
-        product = repo.delete_product(product_id=0, restaurant=RESTAURANT.SOUZA_DE_ABREU)
+        product = repo.delete_product(product_id="6d6b38c0-927d-4c43-93b7-b33ea9278cba", restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
-        assert product.product_id == 0
+        assert product.product_id == "6d6b38c0-927d-4c43-93b7-b33ea9278cba"
         assert product.restaurant.value == "SOUZA_DE_ABREU"
         assert len(repo.products) == lenBefore - 1
 
