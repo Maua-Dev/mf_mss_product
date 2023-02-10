@@ -35,7 +35,7 @@ class Test_CreteProductController:
         assert response.body["product"]["description"] == "Mortadela"
         assert response.body["product"]["meal_type"] == "SANDWICHES"
         assert response.body["product"]["photo"] == "https://avatars.githubusercontent.com/u/30812461?v=4"
-        assert response.body["product"]["product_id"] == 93
+        assert type(response.body["product"]["product_id"]) == str
         assert type(response.body["product"]["last_update"]) == int
         assert response.body["product"]["restaurant"] == "SOUZA_DE_ABREU"
         assert response.body["product"]["prepareTime"] == 20

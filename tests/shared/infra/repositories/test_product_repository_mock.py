@@ -39,7 +39,7 @@ class Test_ProductRepositoryMock():
             prepareTime=20, 
             meal_type=MEAL_TYPE.SANDWICHES, 
             photo='https://avatars.githubusercontent.com/u/30812461?v=4', 
-            product_id=0, 
+            product_id="1825f29d-78fe-4f0d-aa88-b8d44a9a0e1f", 
             last_update=1674835337393, 
             restaurant=RESTAURANT.SOUZA_DE_ABREU
         ))
@@ -51,7 +51,7 @@ class Test_ProductRepositoryMock():
         assert product.prepareTime == 20
         assert product.meal_type == MEAL_TYPE.SANDWICHES
         assert product.photo == 'https://avatars.githubusercontent.com/u/30812461?v=4'
-        assert product.product_id == 0
+        assert product.product_id == "1825f29d-78fe-4f0d-aa88-b8d44a9a0e1f"
         assert product.last_update == 1674835337393
         assert product.restaurant == RESTAURANT.SOUZA_DE_ABREU
 

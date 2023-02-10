@@ -16,7 +16,6 @@ class Test_CreateProductPresenter:
         assert json.loads(response["body"])["product"]["description"] == "Mussarela e Presunto"
         assert json.loads(response["body"])["product"]["meal_type"] == "SANDWICHES"
         assert json.loads(response["body"])["product"]["photo"] == "https://avatars.githubusercontent.com/u/30812461?v=4"
-        assert json.loads(response["body"])["product"]["product_id"] == 45
         assert json.loads(response["body"])["product"]["restaurant"] == "RESTAURANTE_DO_H"
         assert json.loads(response["body"])["product"]["prepareTime"] == 15
 
