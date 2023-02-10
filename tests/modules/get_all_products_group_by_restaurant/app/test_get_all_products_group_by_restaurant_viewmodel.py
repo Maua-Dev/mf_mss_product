@@ -12,18 +12,7 @@ class Test_GetAllProductsByRestaurantViewmodel:
         viewmodel = GetAllProductsGroupByRestaurantViewmodel(all_products=all_products)
         
         expected = {
-            'SOUZA_DE_ABREU':[
-            {
-                'available':True,
-                'price':14.0,
-                'name':'Lanche Mortadela',
-                'description':'Mortadela',
-                'meal_type':'SANDWICHES',
-                'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':0,
-                'last_update':1674835337393,
-                'prepareTime':20
-            },
+        'SOUZA_DE_ABREU':[
             {
                 'available':True,
                 'price':16.0,
@@ -31,9 +20,20 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Hamburguer/Mussarela/Maionese/Alface/Tomate',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':1,
+                'product_id':'8a705b91-c9e9-4353-a755-07f13afafed3',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
+            },
+            {
+                'available':True,
+                'price':14.0,
+                'name':'Lanche Mortadela',
+                'description':'Mortadela',
+                'meal_type':'SANDWICHES',
+                'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+                'product_id':'cf8b01e6-ea9f-40fc-8344-d77d61761fbe',
+                'last_update':1674835337393,
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -42,9 +42,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Hamburguer/Mussarela/Maionese',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':2,
+                'product_id':'052deac5-3b97-4b44-a0ff-e5d59ed8a69b',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -53,9 +53,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Hamburguer/Bacon/Mussarela/Maionese/Alface/Tomate',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':3,
+                'product_id':'2f9ad2af-a751-4adf-81c4-50e6a9b06c8b',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -64,9 +64,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Hamburguer/Ovo/Mussarela/Maionese/Alface/Tomate',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':4,
+                'product_id':'d16053c9-25dc-40b3-9257-0719c4622cc3',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -75,9 +75,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Calabresa/Mussarela/Alface/Tomate',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':5,
+                'product_id':'8ffcc3ef-6d35-4fef-abf0-85d3649a85d5',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -86,9 +86,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Filé de Frango/Mussarela/Maionese/Alface/Tomate',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':6,
+                'product_id':'26a1e370-bc59-4b69-9676-51b0eed656ac',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -97,9 +97,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Presunto/Ovo/Mussarela/Maionese/Alface/Tomate/Orégano',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':7,
+                'product_id':'7de7e966-16d0-4a1e-96d2-13c00ba86869',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -108,9 +108,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Presunto/Mussarela/Orégano',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':8,
+                'product_id':'cd54faed-a721-4023-a0a4-d447b553b599',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -119,9 +119,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Presunto/Mussarela/Tomate/Orégano',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':9,
+                'product_id':'e222e1d5-b8ab-4693-b978-8b234c7f6595',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -130,9 +130,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Contra Filé',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':10,
+                'product_id':'e1027314-13aa-44a2-87be-e66eb9307765',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -141,9 +141,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Contra Filé/Mussarela',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':11,
+                'product_id':'b540f438-01fe-45c0-9513-7e092a3b02e6',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -152,9 +152,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Contra Filé/Vinagrete',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':12,
+                'product_id':'ef0ce1aa-1fb6-4e15-b490-2fd8a5623a43',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -163,9 +163,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Contra Filé/Mussarela/Vinagrete',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':13,
+                'product_id':'dc325006-8d4e-4dfe-be33-f8b87adb1782',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -174,9 +174,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Mortadela/Mussarela',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':14,
+                'product_id':'dbc6a4ac-00c9-4879-b964-f5b80908c196',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -185,9 +185,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Peito de Peru/Mussarela/Alface/Tomate',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':15,
+                'product_id':'fc85b4ef-2ab0-4591-8bf5-6e3f1ed53849',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -196,9 +196,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'2x Hamurguer/Ovo/Presunto/Calabresa/Bacon/Mussarela/Maionese/Alface/Tomate',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':16,
+                'product_id':'3c73e9ab-b01f-40ba-a1c8-f34be5caede7',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -207,9 +207,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Filé de Frango/Batata Palha/Catupiry/Mussarela',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':17,
+                'product_id':'39c6556c-680a-4c48-a80a-0e4bb53d965e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -218,9 +218,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Contra Filé/Batata Palha/Catupiry/Mussarela',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':18,
+                'product_id':'f2d2dea8-a7eb-43f8-82cf-bb8fa647227d',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -229,9 +229,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Calabresa/Batata Palha/Catupiry/Mussarela',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':19,
+                'product_id':'00170e97-6a4a-49c7-8bb2-342071ad752e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -240,9 +240,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Ovo',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':20,
+                'product_id':'06147f40-1962-4072-9197-f591223c0005',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -251,9 +251,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Ovo/Mussarela/Orégano',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':21,
+                'product_id':'f3cd6997-e2a3-47dd-8197-0536e4e480fe',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -262,9 +262,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Presunto/Batata Palha/Mussarela/Orégano',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':22,
+                'product_id':'219f1d27-8542-471c-a0d3-989b4392054c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -273,9 +273,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Carne/Alface/Tomate/Mussarela/Ovo',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':23,
+                'product_id':'4c0efc96-610f-40e0-af54-ee332e2174d2',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -284,9 +284,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Carne/Alface/Tomate/Mussarela/Ovo/Bacon/Cheddar',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':24,
+                'product_id':'841e50ea-5609-4d61-a76b-195de5662018',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -295,9 +295,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Frango/Alface/Tomate/Mussarela/Ovo',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':25,
+                'product_id':'17d2e5cb-c70d-4985-a5d0-b5bb44412d92',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -306,9 +306,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Calabresa/Alface/Tomate/Mussarela/Ovo',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':26,
+                'product_id':'3c5d43fc-2fa1-4e2a-bfee-8cf639d7a905',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -317,9 +317,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':27,
+                'product_id':'5ee19425-3bd2-434e-908d-13ed158772b5',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -328,9 +328,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':28,
+                'product_id':'8f2139c5-37a4-4e4a-998c-35cafcc5db7e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -339,9 +339,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':29,
+                'product_id':'520decf1-e781-4183-be50-408280481d65',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -350,9 +350,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':30,
+                'product_id':'caed1fd9-02bd-45b3-a52c-f9f4df030f28',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -361,9 +361,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':31,
+                'product_id':'bf9bb615-e963-4056-ad77-82676351c24c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -372,9 +372,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':32,
+                'product_id':'55349764-e316-41f9-a13d-24606bdf5428',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -383,9 +383,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':33,
+                'product_id':'79e2706e-7621-43ab-b6d1-82aeb45fc57c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -394,9 +394,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':34,
+                'product_id':'e1c5ef03-cfab-4c0a-92b3-b2252dcbfb9c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -405,9 +405,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':35,
+                'product_id':'0eb93198-1605-4741-893e-93fe56a413a4',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -416,9 +416,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':36,
+                'product_id':'760df1fe-5ced-4b30-9530-82fa1431fb2b',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -427,9 +427,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':37,
+                'product_id':'bfdc471e-1a2c-4bf8-b327-77cebd6d73e4',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -438,9 +438,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':38,
+                'product_id':'971b816a-7739-427a-bbe2-3610399cf282',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -449,9 +449,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':39,
+                'product_id':'657f235b-c795-4e1d-929b-0ac227a50444',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -460,9 +460,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':40,
+                'product_id':'4d1716c4-5e51-4d72-ba93-349e31201a22',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -471,9 +471,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':41,
+                'product_id':'bfbe8b90-63d0-459e-b8ef-598a181cf8fc',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -482,9 +482,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Mussarela/Tomate/Orégano/No Prato',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':42,
+                'product_id':'92c86257-e25c-449b-a589-39da2902c884',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -493,9 +493,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Queijo Brancp/Tomate/Orégano/No Prato',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':43,
+                'product_id':'20602c5e-adb3-426a-8176-59fabca63aaf',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -504,9 +504,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Queijo Brancp/Tomate Seco/Orégano/No Prato',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':44,
+                'product_id':'86834cce-2334-44dc-bf34-e12b9217c963',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -515,9 +515,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Contra Filé/Bacon/Cheddar/Catupiry/Batata Palha/No Prato',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':45,
+                'product_id':'0edfd473-7c37-4e25-b6b4-872b535d7477',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -526,9 +526,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':46,
+                'product_id':'29f360d0-fd00-4ae1-8b24-e00f37624b02',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -537,9 +537,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':47,
+                'product_id':'890fd3cd-9b18-42ef-bec4-b9687d8cd676',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -548,9 +548,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':48,
+                'product_id':'9aa4ebcb-a9e8-4585-a387-8c6096218433',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -559,9 +559,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':49,
+                'product_id':'006265f5-5303-4913-93f5-0fb7ec314034',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -570,9 +570,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':50,
+                'product_id':'af4d020c-01d6-4786-99b5-94ef3a5d33eb',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -581,9 +581,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':51,
+                'product_id':'dca552c0-a0ed-411b-8ea3-c8b365f908d4',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -592,9 +592,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':52,
+                'product_id':'12121529-ce72-458a-91da-a1106ede10d3',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -603,9 +603,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':53,
+                'product_id':'d2b32a22-efb5-4dc1-8a8c-21bfe849bebd',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -614,9 +614,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':54,
+                'product_id':'e83289ce-abff-40b6-be52-f756a51ef0b2',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -625,9 +625,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':55,
+                'product_id':'6c993b58-af90-49d4-b537-e7824181ebe0',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -636,9 +636,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':56,
+                'product_id':'60057b1c-b966-4e19-8247-c821e425cc2e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -647,9 +647,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':57,
+                'product_id':'3a707065-a73b-4d24-848b-4dbca8cd4b39',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -658,9 +658,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':58,
+                'product_id':'a75d2891-4c80-4cf9-8102-3c8b08931cab',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -669,9 +669,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':59,
+                'product_id':'80ac0065-229d-4d14-bd77-1d5d6be45fe7',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -680,9 +680,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':60,
+                'product_id':'5e87b3d9-b309-477e-897e-d44e6d49782c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -691,9 +691,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':61,
+                'product_id':'be16d4db-19c3-4f5c-88ef-429e37b4f9ef',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -702,9 +702,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':62,
+                'product_id':'b3cbc545-739f-4d23-9025-601e9a27bb55',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -713,9 +713,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':63,
+                'product_id':'0d8fc166-a4a0-4a3b-887e-d51e8e78fd19',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -724,9 +724,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':64,
+                'product_id':'760379f7-2806-4e4b-a1cb-347bb2d4405e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -735,9 +735,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':65,
+                'product_id':'4e6979d6-c9c3-438e-9b8c-e4d799358720',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -746,9 +746,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':66,
+                'product_id':'5c8e2ac3-81c1-4f40-8856-8790e60844e5',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -757,9 +757,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':67,
+                'product_id':'eb82b21e-98c9-4dc7-962a-ffd17ea487f8',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -768,9 +768,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':68,
+                'product_id':'b0e734f1-42e3-4007-82ee-9a7e6d6abc71',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -779,9 +779,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':69,
+                'product_id':'0165b801-04c5-41b7-82bb-10f1501333ae',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -790,9 +790,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':70,
+                'product_id':'ff9e45db-47ac-4f4c-8453-fc47c364db56',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -801,9 +801,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':71,
+                'product_id':'a09b1ab6-f867-4e3e-9878-395198d1f0cd',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -812,9 +812,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':72,
+                'product_id':'53147297-15a0-45a6-8624-84380c58ae3f',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -823,9 +823,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':73,
+                'product_id':'0dbf752b-5c05-42ef-b7ee-f2e5d066297b',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -834,9 +834,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':74,
+                'product_id':'0312246c-93e7-4358-aee4-3674c1753f02',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -845,9 +845,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':75,
+                'product_id':'094e7516-73bc-4055-b2bc-7c876653246e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -856,9 +856,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':76,
+                'product_id':'dfb38a7e-1819-4ab9-be8a-cfeb515e21fa',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -867,9 +867,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':77,
+                'product_id':'ec24f1ed-6e49-4774-8a3f-7485c822129d',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -878,9 +878,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':78,
+                'product_id':'f9adc29e-ac77-4282-9811-9a1386309f52',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -889,9 +889,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':79,
+                'product_id':'e60da0e3-cc8b-4a56-968b-1f2403991f94',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -900,9 +900,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':80,
+                'product_id':'6561df65-ed3e-4e01-824d-73d46f2c92ec',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -911,9 +911,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SNACKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':81,
+                'product_id':'4331e442-36f7-40d7-b646-281a4f7828b2',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -922,9 +922,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Filé de Frango - Mussarela/Alface/Tomate/Batata Frita/No Prato',
                 'meal_type':'SALADS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':82,
+                'product_id':'c169a479-bcb9-4c34-8a48-aafb26010f2b',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -933,9 +933,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Contra Filé - Mussarela/Alface/Tomate/Batata Frita/No Prato',
                 'meal_type':'SALADS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':83,
+                'product_id':'352683c8-ad7f-47ef-8d3b-ac6b9eaa157e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -944,9 +944,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Calabresa - Mussarela/Alface/Tomate/Batata Frita/No Prato',
                 'meal_type':'SALADS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':84,
+                'product_id':'02218ac2-88bd-4771-9910-a44ec1aa361f',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -955,9 +955,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Alface/Tomate/No Prato',
                 'meal_type':'SALADS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':85,
+                'product_id':'88b73f96-8522-4446-9be9-e2db78293b7c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -966,9 +966,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Ovo/Alface/Tomate/No Prato',
                 'meal_type':'SALADS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':86,
+                'product_id':'19c2527b-68f8-40db-ad4e-cad69ecd9abd',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -977,9 +977,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Massa - Mussarela/Presunto/Molho ao sugo',
                 'meal_type':'SALADS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':87,
+                'product_id':'5a39d0ee-06da-4abf-9fc1-40d25bea19e0',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -988,9 +988,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':88,
+                'product_id':'13079a73-f8bf-4e5a-bbb2-a867fbb89a71',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -999,9 +999,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':89,
+                'product_id':'2d852439-a960-463a-aac9-482ed5274319',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1010,9 +1010,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':90,
+                'product_id':'82c875f0-378a-4996-89cd-231311c093fb',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1021,9 +1021,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':91,
+                'product_id':'d35310a1-d48b-4bb0-bbe5-710f544d2669',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1032,12 +1032,12 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':92,
+                'product_id':'6d6b38c0-927d-4c43-93b7-b33ea9278cba',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             }
         ],
-            'RESTAURANTE_DO_H':[
+        'RESTAURANTE_DO_H':[
             {
                 'available':True,
                 'price':5.0,
@@ -1045,9 +1045,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Garrafa de água mineral com 500ml',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':0,
+                'product_id':'3ccfd9d8-60e5-4a12-9892-e289939a78d3',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1056,9 +1056,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Água de coco de 330ml',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':1,
+                'product_id':'17624404-da8e-49fa-ad40-5611adf65124',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1067,9 +1067,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':2,
+                'product_id':'1b115958-b2fa-45e2-af4c-f1250bea91a7',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1078,9 +1078,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Dose média de café ou leite',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':3,
+                'product_id':'8d137546-36cb-4f37-898c-d3a4bffc62c9',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1089,9 +1089,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'Lata de chá Fell Good do sabor escolhido com 330ml',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':4,
+                'product_id':'658aa88a-8016-446b-8da1-42856d91f750',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1100,9 +1100,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':5,
+                'product_id':'037a9102-aad1-46b6-8806-5bc44e774c0e',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1111,9 +1111,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':6,
+                'product_id':'6fbbdaf8-c041-4c8a-9786-0853fdf67a78',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1122,9 +1122,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':7,
+                'product_id':'27cb49f5-4313-49a7-9f84-ec0b90263795',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1133,9 +1133,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':8,
+                'product_id':'d87967d2-e3b0-4c38-ad08-fea64dc9c695',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1144,9 +1144,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':9,
+                'product_id':'22cfca1a-dd56-4fd9-9c62-9a5aad49879c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1155,9 +1155,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':10,
+                'product_id':'8a1bbd6f-ea4c-4d09-8b99-8533ec2f2edf',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1166,9 +1166,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':11,
+                'product_id':'a772b0ad-7de8-4da2-9b84-1fafcf611aaf',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1177,9 +1177,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':12,
+                'product_id':'1825f29d-78fe-4f0d-aa88-b8d44a9a0e1f',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1188,9 +1188,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':13,
+                'product_id':'926a6368-806c-4845-bc4b-61bad0978ddf',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1199,9 +1199,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':14,
+                'product_id':'c0c1331d-e7a8-4bd5-a812-51546cedfc50',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1210,9 +1210,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':15,
+                'product_id':'ff875855-b074-48c0-bee8-aabd372847f0',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1221,9 +1221,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':16,
+                'product_id':'707ec56d-7b19-46e4-83a1-0e8c44fdf57f',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1232,9 +1232,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':17,
+                'product_id':'6a8505cb-0b48-4f70-a259-6fe08191d7bb',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1243,9 +1243,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':18,
+                'product_id':'d3d6e45f-e24e-49d9-bff8-4e5bdb9cf1b5',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1254,9 +1254,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':19,
+                'product_id':'3024f410-c821-45df-859e-0a832217abda',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1265,9 +1265,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'DRINKS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':20,
+                'product_id':'eeca71d0-3dfc-44e2-9226-8ccd6ef87328',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1276,9 +1276,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':21,
+                'product_id':'54d30657-ff64-477b-a6a1-52fde7aeb33f',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1287,9 +1287,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':22,
+                'product_id':'6ef2e0b3-ba9b-4ea9-a1c5-1c5743a751a5',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1298,9 +1298,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'SANDWICHES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':23,
+                'product_id':'f29cd084-b80b-417b-accd-d8d259269e00',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1309,9 +1309,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':24,
+                'product_id':'3cbb41bc-01b5-4f41-b87f-063f51b30e1c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1320,9 +1320,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':25,
+                'product_id':'f8c78085-3f62-468b-9b88-382e8b88c4f9',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1331,9 +1331,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':26,
+                'product_id':'92b0d91b-4831-4b67-a540-a1f476408f5f',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1342,9 +1342,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PORTIONS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':27,
+                'product_id':'3e4878f8-18f5-4da5-8cf9-3f9654bafbec',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1353,9 +1353,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PASTAS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':28,
+                'product_id':'448ee545-5112-4b62-83ab-08c659c1abcd',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1364,9 +1364,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PASTAS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':29,
+                'product_id':'81c21e07-3035-4ecc-a9e7-2fc508e0121b',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1375,9 +1375,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PASTAS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':30,
+                'product_id':'70f27ebe-51d6-43c8-bb9e-f952d5f90dbd',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1386,9 +1386,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PASTAS',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':31,
+                'product_id':'0b925e7b-eac5-441d-bbbb-54ef6d098c91',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1397,9 +1397,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':32,
+                'product_id':'22ca993f-8f7b-4844-ad61-86f149ee50f3',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1408,9 +1408,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':33,
+                'product_id':'81fa03a8-be1d-4f32-805e-59b9f42b2ccd',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1419,9 +1419,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':34,
+                'product_id':'918bfb1e-b7e2-4c45-b4e7-9db3e1b00272',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1430,9 +1430,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'CANDIES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':35,
+                'product_id':'d3d75493-a708-4d38-8cf4-3bb80336daa8',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1441,9 +1441,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':36,
+                'product_id':'a45a3c7c-58ed-4de4-bdf7-9eb81c73ace3',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1452,9 +1452,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':37,
+                'product_id':'33ef7285-4913-4609-befd-82343c7fcec7',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1463,9 +1463,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':38,
+                'product_id':'bb979748-574e-4f87-b4ac-2f7932063dfc',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1474,9 +1474,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':39,
+                'product_id':'22b5bab7-a8da-405c-8b89-09066fe08ca3',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1485,9 +1485,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':40,
+                'product_id':'351b56c6-b5da-4e04-9d48-cc201957f639',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1496,9 +1496,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':41,
+                'product_id':'0041b281-15ae-4cbb-ade7-70c8a5a81335',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1507,9 +1507,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':42,
+                'product_id':'b86400ce-eff2-4c35-848d-bacfd2b9517f',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1518,9 +1518,9 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':43,
+                'product_id':'9366e5f6-d20a-461d-9232-9328b597c193',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             },
             {
                 'available':True,
@@ -1529,12 +1529,12 @@ class Test_GetAllProductsByRestaurantViewmodel:
                 'description':'',
                 'meal_type':'PLATES',
                 'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-                'product_id':44,
+                'product_id':'44daaa83-d8a3-4507-b807-644be457955c',
                 'last_update':1674835337393,
-                'prepareTime':20
+                'prepare_time':20
             }
         ],
-            'message':'the products were retrieved'
+        'message':'the products were retrieved'
         }
         
         assert viewmodel.to_dict() == expected

@@ -11,8 +11,8 @@ class Test_GetAllProductsGroupByRestaurantUsecase:
         
         assert list(products.keys()) == [restaurant for restaurant in RESTAURANT]
         
-        lenght_products = 0
+        length_products = 0
         for list_of_products in products.values():
             for product in list_of_products:
-                lenght_products += 1      
-        assert lenght_products == len(repo.products)
+                length_products += 1      
+        assert length_products == len(repo.products)
