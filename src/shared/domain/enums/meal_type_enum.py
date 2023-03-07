@@ -10,5 +10,6 @@ class MEAL_TYPE(Enum):
     SNACKS = "SNACKS"
     PASTAS = "PASTAS"
     SALADS = "SALADS"
-    
+    DESSERT = "DESSERT"
+    SAVOURY = "SAVOURY"
     
