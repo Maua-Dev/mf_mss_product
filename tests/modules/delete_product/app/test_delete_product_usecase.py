@@ -12,7 +12,7 @@ class Test_DeleteProductUsecase:
         usecase = DeleteProductUsecase(repo=repo)
         lenBefore = len(repo.products)
 
-        product_id = "6d6b38c0-927d-4c43-93b7-b33ea9278cba"
+        product_id = "8a705b91-c9e9-4353-a755-07f13afafed3"
 
         product = usecase(product_id=product_id, restaurant=RESTAURANT.SOUZA_DE_ABREU)
 

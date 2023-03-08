@@ -22,9 +22,9 @@ class Test_ProductRepositoryMock():
     def test_delete_product(self):
         repo = ProductRepositoryMock()
         lenBefore = len(repo.products)
-        product = repo.delete_product(product_id="6d6b38c0-927d-4c43-93b7-b33ea9278cba", restaurant=RESTAURANT.SOUZA_DE_ABREU)
+        product = repo.delete_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
-        assert product.product_id == "6d6b38c0-927d-4c43-93b7-b33ea9278cba"
+        assert product.product_id == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert product.restaurant.value == "SOUZA_DE_ABREU"
         assert len(repo.products) == lenBefore - 1
 
@@ -33,7 +33,7 @@ class Test_ProductRepositoryMock():
         len_before = len(repo.products)
         product = repo.create_product(Product(
             available=True, 
-            price=14.0, 
+            price=17.0, 
             name='Lanche Mortadela', 
             description='Mortadela', 
             prepare_time=20, 
@@ -45,7 +45,7 @@ class Test_ProductRepositoryMock():
         ))
 
         assert product.available == True
-        assert product.price == 14.0
+        assert product.price == 17.0
         assert product.name == 'Lanche Mortadela'
         assert product.description == 'Mortadela'
         assert product.prepare_time == 20
