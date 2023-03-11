@@ -210,5 +210,10 @@ class ProductRepositoryMock(IProductRepository):
                 products.append(product)
         return products
             
+    def get_product(self, product_id: str) -> Product:
+        for product in self.products:
+            if product_id == product_id:
+                return product
+        return None
 
         
