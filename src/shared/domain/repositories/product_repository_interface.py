@@ -21,3 +21,8 @@ class IProductRepository(ABC):
     @abstractmethod
     def create_product(self, product:Product) -> Product:
         pass
+
+    @abstractmethod
+    def get_product(self, product_id: str) -> Product:
+        pass
+    
