@@ -57,4 +57,17 @@ class Test_ProductRepositoryMock():
 
         assert type(product) == Product
         assert len(repo.products) == len_before + 1
+
+    def test_get_product(self):
+        repo = ProductRepositoryMock()
+        product = repo.get_product(repo.products[0].product_id)
+
+        assert type(product) == Product
+        assert product == repo.products[0]
         
+    
+    def test_get_product_product_not_found(self):
+        repo = ProductRepositoryMock()
+        product = repo.get_product("00000000-0000-0000-0000-000000000000")
+
+        assert product == None

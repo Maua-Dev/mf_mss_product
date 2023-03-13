@@ -31,12 +31,26 @@ class Test_GetProductController:
         repo = ProductRepositoryMock()
         usecase = GetProductUsecase(repo)
         controller = GetProductController(usecase)
-        request = HttpRequest(query_params={'available': repo.products[0].available, 'price': repo.products[0].price, 'name': repo.products[0].name, 'description': repo.products[0].description, 'prepare_time': repo.products[0].prepare_time, 'meal_type': repo.products[0].meal_type.value, 'photo': repo.products[0].photo, 'last_update': repo.products[0].last_update, 'restaurant': repo.products[0].restaurant.value  })
+        request = HttpRequest(query_params={})
 
         response = controller(request)
 
         assert response.status_code == 400
-        assert response.body == 'Parâmetro ausente: Field product_id is missing'
+        assert response.body == 'Field product_id is missing'
+
+    def test_get_product_controller_product_not_found(self):
+
+        repo = ProductRepositoryMock()
+        usecase = GetProductUsecase(repo)
+        controller = GetProductController(usecase)
+        request = HttpRequest(query_params={'product_id':"00000000-0000-0000-0000-000000000000"})
+
+        response = controller(request)
+
+        assert response.status_code == 404
+        assert response.body == 'No items found for product'
+
+    
 
 
     

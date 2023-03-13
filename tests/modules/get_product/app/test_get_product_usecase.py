@@ -19,5 +19,12 @@ class Test_GetProductUsecase:
         usecase = GetProductUsecase(repo)
 
         with pytest.raises(EntityError):
+            product = usecase(product_id= "1234")
+       
+    def test_get_product_usecase_with_invalid_type(self):
+        repo = ProductRepositoryMock()
+        usecase = GetProductUsecase(repo)
+
+        with pytest.raises(EntityError):
             product = usecase(product_id= 2)
 

@@ -212,7 +212,7 @@ class ProductRepositoryMock(IProductRepository):
             
     def get_product(self, product_id: str) -> Product:
         for product in self.products:
-            if product_id == product_id:
+            if product.product_id == product_id:
                 return product
         return None
 

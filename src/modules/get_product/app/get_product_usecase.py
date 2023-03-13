@@ -9,6 +9,9 @@ class GetProductUsecase:
 
     def __call__(self, product_id: str) -> Product:
         
+        if not Product.validate_product_id(product_id):
+            raise EntityError("product_id")
+        
         if type(product_id) is not str:
             raise EntityError("product_id")
         
