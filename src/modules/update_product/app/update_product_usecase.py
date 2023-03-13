@@ -10,7 +10,7 @@ class UpdateProductUsecase:
     def __init__(self, repo: IProductRepository):
         self.repo = repo
 
-    def __call__(self, new_product_id: str, new_restaurant: RESTAURANT, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
+    def __call__(self, product_id: str, restaurant: RESTAURANT, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
         if type(new_available) != bool:
             raise EntityError("new_available")
         
@@ -35,13 +35,13 @@ class UpdateProductUsecase:
         if type(new_last_update) != int:
             raise EntityError("new_last_update")
         
-        if type(new_restaurant) != RESTAURANT:
-            raise EntityError("new_restaurant")
+        if type(restaurant) != RESTAURANT:
+            raise EntityError("restaurant")
         
-        if type(new_product_id) != RESTAURANT:
-            raise EntityError("new_restaurant")
+        if not Product.validate_product_id(product_id=product_id):
+            raise EntityError("product_id")
         
-        product = self.repo.update_product(new_available=new_available, new_price=new_price, new_name=new_name, new_description=new_description, new_prepare_time=new_prepare_time, new_meal_type=new_meal_type, new_photo=new_photo, new_last_update=new_last_update, new_restaurant=new_restaurant)
+        product = self.repo.update_product(product_id=product_id, restaurant=restaurant,new_available=new_available, new_price=new_price, new_name=new_name, new_description=new_description, new_prepare_time=new_prepare_time, new_meal_type=new_meal_type, new_photo=new_photo, new_last_update=new_last_update)
 
         if product == None:
             raise NoItemsFound("product_id and restaurant")
