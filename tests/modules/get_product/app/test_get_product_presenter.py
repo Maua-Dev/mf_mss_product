@@ -231,4 +231,4 @@ class Test_GetProductPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == 'No items found for product'  
+        assert json.loads(response["body"]) == 'Product not found'  

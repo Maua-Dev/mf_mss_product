@@ -23,14 +23,9 @@ class GetProductController:
             return OK (viewmodel.to_dict())
         
         except NoItemsFound as err:
-            message = err.message
+        
+            return NotFound(body="Product not found")
 
-            if message == "product":
-                return NotFound(body="Product not found")
-            
-            else:
-                return NotFound(body=message)
-            
         except MissingParameters as err:
 
             return BadRequest(body=err.message)
