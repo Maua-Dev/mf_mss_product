@@ -24,5 +24,5 @@ class IProductRepository(ABC):
         pass
 
     @abstractmethod
-    def update_product(self, new_product_id: str, new_restaurant: RESTAURANT, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
+    def update_product(self, product_id: str, restaurant: RESTAURANT, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
         pass
