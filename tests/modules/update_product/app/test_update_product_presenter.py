@@ -67,7 +67,7 @@ class Test_UpdateProductPresenter:
             'prepare_time':20,
             'meal_type':'DRINKS',
             'photo':'new_photo',
-            'last_update': int(datetime.datetime.now().timestamp()*1000)
+            'last_update': int(datetime.datetime.now().timestamp())
         }
 
         response = lambda_handler(event, None)

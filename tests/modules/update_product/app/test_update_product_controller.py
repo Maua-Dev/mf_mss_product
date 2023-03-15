@@ -35,7 +35,7 @@ class Test_UpdateProductController:
         assert response.body["product"]["prepare_time"] == 20
         assert response.body["product"]["meal_type"] == "DRINKS"
         assert response.body["product"]["photo"] == "new_photo"
-        assert response.body["product"]["last_update"] == int(datetime.datetime.now().timestamp()*1000)
+        assert response.body["product"]["last_update"] == int(datetime.datetime.now().timestamp())
         assert response.body["message"] == "the product was updated"
 
     def test_update_product_controller_product_id_is_missing(self):
