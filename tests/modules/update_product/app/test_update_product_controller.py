@@ -1,3 +1,4 @@
+import datetime
 from src.modules.update_product.app.update_product_controller import UpdateProductController
 from src.modules.update_product.app.update_product_usecase import UpdateProductUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
@@ -21,7 +22,6 @@ class Test_UpdateProductController:
             'new_prepare_time':20,
             'new_meal_type':'DRINKS',
             'new_photo':'new_photo',
-            'new_last_update':1678744638,
             }
         )
 
@@ -35,7 +35,7 @@ class Test_UpdateProductController:
         assert response.body["product"]["prepare_time"] == 20
         assert response.body["product"]["meal_type"] == "DRINKS"
         assert response.body["product"]["photo"] == "new_photo"
-        assert response.body["product"]["last_update"] == 1678744638
+        assert response.body["product"]["last_update"] == int(datetime.datetime.now().timestamp()*1000)
         assert response.body["message"] == "the product was updated"
 
     def test_update_product_controller_product_id_is_missing(self):
@@ -52,8 +52,7 @@ class Test_UpdateProductController:
             'new_description':'Descrição Atualizada',
             'new_prepare_time':20,
             'new_meal_type':'DRINKS',
-            'new_photo':'new_photo',
-            'new_last_update':1678744638,
+            'new_photo':'new_photo'
             }
         )
 
@@ -76,8 +75,7 @@ class Test_UpdateProductController:
             'new_description':'Descrição Atualizada',
             'new_prepare_time':20,
             'new_meal_type':'DRINKS',
-            'new_photo':'new_photo',
-            'new_last_update':1678744638,
+            'new_photo':'new_photo'
             }
         )
 
@@ -101,15 +99,14 @@ class Test_UpdateProductController:
             'new_description':'Descrição Atualizada',
             'new_prepare_time':20,
             'new_meal_type':'DRINKS',
-            'new_photo':'new_photo',
-            'new_last_update':1678744638,
+            'new_photo':'new_photo'
             }
         )
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Field restaurant is not valid"
+        assert response.status_code == 404
+        assert response.body == "No items found for restaurant"
 
     def test_update_product_controller_meal_type_not_valid(self):
         repo = ProductRepositoryMock()
@@ -126,12 +123,11 @@ class Test_UpdateProductController:
             'new_description':'Descrição Atualizada',
             'new_prepare_time':20,
             'new_meal_type':'SARGADIN',
-            'new_photo':'new_photo',
-            'new_last_update':1678744638,
+            'new_photo':'new_photo'
             }
         )
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Field new_meal_type is not valid"
+        assert response.status_code == 404
+        assert response.body == "No items found for new_meal_type"

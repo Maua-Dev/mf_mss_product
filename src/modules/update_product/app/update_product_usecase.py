@@ -1,3 +1,4 @@
+import datetime
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
@@ -32,16 +33,13 @@ class UpdateProductUsecase:
         if type(new_photo) != str:
             raise EntityError("new_photo")
         
-        if type(new_last_update) != int:
-            raise EntityError("new_last_update")
-        
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")
         
         if not Product.validate_product_id(product_id=product_id):
             raise EntityError("product_id")
         
-        product = self.repo.update_product(product_id=product_id, restaurant=restaurant,new_available=new_available, new_price=new_price, new_name=new_name, new_description=new_description, new_prepare_time=new_prepare_time, new_meal_type=new_meal_type, new_photo=new_photo, new_last_update=new_last_update)
+        product = self.repo.update_product(product_id=product_id, restaurant=restaurant,new_available=new_available, new_price=new_price, new_name=new_name, new_description=new_description, new_prepare_time=new_prepare_time, new_meal_type=new_meal_type, new_photo=new_photo, new_last_update=int(datetime.datetime.now().timestamp()*1000))
 
         if product == None:
             raise NoItemsFound("product_id and restaurant")

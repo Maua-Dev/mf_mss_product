@@ -1,5 +1,5 @@
-from src.modules.update_product.app.update_product_controller import UpdateProductController
-from src.modules.update_product.app.update_product_usecase import UpdateProductUsecase
+from .update_product_controller import UpdateProductController
+from .update_product_usecase import UpdateProductUsecase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
