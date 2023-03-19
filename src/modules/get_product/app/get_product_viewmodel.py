@@ -5,7 +5,7 @@ from src.shared.domain.enums.restaurant_enum import RESTAURANT
 
 class GetProductViewmodel:
     available: bool
-    price: int
+    price: float
     name: str
     description: str
     prepare_time: int
