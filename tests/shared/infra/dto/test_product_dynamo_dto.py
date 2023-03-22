@@ -68,6 +68,41 @@ class Test_ProductDynamoDto:
         assert type(expected_dict['last_update']) == Decimal
         assert type(expected_dict['prepare_time']) == Decimal
 
+    def test_to_dynamo_prepare_time_none(self):
+        repo = ProductRepositoryMock()
+        
+        product = repo.products[100]
+
+        product_dto = ProductDynamoDTO(
+            available=product.available,
+            price=product.price,
+            name=product.name,
+            description=product.description,
+            meal_type=product.meal_type,
+            photo=product.photo,
+            product_id=product.product_id,
+            last_update=(product.last_update),
+            restaurant=product.restaurant,
+            prepare_time=(product.prepare_time)
+        )
+
+        product_dynamo = product_dto.to_dynamo()
+
+        expected_dict = {
+            "entity": "product",
+            "available": product.available,
+            "price": Decimal(product.price),
+            "name": product.name,
+            "description": product.description,
+            "meal_type": product.meal_type.value,
+            "photo": product.photo,
+            "product_id": product.product_id,
+            "last_update": Decimal(product.last_update),
+            "restaurant": product.restaurant.value
+        }
+
+        assert expected_dict == product_dynamo
+
     def test_from_dynamo(self):
         dynamo_dict = {'Item': {'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
                                 'available' : 'True',

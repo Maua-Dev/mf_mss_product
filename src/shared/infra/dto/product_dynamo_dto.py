@@ -53,19 +53,23 @@ class ProductDynamoDTO:
         """
         Parse data from ProductDynamoDTO to dict
         """
-        return {
+        data = {
             "entity": "product",
             "available": self.available,
             "price": Decimal(self.price),
             "name": self.name,
             "description": self.description,
-            "prepare_time": Decimal(self.prepare_time),
+            "prepare_time": Decimal(self.prepare_time) if self.prepare_time is not None else None,
             "meal_type": self.meal_type.value,
             "photo": self.photo,
             "product_id": self.product_id,
             "last_update": Decimal(self.last_update),
             "restaurant": self.restaurant.value
         }
+    
+        data_without_none_values = {k: v for k, v in data.items() if v is not None}
+
+        return data_without_none_values
 
     @staticmethod
     def from_dynamo(product_data: dict) -> "ProductDynamoDTO":
@@ -74,11 +78,11 @@ class ProductDynamoDTO:
         @param product_data: dict from DynamoDB
         """
         return ProductDynamoDTO(
-            available=bool(product_data["available"]),
+            available=bool(product_data["available"]), #fix
             price=float(product_data["price"]),
             name=str(product_data["name"]),
             description=str(product_data["description"]),
-            prepare_time=int(product_data["prepare_time"]),
+            prepare_time=int(product_data["prepare_time"]), #fix
             meal_type=MEAL_TYPE(product_data["meal_type"]),
             photo=str(product_data["photo"]),
             product_id=str(product_data["product_id"]),
