@@ -27,7 +27,10 @@ class Test_ProductDynamoDto:
         )
 
         assert product_dto == expected_product_dto
-
+        assert type(product_dto.price) == float
+        assert type(product_dto.prepare_time) == int
+        assert type(product_dto.last_update) == int
+        
     def test_to_dynamo(self):
         repo = ProductRepositoryMock()
 
@@ -39,9 +42,9 @@ class Test_ProductDynamoDto:
             meal_type=repo.products[0].meal_type,
             photo=repo.products[0].photo,
             product_id=repo.products[0].product_id,
-            last_update=repo.products[0].last_update,
+            last_update=(repo.products[0].last_update),
             restaurant=repo.products[0].restaurant,
-            prepare_time=repo.products[0].prepare_time
+            prepare_time=(repo.products[0].prepare_time)
         )
 
         product_dynamo = product_dto.to_dynamo()
@@ -49,30 +52,33 @@ class Test_ProductDynamoDto:
         expected_dict = {
             "entity": "product",
             "available": repo.products[0].available,
-            "price": repo.products[0].price,
+            "price": Decimal(repo.products[0].price),
             "name": repo.products[0].name,
             "description": repo.products[0].description,
             "meal_type": repo.products[0].meal_type.value,
             "photo": repo.products[0].photo,
             "product_id": repo.products[0].product_id,
-            "last_update": repo.products[0].last_update,
+            "last_update": Decimal(repo.products[0].last_update),
             "restaurant": repo.products[0].restaurant.value,
-            "prepare_time": repo.products[0].prepare_time,
+            "prepare_time": Decimal(repo.products[0].prepare_time),
         }
 
         assert product_dto.to_dynamo() == expected_dict
+        assert type(expected_dict['price']) == Decimal
+        assert type(expected_dict['last_update']) == Decimal
+        assert type(expected_dict['prepare_time']) == Decimal
 
     def test_from_dynamo(self):
         dynamo_dict = {'Item': {'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
                                 'available' : 'True',
-                                'price': '19.0',
+                                'price': Decimal('19.0'),
                                 'name': 'X-Salada',
                                 'description': 'Hamburguer/Mussarela/Maionese/Alface/Tomate',
                                 'meal_type': 'SANDWICHES',
                                 'photo': 'https://avatars.githubusercontent.com/u/30812461?v=4',
-                                'last_update': '1678228149',
+                                'last_update': Decimal('1678228149'),
                                 'restaurant': 'SOUZA_DE_ABREU',
-                                'prepare_time': '20',
+                                'prepare_time': Decimal('20'),
                                 'SK': '#8a705b91-c9e9-4353-a755-07f13afafed3',
                                 'PK': 'product#8a705b91-c9e9-4353-a755-07f13afafed3',
                                 'entity': 'product'},
@@ -90,7 +96,7 @@ class Test_ProductDynamoDto:
 
         expected_product_dto = ProductDynamoDTO(
             available=True,
-            price=19.0,
+            price= 19.0,
             name='X-Salada',
             description='Hamburguer/Mussarela/Maionese/Alface/Tomate',
             meal_type=MEAL_TYPE.SANDWICHES,
@@ -102,6 +108,9 @@ class Test_ProductDynamoDto:
         )
 
         assert product_dto == expected_product_dto
+        assert type(dynamo_dict['Item']['price']) == Decimal
+        assert type(dynamo_dict['Item']['last_update']) == Decimal
+        assert type(dynamo_dict['Item']['prepare_time']) == Decimal
 
     def test_to_entity(self):
         repo = ProductRepositoryMock()
@@ -131,17 +140,20 @@ class Test_ProductDynamoDto:
         assert product.last_update == repo.products[0].last_update
         assert product.restaurant == repo.products[0].restaurant
         assert product.prepare_time == repo.products[0].prepare_time
+        assert type(product.price) == float
+        assert type(product.prepare_time) == int
+        assert type(product.last_update) == int   
 
     def test_from_dynamo_to_entity(self):
         dynamo_item = {'Item': {'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
                                 'available': 'True',
-                                'price': '19.0',
+                                'price': Decimal('19.0'),
                                 'name': 'X-Salada',
                                 'description': 'Hamburguer/Mussarela/Maionese/Alface/Tomate',
-                                'prepare_time': '20',
+                                'prepare_time': Decimal('20'),
                                 'meal_type': 'SANDWICHES',
                                 'photo': 'https://avatars.githubusercontent.com/u/30812461?v=4',
-                                'last_update': '1678228149',
+                                'last_update': Decimal('1678228149'),
                                 'restaurant': 'SOUZA_DE_ABREU',
                                 'SK': '8a705b91-c9e9-4353-a755-07f13afafed3',
                                 'state': 'APPROVED',
