@@ -147,6 +147,47 @@ class Test_ProductDynamoDto:
         assert type(dynamo_dict['Item']['last_update']) == Decimal
         assert type(dynamo_dict['Item']['prepare_time']) == Decimal
 
+    def test_from_dynamo_prepare_time_none(self):
+        dynamo_dict = {'Item': {'product_id': 'f92ac405-0a5c-43f8-827e-8cb6a64612ed',
+                                'available' : 'True',
+                                'price': Decimal('4.5'),
+                                'name': 'Café',
+                                'description': '',
+                                'meal_type': 'DRINKS',
+                                'photo': 'https://avatars.githubusercontent.com/u/30812461?v=4',
+                                'last_update': Decimal('1677893281'),
+                                'restaurant': 'CANTINA_DO_MOLEZA',
+                                'prepare_time': None,
+                                'SK': '#f92ac405-0a5c-43f8-827e-8cb6a64612ed',
+                                'PK': 'product#f92ac405-0a5c-43f8-827e-8cb6a64612ed',
+                                'entity': 'product'},
+                       'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
+                                            'HTTPStatusCode': 200,
+                                            'HTTPHeaders': {'date': 'Fri, 16 Dec 2022 15:40:29 GMT',
+                                                            'content-type': 'application/x-amz-json-1.0',
+                                                            'x-amz-crc32': '3909675734',
+                                                            'x-amzn-requestid': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
+                                                            'content-length': '174',
+                                                            'server': 'Jetty(9.4.48.v20220622)'},
+                                            'RetryAttempts': 0}}
+
+        product_dto = ProductDynamoDTO.from_dynamo(product_data=dynamo_dict["Item"])
+
+        expected_product_dto = ProductDynamoDTO(
+            available=True,
+            price= 4.5,
+            name='Café',
+            description='',
+            meal_type=MEAL_TYPE.DRINKS,
+            photo='https://avatars.githubusercontent.com/u/30812461?v=4',
+            product_id='f92ac405-0a5c-43f8-827e-8cb6a64612ed',
+            last_update=1677893281,
+            restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
+            prepare_time=None
+        )
+
+        assert product_dto.prepare_time == expected_product_dto.prepare_time
+
     def test_to_entity(self):
         repo = ProductRepositoryMock()
 
