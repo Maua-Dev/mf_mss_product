@@ -16,7 +16,7 @@ class Test_ProductRepositoryDynamo:
 
         assert new_product == repo_mock.products[2]
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_update_product(self):
         repo_dynamo = ProductRepositoryDynamo()
         repo_mock = ProductRepositoryMock()
