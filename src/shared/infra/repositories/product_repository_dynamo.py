@@ -81,9 +81,7 @@ class ProductRepositoryDynamo(IProductRepository):
             last_update=new_last_update
             )
         
-        update_product_dto = ProductDynamoDTO.from_entity(product=update_product)
-
-        update_product_dto = update_product_dto.to_dynamo()
+        update_product_dto = ProductDynamoDTO.from_entity(product=update_product).to_dynamo()
 
         response = self.dynamo.hard_update_item(
             partition_key=self.partition_key_format(restaurant=restaurant),
