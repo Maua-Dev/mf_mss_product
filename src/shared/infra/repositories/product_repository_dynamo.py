@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
@@ -28,10 +28,31 @@ class ProductRepositoryDynamo(IProductRepository):
                                        sort_key=Environments.get_envs().dynamo_sort_key)
         
     def get_product(self, product_id: str) -> Product:
-        pass
+        
+        product_data = self.dynamo.get_item(partition_key=self.partition_key_format(RESTAURANT.value),
+                                            sort_key=self.sort_key_format(product_id))
 
-    def get_all_products_group_by_restaurant(self) -> List[Product]:
-        pass
+        product = ProductDynamoDTO.from_dynamo(product_data.get("Item")).to_entity()
+
+    def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
+        response = self.dynamo.get_all_items()
+
+        products_dict = list()
+        restaurant = dict()
+        for item in response["Items"]:
+            if item["entity"] == "product":
+                products_dict.append(item)
+
+            elif item["entity"] == "restaurant":
+                restaurant[item["restaurant"]] = restaurant.get(item["restaurant"], list())
+                restaurant[item["restaurant"]].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+
+        products = list()
+        for product in products_dict:
+            product_to_add = product
+            products.append(ProductDynamoDTO.from_dynamo(product_to_add).to_entity())
+
+        return restaurant, products
 
     def create_product(self, new_product: Product) -> Product:
         product_dto = ProductDynamoDTO.from_entity(product=new_product)
@@ -46,8 +67,31 @@ class ProductRepositoryDynamo(IProductRepository):
     def delete_product(self, product_id: str) -> Product:
         pass
 
-    def update_product(self, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
-        pass
+    def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
+        update_product = Product(
+            restaurant=restaurant,
+            product_id=product_id,
+            available=new_available,
+            price=new_price,
+            name=new_name,
+            description=new_description,
+            prepare_time=new_prepare_time,
+            meal_type=new_meal_type,
+            photo=new_photo,
+            last_update=new_last_update
+            )
+        
+        update_product_dto = ProductDynamoDTO.from_entity(product=update_product)
+
+        update_product_dto = update_product_dto.to_dynamo()
+
+        response = self.dynamo.hard_update_item(
+            partition_key=self.partition_key_format(restaurant=restaurant),
+            sort_key=self.sort_key_format(product_id=product_id),
+            item=update_product_dto,
+        )
+
+        return update_product
 
     def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
         pass
