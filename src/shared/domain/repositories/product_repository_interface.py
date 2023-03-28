@@ -16,10 +16,6 @@ class IProductRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
-        pass
-
-    @abstractmethod
     def create_product(self, product:Product) -> Product:
         pass
 
