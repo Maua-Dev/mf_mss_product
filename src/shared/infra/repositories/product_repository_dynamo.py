@@ -64,7 +64,7 @@ class ProductRepositoryDynamo(IProductRepository):
 
         return new_product
 
-    def delete_product(self, product_id: str) -> Product:
+    def delete_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         pass
 
     def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
@@ -89,6 +89,7 @@ class ProductRepositoryDynamo(IProductRepository):
             partition_key=self.partition_key_format(restaurant=restaurant),
             sort_key=self.sort_key_format(product_id=product_id),
             item=update_product_dto,
+            is_decimal=True
         )
 
         return update_product

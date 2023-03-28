@@ -67,7 +67,7 @@ class DynamoDatasource:
         )
         return resp
 
-    def hard_update_item(self, partition_key: str, sort_key: str, item: dict):
+    def hard_update_item(self, partition_key: str, sort_key: str, item: dict, **kwargs):
         """
         Hard update an item in the table (must have its keys - Partition and Sort).
         @param partition_key: string with the partition key
@@ -81,7 +81,7 @@ class DynamoDatasource:
         if sort_key:
             item[self.sort_key] = sort_key
 
-        resp = self.dynamo_table.put_item(Item=DynamoDatasource._parse_float_to_decimal(item))
+        resp = self.dynamo_table.put_item(Item=DynamoDatasource._parse_float_to_decimal(item) if not kwargs.get("is_decimal", False) else item)
         return resp
 
     def update_item(self, partition_key: str, sort_key: str, update_dict: dict):
