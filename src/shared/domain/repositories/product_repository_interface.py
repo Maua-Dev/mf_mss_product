@@ -24,6 +24,6 @@ class IProductRepository(ABC):
         pass
         
     @abstractmethod   
-    def get_product(self, product_id: str) -> Product:
+    def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         pass
     
