@@ -61,11 +61,11 @@ class Test_ProductRepositoryMock():
 
     def test_get_product(self):
         repo = ProductRepositoryMock()
-        product = repo.get_product(repo.products[0].product_id)
+        product = repo.get_product(repo.products[0].product_id, repo.products[0].restaurant)
 
         assert type(product) == Product
-        assert product == repo.products[0]
-        
+        assert product.product_id == repo.products[0].product_id
+        assert product.restaurant == repo.products[0].restaurant
     
     def test_get_product_product_not_found(self):
         repo = ProductRepositoryMock()
