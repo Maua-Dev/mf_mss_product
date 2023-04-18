@@ -19,13 +19,23 @@ class ProductRepositoryDynamo(IProductRepository):
     @staticmethod
     def sort_key_format(product_id: str) -> str:
         return f"product#{product_id}"
+    
+    @staticmethod
+    def gsi_partition_key_format(product_id: str) -> str:
+        return f"{product_id}"
+    
+    @staticmethod
+    def gsi_sort_key_format(restaurant: RESTAURANT) -> str:
+        return f"product#{restaurant.value}"
 
     def __init__(self):
         self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url,
                                        dynamo_table_name=Environments.get_envs().dynamo_table_name,
                                        region=Environments.get_envs().region,
                                        partition_key=Environments.get_envs().dynamo_partition_key,
-                                       sort_key=Environments.get_envs().dynamo_sort_key)
+                                       sort_key=Environments.get_envs().dynamo_sort_key,
+                                       gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
+                                       gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
         
     def get_product(self, product_id: str) -> Product:
         
@@ -57,6 +67,9 @@ class ProductRepositoryDynamo(IProductRepository):
     def create_product(self, new_product: Product) -> Product:
         product_dto = ProductDynamoDTO.from_entity(product=new_product)
         item = product_dto.to_dynamo()
+
+        item[self.dynamo.gsi_partition_key] = self.gsi_partition_key_format(new_product.product_id)
+        item[self.dynamo.gsi_sort_key] = self.gsi_sort_key_format(new_product.restaurant)
 
         resp = self.dynamo.put_item(partition_key=self.partition_key_format(new_product.restaurant),
                                     sort_key=self.sort_key_format(new_product.product_id), item=item,
