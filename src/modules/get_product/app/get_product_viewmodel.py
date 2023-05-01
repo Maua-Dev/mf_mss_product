@@ -29,6 +29,7 @@ class GetProductViewmodel:
 
     def to_dict(self):
         return{
+            "product":{
             "available":self.available,
             "price":self.price,
             "name":self.name,
@@ -38,6 +39,6 @@ class GetProductViewmodel:
             "photo":self.photo,
             "product_id":self.product_id,
             "last_update":self.last_update,
-            "restaurant": self.restaurant.value,
+            "restaurant": self.restaurant.value},
             "message": "the product was retrieved"
         }

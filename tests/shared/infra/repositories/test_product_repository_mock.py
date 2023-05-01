@@ -65,11 +65,11 @@ class Test_ProductRepositoryMock():
 
         assert type(product) == Product
         assert product.product_id == repo.products[0].product_id
-        assert product.restaurant == repo.products[0].restaurant
+        assert product.restaurant.value == repo.products[0].restaurant.value
     
     def test_get_product_product_not_found(self):
         repo = ProductRepositoryMock()
-        product = repo.get_product("00000000-0000-0000-0000-000000000000")
+        product = repo.get_product(product_id="00000000-0000-0000-0000-000000000000", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
         assert product == None
 

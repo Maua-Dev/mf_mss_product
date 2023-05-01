@@ -16,9 +16,6 @@ class GetProductUsecase:
         if type(product_id) is not str:
             raise EntityError("product_id")
         
-        if type(restaurant) is not RESTAURANT:
-            raise EntityError("restaurant")
-        
         product = self.repo.get_product(product_id=product_id, restaurant=restaurant)
 
         if product is None:
