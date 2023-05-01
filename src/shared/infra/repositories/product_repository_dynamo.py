@@ -37,10 +37,10 @@ class ProductRepositoryDynamo(IProductRepository):
                                        gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
         
-    def get_product(self, product_id: str) -> Product:
+    def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         
-        product_data = self.dynamo.get_item(partition_key=self.partition_key_format(RESTAURANT.value),
-                                            sort_key=self.sort_key_format(product_id))
+        product_data = self.dynamo.get_item(partition_key=self.partition_key_format(restaurant=restaurant),
+                                            sort_key=self.sort_key_format(product_id=product_id))
 
         product = ProductDynamoDTO.from_dynamo(product_data.get("Item")).to_entity()
 
