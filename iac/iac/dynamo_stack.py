@@ -35,6 +35,6 @@ class DynamoStack(Construct):
 
             CfnOutput(self, 'DynamoRemovalPolicy',
                         value=REMOVAL_POLICY.value,
-                        export_name='DynamoRemovalPolicyValue')
+                        export_name=f'MauaFood{self.github_ref_name}DynamoRemovalPolicyValue')
 
 
