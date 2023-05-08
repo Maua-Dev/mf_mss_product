@@ -5,7 +5,7 @@ from aws_cdk import (
     # aws_sqs as sqs,
 )
 from constructs import Construct
-from iac.iac.dynamo_stack import DynamoStack
+from .dynamo_stack import DynamoStack
 
 from .lambda_stack import LambdaStack
 from aws_cdk.aws_apigateway import RestApi, Cors
