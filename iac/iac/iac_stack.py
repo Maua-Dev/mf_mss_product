@@ -54,7 +54,6 @@ class IacStack(Stack):
             "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
             # "DYNAMO_PARTITION_KEY": self.dynamo_stack.partition_key_name,
             # "DYNAMO_SORT_KEY": self.dynamo_stack.sort_key_name,
-            "AWS_REGION": self.aws_region,
         }
 
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
