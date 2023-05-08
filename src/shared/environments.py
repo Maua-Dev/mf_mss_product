@@ -66,7 +66,7 @@ class Environments:
             return ProductRepositoryMock
         elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
             from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
-            return ProductRepositoryDynamo
+            return ProductRepositoryDynamo        
         else:
             raise Exception("No repository found for this stage")
 
