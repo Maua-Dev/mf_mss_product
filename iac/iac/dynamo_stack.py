@@ -16,7 +16,7 @@ class DynamoStack(Construct):
 
             self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
 
-            REMOVAL_POLICY = RemovalPolicy.RETAIN if 'prod' in self.github_ref else RemovalPolicy.DESTROY
+            REMOVAL_POLICY = RemovalPolicy.RETAIN if 'prod' in self.github_ref_name else RemovalPolicy.DESTROY
 
             self.dynamo_table = aws_dynamodb.Table(
                 self, "MauaFood_Product_Table",
