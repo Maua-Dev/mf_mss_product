@@ -40,10 +40,10 @@ class IacStack(Stack):
                 "allow_headers": Cors.DEFAULT_HEADERS
             }
         )
-        if 'prod' in self.github_ref:
+        if 'prod' in self.github_ref_name:
             stage = 'PROD'
 
-        elif 'homolog' in self.github_ref:
+        elif 'homolog' in self.github_ref_name:
             stage = 'HOMOLOG'
 
         else:
