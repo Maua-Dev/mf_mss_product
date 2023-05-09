@@ -12,7 +12,10 @@ class Test_ProductRepositoryDynamo:
         repo_dynamo = ProductRepositoryDynamo()
         repo_mock = ProductRepositoryMock()
 
-        new_product = repo_dynamo.create_product(new_product=repo_mock.products[2])
+        product = repo_mock.products[2]
+        product.available = False
+
+        new_product = repo_dynamo.create_product(new_product=product)
 
         assert new_product == repo_mock.products[2]
 
@@ -26,3 +29,19 @@ class Test_ProductRepositoryDynamo:
         assert update_product.available == True
         assert update_product.description == "Nova_descrição"
         assert update_product.name == "Novo_produto"
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_product(self):
+        repo_dynamo = ProductRepositoryDynamo()
+        repo_mock = ProductRepositoryMock()
+
+        product = repo_mock.products[0]
+
+        get_product = repo_dynamo.get_product(product_id=product.product_id, restaurant=product.restaurant)
+
+        assert get_product.available == product.available
+        assert get_product.name == product.name
+        assert get_product.description == product.description
+        assert get_product.price == product.price
+        assert get_product.meal_type == product.meal_type
+        assert get_product.prepare_time == product.prepare_time

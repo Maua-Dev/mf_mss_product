@@ -105,7 +105,7 @@ class Test_ProductDynamoDto:
 
     def test_from_dynamo(self):
         dynamo_dict = {'Item': {'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
-                                'available' : 'True',
+                                'available' : eval('True'),
                                 'price': Decimal('19.0'),
                                 'name': 'X-Salada',
                                 'description': 'Hamburguer/Mussarela/Maionese/Alface/Tomate',
@@ -222,7 +222,7 @@ class Test_ProductDynamoDto:
 
     def test_from_dynamo_to_entity(self):
         dynamo_item = {'Item': {'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
-                                'available': 'True',
+                                'available': eval('True'),
                                 'price': Decimal('19.0'),
                                 'name': 'X-Salada',
                                 'description': 'Hamburguer/Mussarela/Maionese/Alface/Tomate',

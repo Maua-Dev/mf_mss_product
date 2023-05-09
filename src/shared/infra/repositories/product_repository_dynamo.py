@@ -44,6 +44,8 @@ class ProductRepositoryDynamo(IProductRepository):
 
         product = ProductDynamoDTO.from_dynamo(product_data.get("Item")).to_entity()
 
+        return product
+
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
         response = self.dynamo.get_all_items()
 

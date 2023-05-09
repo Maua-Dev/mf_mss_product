@@ -78,7 +78,7 @@ class ProductDynamoDTO:
         @param product_data: dict from DynamoDB
         """
         return ProductDynamoDTO(
-            available=bool(eval(product_data["available"])),
+            available=product_data["available"],
             price=float(product_data["price"]),
             name=str(product_data["name"]),
             description=str(product_data["description"]),
