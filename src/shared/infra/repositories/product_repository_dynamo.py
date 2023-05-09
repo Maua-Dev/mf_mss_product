@@ -41,6 +41,9 @@ class ProductRepositoryDynamo(IProductRepository):
         
         product_data = self.dynamo.get_item(partition_key=self.partition_key_format(restaurant=restaurant),
                                             sort_key=self.sort_key_format(product_id=product_id))
+        
+        if 'Item' not in product_data:
+            return None
 
         product = ProductDynamoDTO.from_dynamo(product_data.get("Item")).to_entity()
 
@@ -80,7 +83,14 @@ class ProductRepositoryDynamo(IProductRepository):
         return new_product
 
     def delete_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
-        pass
+        
+        delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(restaurant=restaurant),
+                                                sort_key=self.sort_key_format(product_id=product_id))
+        
+        if 'Products' not in delete_product:
+            return None
+
+        return ProductDynamoDTO.from_dynamo(delete_product["Products"]).to_entity()
 
     def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
         update_product = Product(
