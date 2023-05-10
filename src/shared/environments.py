@@ -54,7 +54,7 @@ class Environments:
             self.s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
             self.region = os.environ.get("AWS_REGION")
             self.endpoint_url = os.environ.get("ENDPOINT_URL")
-            # self.dynamo_table_name = os.environ.get("DYNAMO_TABLE_NAME")
+            # self.dynamo_table_name = os.environ.get("DYNAMO_TABLE_NAME") 
             # self.dynamo_partition_key = os.environ.get("DYNAMO_PARTITION_KEY")
             # self.dynamo_sort_key = os.environ.get("DYNAMO_SORT_KEY")
             self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
