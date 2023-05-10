@@ -45,18 +45,18 @@ class Environments:
             self.s3_bucket_name = "bucket-test"
             self.region = "sa-east-1"
             self.endpoint_url = "http://localhost:8000"
-            self.dynamo_table_name = "user_mss_template-table"
-            self.dynamo_partition_key = "PK"
-            self.dynamo_sort_key = "SK"
+            # self.dynamo_table_name = "user_mss_template-table"
+            # self.dynamo_partition_key = "PK"
+            # self.dynamo_sort_key = "SK"
             self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
 
         else:
             self.s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
             self.region = os.environ.get("AWS_REGION")
             self.endpoint_url = os.environ.get("ENDPOINT_URL")
-            self.dynamo_table_name = os.environ.get("DYNAMO_TABLE_NAME")
-            self.dynamo_partition_key = os.environ.get("DYNAMO_PARTITION_KEY")
-            self.dynamo_sort_key = os.environ.get("DYNAMO_SORT_KEY")
+            # self.dynamo_table_name = os.environ.get("DYNAMO_TABLE_NAME")
+            # self.dynamo_partition_key = os.environ.get("DYNAMO_PARTITION_KEY")
+            # self.dynamo_sort_key = os.environ.get("DYNAMO_SORT_KEY")
             self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
 
     @staticmethod
@@ -65,8 +65,8 @@ class Environments:
             from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
             return ProductRepositoryMock
         elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
-            from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
-            return ProductRepositoryDynamo        
+            from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock#from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
+            return ProductRepositoryMock #ProductRepositoryDynamo        
         else:
             raise Exception("No repository found for this stage")
 
