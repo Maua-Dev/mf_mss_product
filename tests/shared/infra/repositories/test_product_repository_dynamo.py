@@ -6,7 +6,7 @@ from src.shared.infra.repositories.product_repository_mock import ProductReposit
 
 
 class Test_ProductRepositoryDynamo:
-    
+
     @pytest.mark.skip("Can't test dynamo in Github")
     def test_create_product(self):
         repo_dynamo = ProductRepositoryDynamo()
@@ -14,6 +14,7 @@ class Test_ProductRepositoryDynamo:
 
         product = repo_mock.products[2]
         product.available = False
+        product.name = 'Teste do False'
 
         new_product = repo_dynamo.create_product(new_product=product)
 
@@ -56,3 +57,14 @@ class Test_ProductRepositoryDynamo:
         delete_product = repo_dynamo.delete_product(product_id=product.product_id, restaurant=product.restaurant)
 
         assert True
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_products_group_by_restaurant(self):
+        repo_dynamo = ProductRepositoryDynamo()
+        repo_mock = ProductRepositoryMock()
+
+        products = repo_mock.products
+        
+        get_all_products = repo_dynamo.get_all_products_group_by_restaurant()
+
+        assert len([restaurant_value.value for restaurant_value in RESTAURANT]) == len(get_all_products.keys())

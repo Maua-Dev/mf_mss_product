@@ -82,7 +82,7 @@ class ProductDynamoDTO:
             price=float(product_data["price"]),
             name=str(product_data["name"]),
             description=str(product_data["description"]),
-            prepare_time=int(product_data["prepare_time"]) if product_data["prepare_time"] is not None else None,
+            prepare_time=int(product_data.get("prepare_time")) if product_data.get("prepare_time") is not None else None,
             meal_type=MEAL_TYPE(product_data["meal_type"]),
             photo=str(product_data["photo"]),
             product_id=str(product_data["product_id"]),

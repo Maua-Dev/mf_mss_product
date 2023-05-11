@@ -52,22 +52,18 @@ class ProductRepositoryDynamo(IProductRepository):
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
         response = self.dynamo.get_all_items()
 
-        products_dict = list()
-        restaurant = dict()
+        if 'Items' not in response:
+            return None
+
+        products = dict()
+
         for item in response["Items"]:
-            if item["entity"] == "product":
-                products_dict.append(item)
+            if item["restaurant"] not in products.keys():
+                products[item["restaurant"]] = list()
 
-            elif item["entity"] == "restaurant":
-                restaurant[item["restaurant"]] = restaurant.get(item["restaurant"], list())
-                restaurant[item["restaurant"]].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+            products[item["restaurant"]].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
-        products = list()
-        for product in products_dict:
-            product_to_add = product
-            products.append(ProductDynamoDTO.from_dynamo(product_to_add).to_entity())
-
-        return restaurant, products
+        return products
 
     def create_product(self, new_product: Product) -> Product:
         product_dto = ProductDynamoDTO.from_entity(product=new_product)
@@ -116,6 +112,3 @@ class ProductRepositoryDynamo(IProductRepository):
         )
 
         return update_product
-
-    def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
-        pass
