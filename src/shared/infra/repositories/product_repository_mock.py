@@ -209,7 +209,7 @@ class ProductRepositoryMock(IProductRepository):
                 if new_available != None:
                     product.available = new_available
                 if new_price != None:
-                    product.price = new_price   
+                    product.price = new_price
                 if new_name != None:
                     product.name = new_name
                 if new_description != None:

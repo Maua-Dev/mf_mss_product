@@ -89,6 +89,9 @@ class ProductRepositoryDynamo(IProductRepository):
         return ProductDynamoDTO.from_dynamo(delete_product["Products"]).to_entity()
 
     def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
+        if self.get_product(product_id=product_id, restaurant=restaurant) == None: 
+            return None
+        
         update_product = Product(
             restaurant=restaurant,
             product_id=product_id,
@@ -101,7 +104,7 @@ class ProductRepositoryDynamo(IProductRepository):
             photo=new_photo,
             last_update=new_last_update
             )
-        
+            
         update_product_dto = ProductDynamoDTO.from_entity(product=update_product).to_dynamo()
 
         response = self.dynamo.hard_update_item(

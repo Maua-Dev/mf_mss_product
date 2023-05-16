@@ -32,6 +32,15 @@ class Test_ProductRepositoryDynamo:
         assert update_product.name == "Novo_produto"
 
     @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_product_not_found(self):
+        repo_dynamo = ProductRepositoryDynamo()
+        repo_mock = ProductRepositoryMock()
+
+        update_product = repo_dynamo.update_product(restaurant=RESTAURANT.CANTINA_DO_MOLEZA, product_id="00000000-1255-0000-0000-000000000000", new_available=True, new_price=20.0, new_name='Novo_produto', new_description='Nova_descrição', new_prepare_time=20, new_meal_type=MEAL_TYPE.PLATES, new_photo="https://avatars.githubusercontent.com/u/30812461?v=4", new_last_update=1678228149)
+
+        assert update_product is None
+
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_get_product(self):
         repo_dynamo = ProductRepositoryDynamo()
         repo_mock = ProductRepositoryMock()
@@ -48,6 +57,15 @@ class Test_ProductRepositoryDynamo:
         assert get_product.prepare_time == product.prepare_time
 
     @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_product_not_found(self):
+        repo_dynamo = ProductRepositoryDynamo()
+        repo_mock = ProductRepositoryMock()
+
+        get_product = repo_dynamo.get_product(product_id='00000000-1237-0000-0000-000000000000', restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+
+        assert get_product is None
+        
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_delete_product(self):
         repo_dynamo = ProductRepositoryDynamo()
         repo_mock = ProductRepositoryMock()
@@ -57,6 +75,14 @@ class Test_ProductRepositoryDynamo:
         delete_product = repo_dynamo.delete_product(product_id=product.product_id, restaurant=product.restaurant)
 
         assert True
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_delete_product_not_found(self):
+        repo_dynamo = ProductRepositoryDynamo()
+        repo_mock = ProductRepositoryMock()
+        
+        delete_product = repo_dynamo.delete_product(product_id='00000000-0000-0000-0000-000000000000', restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+        assert delete_product is None
 
     @pytest.mark.skip("Can't test dynamo in Github")
     def test_get_all_products_group_by_restaurant(self):
