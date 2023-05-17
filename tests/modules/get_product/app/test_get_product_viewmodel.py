@@ -21,7 +21,9 @@ class Test_GetProductViewmodel:
                     "photo":'https://avatars.githubusercontent.com/u/30812461?v=4', 
                     "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", 
                     "last_update":1678228149, 
-                    "restaurant":"SOUZA_DE_ABREU" },
-            'message': 'the product was retrieved'}
+                    "restaurant":"SOUZA_DE_ABREU" 
+                    },
+            'message': 'the product was retrieved'
+            }
 
         assert product_viewmodel == excepted

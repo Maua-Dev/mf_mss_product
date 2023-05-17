@@ -114,4 +114,4 @@ class ProductRepositoryDynamo(IProductRepository):
             is_decimal=True
         )
 
-    return update_product
+        return update_product

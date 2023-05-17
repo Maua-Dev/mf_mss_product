@@ -29,15 +29,15 @@ class ProductViewmodel:
 
     def to_dict(self):
         return{
-            "available":self.available,
-            "price":self.price,
-            "name":self.name,
-            "description":self.description,
-            "prepare_time":self.prepare_time,
+            "available": self.available,
+            "price": self.price,
+            "name": self.name,
+            "description": self.description,
+            "prepare_time": self.prepare_time,
             "meal_type": self.meal_type.value,
-            "photo":self.photo,
-            "product_id":self.product_id,
-            "last_update":self.last_update,
+            "photo": self.photo,
+            "product_id": self.product_id,
+            "last_update": self.last_update,
             "restaurant": self.restaurant.value,
             }
 
@@ -48,6 +48,6 @@ class GetProductViewmodel:
 
     def to_dict(self) -> dict:
         return {
-            "product":self.product.to_dict(),
-            "message":"the product was retrieved"
+            "product": self.product.to_dict(),
+            "message": "the product was retrieved"
         }
