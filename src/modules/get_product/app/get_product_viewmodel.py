@@ -8,12 +8,12 @@ class GetProductViewmodel:
     price: float
     name: str
     description: str
-    prepare_time: int
     meal_type: MEAL_TYPE
     photo: str
     product_id: str
     last_update: int
     restaurant: RESTAURANT
+    prepare_time: int = None
 
     def __init__(self, product: Product):
         self.available = product.available

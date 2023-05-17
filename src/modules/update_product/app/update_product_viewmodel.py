@@ -4,15 +4,15 @@ from src.shared.domain.enums.restaurant_enum import RESTAURANT
 
 
 class ProductViewmodel:
-    product_id: str
-    restaurant: RESTAURANT
     available: bool = None
     price: float = None
     name: str = None
     description: str = None
     meal_type: MEAL_TYPE = None
     photo: str = None
+    product_id: str 
     last_update: int = None
+    restaurant: RESTAURANT
     prepare_time: int = None
 
     def __init__(self, product: Product):
