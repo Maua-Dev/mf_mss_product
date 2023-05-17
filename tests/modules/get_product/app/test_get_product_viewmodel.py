@@ -8,7 +8,7 @@ class Test_GetProductViewmodel:
 
         product = repo.products[0]
 
-        get_product_viewmodel = GetProductViewmodel(product).to_dict()
+        product_viewmodel = GetProductViewmodel(product).to_dict()
 
         excepted = {
             "product":{
@@ -24,4 +24,4 @@ class Test_GetProductViewmodel:
                     "restaurant":"SOUZA_DE_ABREU" },
             'message': 'the product was retrieved'}
 
-        assert get_product_viewmodel == excepted
+        assert product_viewmodel == excepted
