@@ -202,13 +202,6 @@ class ProductRepositoryMock(IProductRepository):
         self.products.append(product)
 
         return product
-
-    def get_all_products_by_restaurant(self, restaurant: RESTAURANT) -> List[Product]:
-        products = list()
-        for product in self.products:
-            if product.restaurant == restaurant:
-                products.append(product)
-        return products
             
     def update_product(self, product_id: str, restaurant: RESTAURANT, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
         for product in self.products:
@@ -216,7 +209,7 @@ class ProductRepositoryMock(IProductRepository):
                 if new_available != None:
                     product.available = new_available
                 if new_price != None:
-                    product.price = new_price   
+                    product.price = new_price
                 if new_name != None:
                     product.name = new_name
                 if new_description != None:
@@ -233,8 +226,8 @@ class ProductRepositoryMock(IProductRepository):
             else:
                 return None
                 
-    def get_product(self, product_id: str) -> Product:
+    def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         for product in self.products:
-            if product.product_id == product_id:
+            if product.product_id == product_id and product.restaurant == restaurant:
                 return product
         return None

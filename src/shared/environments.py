@@ -45,10 +45,13 @@ class Environments:
             self.s3_bucket_name = "bucket-test"
             self.region = "sa-east-1"
             self.endpoint_url = "http://localhost:8000"
-            # self.dynamo_table_name = "user_mss_template-table"
-            # self.dynamo_partition_key = "PK" 
-            # self.dynamo_sort_key = "SK"
+            self.dynamo_table_name = "mf_mss_product-table"
+            self.dynamo_partition_key = "PK"
+            self.dynamo_sort_key = "SK"
+
             self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
+            self.dynamo_gsi_partition_key = "GSI1-PK"
+            self.dynamo_gsi_sort_key = "GSI1-SK"
 
         else:
             self.s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
@@ -58,6 +61,8 @@ class Environments:
             # self.dynamo_partition_key = os.environ.get("DYNAMO_PARTITION_KEY")
             # self.dynamo_sort_key = os.environ.get("DYNAMO_SORT_KEY")
             self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
+            self.dynamo_gsi_partition_key = os.environ.get("DYNAMO_GSI_PARTITION_KEY")
+            self.dynamo_gsi_sort_key = os.environ.get("DYNAMO_GSI_SORT_KEY")
 
     @staticmethod
     def get_product_repo() -> IProductRepository:
