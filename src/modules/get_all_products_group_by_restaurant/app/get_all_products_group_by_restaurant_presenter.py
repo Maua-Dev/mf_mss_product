@@ -4,7 +4,7 @@ from .get_all_products_group_by_restaurant_usecase import GetAllProductsGroupByR
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
-repo = Environments.get_user_repo()()
+repo = Environments.get_product_repo()()
 usecase = GetAllProductsGroupByRestaurantUsecase(repo=repo)
 controller = GetAllProductGroupByRestaurantController(usecase=usecase)
 

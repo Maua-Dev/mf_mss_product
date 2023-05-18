@@ -3,7 +3,7 @@ from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHt
 from .get_product_controller import GetProductController
 from .get_product_usecase import GetProductUsecase
 
-repo = Environments.get_user_repo()()
+repo = Environments.get_product_repo()()
 usecase = GetProductUsecase(repo)
 controller = GetProductController(usecase)
 

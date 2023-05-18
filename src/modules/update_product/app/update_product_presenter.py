@@ -4,7 +4,7 @@ from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
 
-repo = Environments.get_user_repo()()
+repo = Environments.get_product_repo()()
 usecase = UpdateProductUsecase(repo=repo)
 controller = UpdateProductController(usecase=usecase)
 
