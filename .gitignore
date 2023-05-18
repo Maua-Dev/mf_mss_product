@@ -133,3 +133,6 @@ dmypy.json
 
 /.vscode/
 /.idea/
+
+# Docker
+iac/local/docker/dynamodb/shared-local-instance.db
