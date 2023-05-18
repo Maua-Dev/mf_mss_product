@@ -61,15 +61,15 @@ class Test_ProductRepositoryMock():
 
     def test_get_product(self):
         repo = ProductRepositoryMock()
-        product = repo.get_product(repo.products[0].product_id)
+        product = repo.get_product(repo.products[0].product_id, repo.products[0].restaurant)
 
         assert type(product) == Product
-        assert product == repo.products[0]
-        
+        assert product.product_id == repo.products[0].product_id
+        assert product.restaurant.value == repo.products[0].restaurant.value
     
     def test_get_product_product_not_found(self):
         repo = ProductRepositoryMock()
-        product = repo.get_product("00000000-0000-0000-0000-000000000000")
+        product = repo.get_product(product_id="00000000-0000-0000-0000-000000000000", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
         assert product == None
 
@@ -85,3 +85,18 @@ class Test_ProductRepositoryMock():
         assert repo.products[0].meal_type == product.meal_type
         assert repo.products[0].photo == product.photo
         assert repo.products[0].last_update == product.last_update
+
+    def test_delete_product_not_found(self):
+        repo_mock = ProductRepositoryMock()
+
+        delete_product = repo_mock.delete_product(product_id="00000000-0000-0000-0000-000000000000", restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        assert delete_product is None
+
+
+    def test_update_product_not_found(self):
+        repo_mock = ProductRepositoryMock()
+
+        update_product = repo_mock.update_product(product_id="00000000-0000-0000-0000-000000000000", restaurant=RESTAURANT.SOUZA_DE_ABREU, new_available=True, new_price=15.0, new_name='Nome Atualizado', new_description='Descrição Atualizada', new_prepare_time=20, new_meal_type=MEAL_TYPE.DRINKS, new_photo='new_photo', new_last_update=int(datetime.datetime.now().timestamp()*1000))
+
+        assert update_product is None

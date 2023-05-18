@@ -47,6 +47,6 @@ class CreateProductViewmodel:
 
     def to_dict(self) -> dict:
         return {
-            "product":self.product.to_dict(),
-            "message":"the product was created"
+            "product": self.product.to_dict(),
+            "message": "the product was created"
         }

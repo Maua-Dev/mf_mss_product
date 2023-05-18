@@ -3,8 +3,8 @@ from src.modules.get_all_products_group_by_restaurant.app.get_all_products_group
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 
 
-class Test_GetAllProductsByRestaurantViewmodel:
-    def test_get_all_products_by_restaurant_viewmodel(self):
+class Test_GetAllProductsGroupByRestaurantViewmodel:
+    def test_get_all_products_group_by_restaurant_viewmodel(self):
         repo = ProductRepositoryMock()
         usecase = GetAllProductsGroupByRestaurantUsecase(repo=repo)
         all_products = usecase()
