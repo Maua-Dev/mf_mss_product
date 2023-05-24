@@ -29,6 +29,7 @@ class Environments:
     dynamo_partition_key: str
     dynamo_sort_key: str
     cloud_front_distribution_domain: str
+    s3_assets_cdn: str
 
     def _configure_local(self):
         from dotenv import load_dotenv
@@ -48,13 +49,14 @@ class Environments:
             self.dynamo_table_name = "mf_mss_product-table"
             self.dynamo_partition_key = "PK"
             self.dynamo_sort_key = "SK"
-
+            self.s3_assets_cdn = "https://mauafood-assets.cloudfront.net/"
             self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
             self.dynamo_gsi_partition_key = "GSI1-PK"
             self.dynamo_gsi_sort_key = "GSI1-SK"
 
         else:
             self.s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
+            self.s3_assets_cdn = os.environ.get("S3_ASSETS_CDN")
             self.region = os.environ.get("AWS_REGION")
             self.endpoint_url = os.environ.get("ENDPOINT_URL")
             # self.dynamo_table_name = os.environ.get("DYNAMO_TABLE_NAME") 
