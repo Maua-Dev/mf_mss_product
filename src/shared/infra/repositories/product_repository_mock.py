@@ -11,16 +11,18 @@ class ProductRepositoryMock(IProductRepository):
     
     def __init__(self):
         
-        link_base = Environments.get_envs().s3_assets_cdn
+        link_base = Environments.get_envs().s3_assets_cdn + "products/icons/"
 
         link_sandwiches = link_base + "sandwiches.png"
         link_drinks = link_base + "drinks.png"
         link_candies = link_base + "candies.png"
         link_plates = link_base + "plates.png"
         link_snacks = link_base + "snacks.png"
-        link_dessert = link_base + "desserts.png"
-        link_savoury = link_base + "sauvories.png"
+        link_dessert = link_base + "dessert.png"
+        link_savoury = link_base + "savoury.png"
         link_portions = link_base + "portions.png"
+        link_pastas = link_base + "pastas.png"
+        link_salads = link_base + "salads.png"
 
         self.products = [
             Product(available=True, price=19.0, name='X-Salada', description='Hamburguer/Mussarela/Maionese/Alface/Tomate', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo=link_sandwiches, product_id="8a705b91-c9e9-4353-a755-07f13afafed3", last_update=1678228149, restaurant=RESTAURANT.SOUZA_DE_ABREU),
