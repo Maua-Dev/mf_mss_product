@@ -459,17 +459,6 @@ class Test_GetAllProductGroupByRestaurantPresenter:
       },
       {
          'available':True,
-         'price':0.0,
-         'name':'Sorvetes',
-         'description':'',
-         'meal_type':'DESSERT',
-         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
-         'product_id':'760df1fe-5ced-4b30-9530-82fa1431fb2b',
-         'last_update':1678228149,
-         'prepare_time':20
-      },
-      {
-         'available':True,
          'price':15.0,
          'name':'Salada de Fruta',
          'description':'',
