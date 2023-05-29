@@ -559,7 +559,7 @@ class Test_GetAllProductGroupByRestaurantPresenter:
       {
          'available':True,
          'price':35.0,
-         'name':'STROGONOFF DE CARNE',
+         'name':'Strogonoff De Carne',
          'description':'Carne/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
@@ -570,7 +570,7 @@ class Test_GetAllProductGroupByRestaurantPresenter:
       {
          'available':True,
          'price':35.0,
-         'name':'STROGONOFF DE FRANGO',
+         'name':'Strogonoff De Frango',
          'description':'Frango/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
@@ -581,7 +581,7 @@ class Test_GetAllProductGroupByRestaurantPresenter:
       {
          'available':True,
          'price':10.0,
-         'name':'HOT DOG',
+         'name':'Hot Dog',
          'description':'Ver opções',
          'meal_type':'SAVOURY',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
