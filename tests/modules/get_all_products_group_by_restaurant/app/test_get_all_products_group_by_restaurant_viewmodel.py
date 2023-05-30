@@ -413,17 +413,6 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       },
       {
          'available':True,
-         'price':0.0,
-         'name':'Sorvetes',
-         'description':'',
-         'meal_type':'DESSERT',
-         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
-         'product_id':'760df1fe-5ced-4b30-9530-82fa1431fb2b',
-         'last_update':1678228149,
-         'prepare_time':20
-      },
-      {
-         'available':True,
          'price':15.0,
          'name':'Salada de Fruta',
          'description':'',
@@ -524,7 +513,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':35.0,
-         'name':'STROGONOFF DE CARNE',
+         'name':'Strogonoff De Carne',
          'description':'Carne/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
@@ -535,7 +524,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':35.0,
-         'name':'STROGONOFF DE FRANGO',
+         'name':'Strogonoff De Frango',
          'description':'Frango/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
@@ -546,7 +535,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':10.0,
-         'name':'HOT DOG',
+         'name':'Hot Dog',
          'description':'Ver opções',
          'meal_type':'SAVOURY',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
