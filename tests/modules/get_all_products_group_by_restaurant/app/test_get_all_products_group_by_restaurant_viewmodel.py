@@ -10,8 +10,10 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
         all_products = usecase()
         
         viewmodel = GetAllProductsGroupByRestaurantViewmodel(all_products=all_products)
+
         
         expected = {
+   
    'SOUZA_DE_ABREU':[
       {
          'available':True,
@@ -19,7 +21,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'X-Salada',
          'description':'Hamburguer/Mussarela/Maionese/Alface/Tomate',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'8a705b91-c9e9-4353-a755-07f13afafed3',
          'last_update':1678228149,
          'prepare_time':20
@@ -30,7 +32,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Lanche Mortadela',
          'description':'Mortadela',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'cf8b01e6-ea9f-40fc-8344-d77d61761fbe',
          'last_update':1678228149,
          'prepare_time':20
@@ -41,7 +43,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'X-Burguer',
          'description':'Hamburguer/Mussarela/Maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'052deac5-3b97-4b44-a0ff-e5d59ed8a69b',
          'last_update':1678228149,
          'prepare_time':20
@@ -52,7 +54,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'X-Bacon',
          'description':'Hamburguer/Bacon/Mussarela/Maionese/Alface/Tomate',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'2f9ad2af-a751-4adf-81c4-50e6a9b06c8b',
          'last_update':1678228149,
          'prepare_time':20
@@ -63,7 +65,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'X-Egg',
          'description':'Hamburguer/Ovo/Mussarela/Maionese/Alface/Tomate',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'d16053c9-25dc-40b3-9257-0719c4622cc3',
          'last_update':1678228149,
          'prepare_time':20
@@ -74,7 +76,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'X-Calabresa',
          'description':'Calabresa/Mussarela/Alface/Tomate',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'8ffcc3ef-6d35-4fef-abf0-85d3649a85d5',
          'last_update':1678228149,
          'prepare_time':20
@@ -85,7 +87,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'X-Frango',
          'description':'Filé de Frango/Mussarela/Maionese/Alface/Tomate',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'26a1e370-bc59-4b69-9676-51b0eed656ac',
          'last_update':1678228149,
          'prepare_time':20
@@ -96,7 +98,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Americano',
          'description':'Presunto/Ovo/Mussarela/Maionese/Alface/Tomate/Orégano',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'7de7e966-16d0-4a1e-96d2-13c00ba86869',
          'last_update':1678228149,
          'prepare_time':20
@@ -107,7 +109,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Misto Quente',
          'description':'Presunto/Mussarela/Orégano',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'cd54faed-a721-4023-a0a4-d447b553b599',
          'last_update':1678228149,
          'prepare_time':20
@@ -118,7 +120,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Bauru',
          'description':'Presunto/Mussarela/Tomate/Orégano',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'e222e1d5-b8ab-4693-b978-8b234c7f6595',
          'last_update':1678228149,
          'prepare_time':20
@@ -129,7 +131,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Churrasco',
          'description':'Contra Filé',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'e1027314-13aa-44a2-87be-e66eb9307765',
          'last_update':1678228149,
          'prepare_time':20
@@ -140,7 +142,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Ch. c/ Queijo',
          'description':'Contra Filé/Mussarela',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'b540f438-01fe-45c0-9513-7e092a3b02e6',
          'last_update':1678228149,
          'prepare_time':20
@@ -151,7 +153,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Ch. c/ Vinag.',
          'description':'Contra Filé/Vinagrete',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'ef0ce1aa-1fb6-4e15-b490-2fd8a5623a43',
          'last_update':1678228149,
          'prepare_time':20
@@ -162,7 +164,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Ch. c/ Queijo/Vinag.',
          'description':'Contra Filé/Mussarela/Vinagrete',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'dc325006-8d4e-4dfe-be33-f8b87adb1782',
          'last_update':1678228149,
          'prepare_time':20
@@ -173,7 +175,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Mort. c/ Mussarela',
          'description':'Mortadela/Mussarela',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'dbc6a4ac-00c9-4879-b964-f5b80908c196',
          'last_update':1678228149,
          'prepare_time':20
@@ -184,7 +186,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Lanche Natural',
          'description':'Peito de Peru/Mussarela/Alface/Tomate',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'fc85b4ef-2ab0-4591-8bf5-6e3f1ed53849',
          'last_update':1678228149,
          'prepare_time':20
@@ -195,7 +197,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'X-Tudo',
          'description':'2x Hamurguer/Ovo/Presunto/Calabresa/Bacon/Mussarela/Maionese/Alface/Tomate',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'3c73e9ab-b01f-40ba-a1c8-f34be5caede7',
          'last_update':1678228149,
          'prepare_time':20
@@ -206,7 +208,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Vasco de Frango',
          'description':'Filé de Frango/Batata Palha/Catupiry/Mussarela',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'39c6556c-680a-4c48-a80a-0e4bb53d965e',
          'last_update':1678228149,
          'prepare_time':20
@@ -217,7 +219,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Vasco de Carne',
          'description':'Contra Filé/Batata Palha/Catupiry/Mussarela',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'f2d2dea8-a7eb-43f8-82cf-bb8fa647227d',
          'last_update':1678228149,
          'prepare_time':20
@@ -228,7 +230,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Vasco de Calabresa',
          'description':'Calabresa/Batata Palha/Catupiry/Mussarela',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'00170e97-6a4a-49c7-8bb2-342071ad752e',
          'last_update':1678228149,
          'prepare_time':20
@@ -239,7 +241,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão c/ Ovo',
          'description':'Ovo',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'06147f40-1962-4072-9197-f591223c0005',
          'last_update':1678228149,
          'prepare_time':20
@@ -250,7 +252,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão c/ Ovo/Mussar.',
          'description':'Ovo/Mussarela/Orégano',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'f3cd6997-e2a3-47dd-8197-0536e4e480fe',
          'last_update':1678228149,
          'prepare_time':20
@@ -261,7 +263,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Misto/Batata Palha',
          'description':'Presunto/Batata Palha/Mussarela/Orégano',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'219f1d27-8542-471c-a0d3-989b4392054c',
          'last_update':1678228149,
          'prepare_time':20
@@ -272,7 +274,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Carne I',
          'description':'Carne/Alface/Tomate/Mussarela/Ovo',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'4c0efc96-610f-40e0-af54-ee332e2174d2',
          'last_update':1678228149,
          'prepare_time':20
@@ -283,7 +285,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Carne II',
          'description':'Carne/Alface/Tomate/Mussarela/Ovo/Bacon/Cheddar',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'841e50ea-5609-4d61-a76b-195de5662018',
          'last_update':1678228149,
          'prepare_time':20
@@ -294,7 +296,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Frango',
          'description':'Frango/Alface/Tomate/Mussarela/Ovo',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'17d2e5cb-c70d-4985-a5d0-b5bb44412d92',
          'last_update':1678228149,
          'prepare_time':20
@@ -305,7 +307,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Calabresa',
          'description':'Calabresa/Alface/Tomate/Mussarela/Ovo',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'3c5d43fc-2fa1-4e2a-bfee-8cf639d7a905',
          'last_update':1678228149,
          'prepare_time':20
@@ -316,7 +318,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Cone Trufado',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'5ee19425-3bd2-434e-908d-13ed158772b5',
          'last_update':1678228149,
          'prepare_time':20
@@ -327,7 +329,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Bolo de Pote',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'8f2139c5-37a4-4e4a-998c-35cafcc5db7e',
          'last_update':1678228149,
          'prepare_time':20
@@ -338,7 +340,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Brigadeiro',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'520decf1-e781-4183-be50-408280481d65',
          'last_update':1678228149,
          'prepare_time':20
@@ -349,7 +351,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Sonho de Valsa',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'caed1fd9-02bd-45b3-a52c-f9f4df030f28',
          'last_update':1678228149,
          'prepare_time':20
@@ -360,7 +362,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Barra de Cereais',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'bf9bb615-e963-4056-ad77-82676351c24c',
          'last_update':1678228149,
          'prepare_time':20
@@ -371,7 +373,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Chocolates',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'55349764-e316-41f9-a13d-24606bdf5428',
          'last_update':1678228149,
          'prepare_time':20
@@ -382,7 +384,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Paçoquita',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'79e2706e-7621-43ab-b6d1-82aeb45fc57c',
          'last_update':1678228149,
          'prepare_time':20
@@ -393,7 +395,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Trident',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'e1c5ef03-cfab-4c0a-92b3-b2252dcbfb9c',
          'last_update':1678228149,
          'prepare_time':20
@@ -404,19 +406,8 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Halls',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'0eb93198-1605-4741-893e-93fe56a413a4',
-         'last_update':1678228149,
-         'prepare_time':20
-      },
-      {
-         'available':True,
-         'price':0.0,
-         'name':'Sorvetes',
-         'description':'',
-         'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
-         'product_id':'760df1fe-5ced-4b30-9530-82fa1431fb2b',
          'last_update':1678228149,
          'prepare_time':20
       },
@@ -426,7 +417,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salada de Fruta',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'bfdc471e-1a2c-4bf8-b327-77cebd6d73e4',
          'last_update':1678228149,
          'prepare_time':20
@@ -437,7 +428,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Açaí',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'971b816a-7739-427a-bbe2-3610399cf282',
          'last_update':1678228149,
          'prepare_time':20
@@ -448,7 +439,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Gelatina Colorida',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'657f235b-c795-4e1d-929b-0ac227a50444',
          'last_update':1678228149,
          'prepare_time':20
@@ -459,7 +450,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Copo da Felicidade',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'4d1716c4-5e51-4d72-ba93-349e31201a22',
          'last_update':1678228149,
          'prepare_time':20
@@ -470,7 +461,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Musse/Chocolate',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'bfbe8b90-63d0-459e-b8ef-598a181cf8fc',
          'last_update':1678228149,
          'prepare_time':20
@@ -481,7 +472,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Queijo Quente 01',
          'description':'Mussarela/Tomate/Orégano/No Prato',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'92c86257-e25c-449b-a589-39da2902c884',
          'last_update':1678228149,
          'prepare_time':20
@@ -492,7 +483,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Queijo Quente 02',
          'description':'Queijo Brancp/Tomate/Orégano/No Prato',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'20602c5e-adb3-426a-8176-59fabca63aaf',
          'last_update':1678228149,
          'prepare_time':20
@@ -503,7 +494,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Queijo Quente 03',
          'description':'Queijo Brancp/Tomate Seco/Orégano/No Prato',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'86834cce-2334-44dc-bf34-e12b9217c963',
          'last_update':1678228149,
          'prepare_time':20
@@ -514,7 +505,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Prima',
          'description':'Contra Filé/Bacon/Cheddar/Catupiry/Batata Palha/No Prato',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'0edfd473-7c37-4e25-b6b4-872b535d7477',
          'last_update':1678228149,
          'prepare_time':20
@@ -522,10 +513,10 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':35.0,
-         'name':'STROGONOFF DE CARNE',
+         'name':'Strogonoff De Carne',
          'description':'Carne/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'c06d92e6-7a58-419b-b899-c4cf9f35dc4e',
          'last_update':1678228149,
          'prepare_time':20
@@ -533,10 +524,10 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':35.0,
-         'name':'STROGONOFF DE FRANGO',
+         'name':'Strogonoff De Frango',
          'description':'Frango/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'40996690-743b-4bb7-8e37-5d65314f0106',
          'last_update':1678228149,
          'prepare_time':20
@@ -544,10 +535,10 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':10.0,
-         'name':'HOT DOG',
+         'name':'Hot Dog',
          'description':'Ver opções',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09',
          'last_update':1678228149,
          'prepare_time':20
@@ -558,7 +549,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Refrigerante Lata',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'29f360d0-fd00-4ae1-8b24-e00f37624b02',
          'last_update':1678228149,
          'prepare_time':20
@@ -569,7 +560,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Tônica Schweppes',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'890fd3cd-9b18-42ef-bec4-b9687d8cd676',
          'last_update':1678228149,
          'prepare_time':20
@@ -580,7 +571,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco Lata',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'9aa4ebcb-a9e8-4585-a387-8c6096218433',
          'last_update':1678228149,
          'prepare_time':20
@@ -591,7 +582,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'H2O',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'006265f5-5303-4913-93f5-0fb7ec314034',
          'last_update':1678228149,
          'prepare_time':20
@@ -602,7 +593,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Chá - Lata',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'af4d020c-01d6-4786-99b5-94ef3a5d33eb',
          'last_update':1678228149,
          'prepare_time':20
@@ -613,7 +604,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Energético',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'dca552c0-a0ed-411b-8ea3-c8b365f908d4',
          'last_update':1678228149,
          'prepare_time':20
@@ -624,7 +615,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Água c/ Gás',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'12121529-ce72-458a-91da-a1106ede10d3',
          'last_update':1678228149,
          'prepare_time':20
@@ -635,7 +626,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Água s/ Gás',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'d2b32a22-efb5-4dc1-8a8c-21bfe849bebd',
          'last_update':1678228149,
          'prepare_time':20
@@ -646,7 +637,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco de Laranja',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'e83289ce-abff-40b6-be52-f756a51ef0b2',
          'last_update':1678228149,
          'prepare_time':20
@@ -657,7 +648,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco de Melância',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'6c993b58-af90-49d4-b537-e7824181ebe0',
          'last_update':1678228149,
          'prepare_time':20
@@ -668,7 +659,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco Misto | Polpa',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'60057b1c-b966-4e19-8247-c821e425cc2e',
          'last_update':1678228149,
          'prepare_time':20
@@ -679,7 +670,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Toddynho',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'3a707065-a73b-4d24-848b-4dbca8cd4b39',
          'last_update':1678228149,
          'prepare_time':20
@@ -690,7 +681,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Vitamina Mista',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'a75d2891-4c80-4cf9-8102-3c8b08931cab',
          'last_update':1678228149,
          'prepare_time':20
@@ -701,7 +692,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Gatorade',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'80ac0065-229d-4d14-bd77-1d5d6be45fe7',
          'last_update':1678228149,
          'prepare_time':20
@@ -712,7 +703,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Guaraviton',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'5e87b3d9-b309-477e-897e-d44e6d49782c',
          'last_update':1678228149,
          'prepare_time':20
@@ -723,7 +714,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Chocolate Batido',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'be16d4db-19c3-4f5c-88ef-429e37b4f9ef',
          'last_update':1678228149,
          'prepare_time':20
@@ -734,7 +725,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Café - peq.',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'b3cbc545-739f-4d23-9025-601e9a27bb55',
          'last_update':1678228149,
          'prepare_time':20
@@ -745,7 +736,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Café - gde.',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'0d8fc166-a4a0-4a3b-887e-d51e8e78fd19',
          'last_update':1678228149,
          'prepare_time':20
@@ -756,7 +747,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Capuccino - peq.',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'760379f7-2806-4e4b-a1cb-347bb2d4405e',
          'last_update':1678228149,
          'prepare_time':20
@@ -767,7 +758,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Capuccino - gde.',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'4e6979d6-c9c3-438e-9b8c-e4d799358720',
          'last_update':1678228149,
          'prepare_time':20
@@ -778,7 +769,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Chocolate - peq.',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'5c8e2ac3-81c1-4f40-8856-8790e60844e5',
          'last_update':1678228149,
          'prepare_time':20
@@ -789,7 +780,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Chocolate - gde.',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'eb82b21e-98c9-4dc7-962a-ffd17ea487f8',
          'last_update':1678228149,
          'prepare_time':20
@@ -800,7 +791,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Chá Quente',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'b0e734f1-42e3-4007-82ee-9a7e6d6abc71',
          'last_update':1678228149,
          'prepare_time':20
@@ -811,7 +802,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão de Queijo',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'0165b801-04c5-41b7-82bb-10f1501333ae',
          'last_update':1678228149,
          'prepare_time':20
@@ -822,7 +813,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Coxinha',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'ff9e45db-47ac-4f4c-8453-fc47c364db56',
          'last_update':1678228149,
          'prepare_time':20
@@ -833,7 +824,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Esfihas',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'a09b1ab6-f867-4e3e-9878-395198d1f0cd',
          'last_update':1678228149,
          'prepare_time':20
@@ -844,7 +835,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Folhadinhos',
          'description':'Calabresa, Queijo Branco ou Frango c/ Catupiry',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'53147297-15a0-45a6-8624-84380c58ae3f',
          'last_update':1678228149,
          'prepare_time':20
@@ -855,7 +846,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Quiche',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'0dbf752b-5c05-42ef-b7ee-f2e5d066297b',
          'last_update':1678228149,
          'prepare_time':20
@@ -866,7 +857,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Empada',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'0312246c-93e7-4358-aee4-3674c1753f02',
          'last_update':1678228149,
          'prepare_time':20
@@ -877,7 +868,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Bauruzinho',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'094e7516-73bc-4055-b2bc-7c876653246e',
          'last_update':1678228149,
          'prepare_time':20
@@ -888,7 +879,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão de Batata',
          'description':'Calabresa, Frango ou Catupiry',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'dfb38a7e-1819-4ab9-be8a-cfeb515e21fa',
          'last_update':1678228149,
          'prepare_time':20
@@ -899,7 +890,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Hamburgão c/ Queijo',
          'description':'',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'ec24f1ed-6e49-4774-8a3f-7485c822129d',
          'last_update':1678228149,
          'prepare_time':20
@@ -910,7 +901,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Baguete Folhada',
          'description':'Calabresa',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'f9adc29e-ac77-4282-9811-9a1386309f52',
          'last_update':1678228149,
          'prepare_time':20
@@ -921,7 +912,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão na Chapa',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'e60da0e3-cc8b-4a56-968b-1f2403991f94',
          'last_update':1678228149,
          'prepare_time':20
@@ -932,7 +923,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão c/ requeijão',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'6561df65-ed3e-4e01-824d-73d46f2c92ec',
          'last_update':1678228149,
          'prepare_time':20
@@ -943,7 +934,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Mini Pizza',
          'description':'Calabresa',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'4331e442-36f7-40d7-b646-281a4f7828b2',
          'last_update':1678228149,
          'prepare_time':20
@@ -954,7 +945,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salada / F. Frango',
          'description':'Filé de Frango - Mussarela/Alface/Tomate/Batata Frita/No Prato',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'c169a479-bcb9-4c34-8a48-aafb26010f2b',
          'last_update':1678228149,
          'prepare_time':20
@@ -965,7 +956,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salada / C. Filé',
          'description':'Contra Filé - Mussarela/Alface/Tomate/Batata Frita/No Prato',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'352683c8-ad7f-47ef-8d3b-ac6b9eaa157e',
          'last_update':1678228149,
          'prepare_time':20
@@ -976,7 +967,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salada / Calabresa',
          'description':'Calabresa - Mussarela/Alface/Tomate/Batata Frita/No Prato',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'02218ac2-88bd-4771-9910-a44ec1aa361f',
          'last_update':1678228149,
          'prepare_time':20
@@ -987,7 +978,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salada Simples',
          'description':'Alface/Tomate/No Prato',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'88b73f96-8522-4446-9be9-e2db78293b7c',
          'last_update':1678228149,
          'prepare_time':20
@@ -998,7 +989,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Omelete c/ Salada',
          'description':'Ovo/Alface/Tomate/No Prato',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'19c2527b-68f8-40db-ad4e-cad69ecd9abd',
          'last_update':1678228149,
          'prepare_time':20
@@ -1009,7 +1000,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Lasanha',
          'description':'Massa - Mussarela/Presunto/Molho ao sugo',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'5a39d0ee-06da-4abf-9fc1-40d25bea19e0',
          'last_update':1678228149,
          'prepare_time':20
@@ -1020,7 +1011,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Fritas Pequenas',
          'description':'',
          'meal_type':'PORTIONS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/portions.png',
          'product_id':'13079a73-f8bf-4e5a-bbb2-a867fbb89a71',
          'last_update':1678228149,
          'prepare_time':20
@@ -1031,7 +1022,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Fritas Gde Simples',
          'description':'',
          'meal_type':'PORTIONS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/portions.png',
          'product_id':'82c875f0-378a-4996-89cd-231311c093fb',
          'last_update':1678228149,
          'prepare_time':20
@@ -1042,7 +1033,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Fritas Gde Completa',
          'description':'',
          'meal_type':'PORTIONS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/portions.png',
          'product_id':'d35310a1-d48b-4bb0-bbe5-710f544d2669',
          'last_update':1678228149,
          'prepare_time':20
@@ -1055,7 +1046,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Nuggets (6 unid.)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'71ede2ce-31c6-4b22-bab5-da2175654308',
          'last_update':1677722948,
          'prepare_time':None
@@ -1066,7 +1057,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Filé de Frango (Grelhado)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'f78a4ce5-607e-41cf-8175-f9bbd0498d7c',
          'last_update':1677722948,
          'prepare_time':None
@@ -1077,7 +1068,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Omelete (Presunto, Queijo, Tomate)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'118cd9d3-95f0-4c1a-8052-39e1a9049e38',
          'last_update':1677722948,
          'prepare_time':None
@@ -1088,7 +1079,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Contra Filé (Grelhado)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'21177333-ac07-4359-b47a-00f1e09d2659',
          'last_update':1677722948,
          'prepare_time':None
@@ -1099,7 +1090,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Calabresa Grelhada (Toscana Aurora)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'850fe1d7-13df-430f-949f-4d106df70db4',
          'last_update':1677722948,
          'prepare_time':None
@@ -1110,7 +1101,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Parmegiana de Frango (Molho de tomate caseiro)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'e11b090e-a275-4474-ae90-2126b3d3a165',
          'last_update':1677722948,
          'prepare_time':None
@@ -1121,7 +1112,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Parmegiana de Carne (Molho de tomate caseiro)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'7a425df8-6d4d-4f3a-b69b-3ae9b7c6ab96',
          'last_update':1677722948,
          'prepare_time':None
@@ -1132,7 +1123,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Strogonoff de Frango',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'c2b0e3de-02d0-483c-b8ce-1383c24bed60',
          'last_update':1677722948,
          'prepare_time':None
@@ -1143,7 +1134,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Strogonoff de Carne',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'384ce447-76ad-462d-b8cd-79f93f92b5f3',
          'last_update':1677722948,
          'prepare_time':None
@@ -1154,7 +1145,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Peixe a Dore (Pescada Branca)',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'04a65d3f-a7f7-4161-ac7b-50d139946d2e',
          'last_update':1677722948,
          'prepare_time':None
@@ -1165,7 +1156,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Filé Mignon',
          'description':'Este prato inclui 2 acompanhamentos:\nArroz Feijão, Arroz a Grega, Arroz Integral, Creme de Milho, Mix Legumes, Purê de Batata, Salada Folhas, Salada de Tomate e Queijo Branco Temperado, Salada de Maionese, Salada de Couve com Tomate e Cebola, Batata Frita, Polenta Frita, Mandioca Frita, Beringela Caponata, Abobrinha Refogada',
          'meal_type':'PLATES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
          'product_id':'5569bd1d-21ed-4846-a3aa-4157beb11147',
          'last_update':1677722948,
          'prepare_time':None
@@ -1178,7 +1169,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Biscoito Wafer Look',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'c66cd618-67cc-4821-b2e1-b183058ba071',
          'last_update':1677893281,
          'prepare_time':None
@@ -1189,7 +1180,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Mentos Pure Fresh',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'8d1db391-2f02-466e-9746-f00f66c2626c',
          'last_update':1677893281,
          'prepare_time':None
@@ -1200,7 +1191,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Mentos Pure Fresh Grande',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'6aa96cc1-1608-402b-8030-66e902e59521',
          'last_update':1677893281,
          'prepare_time':None
@@ -1211,7 +1202,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Trident X Senses',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'f271460e-c231-4181-8b6b-4ec67c832858',
          'last_update':1677893281,
          'prepare_time':None
@@ -1222,7 +1213,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Bolo de Pote',
          'description':'Sabores: Prestígio, Brigadeira, Morango, Ninho, Doce de Leite, Abacaxi, Cenoura com Chocolate',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'e9c1f29c-bed8-4765-bad5-f5283247f273',
          'last_update':1677893281,
          'prepare_time':None
@@ -1233,7 +1224,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Baguete de Calabresa',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'9356b4cb-2773-4e72-b53c-6f65e5e03d54',
          'last_update':1677893281,
          'prepare_time':None
@@ -1244,7 +1235,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Baguete de Frango com Cheddar',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'d6e31be9-5381-4a96-a3b8-e706eeff2ad6',
          'last_update':1677893281,
          'prepare_time':None
@@ -1255,7 +1246,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Baguete de Presunto com Mussarela',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'bf75685e-3f91-4f46-b880-19d4b1bc6081',
          'last_update':1677893281,
          'prepare_time':None
@@ -1266,7 +1257,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Baguete de Parmesão e Mussarela com Requeijão',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'e82dc4bb-af5c-458a-b992-2af0d684432e',
          'last_update':1677893281,
          'prepare_time':None
@@ -1277,7 +1268,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão de Batata com Catupiry',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'4a1b4283-90e2-41cf-ab85-d02686b460ed',
          'last_update':1677893281,
          'prepare_time':None
@@ -1288,7 +1279,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão de Queijo',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'2daa50b4-7645-4bc5-9deb-8760457a6426',
          'last_update':1677893281,
          'prepare_time':None
@@ -1299,7 +1290,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Croissant de Frango com Catupiry',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'aaddfbd0-136c-4824-a12b-005ff6729a42',
          'last_update':1677893281,
          'prepare_time':None
@@ -1310,7 +1301,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Croissant de Queijo Branco',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'89e470aa-a77f-4194-bf64-6f7f05a1332c',
          'last_update':1677893281,
          'prepare_time':None
@@ -1321,7 +1312,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Croissant Integral de Peito de Peru',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'7f1947e0-7d26-45ed-8ec6-57cc0362b452',
          'last_update':1677893281,
          'prepare_time':None
@@ -1332,7 +1323,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Croissant de Chocolate',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'fa908158-47a9-47e7-827d-395a24937d70',
          'last_update':1677893281,
          'prepare_time':None
@@ -1343,7 +1334,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Bauru',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'b8922a1b-a029-4e5a-b85a-e87b5d9aac61',
          'last_update':1677893281,
          'prepare_time':None
@@ -1354,7 +1345,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Folhado',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'ab00b2ff-f2cd-41f2-885e-2772924d477d',
          'last_update':1677893281,
          'prepare_time':None
@@ -1365,7 +1356,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Carteira',
          'description':'Carne Desfiada com Mussarela',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'9589b258-ed44-4c24-b7d6-e96ae221baae',
          'last_update':1677893281,
          'prepare_time':None
@@ -1376,7 +1367,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Hamburgão',
          'description':'Bacon ou Cheddar ou Mussarela com Requeijão',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'dc0ff61d-0c38-4cd6-b19e-ce3409585136',
          'last_update':1677893281,
          'prepare_time':None
@@ -1387,7 +1378,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Enroladinho',
          'description':'Salsicha com Mussarela',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'717e6b57-9f26-426a-adbc-7cec16a27ae8',
          'last_update':1677893281,
          'prepare_time':None
@@ -1398,7 +1389,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Esfiha de Carne',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'840cf964-9720-4a1d-8dfe-3db809e443ae',
          'last_update':1677893281,
          'prepare_time':None
@@ -1409,7 +1400,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Coxinha Frango com Requeijão',
          'description':'',
          'meal_type':'SAVOURY',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/savoury.png',
          'product_id':'4b930558-46a8-41cd-850e-34261ced924f',
          'last_update':1677893281,
          'prepare_time':None
@@ -1420,7 +1411,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Vegetariano',
          'description':'Mussarela, Cenoura, Milho, Tomate, Alface e Maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'c182a8dd-61c9-4af3-948e-4c339f1d0d4c',
          'last_update':1677893281,
          'prepare_time':None
@@ -1431,7 +1422,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Tradicional',
          'description':'Rosbife, Mussarela, Ovo, Tomate, Alface e Maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'abd7c5f8-5b1d-4492-995b-d277d028dbc2',
          'last_update':1677893281,
          'prepare_time':None
@@ -1442,7 +1433,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Frango Magro',
          'description':'Frango Desfiado, Mussarela, Milho, Tomate, Alface e Maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'7fe0155b-06b0-48df-9dc9-4f28ff9d3428',
          'last_update':1677893281,
          'prepare_time':None
@@ -1453,7 +1444,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute à Moda da Casa',
          'description':'Presunto, Queijo Prato, Bacon, Tomate, Alface e Maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'cedd8040-a136-4300-90df-43715b5a526b',
          'last_update':1677893281,
          'prepare_time':None
@@ -1464,7 +1455,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Perú',
          'description':'Peito de Peru, Queijo Branco, Requeijão, Tomate, Alface e Maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'26368789-8ad1-400b-86ea-76511aab42bc',
          'last_update':1677893281,
          'prepare_time':None
@@ -1475,7 +1466,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Beirute Frango Gordo',
          'description':'Frango Desfiado, Bacon, Presunto, Queijo Prato, Ovo, Tomate, Alface e Maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'b75e7b65-283e-4e0d-a55b-cc0e7db23f3a',
          'last_update':1677893281,
          'prepare_time':None
@@ -1486,7 +1477,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Saladão de Peru',
          'description':'Peito de Peru, Queijo Branco, Milho, Cenoura, Tomate e Alface',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'13d3cac0-36ae-4045-be8e-f3639c1d558e',
          'last_update':1677893281,
          'prepare_time':None
@@ -1497,7 +1488,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Saladão de Vegetariano',
          'description':'Mussarela, Queijo Branco, Milho, Cenoura, Tomate e Alface',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'06e620dd-22af-4983-9ead-20c7a15f2a79',
          'last_update':1677893281,
          'prepare_time':None
@@ -1508,7 +1499,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Doritos',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'309a3050-7447-42c2-9205-34d879eff89f',
          'last_update':1677893281,
          'prepare_time':None
@@ -1519,7 +1510,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Fandangos',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'9422d722-0b5d-4d4d-bebc-bd9a57eb15d2',
          'last_update':1677893281,
          'prepare_time':None
@@ -1530,7 +1521,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Ruffles',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'6ebf8445-b107-442d-ac7c-77a5f363cec9',
          'last_update':1677893281,
          'prepare_time':None
@@ -1541,7 +1532,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Biscoito de Polvilho',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'86f79e88-062b-4bf6-8173-57528761a0d0',
          'last_update':1677893281,
          'prepare_time':None
@@ -1552,7 +1543,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Ovinhos',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'ec1a59ba-4d8c-47f0-87e3-1a2471fefce4',
          'last_update':1677893281,
          'prepare_time':None
@@ -1563,7 +1554,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Dori',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'cc037b01-4f6d-45d3-ba65-49eb06e28368',
          'last_update':1677893281,
          'prepare_time':None
@@ -1574,7 +1565,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Fofura',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'e4521192-1d72-4484-8946-2f4ff482bdb2',
          'last_update':1677893281,
          'prepare_time':None
@@ -1585,7 +1576,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'M & M s Grande',
          'description':'',
          'meal_type':'CANDIES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/candies.png',
          'product_id':'41d51beb-a4c2-4a40-b7f1-c252265189c8',
          'last_update':1677893281,
          'prepare_time':None
@@ -1596,7 +1587,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Torcida',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'16628dab-0ef8-4e9d-ad8d-250b1ac136af',
          'last_update':1677893281,
          'prepare_time':None
@@ -1607,7 +1598,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Hitt Nuts',
          'description':'',
          'meal_type':'SNACKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/snacks.png',
          'product_id':'6e31d58b-3b8c-4c88-9125-59a3e9118b26',
          'last_update':1677893281,
          'prepare_time':None
@@ -1618,7 +1609,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Café com Leite',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'e1d138da-be5f-4280-9966-724072fa6da0',
          'last_update':1677893281,
          'prepare_time':None
@@ -1629,7 +1620,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Chocolate',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'1ec541b9-3fbf-41e4-bde0-c3136c1ed332',
          'last_update':1677893281,
          'prepare_time':None
@@ -1640,7 +1631,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Capuccino',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'f92ac405-0a5c-43f8-827e-8cb6a64612ed',
          'last_update':1677893281,
          'prepare_time':None
@@ -1651,7 +1642,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Café',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'138b833e-8d39-4fee-824d-344d8af0f3ad',
          'last_update':1677893281,
          'prepare_time':None
@@ -1662,7 +1653,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Todão 400mL',
          'description':'Quente ou Frio',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'99932a5b-2a8b-49db-a37f-b1567beccd17',
          'last_update':1677893281,
          'prepare_time':None
@@ -1673,7 +1664,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão na Chapa',
          'description':'Baguete e Margarina',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'08619740-6ae2-4c90-89af-94bfaf41c649',
          'last_update':1677893281,
          'prepare_time':None
@@ -1684,7 +1675,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Pão com Ovo',
          'description':'Baguete, 2 ovos e maionese',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'4c31a2e2-4273-43fd-a34f-8d994d7e78ef',
          'last_update':1677893281,
          'prepare_time':None
@@ -1695,7 +1686,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Peito de Peru com Alface e Cenoura',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'bb1c5b2c-f0ba-4149-88aa-52b658c26d61',
          'last_update':1677893281,
          'prepare_time':None
@@ -1706,7 +1697,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salpicão de Frango com Alface e Cenoura',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'5ce70740-e2c6-43e0-ad99-6b1c232ba763',
          'last_update':1677893281,
          'prepare_time':None
@@ -1717,7 +1708,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salame com Mussarela e Queijo Prato',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'4200c280-1e9e-4cb2-9739-b91b98734f24',
          'last_update':1677893281,
          'prepare_time':None
@@ -1728,7 +1719,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Provolone com Copa, Presunto, Alface e Tomate',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'0751f4b5-17f3-46be-811c-b8bf7794a5f9',
          'last_update':1677893281,
          'prepare_time':None
@@ -1739,7 +1730,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Mussarela com Copa, Presunto, Alface e Tomate',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'884c0f45-3c0d-48be-9a58-33f4026ac219',
          'last_update':1677893281,
          'prepare_time':None
@@ -1750,7 +1741,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Peito de Peru com Milho, Alface e Cenoura',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'fbfab0bb-9f09-4cfc-88c6-aa634afaddcb',
          'last_update':1677893281,
          'prepare_time':None
@@ -1761,7 +1752,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Frango Desfiado com Mussarela e Alface',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'SANDWICHES',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
          'product_id':'402d7016-90c1-4791-a79b-6db340e7cdac',
          'last_update':1677893281,
          'prepare_time':None
@@ -1772,7 +1763,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco com Água',
          'description':'Sabores das Polpas : Acerola, Abacaxi, Limão, Mamão, Manga, Maracujá, Melão',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'fcb71d16-c54c-44f7-b09b-5a598e0778f3',
          'last_update':1677893281,
          'prepare_time':None
@@ -1783,7 +1774,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco com Leite',
          'description':'Sabores das Polpas : Acerola, Abacaxi, Limão, Mamão, Manga, Maracujá, Melão',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'509cc52b-b728-4bfa-bb71-665911778b7f',
          'last_update':1677893281,
          'prepare_time':None
@@ -1794,7 +1785,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco com dois Sabores',
          'description':'Sabores das Polpas : Acerola, Abacaxi, Limão, Mamão, Manga, Maracujá, Melão',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'3e81e25d-b89c-4809-bfc5-7b4dc699a640',
          'last_update':1677893281,
          'prepare_time':None
@@ -1805,7 +1796,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco de Açaí',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'c3e450c2-eb98-47ae-b40b-1e6d07d93c72',
          'last_update':1677893281,
          'prepare_time':None
@@ -1816,7 +1807,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco de Açaí com Banana',
          'description':'Baguete ou Pão de Forma Integral',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'675ae6b6-eabb-414b-bb90-58af56af1ea7',
          'last_update':1677893281,
          'prepare_time':None
@@ -1827,7 +1818,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Suco de Laranja',
          'description':'',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'54fd74bf-65f2-45b4-9324-074c573df446',
          'last_update':1677893281,
          'prepare_time':None
@@ -1838,7 +1829,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Laranja com uma Polpa',
          'description':'Sabores das Polpas : Acerola, Abacaxi, Limão, Mamão, Manga, Maracujá, Melão',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'b0a3623f-f2c7-4e2f-8b6f-6e282003090d',
          'last_update':1677893281,
          'prepare_time':None
@@ -1849,7 +1840,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Açaí na Tigela (180mL)',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'40224b67-2c59-4898-8101-0783a724a44a',
          'last_update':1677893281,
          'prepare_time':None
@@ -1860,7 +1851,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Açaí na Tigela (360mL)',
          'description':'',
          'meal_type':'DESSERT',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/dessert.png',
          'product_id':'3dbfc3d6-11d5-498d-bad4-210d7a82b0f2',
          'last_update':1677893281,
          'prepare_time':None
@@ -1871,7 +1862,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Cimento (400mL)',
          'description':'Pouco Leite com Açaí e Morango',
          'meal_type':'DRINKS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/drinks.png',
          'product_id':'4081a83a-516f-442c-85e2-b54bfb192e55',
          'last_update':1677893281,
          'prepare_time':None
@@ -1882,7 +1873,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
          'name':'Salada de Frutas',
          'description':'',
          'meal_type':'PORTIONS',
-         'photo':'https://avatars.githubusercontent.com/u/30812461?v=4',
+         'photo':'https://mauafood-assets.cloudfront.net/products/icons/portions.png',
          'product_id':'6624e731-1301-4b24-a036-1e7f2553e023',
          'last_update':1677893281,
          'prepare_time':None
