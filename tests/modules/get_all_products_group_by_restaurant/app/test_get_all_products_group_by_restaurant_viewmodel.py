@@ -139,7 +139,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':25.0,
-         'name':'Ch. c/ Queijo',
+         'name':'Churrasco c/ Queijo',
          'description':'Contra Filé/Mussarela',
          'meal_type':'SANDWICHES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
@@ -150,7 +150,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':24.0,
-         'name':'Ch. c/ Vinag.',
+         'name':'Churrasco c/ Vinagrete',
          'description':'Contra Filé/Vinagrete',
          'meal_type':'SANDWICHES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
@@ -161,7 +161,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':29.0,
-         'name':'Ch. c/ Queijo/Vinag.',
+         'name':'Churrasco c/ Queijo/Vinagrete',
          'description':'Contra Filé/Mussarela/Vinagrete',
          'meal_type':'SANDWICHES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
@@ -249,7 +249,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':15.0,
-         'name':'Pão c/ Ovo/Mussar.',
+         'name':'Pão c/ Ovo/Mussarela',
          'description':'Ovo/Mussarela/Orégano',
          'meal_type':'SANDWICHES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/sandwiches.png',
@@ -513,7 +513,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':35.0,
-         'name':'Strogonoff De Carne',
+         'name':'Strogonoff de Carne',
          'description':'Carne/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
@@ -524,7 +524,7 @@ class Test_GetAllProductsGroupByRestaurantViewmodel:
       {
          'available':True,
          'price':35.0,
-         'name':'Strogonoff De Frango',
+         'name':'Strogonoff de Frango',
          'description':'Frango/Arroz/Batata Palha/No Prato',
          'meal_type':'PLATES',
          'photo':'https://mauafood-assets.cloudfront.net/products/icons/plates.png',
