@@ -7,4 +7,4 @@ on:
 
 jobs:
   testApp:
-    uses: maua-dev/ci_workflows_reusable/.github/workflows/pytest_ci.yml@main
+    uses: maua-dev/ci_workflows_reusable/.github/workflows/pytest_ci.yml@V1.0
