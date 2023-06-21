@@ -7,6 +7,6 @@ on:
 
 jobs: 
   check_owner:
-    uses: maua-dev/ci_workflows_reusable/.github/workflows/pr_owner.yml@main
+    uses: maua-dev/ci_workflows_reusable/.github/workflows/pr_owner.yml@V1.0
     with:
       repository: ${{ github.repository }}

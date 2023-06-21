@@ -3,11 +3,16 @@ import json
 
 from src.modules.get_product.app.get_product_presenter import lambda_handler
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 
 
 class Test_GetProductPresenter:
-
+    repo_mock = ProductRepositoryMock()
+    photo_link:str = repo_mock.products[0].photo
+    
     def test_get_product_presenter(self):
+        
+
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -55,7 +60,7 @@ class Test_GetProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":"https://avatars.githubusercontent.com/u/30812461?v=4", "last_update":1678228149, "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU"}',
+            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":https://mauafood-assets.cloudfront.net/portions.png, "last_update":1678228149, "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -68,7 +73,7 @@ class Test_GetProductPresenter:
             "description": "Hamburguer/Mussarela/Maionese/Alface/Tomate",
             "prepare_time": 20,
             "meal_type": "SANDWICHES",
-            "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+            "photo": self.photo_link,
             "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
             "last_update": 1678228149,
             "restaurant": "SOUZA_DE_ABREU"
@@ -126,7 +131,7 @@ class Test_GetProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":"https://avatars.githubusercontent.com/u/30812461?v=4", "last_update":1678228149}', 
+            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":https://mauafood-assets.cloudfront.net/portions.png, "last_update":1678228149}', 
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -183,7 +188,7 @@ class Test_GetProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":"https://avatars.githubusercontent.com/u/30812461?v=4", "last_update":1678228149}', 
+            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":"https://mauafood-assets.cloudfront.net/portions.png", "last_update":1678228149}', 
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -241,7 +246,7 @@ class Test_GetProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":"https://avatars.githubusercontent.com/u/30812461?v=4", "last_update":1678228149}', 
+            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":https://mauafood-assets.cloudfront.net/portions.png, "last_update":1678228149}', 
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -299,7 +304,7 @@ class Test_GetProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":"https://avatars.githubusercontent.com/u/30812461?v=4", "last_update":1678228149}', 
+            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":https://mauafood-assets.cloudfront.net/portions.png, "last_update":1678228149}', 
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -357,7 +362,7 @@ class Test_GetProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":"https://avatars.githubusercontent.com/u/30812461?v=4", "last_update":1678228149}', 
+            "body": '{"available":true, "price":19.0, "name":"X-Salada", "description":"Hamburguer/Mussarela/Maionese/Alface/Tomate", "prepare_time":20, "meal_type":"SANDWICHES", "photo":https://mauafood-assets.cloudfront.net/portions.png, "last_update":1678228149}', 
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
