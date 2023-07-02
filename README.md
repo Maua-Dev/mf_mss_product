@@ -66,8 +66,9 @@ Clone the repository using template.
 
 ## Special Thanks 🙏
 
-- Dev. Community Mauá
-- Mauá Institute of Technology
+- [Dev. Community Mauá](https://www.instagram.com/devcommunitymaua/)
+- [Mauá Institute of Technology](https://www.maua.br/)
+- [Clean Architecture: A Craftsman's Guide to Software Structure and Design](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
 
 
 
