@@ -1,5 +1,6 @@
 import abc
 import re
+from typing import Optional
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -8,12 +9,12 @@ class User(abc.ABC):
     name: str
     email: str
     role: ROLE
-    restaurant: RESTAURANT = None
+    restaurant: Optional[RESTAURANT] = None
     MIN_NAME_LENGTH = 2
     user_id: str
     USER_ID_LENGTH = 36
 
-    def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: RESTAURANT = None):
+    def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: Optional[RESTAURANT] = None):
         if not User.validate_name(name):
             raise EntityError("name")
         self.name = name
@@ -67,4 +68,4 @@ class User(abc.ABC):
         return True
 
     def __repr__(self):
-        return f"User(name={self.name}, email={self.email}, user_id={self.user_id}, state={self.role})"
+        return f"User(name={self.name}, email={self.email}, user_id={self.user_id}, state={self.role}, restaurant={self.restaurant})"

@@ -15,7 +15,7 @@ class Test_User:
         assert user.email == "21.00306-8@maua.br"
         assert user.role == ROLE.ADMIN
         assert user.user_id == "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
-        assert user.restaurant is None
+        assert user.restaurant == None
 
     def test_user_with_restaurant(self):
         user = User(name="Lucas Duez", email="21.00306-8@maua.br", role=ROLE.ADMIN, user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3", restaurant=RESTAURANT.SOUZA_DE_ABREU)
