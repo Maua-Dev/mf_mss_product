@@ -3,18 +3,17 @@ import re
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.errors.domain_errors import EntityError
-from typing import Optional
 
 class User(abc.ABC):
     name: str
     email: str
     role: ROLE
-    restaurant: Optional[RESTAURANT]
+    restaurant: RESTAURANT = None
     MIN_NAME_LENGTH = 2
     user_id: str
     USER_ID_LENGTH = 36
 
-    def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: Optional[RESTAURANT]):
+    def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: RESTAURANT = None):
         if not User.validate_name(name):
             raise EntityError("name")
         self.name = name
@@ -23,11 +22,10 @@ class User(abc.ABC):
             raise EntityError("email")
         self.email = email
 
-        if type(user_id) == str:
-            raise EntityError("user_id")
-
-        if type(restaurant) != Optional[RESTAURANT]:
-            raise EntityError("restaurant")
+        if restaurant is not None:
+            if type(restaurant) != RESTAURANT:
+                raise EntityError("restaurant")
+        self.restaurant = restaurant
 
         if not self.validate_user_id(user_id=user_id):
             raise EntityError("user_id")
@@ -37,23 +35,28 @@ class User(abc.ABC):
             raise EntityError("state")
         self.role = role
 
+        if type(user_id) != str:
+            raise EntityError("user_id")  
+
     @staticmethod
     def validate_name(name: str) -> bool:
+        regex = re.compile(r"^[a-zA-Z\s]+$")
+
         if name is None:
             return False
         elif type(name) != str:
             return False
-        elif len(name) < User.MIN_NAME_LENGTH:
+        elif len(name) <= User.MIN_NAME_LENGTH:
             return False
-
-        return True
+        
+        return bool(re.fullmatch(regex, name))
 
     @staticmethod
     def validate_email(email: str) -> bool:
         if email is None:
             return False
 
-        regex = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+        regex = re.compile(r"^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
 
         return bool(re.fullmatch(regex, email))
     
