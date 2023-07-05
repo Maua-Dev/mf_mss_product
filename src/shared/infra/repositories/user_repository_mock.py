@@ -30,7 +30,10 @@ class UserRepositoryMock(IUserRepository):
         return user
 
     def get_user_by_id(self, user_id: str):
-        pass
+        for user in self.users_list:
+            if user_id == user.user_id:
+                return user
+        return None
 
     def update_user_by_id(self, user_id: str):
         pass
