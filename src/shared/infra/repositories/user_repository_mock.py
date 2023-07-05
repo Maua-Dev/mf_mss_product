@@ -39,4 +39,8 @@ class UserRepositoryMock(IUserRepository):
         pass
 
     def delete_user_by_id(self, user_id: str):
-        pass
+        for user in self.users_list:
+            if user_id == user.user_id:
+                self.users_list.remove(user)
+                return user
+        return None
