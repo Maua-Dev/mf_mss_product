@@ -27,12 +27,6 @@ class User(abc.ABC):
             if type(restaurant) != RESTAURANT:
                 raise EntityError("restaurant")
 
-        if role == ROLE.OWNER and restaurant is None:
-            raise EntityError("restaurant")
-
-        if role == ROLE.SELLER and restaurant is None:
-            raise EntityError("restaurant")
-
         self.restaurant = restaurant
 
         if not self.validate_user_id(user_id=user_id):
@@ -48,7 +42,7 @@ class User(abc.ABC):
 
     @staticmethod
     def validate_name(name: str) -> bool:
-        regex = re.compile(r"^[a-zA-Z\s]+$")
+        regex = re.compile(r"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$")
 
         if name is None:
             return False
