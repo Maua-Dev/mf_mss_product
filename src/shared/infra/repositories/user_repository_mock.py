@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
@@ -29,16 +29,27 @@ class UserRepositoryMock(IUserRepository):
         self.users_list.append(user)
         return user
 
-    def get_user_by_id(self, user_id: str):
+    def get_user_by_id(self, user_id: str) -> Optional[User]:
         for user in self.users_list:
             if user_id == user.user_id:
                 return user
         return None
 
-    def update_user_by_id(self, user_id: str):
-        pass
+    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None, new_email: Optional[str] = None):
+        user_to_update = self.get_user_by_id(user_id)
 
-    def delete_user_by_id(self, user_id: str):
+        if user_to_update is None:
+            return None
+
+        if new_name is not None and User.validate_name(new_name):
+            user_to_update.name = new_name
+
+        if new_email is not None and User.validate_email(new_email):
+            user_to_update.email = new_email
+
+        return user_to_update
+
+    def delete_user_by_id(self, user_id: str) -> Optional[User]:
         for user in self.users_list:
             if user_id == user.user_id:
                 self.users_list.remove(user)

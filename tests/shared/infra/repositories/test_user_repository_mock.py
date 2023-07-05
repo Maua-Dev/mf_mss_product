@@ -37,6 +37,51 @@ class Test_UserRepositoryMock:
 
         assert response is None
 
+    def test_update_user_name_with_valid_name(self):
+        repo_mock = UserRepositoryMock()
+
+        response = repo_mock.update_user_by_id(first_user_id, new_name="Sacul Zeud")
+
+        assert repo_mock.users_list[0].name == "Sacul Zeud"
+        assert repo_mock.users_list[0].email == response.email
+
+    def test_update_user_name_with_invalid_name(self):
+        repo_mock = UserRepositoryMock()
+
+        first_user_name = repo_mock.users_list[0].name
+        first_user_email = repo_mock.users_list[0].email
+
+        response = repo_mock.update_user_by_id(first_user_id, new_name="Luc@as D3uz")
+
+        assert repo_mock.users_list[0].name == first_user_name
+        assert repo_mock.users_list[0].email == first_user_email
+
+    def test_update_user_email_with_valid_email(self):
+        repo_mock = UserRepositoryMock()
+
+        response = repo_mock.update_user_by_id(first_user_id, new_email="meu.novo.email@gmail.com")
+
+        assert repo_mock.users_list[0].name == response.name
+        assert repo_mock.users_list[0].email == "meu.novo.email@gmail.com"
+
+    def test_update_user_name_with_invalid_email(self):
+        repo_mock = UserRepositoryMock()
+
+        first_user_name = repo_mock.users_list[0].name
+        first_user_email = repo_mock.users_list[0].email
+
+        response = repo_mock.update_user_by_id(first_user_id, new_email="@gmail.com")
+
+        assert repo_mock.users_list[0].name == first_user_name
+        assert repo_mock.users_list[0].email == first_user_email
+
+    def test_update_user_with_invalid_id(self):
+        repo_mock = UserRepositoryMock()
+
+        response = repo_mock.update_user_by_id("Um id que não existe", "novo nome", "novo email")
+
+        assert response is None
+
     def test_delete_user_with_valid_id(self):
         repo_mock = UserRepositoryMock()
 
