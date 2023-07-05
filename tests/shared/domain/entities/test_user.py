@@ -58,3 +58,7 @@ class Test_User:
     def test_invalid_restaurant(self):
         with pytest.raises(EntityError):
             user = User(name="Laura Balbachan", email="21.00306-8@maua.br", role=ROLE.ADMIN, user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3", restaurant={})
+
+    def test_owner_must_have_a_restaurant(self):
+        with pytest.raises(EntityError):
+            user = User(name="Laura Balbachan", email="21.00306-8@maua.br", role=ROLE.OWNER, user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3", restaurant=None)

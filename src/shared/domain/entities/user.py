@@ -26,6 +26,13 @@ class User(abc.ABC):
         if restaurant is not None:
             if type(restaurant) != RESTAURANT:
                 raise EntityError("restaurant")
+
+        if role == ROLE.OWNER and restaurant is None:
+            raise EntityError("restaurant")
+
+        if role == ROLE.SELLER and restaurant is None:
+            raise EntityError("restaurant")
+
         self.restaurant = restaurant
 
         if not self.validate_user_id(user_id=user_id):
