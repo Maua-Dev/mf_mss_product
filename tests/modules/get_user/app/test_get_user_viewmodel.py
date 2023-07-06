@@ -13,7 +13,7 @@ class Test_UserViewmodel:
         response = self.user_viewmodel.to_dict()
 
         expected = {
-            "product": {
+            "user": {
                 "user_name": "Lucas Duez",
                 "user_email": "lucas.santos@maua.br",
                 "role": "USER",

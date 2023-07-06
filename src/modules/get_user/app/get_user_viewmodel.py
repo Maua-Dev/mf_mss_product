@@ -35,6 +35,6 @@ class GetUserViewmodel:
 
     def to_dict(self):
         return {
-            "product": self.user_viewmodel.to_dict(),
+            "user": self.user_viewmodel.to_dict(),
             "message": "the user was retrieved"
         }
