@@ -24,4 +24,4 @@ class UserApiGatewayDTO:
         )
     
     def __eq__(self, other):
-        return self.name == other.name and self.email == other.email and self.user_id == other.user_id and self.is_maua == other.is_maua
+        return self.name == other.user_name and self.email == other.email and self.user_id == other.user_id and self.is_maua == other.is_maua
