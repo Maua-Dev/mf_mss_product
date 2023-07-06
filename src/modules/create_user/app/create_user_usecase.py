@@ -10,7 +10,7 @@ class CreateUserUsecase:
     def __init__(self, repo: IUserRepository):
         self.repo = repo
 
-    def __call__(self, name: str, email: str, role: ROLE, restaurant: None, user_id: str) -> User:
+    def __call__(self, name: str, email: str, role: ROLE, restaurant: RESTAURANT, user_id: str) -> User:
     
         if role is not ROLE.USER:
             raise EntityError("role")
