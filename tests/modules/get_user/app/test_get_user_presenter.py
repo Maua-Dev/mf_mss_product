@@ -7,7 +7,7 @@ first_user = UserRepositoryMock().users_list[0]
 
 class Test_GetUserPresenter:
 
-    def test_get_enrollment_presenter(self):
+    def test_get_user_presenter(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",
