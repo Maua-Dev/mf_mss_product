@@ -19,8 +19,8 @@ class UserViewmodel:
 
     def to_dict(self):
         return {
-            "user_name": self.user_name,
-            "user_email": self.user_email,
+            "name": self.user_name,
+            "email": self.user_email,
             "role": self.role,
             "user_id": self.user_id,
             "restaurant": self.restaurant

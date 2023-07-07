@@ -8,7 +8,7 @@ class CreateUserViewmodel:
     name: str
     email: str
     restaurant: RESTAURANT = None
-    role: ROLE 
+    role: ROLE
 
     def __init__(self, user: User):
         self.user_id = user.user_id
@@ -19,10 +19,13 @@ class CreateUserViewmodel:
 
     def to_dict(self):
         return {
-            'user_id': self.user_id,
-            'name': self.name,
-            'email': self.email,
-            'restaurant': str(self.restaurant),
-            'role': self.role.value,
+            'user': {
+                'user_id': self.user_id,
+                'name': self.name,
+                'email': self.email,
+                'restaurant': self.restaurant.value,
+                'role': self.role.value
+            },
+
             'message': "the user was created successfully"
         }

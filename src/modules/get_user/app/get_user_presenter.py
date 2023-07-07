@@ -1,5 +1,5 @@
-from src.modules.get_user.app.get_user_controller import GetUserController
-from src.modules.get_user.app.get_user_usecase import GetUserUseCase
+from .get_user_controller import GetUserController
+from .get_user_usecase import GetUserUseCase
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
