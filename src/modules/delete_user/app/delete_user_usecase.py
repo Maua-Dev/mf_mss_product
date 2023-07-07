@@ -20,3 +20,5 @@ class DeleteUserUsecase:
 
         if user is None:
             raise NoItemsFound("user_id")
+        
+        return user

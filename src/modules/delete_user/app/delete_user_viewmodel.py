@@ -1,3 +1,4 @@
+from typing import Optional
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
@@ -7,15 +8,15 @@ class UserViewmodel:
     user_id: str
     name: str
     email: str
-    restaurant: RESTAURANT = None
-    role: ROLE
+    restaurant: Optional[RESTAURANT] = None
+    role: str
 
     def __init__(self, user: User):
         self.user_id = user.user_id
         self.name = user.name
         self.email = user.email
         self.restaurant = user.restaurant
-        self.role = user.role
+        self.role = user.role.value
 
     def to_dict(self) -> dict:
         return {
@@ -23,7 +24,7 @@ class UserViewmodel:
             'name': self.name,
             'email': self.email,
             'restaurant': self.restaurant,
-            'role': self.role.value
+            'role': self.role
         }
     
 class DeleteUserViewmodel:

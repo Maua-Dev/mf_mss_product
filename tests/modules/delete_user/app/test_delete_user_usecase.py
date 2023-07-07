@@ -16,6 +16,7 @@ class Test_DeleteUserUsecase:
         user = usecase(user_id=user_id)
 
         assert len(repo.users_list) == lenBefore - 1
+        assert user.user_id == user_id
 
     def test_delete_user_invalid_type(self):
         repo = UserRepositoryMock()
