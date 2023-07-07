@@ -29,7 +29,7 @@ class UserViewmodel:
 class DeleteUserViewmodel:
         
     def __init__(self, user: User):
-            self.user = UserViewmodel(user=user)
+        self.user = UserViewmodel(user=user)
 
     def to_dict(self):
         return {
