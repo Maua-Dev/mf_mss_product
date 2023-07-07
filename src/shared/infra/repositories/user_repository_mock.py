@@ -24,7 +24,7 @@ class UserRepositoryMock(IUserRepository):
             User(name="Rodrigo Morales", email="rodrigo.morales@gmail.com", role=ROLE.USER,
                  user_id="93bc6ada-c0d1-7054-66ab-e17414c48af9", restaurant=None),
             User(name="José", email="ze@porteiros.br", role=ROLE.USER,
-                 user_id="93bc6ada-c0d1-7054-66ab-e17414c48af9", restaurant=None)
+                 user_id="93bc6ada-c0d1-7054-66ab-e17414c48af1", restaurant=None)
         ]
 
     def create_user(self, user: User) -> User:
