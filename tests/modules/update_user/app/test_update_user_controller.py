@@ -23,8 +23,8 @@ class Test_UpdateUserController:
 
         expected_dict = {
             "user": {
-                "user_name": "Um novo nome",
-                "user_email": "novo.email@gmail.com",
+                "name": "Um novo nome",
+                "email": "novo.email@gmail.com",
                 "role": first_user.role.value,
                 "user_id": first_user.user_id,
                 "restaurant": first_user.restaurant
@@ -57,8 +57,8 @@ class Test_UpdateUserController:
 
         expected_dict = {
             "user": {
-                "user_name": repo_mock.users_list[-1].name,
-                "user_email": "novo.email@gmail.com",
+                "name": repo_mock.users_list[-1].name,
+                "email": "novo.email@gmail.com",
                 "role": first_user.role.value,
                 "user_id": first_user.user_id,
                 "restaurant": first_user.restaurant
@@ -91,8 +91,8 @@ class Test_UpdateUserController:
 
         expected_dict = {
             "user": {
-                "user_name": "Um novo nome",
-                "user_email": repo_mock.users_list[-1].email,
+                "name": "Um novo nome",
+                "email": repo_mock.users_list[-1].email,
                 "role": first_user.role.value,
                 "user_id": first_user.user_id,
                 "restaurant": first_user.restaurant
