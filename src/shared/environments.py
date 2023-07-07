@@ -3,7 +3,7 @@ from enum import Enum
 import os
 
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
-
+from src.shared.domain.repositories.user_repository_interface import IUserRepository
 
 
 class STAGE(Enum):
@@ -74,6 +74,18 @@ class Environments:
         elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
             from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock#from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
             return ProductRepositoryMock #ProductRepositoryDynamo        
+        else:
+            raise Exception("No repository found for this stage")
+
+
+    @staticmethod
+    def get_user_repo() -> IUserRepository:
+        if Environments.get_envs().stage == STAGE.TEST:
+            from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+            return UserRepositoryMock
+        elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
+            from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock#from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
+            return UserRepositoryMock #UserRepositoryDynamo
         else:
             raise Exception("No repository found for this stage")
 
