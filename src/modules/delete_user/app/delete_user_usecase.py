@@ -13,9 +13,6 @@ class DeleteUserUsecase:
         if not User.validate_user_id(user_id=user_id):
             raise EntityError("user_id")
         
-        if type(user_id) != str:
-            raise EntityError("user_id")
-        
         user = self.repo.delete_user_by_id(user_id=user_id)
 
         if user is None:
