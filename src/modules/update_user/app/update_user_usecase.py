@@ -16,6 +16,9 @@ class UpdateUserUsecase:
 
         user_to_update = self.repository.get_user_by_id(user_id)
 
+        if user_to_update is None:
+            raise NoItemsFound("user")
+
         new_user = User(
             user_id=user_to_update.user_id,
             name=user_to_update.name,
@@ -24,8 +27,6 @@ class UpdateUserUsecase:
             restaurant=user_to_update.restaurant
         )
 
-        if user_to_update is None:
-            raise NoItemsFound("user")
 
         if new_name is not None:
             if new_name == user_to_update.name:
