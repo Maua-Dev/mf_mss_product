@@ -1,9 +1,9 @@
 import enum
 from enum import Enum
 import os
-from mf_mss_product.src.shared.domain.repositories.user_repository_interface import IUserRepository
 
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
+from src.shared.domain.repositories.user_repository_interface import IUserRepository
 
 
 
@@ -77,7 +77,7 @@ class Environments:
             return ProductRepositoryMock #ProductRepositoryDynamo        
         else:
             raise Exception("No repository found for this stage")
-
+        
     @staticmethod
     def get_user_repo() -> IUserRepository:
         if Environments.get_envs().stage == STAGE.TEST:
@@ -88,7 +88,7 @@ class Environments:
             return UserRepositoryMock #UserRepositoryDynamo
         else:
             raise Exception("No repository found for this stage")
-        
+
     @staticmethod
     def get_envs() -> "Environments":
         """
@@ -102,4 +102,3 @@ class Environments:
 
     def __repr__(self):
         return self.__dict__
-

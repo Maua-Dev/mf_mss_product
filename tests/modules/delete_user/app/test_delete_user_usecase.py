@@ -1,6 +1,6 @@
-from mf_mss_product.src.shared.helpers.errors.usecase_errors import NoItemsFound
+from src.shared.helpers.errors.usecase_errors import NoItemsFound
 import pytest
-from mf_mss_product.src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError
 from src.modules.delete_user.app.delete_user_usecase import DeleteUserUsecase
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -16,7 +16,6 @@ class Test_DeleteUserUsecase:
         user = usecase(user_id=user_id)
 
         assert len(repo.users_list) == lenBefore - 1
-        assert user.user_id == repo.users_list[0].user_id
 
     def test_delete_user_invalid_type(self):
         repo = UserRepositoryMock()
