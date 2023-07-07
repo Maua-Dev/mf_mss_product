@@ -89,6 +89,7 @@ class Environments:
         else:
             raise Exception("No repository found for this stage")
 
+
     @staticmethod
     def get_envs() -> "Environments":
         """
