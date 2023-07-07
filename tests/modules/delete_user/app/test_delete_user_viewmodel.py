@@ -9,11 +9,13 @@ class Test_DeleteUserViewmodel:
 
         expected = {
             "user":{
-                'user_id': "Lucas Duez",
-                'name': "lucas.santos@gmail.com",
+                'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48ae3",
+                'name': "Lucas Duez",
                 'email': "lucas.santos@gmail.com",
                 'restaurant': None,
                 'role': "ADMIN",
             },
             "message": "the user was deleted"
         }
+
+        assert viewmodel.to_dict() == expected
