@@ -1,5 +1,5 @@
-from src.modules.get_user.app.get_user_usecase import GetUserUseCase
-from src.modules.get_user.app.get_user_viewmodel import GetUserViewmodel
+from .get_user_usecase import GetUserUseCase
+from .get_user_viewmodel import GetUserViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound

@@ -24,8 +24,8 @@ class Test_GetUserController:
 
         expected_dict = {
             "user": {
-                "user_name": self.first_user.name,
-                "user_email": self.first_user.email,
+                "name": self.first_user.name,
+                "email": self.first_user.email,
                 "role": self.first_user.role.value,
                 "user_id": self.first_user.user_id,
                 "restaurant": self.first_user.restaurant

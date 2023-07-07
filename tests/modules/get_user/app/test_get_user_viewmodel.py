@@ -14,8 +14,8 @@ class Test_UserViewmodel:
 
         expected = {
             "user": {
-                "user_name": "Lucas Duez",
-                "user_email": "lucas.santos@maua.br",
+                "name": "Lucas Duez",
+                "email": "lucas.santos@maua.br",
                 "role": "USER",
                 "user_id": "93bc6ada-c0d1-7054-66ab-e17414c48bbb",
                 "restaurant": None

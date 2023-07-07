@@ -91,17 +91,6 @@ class Environments:
 
 
     @staticmethod
-    def get_user_repo() -> IUserRepository:
-        if Environments.get_envs().stage == STAGE.TEST:
-            from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
-            return UserRepositoryMock
-        elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
-            from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock#from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
-            return UserRepositoryMock #UserRepositoryDynamo
-        else:
-            raise Exception("No repository found for this stage")
-
-    @staticmethod
     def get_envs() -> "Environments":
         """
         Returns the Environments object. This method should be used to get the Environments object instead of instantiating it directly.

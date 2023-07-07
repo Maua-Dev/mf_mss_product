@@ -12,12 +12,15 @@ class Test_CreateUserViewModel:
             role=ROLE.USER
         )
         userViewmodel = CreateUserViewmodel(user=user).to_dict()
-
-        expected = {'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48ae3",
-                    'name': 'Rodrigo',
-                    'email': 'rodrigo.morales@gmail.com',
-                    'restaurant': 'None',
-                    'role':'USER',
-                    'message': 'the user was created successfully'}
+        expected = {
+            "user": {
+                'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48ae3",
+                'name': 'Rodrigo',
+                'email': 'rodrigo.morales@gmail.com',
+                'restaurant': None,
+                'role':'USER',
+            },
+            'message': 'the user was created successfully'
+        }
 
         assert expected == userViewmodel
