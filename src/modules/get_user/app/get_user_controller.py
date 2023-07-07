@@ -14,11 +14,11 @@ class GetUserController:
 
     def __call__(self, request: IRequest):
         try:
-            requester_user: UserApiGatewayDTO = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
 
-            if requester_user.user_id is None:
-                raise MissingParameters("user_id")
-            
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
+
             user = self.usecase(user_id=requester_user.user_id)
 
             user_viewmodel = GetUserViewmodel(user).to_dict()

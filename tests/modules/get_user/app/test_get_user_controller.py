@@ -18,8 +18,7 @@ class Test_GetUserController:
                     "name": self.first_user.name,
                     "email": self.first_user.email,
                     "custom:isMaua": True
-                },
-                'code': 'ECM2345'
+                }
             }
         )
 
@@ -47,8 +46,7 @@ class Test_GetUserController:
                     "name": self.first_user.name,
                     "email": self.first_user.email,
                     "custom:isMaua": True
-                },
-                'code': 'ECM2345'
+                }
             }
         )
 
@@ -64,8 +62,7 @@ class Test_GetUserController:
                     "name": self.first_user.name,
                     "email": self.first_user.email,
                     "custom:isMaua": True
-                },
-                'code': 'ECM2345'
+                }
             }
         )
 
@@ -81,8 +78,7 @@ class Test_GetUserController:
                     "name": self.first_user.name,
                     "email": self.first_user.email,
                     "custom:isMaua": True
-                },
-                'code': 'ECM2345'
+                }
             }
         )
 
