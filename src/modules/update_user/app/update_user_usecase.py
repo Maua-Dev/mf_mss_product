@@ -3,7 +3,7 @@ from typing import Optional
 from src.shared.domain.entities.user import User
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, DuplicatedItem
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnecessaryUpdate
 
 
 class UpdateUserUsecase:
@@ -29,7 +29,7 @@ class UpdateUserUsecase:
 
         if new_name is not None:
             if new_name == user_to_update.name:
-                raise DuplicatedItem("user_name")
+                raise UnecessaryUpdate("user_name")
 
             if not User.validate_name(new_name):
                 raise EntityError("user_name")

@@ -2,7 +2,7 @@ import pytest
 
 from src.modules.update_user.app.update_user_usecase import UpdateUserUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import DuplicatedItem
+from src.shared.helpers.errors.usecase_errors import DuplicatedItem, UnecessaryUpdate
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -20,7 +20,7 @@ class Test_UpdateUserUsecase:
         assert first_user.email == user_email_before
 
     def test_update_user_name_with_same_name(self):
-        with pytest.raises(DuplicatedItem):
+        with pytest.raises(UnecessaryUpdate):
             repo_mock = UserRepositoryMock()
             usecase = UpdateUserUsecase(repo_mock)
             first_user = repo_mock.users_list[0]

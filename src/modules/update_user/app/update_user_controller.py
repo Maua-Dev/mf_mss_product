@@ -2,7 +2,7 @@ from .update_user_usecase import UpdateUserUsecase
 from .update_user_viewmodel import UpdateUserViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, DuplicatedItem
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, DuplicatedItem, UnecessaryUpdate
 from src.shared.helpers.external_interfaces.external_interface import IRequest
 from src.shared.helpers.external_interfaces.http_codes import BadRequest, NotFound, InternalServerError, OK
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
@@ -27,6 +27,9 @@ class UpdateUserController:
             return OK(viewmodel)
 
         except MissingParameters as err:
+            return BadRequest(body=err.message)
+
+        except UnecessaryUpdate as err:
             return BadRequest(body=err.message)
 
         except DuplicatedItem as err:
