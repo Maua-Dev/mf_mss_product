@@ -12,7 +12,7 @@ def setup_dynamo_table():
     if not table_name in tables:
         print('Creating table...')
         dynamo_client.create_table(
-            TableName="mf_mss_user-table",
+            TableName = table_name,
             KeySchema=[
                 {
                     'AttributeName': 'PK',

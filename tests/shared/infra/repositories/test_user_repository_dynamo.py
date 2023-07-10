@@ -10,6 +10,7 @@ class Test_UserRepositoryDynamo:
         repo_mock = UserRepositoryMock()
 
         user = repo_mock.users_list[2]
+        user.name = "WoW"
 
         new_user = repo_dynamo.create_user(new_user=user)
 
