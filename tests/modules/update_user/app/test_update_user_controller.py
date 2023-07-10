@@ -14,16 +14,18 @@ class Test_UpdateUserController:
             body={
                 'requester_user': {
                     "sub": first_user.user_id,
-                    "name": "Um novo nome",
+                    "name": first_user.name,
                     "email": first_user.email,
                     "custom:isMaua": True
-                }
+                },
+
+                "new_name": "Meu novo nome"
             }
         )
 
         expected_dict = {
             "user": {
-                "name": "Um novo nome",
+                "name": "Meu novo nome",
                 "email": first_user.email,
                 "role": first_user.role.value,
                 "user_id": first_user.user_id,
@@ -48,10 +50,11 @@ class Test_UpdateUserController:
             body={
                 'requester_user': {
                     "sub": first_user.user_id,
-                    "name": repo_mock.users_list[-1].name,
-                    "email": None,
+                    "name": first_user.name,
+                    "email": first_user.email,
                     "custom:isMaua": True
-                }
+                },
+                "new_name": repo_mock.users_list[-1].name
             }
         )
 
@@ -116,10 +119,11 @@ class Test_UpdateUserController:
             body={
                 'requester_user': {
                     "sub": "um id inválido",
-                    "name": "Um novo nome",
+                    "name": first_user.name,
                     "email": first_user.email,
                     "custom:isMaua": True
-                }
+                },
+                "new_name": "Um nome qualquer"
             }
         )
 
@@ -138,10 +142,11 @@ class Test_UpdateUserController:
             body={
                 'requester_user': {
                     "sub": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                    "name": "Um novo nome",
+                    "name": first_user.name,
                     "email": first_user.email,
                     "custom:isMaua": True
-                }
+                },
+                "new_name": "Novo nome"
             }
         )
 
@@ -160,10 +165,11 @@ class Test_UpdateUserController:
             body={
                 'requester_user': {
                     "sub": first_user.user_id,
-                    "name": "U",
+                    "name": first_user.name,
                     "email": first_user.email,
                     "custom:isMaua": True
-                }
+                },
+                "new_name": "U"
             }
         )
 
@@ -185,7 +191,8 @@ class Test_UpdateUserController:
                     "name": first_user.name,
                     "email": first_user.email,
                     "custom:isMaua": True
-                }
+                },
+                "new_name": first_user.name
             }
         )
 
