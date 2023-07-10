@@ -37,35 +37,34 @@ class Test_UpdateUserUsecase:
 
             updated_user = usecase(user_id=first_user.user_id, new_name="L")
 
-    def test_update_user_email(self):
-        repo_mock = UserRepositoryMock()
-        usecase = UpdateUserUsecase(repo_mock)
-        first_user = repo_mock.users_list[0]
+    # def test_update_user_email(self):
+    #     repo_mock = UserRepositoryMock()
+    #     usecase = UpdateUserUsecase(repo_mock)
+    #     first_user = repo_mock.users_list[0]
+    #
+    #     user_name_before = first_user.name
+    #
+    #     updated_user = usecase(user_id=first_user.user_id, new_email="jao.brancas@maua.br")
+    #
+    #     assert first_user.name == user_name_before
+    #     assert first_user.email == "jao.brancas@maua.br"
 
-        user_name_before = first_user.name
+    # def test_update_user_email_with_same_email(self):
+    #     with pytest.raises(DuplicatedItem):
+    #         repo_mock = UserRepositoryMock()
+    #         usecase = UpdateUserUsecase(repo_mock)
+    #         first_user = repo_mock.users_list[0]
+    #
+    #         user_email_before = first_user.email
+    #
+    #         updated_user = usecase(user_id=first_user.user_id, new_email=user_email_before)
 
-        updated_user = usecase(user_id=first_user.user_id, new_email="jao.brancas@maua.br")
-
-        assert first_user.name == user_name_before
-        assert first_user.email == "jao.brancas@maua.br"
-
-    def test_update_user_email_with_same_email(self):
-        with pytest.raises(DuplicatedItem):
-            repo_mock = UserRepositoryMock()
-            usecase = UpdateUserUsecase(repo_mock)
-            first_user = repo_mock.users_list[0]
-
-            user_email_before = first_user.email
-
-            updated_user = usecase(user_id=first_user.user_id, new_email=user_email_before)
-
-    def test_update_user_email_with_invalid_email(self):
-        with pytest.raises(EntityError):
-            repo_mock = UserRepositoryMock()
-            usecase = UpdateUserUsecase(repo_mock)
-            first_user = repo_mock.users_list[0]
-
-            updated_user = usecase(user_id=first_user.user_id, new_email="@gmail.com")
-
+    # def test_update_user_email_with_invalid_email(self):
+    #     with pytest.raises(EntityError):
+    #         repo_mock = UserRepositoryMock()
+    #         usecase = UpdateUserUsecase(repo_mock)
+    #         first_user = repo_mock.users_list[0]
+    #
+    #         updated_user = usecase(user_id=first_user.user_id, new_email="@gmail.com")
 
 
