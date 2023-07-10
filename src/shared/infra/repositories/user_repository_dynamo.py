@@ -13,10 +13,10 @@ class UserRepositoryDynamo(IUserRepository):
         return f"{user_id}"
     
     def __init__(self):
-        self.dynamo = DynamoDatasource(endpoint_url_user=Environments.get_envs().endpoint_url_user,
-                                       dynamo_table_name_user=Environments.get_envs().dynamo_table_name_user,
+        self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url_user,
+                                       dynamo_table_name=Environments.get_envs().dynamo_table_name_user,
                                        region=Environments.get_envs().region,
-                                       partition_key_user=Environments.get_envs().dynamo_partition_key_user,
+                                       partition_key=Environments.get_envs().dynamo_partition_key_user,
                                        )
 
 
@@ -24,10 +24,8 @@ class UserRepositoryDynamo(IUserRepository):
         user_dto = UserDynamoDTO.from_entity(user=new_user)
         item = user_dto.to_dynamo()
 
-        item[self.dynamo.partition_key] = self.partition_key_format(new_user.user_id)
-
         resp = self.dynamo.put_item(
-        partition_key_user=self.partition_key_format(new_user.user_id),
+        partition_key=self.partition_key_format(new_user.user_id),
         item=item,
         is_decimal=True
         )

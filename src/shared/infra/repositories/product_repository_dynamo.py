@@ -28,18 +28,18 @@ class ProductRepositoryDynamo(IProductRepository):
         return f"product#{restaurant.value}"
 
     def __init__(self):
-        self.dynamo = DynamoDatasource(endpoint_url_product=Environments.get_envs().endpoint_url_product,
-                                       dynamo_table_name_product=Environments.get_envs().dynamo_table_name_product,
+        self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url_product,
+                                       dynamo_table_name=Environments.get_envs().dynamo_table_name_product,
                                        region=Environments.get_envs().region,
-                                       partition_key_product=Environments.get_envs().dynamo_partition_key_product,
-                                       sort_key_product=Environments.get_envs().dynamo_sort_key_product,
+                                       partition_key=Environments.get_envs().dynamo_partition_key_product,
+                                       sort_key=Environments.get_envs().dynamo_sort_key_product,
                                        gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
         
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         
-        product_data = self.dynamo.get_item(partition_key_product=self.partition_key_format(restaurant=restaurant),
-                                            sort_key_product=self.sort_key_format(product_id=product_id))
+        product_data = self.dynamo.get_item(partition_key=self.partition_key_format(restaurant=restaurant),
+                                            sort_key=self.sort_key_format(product_id=product_id))
         
         if 'Item' not in product_data:
             return None
@@ -71,16 +71,16 @@ class ProductRepositoryDynamo(IProductRepository):
         item[self.dynamo.gsi_partition_key] = self.gsi_partition_key_format(new_product.product_id)
         item[self.dynamo.gsi_sort_key] = self.gsi_sort_key_format(new_product.restaurant)
 
-        resp = self.dynamo.put_item(partition_key_product=self.partition_key_format(new_product.restaurant),
-                                    sort_key_product=self.sort_key_format(new_product.product_id), item=item,
+        resp = self.dynamo.put_item(partition_key=self.partition_key_format(new_product.restaurant),
+                                    sort_key=self.sort_key_format(new_product.product_id), item=item,
                                     is_decimal=True)
 
         return new_product
 
     def delete_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         
-        delete_product = self.dynamo.delete_item(partition_key_product=self.partition_key_format(restaurant=restaurant),
-                                                sort_key_product=self.sort_key_format(product_id=product_id))
+        delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(restaurant=restaurant),
+                                                sort_key=self.sort_key_format(product_id=product_id))
         
         if 'Products' not in delete_product:
             return None
@@ -107,8 +107,8 @@ class ProductRepositoryDynamo(IProductRepository):
         update_product_dto = ProductDynamoDTO.from_entity(product=update_product).to_dynamo()
 
         response = self.dynamo.hard_update_item(
-            partition_key_product=self.partition_key_format(restaurant=restaurant),
-            sort_key_product=self.sort_key_format(product_id=product_id),
+            partition_key=self.partition_key_format(restaurant=restaurant),
+            sort_key=self.sort_key_format(product_id=product_id),
             item=update_product_dto,
             is_decimal=True
         )

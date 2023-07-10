@@ -6,9 +6,10 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 def setup_dynamo_table():
     print('Setting up dynamo table...')
     dynamo_client = boto3.client('dynamodb', endpoint_url='http://localhost:8000', region_name='sa-east-1')
-    print(dynamo_client)
     tables = dynamo_client.list_tables()['TableNames']
-    if not tables:
+    table_name = "mf_mss_user-table" 
+    
+    if not table_name in tables:
         print('Creating table...')
         dynamo_client.create_table(
             TableName="mf_mss_user-table",
