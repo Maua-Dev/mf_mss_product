@@ -46,8 +46,8 @@ class UserRepositoryMock(IUserRepository):
         if new_name is not None:
             user_to_update.name = new_name
 
-        if new_email is not None:
-            user_to_update.email = new_email
+        # if new_email is not None:
+        #     user_to_update.email = new_email
 
         return user_to_update
 
