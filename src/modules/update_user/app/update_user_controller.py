@@ -20,8 +20,7 @@ class UpdateUserController:
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
             user = self.usecase(user_id=requester_user.user_id,
-                                new_name=requester_user.name,
-                                new_email=requester_user.email)
+                                new_name=requester_user.name)
 
             viewmodel = UpdateUserViewmodel(user).to_dict()
 
