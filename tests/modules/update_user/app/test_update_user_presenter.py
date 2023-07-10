@@ -5,9 +5,6 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 class Test_UpdateUserPresenter:
 
     def test_update_user_presenter(self):
-        repo_mock = UserRepositoryMock()
-        first_user = repo_mock.users_list[0]
-
         event = {
             "version": "2.0",
             "routeKey": "$default",
@@ -28,9 +25,9 @@ class Test_UpdateUserPresenter:
                 "authorizer": {
                     "claims":
                         {
-                            "sub": first_user.user_id,
-                            "name": first_user.name,
-                            "email": first_user.email,
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48ae3",
+                            "name": "Lucas Duez",
+                            "email": "lucas.santos@gmail.com",
                             "custom:isMaua": True
                         }
                 },
@@ -49,7 +46,7 @@ class Test_UpdateUserPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": {"new_name": "Meu novo nome"},
+            "body": {"new_name": "Aaaaaa isso é no presenter"},
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -167,7 +164,7 @@ class Test_UpdateUserPresenter:
 
     def test_update_with_same_name(self):
         repo_mock = UserRepositoryMock()
-        first_user = repo_mock.users_list[0]
+        user = repo_mock.users_list[-1]
 
         event = {
             "version": "2.0",
@@ -189,9 +186,9 @@ class Test_UpdateUserPresenter:
                 "authorizer": {
                     "claims":
                         {
-                            "sub": first_user.user_id,
-                            "name": first_user.name,
-                            "email": first_user.email,
+                            "sub": user.user_id,
+                            "name": user.name,
+                            "email": user.email,
                             "custom:isMaua": True
                         }
                 },
@@ -210,7 +207,7 @@ class Test_UpdateUserPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": {"new_name": first_user.name},
+            "body": {"new_name": user.name},
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
