@@ -29,8 +29,8 @@ class Test_UpdateUserPresenter:
                     "claims":
                         {
                             "sub": first_user.user_id,
-                            "name": "Meu novo nome",
-                            "email": None,
+                            "name": first_user.name,
+                            "email": first_user.email,
                             "custom:isMaua": True
                         }
                 },
@@ -49,7 +49,7 @@ class Test_UpdateUserPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": "Hello from client!",
+            "body": {"new_name": "Meu novo nome"},
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -81,8 +81,8 @@ class Test_UpdateUserPresenter:
                     "claims":
                         {
                             "sub": None,
-                            "name": "Meu novo nome",
-                            "email": None,
+                            "name": "Lucas Duez",
+                            "email": "lucas.duzer@gmail.com",
                             "custom:isMaua": True
                         }
                 },
@@ -136,8 +136,8 @@ class Test_UpdateUserPresenter:
                     "claims":
                         {
                             "sub": first_user.user_id,
-                            "name": "M",
-                            "email": None,
+                            "name": first_user.name,
+                            "email": first_user.email,
                             "custom:isMaua": True
                         }
                 },
@@ -156,7 +156,7 @@ class Test_UpdateUserPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": "Hello from client!",
+            "body": {"new_name": "L"},
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -191,7 +191,7 @@ class Test_UpdateUserPresenter:
                         {
                             "sub": first_user.user_id,
                             "name": first_user.name,
-                            "email": None,
+                            "email": first_user.email,
                             "custom:isMaua": True
                         }
                 },
@@ -210,7 +210,7 @@ class Test_UpdateUserPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": "Hello from client!",
+            "body": {"new_name": first_user.name},
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
