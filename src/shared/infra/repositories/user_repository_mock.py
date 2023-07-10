@@ -37,7 +37,7 @@ class UserRepositoryMock(IUserRepository):
                 return user
         return None
 
-    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None, new_email: Optional[str] = None):
+    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None):
         user_to_update = self.get_user_by_id(user_id)
 
         if user_to_update is None:
