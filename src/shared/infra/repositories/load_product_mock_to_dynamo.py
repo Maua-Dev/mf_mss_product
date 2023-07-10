@@ -82,4 +82,4 @@ def load_mock_to_local_dynamo():
 
 if __name__ == '__main__':
     setup_dynamo_table()
-    load_mock_to_local_dynamo()
+    # load_mock_to_local_dynamo()
