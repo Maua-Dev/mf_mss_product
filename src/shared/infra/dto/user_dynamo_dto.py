@@ -21,19 +21,19 @@ class UserDynamoDTO:
     @staticmethod
     def from_entity(user: User) -> "UserDynamoDTO":
         """
-        Parse data from User entity to UserDynamoDTO
+        Parse data from User to UserDynamoDTO
         """
         return UserDynamoDTO(
-            name=user.name,
-            email=user.email,
-            user_id=user.user_id,
-            role=user.role,
-            restaurant=user.restaurant,
+            name = user.name,
+            email = user.email,    
+            role = user.role,
+            restaurant = user.restaurant,
+            user_id = user.user_id
         )
-        
+
     def to_dynamo(self) -> dict:
         """
-        Parse data from UserDynamoDTO to dict
+        Parse data from ProductDynamoDTO to dict
         """
         data = {
             "entity": "user",
@@ -46,7 +46,33 @@ class UserDynamoDTO:
     
         data_without_none_values = {k: v for k, v in data.items() if v is not None}
 
-        return data
+        return data_without_none_values
+
+    @staticmethod
+    def from_dynamo(user_data: dict) -> "UserDynamoDTO":
+        """
+        Parse data from DynamoDB to UserDynamoDTO
+        @param user_data: dict from DynamoDB
+        """
+        return UserDynamoDTO(
+            name=str(user_data["name"]),
+            email=str(user_data["email"]),
+            user_id=str(user_data["user_id"]),
+            role=ROLE(user_data["role"]),
+            restaurant=RESTAURANT(user_data.get("restaurant")) if user_data.get("restaurant") is not None else None
+        )
+
+    def to_entity(self) -> User:
+        """
+        Parse data from UserDynamoDTO to User
+        """
+        return User(
+            name=self.name,
+            email=self.email,
+            user_id=self.user_id,
+            role=self.role,
+            restaurant=self.restaurant
+        )
 
     def __repr__(self):
         return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, role={self.role.value}, restaurant={self.restaurant.value})"
