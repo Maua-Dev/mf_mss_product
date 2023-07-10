@@ -8,7 +8,7 @@ class UserViewmodel:
     user_name: str
     user_email: str
     role: str
-    restaurant: Optional[RESTAURANT] = None
+    restaurant: Optional[str] = None
     user_id: str
 
     def __init__(self, user: User):
@@ -16,7 +16,7 @@ class UserViewmodel:
         self.user_email = user.email
         self.role = user.role.value
         self.user_id = user.user_id
-        self.restaurant = user.restaurant
+        self.restaurant = user.restaurant.value if user.restaurant is not None else None
 
     def to_dict(self):
         return {
