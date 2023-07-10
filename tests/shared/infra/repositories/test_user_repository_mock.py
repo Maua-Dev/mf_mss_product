@@ -7,7 +7,6 @@ first_user_id = UserRepositoryMock().users_list[0].user_id
 
 class Test_UserRepositoryMock:
 
-
     def test_create_user(self):
         repo_mock = UserRepositoryMock()
 
@@ -36,15 +35,13 @@ class Test_UserRepositoryMock:
         assert repo_mock.users_list[0].name == "Sacul Zeud"
         assert repo_mock.users_list[0].email == response.email
 
-    
-    def test_update_user_email(self):
-        repo_mock = UserRepositoryMock()
-
-        response = repo_mock.update_user_by_id(first_user_id, new_email="meu.novo.email@gmail.com")
-
-        assert repo_mock.users_list[0].name == response.name
-        assert repo_mock.users_list[0].email == "meu.novo.email@gmail.com"
-
+    # def test_update_user_email(self):
+    #     repo_mock = UserRepositoryMock()
+    #
+    #     response = repo_mock.update_user_by_id(first_user_id, new_email="meu.novo.email@gmail.com")
+    #
+    #     assert repo_mock.users_list[0].name == response.name
+    #     assert repo_mock.users_list[0].email == "meu.novo.email@gmail.com"
 
     def test_delete_user_by_id(self):
         repo_mock = UserRepositoryMock()
