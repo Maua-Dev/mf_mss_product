@@ -45,5 +45,4 @@ class UpdateUserUsecase:
         #
         #     new_user.email = new_email
 
-        return self.repository.update_user_by_id(user_id=new_user.user_id, new_name=new_user.name,
-                                                 new_email=new_user.email)
+        return self.repository.update_user_by_id(user_id=new_user.user_id, new_name=new_user.name)
