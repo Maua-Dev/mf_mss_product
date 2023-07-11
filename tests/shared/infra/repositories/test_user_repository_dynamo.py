@@ -4,7 +4,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 class Test_UserRepositoryDynamo:
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_create_user(self):
         repo_dynamo = UserRepositoryDynamo()
         repo_mock = UserRepositoryMock()
