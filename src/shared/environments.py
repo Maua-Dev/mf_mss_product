@@ -55,7 +55,7 @@ class Environments:
             self.dynamo_partition_key_product = "PK"
             self.dynamo_sort_key_product = "SK"
             self.dynamo_partition_key_user = "PK"
-            self.dynamo_sort_key_user = "SK"
+            # self.dynamo_sort_key_user = "SK"
             self.s3_assets_cdn = "https://mauafood-assets.cloudfront.net/"
             self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
             self.dynamo_gsi_partition_key = "GSI1-PK"

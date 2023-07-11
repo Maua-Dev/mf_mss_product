@@ -61,13 +61,14 @@ class DynamoDatasource:
         @param sort_key: string with the sort key (optional)
         @return: dict with the response from DynamoDB
         """
-
+        key = {self.partition_key: partition_key, self.sort_key: sort_key if sort_key else None}
+        key_without_none_values = {k: v for k, v in key.items() if v is not None}
         resp = self.dynamo_table.get_item(
-            Key={self.partition_key: partition_key, self.sort_key: sort_key if sort_key else None}
+            Key=key_without_none_values
         )
         return resp
 
-    def hard_update_item(self, partition_key: str, sort_key: str, item: dict):
+    def hard_update_item(self, partition_key: str, item: dict, sort_key: str = None):
         """
         Hard update an item in the table (must have its keys - Partition and Sort).
         @param partition_key: string with the partition key
@@ -79,8 +80,11 @@ class DynamoDatasource:
         item[self.partition_key] = partition_key
 
         if sort_key:
-            item[self.sort_key] = sort_key
+            item[self.sort_key] = sort_key if sort_key else None
 
+        key = {self.partition_key: partition_key, self.sort_key: sort_key if sort_key else None}
+        key_without_none_values = {k: v for k, v in key.items() if v is not None}
+        
         resp = self.dynamo_table.put_item(Item=DynamoDatasource._parse_float_to_decimal(item))
         return resp
 
@@ -99,16 +103,18 @@ class DynamoDatasource:
         expression_attribute_names = {f"#attr{i}": data_key_value_pairs[i][0] for i in range(len(data_key_value_pairs))} # {"_attribute1": "attribute1", ":_attribute2": "attribute2"}
         expression_value_names = {f":val{i}": data_key_value_pairs[i][1] for i in range(len(data_key_value_pairs))} # {":value1": "value1", ":value2": "value2"}
 
+        
+        
+        key = {self.partition_key: partition_key, self.sort_key: sort_key if sort_key else None}
+        key_without_none_values = {k: v for k, v in key.items() if v is not None}
         resp = self.dynamo_table.update_item(
-            Key={
-                self.partition_key: partition_key,
-                self.sort_key: sort_key
-            },
+            Key=key_without_none_values,
             UpdateExpression=update_expression,
             ExpressionAttributeNames=expression_attribute_names,
             ExpressionAttributeValues=expression_value_names,
             ReturnValues="ALL_NEW"
-        )
+        ) 
+        
         return resp
 
     def delete_item(self, partition_key: str, sort_key: str = None):
@@ -118,12 +124,10 @@ class DynamoDatasource:
         @param sort_key: string with the sort key (optional)
         @return: dict with the response from DynamoDB
         """
-
+        key = {self.partition_key: partition_key, self.sort_key: sort_key if sort_key else None}
+        key_without_none_values = {k: v for k, v in key.items() if v is not None}
         resp = self.dynamo_table.delete_item(
-            Key={
-                self.partition_key: partition_key,
-                self.sort_key: sort_key if sort_key else None
-            },
+            Key=key_without_none_values,
             ReturnValues='ALL_OLD'
         )
         return resp

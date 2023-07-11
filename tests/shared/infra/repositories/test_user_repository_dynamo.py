@@ -16,39 +16,39 @@ class Test_UserRepositoryDynamo:
 
         assert new_user == repo_mock.users_list[2]
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
-    # def test_get_user_by_id(self):
-    #     repo_dynamo = UserRepositoryDynamo()
-    #     repo_mock = UserRepositoryMock()
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_user_by_id(self):
+        repo_dynamo = UserRepositoryDynamo()
+        repo_mock = UserRepositoryMock()
 
-    #     user = repo_mock.users_list[1]
+        user = repo_mock.users_list[1]
 
-    #     get_user = repo_dynamo.get_user_by_id(user_id=user.user_id)
+        get_user = repo_dynamo.get_user_by_id(user_id=user.user_id)
 
-    #     assert get_user.name == user.name
-    #     assert get_user.email == user.email
-    #     assert get_user.role == user.role
-    #     assert get_user.user_id == user.user_id
-    #     assert get_user.restaurant == user.restaurant
+        assert get_user.name == user.name
+        assert get_user.email == user.email
+        assert get_user.role == user.role
+        assert get_user.user_id == user.user_id
+        assert get_user.restaurant == user.restaurant
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
-    # def test_update_user_by_id(self):
-    #     repo_dynamo = UserRepositoryDynamo()
-    #     repo_mock = UserRepositoryMock()
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_user_by_id(self):
+        repo_dynamo = UserRepositoryDynamo()
+        repo_mock = UserRepositoryMock()
 
-    #     user = repo_mock.users_list[3]
+        user = repo_mock.users_list[3]
 
-    #     update_product = repo_dynamo.update_user_by_id(user_id=user.user_id, new_name="João Brancas 😎")
+        update_product = repo_dynamo.update_user_by_id(user_id=user.user_id, new_name="João Brancass")
 
-    #     assert update_product.name == "João Brancas 😎"
+        assert update_product.name == "João Brancass"
 
-    # @pytest.mark.skip("Can't test dynamo in Github")
-    # def test_delete_user_by_id(self):
-    #     repo_dynamo = UserRepositoryDynamo()
-    #     repo_mock = UserRepositoryMock()
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_delete_user_by_id(self):
+        repo_dynamo = UserRepositoryDynamo()
+        repo_mock = UserRepositoryMock()
 
-    #     user = repo_mock.users_list[0]
+        user = repo_mock.users_list[3]
         
-    #     delete_user = repo_dynamo.delete_user_by_id(user_id=user.user_id)
+        delete_user = repo_dynamo.delete_user_by_id(user_id=user.user_id)
 
-    #     assert True
+        assert True

@@ -1,3 +1,4 @@
+import datetime
 from typing import Optional
 from src.shared.domain.entities.user import User
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
@@ -19,7 +20,6 @@ class UserRepositoryDynamo(IUserRepository):
                                        partition_key=Environments.get_envs().dynamo_partition_key_user,
                                        )
 
-
     def create_user(self, new_user: User) -> User:
         user_dto = UserDynamoDTO.from_entity(user=new_user)
         item = user_dto.to_dynamo()
@@ -33,40 +33,35 @@ class UserRepositoryDynamo(IUserRepository):
         return new_user
     
     def get_user_by_id(self, user_id: str) -> Optional[User]:
-        pass
-        # user_data = self.dynamo.get_item(partition_key=self.partition_key_format(user_id=user_id))                    
+        user_data = self.dynamo.get_item(partition_key=self.partition_key_format(user_id=user_id))                    
         
-        # if 'Item' not in user_data:
-        #     return None
+        if 'Item' not in user_data:
+            return None
 
-        # user = UserDynamoDTO.from_dynamo(user_data.get("Item")).to_entity()
+        user = UserDynamoDTO.from_dynamo(user_data.get("Item")).to_entity()
 
-        # return user
+        return user
 
     def update_user_by_id(self, user_id: str, new_name: Optional[str] = None) -> User:
-        pass
-        # if self.get_user_by_id(user_id=user_id) == None: 
-        #     return None
-        
-        # update_user = User(
-        #     name=new_name,
-        #     )
-            
-        # update_user_dto = UserDynamoDTO.from_entity(user=update_user).to_dynamo()
+        user_to_update = self.get_user_by_id(user_id=user_id)
 
-        # response = self.dynamo.hard_update_item(
-        #     partition_key=self.partition_key_format(user_id=user_id),
-        #     item=update_user_dto,
-        #     is_decimal=True
-        # )
+        if user_to_update is None: 
+            return None
 
-        # return update_user
+        response = self.dynamo.update_item(
+            partition_key=self.partition_key_format(user_id=user_id),
+            sort_key=None,
+            update_dict={"name": new_name})
+
+        if "Attributes" not in response:
+            return None
+
+        return UserDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def delete_user_by_id(self, user_id: str) -> Optional[User]:
-        pass
-        # delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(user_id=user_id))
-        
-        # if 'users_list' not in delete_product:
-        #     return None
+        delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(user_id=user_id))
 
-        # return UserDynamoDTO.from_dynamo(delete_product["users_list"]).to_entity()
+        if 'users_list' not in delete_product:
+            return None
+
+        return UserDynamoDTO.from_dynamo(delete_product["users_list"]).to_entity()
