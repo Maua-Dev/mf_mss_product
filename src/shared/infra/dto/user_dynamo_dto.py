@@ -43,10 +43,8 @@ class UserDynamoDTO:
             "role": self.role.value,
             "restaurant": self.restaurant.value if self.restaurant is not None else None
         }
-    
-        data_without_none_values = {k: v for k, v in data.items() if v is not None}
 
-        return data_without_none_values
+        return data
 
     @staticmethod
     def from_dynamo(user_data: dict) -> "UserDynamoDTO":

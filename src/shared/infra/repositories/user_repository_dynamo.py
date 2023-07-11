@@ -34,9 +34,39 @@ class UserRepositoryDynamo(IUserRepository):
     
     def get_user_by_id(self, user_id: str) -> Optional[User]:
         pass
+        # user_data = self.dynamo.get_item(partition_key=self.partition_key_format(user_id=user_id))                    
+        
+        # if 'Item' not in user_data:
+        #     return None
+
+        # user = UserDynamoDTO.from_dynamo(user_data.get("Item")).to_entity()
+
+        # return user
 
     def update_user_by_id(self, user_id: str, new_name: Optional[str] = None) -> User:
         pass
+        # if self.get_user_by_id(user_id=user_id) == None: 
+        #     return None
+        
+        # update_user = User(
+        #     name=new_name,
+        #     )
+            
+        # update_user_dto = UserDynamoDTO.from_entity(user=update_user).to_dynamo()
+
+        # response = self.dynamo.hard_update_item(
+        #     partition_key=self.partition_key_format(user_id=user_id),
+        #     item=update_user_dto,
+        #     is_decimal=True
+        # )
+
+        # return update_user
 
     def delete_user_by_id(self, user_id: str) -> Optional[User]:
         pass
+        # delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(user_id=user_id))
+        
+        # if 'users_list' not in delete_product:
+        #     return None
+
+        # return UserDynamoDTO.from_dynamo(delete_product["users_list"]).to_entity()

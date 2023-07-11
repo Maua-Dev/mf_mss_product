@@ -4,14 +4,51 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 class Test_UserRepositoryDynamo:
 
-    @pytest.mark.skip("Can't test dynamo in Github")
+    # @pytest.mark.skip("Can't test dynamo in Github")
     def test_create_user(self):
         repo_dynamo = UserRepositoryDynamo()
         repo_mock = UserRepositoryMock()
 
         user = repo_mock.users_list[2]
-        user.name = "WoW"
+        user.name = "Pimbas"
 
         new_user = repo_dynamo.create_user(new_user=user)
 
         assert new_user == repo_mock.users_list[2]
+
+    # @pytest.mark.skip("Can't test dynamo in Github")
+    # def test_get_user_by_id(self):
+    #     repo_dynamo = UserRepositoryDynamo()
+    #     repo_mock = UserRepositoryMock()
+
+    #     user = repo_mock.users_list[1]
+
+    #     get_user = repo_dynamo.get_user_by_id(user_id=user.user_id)
+
+    #     assert get_user.name == user.name
+    #     assert get_user.email == user.email
+    #     assert get_user.role == user.role
+    #     assert get_user.user_id == user.user_id
+    #     assert get_user.restaurant == user.restaurant
+
+    # @pytest.mark.skip("Can't test dynamo in Github")
+    # def test_update_user_by_id(self):
+    #     repo_dynamo = UserRepositoryDynamo()
+    #     repo_mock = UserRepositoryMock()
+
+    #     user = repo_mock.users_list[3]
+
+    #     update_product = repo_dynamo.update_user_by_id(user_id=user.user_id, new_name="João Brancas 😎")
+
+    #     assert update_product.name == "João Brancas 😎"
+
+    # @pytest.mark.skip("Can't test dynamo in Github")
+    # def test_delete_user_by_id(self):
+    #     repo_dynamo = UserRepositoryDynamo()
+    #     repo_mock = UserRepositoryMock()
+
+    #     user = repo_mock.users_list[0]
+        
+    #     delete_user = repo_dynamo.delete_user_by_id(user_id=user.user_id)
+
+    #     assert True
