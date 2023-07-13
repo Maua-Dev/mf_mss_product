@@ -10,7 +10,7 @@ class Test_CreateUserControler:
         usecase = CreateUserUsecase(repo=repo)
         controller = CreateUserController(usecase=usecase)
 
-        request = HttpRequest(headers={"requester_user":{"sub":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "name":"Rodas Morales", "email":"rodas.morales@gmail.com", "custom:isMaua": True  }})
+        request = HttpRequest(headers={"requester_user":{"sub":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "name":"Rodas Morales", "email":"rodas.morales@gmail.com", "custom:isMaua": True}})
 
         response = controller(request)
 
