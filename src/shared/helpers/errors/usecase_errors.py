@@ -13,6 +13,10 @@ class UnecessaryUpdate(BaseError):
     def __init__(self, message: str):
         super().__init__(f'The value for {message} is already the new one')
 
+class UserNotAllowed(BaseError):
+    def __init__(self):
+        super().__init__(f'That type of user has no permission for that action')       
+
 class ForbiddenAction(BaseError):
     def __init__(self, message: str):
         super().__init__(f'That action is forbidden for this {message}')
