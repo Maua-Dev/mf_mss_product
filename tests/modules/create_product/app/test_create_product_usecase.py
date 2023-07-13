@@ -1,4 +1,6 @@
-from src.shared.domain.entities.product import Product
+import pytest
+
+from src.shared.helpers.errors.usecase_errors import UserNotAllowed
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.modules.create_product.app.create_product_usecase import CreateProductUsecase
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
@@ -28,5 +30,14 @@ class Test_CreateProductUsecase:
         assert repo_prod.products[-1].restaurant == product.restaurant
         assert repo_user.users_list[0].user_id == user.user_id
         assert repo_prod.products[-1].product_id == product.product_id
-        
-        
+
+    def test_create_product_usecase_user_role_not_allowed(self):
+        repo_prod = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateProductUsecase(repo_prod, repo_user)
+
+        user = repo_user.users_list[0]
+        user.role = ROLE.USER
+
+        with pytest.raises(UserNotAllowed):
+            product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user.user_id, product_id="cf8b01e6-ea9f-40fc-8344-d77d61789fff")
