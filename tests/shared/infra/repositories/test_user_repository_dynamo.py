@@ -36,7 +36,7 @@ class Test_UserRepositoryDynamo:
         repo_dynamo = UserRepositoryDynamo()
         repo_mock = UserRepositoryMock()
 
-        user = repo_mock.users_list[3]
+        user = repo_mock.users_list[4]
 
         update_product = repo_dynamo.update_user_by_id(user_id=user.user_id, new_name="João Brancass")
 

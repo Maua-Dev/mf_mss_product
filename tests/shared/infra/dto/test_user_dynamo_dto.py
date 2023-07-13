@@ -63,8 +63,7 @@ class Test_UserDynamoDto:
             "name": repo.users_list[0].name,
             "email": repo.users_list[0].email,
             "user_id": repo.users_list[0].user_id,
-            "role": repo.users_list[0].role.value,
-            "restaurant": repo.users_list[0].restaurant.value if repo.users_list[0].restaurant is not None else None
+            "role": repo.users_list[0].role.value
         }
 
         assert user_dynamo == expected_dict
@@ -72,17 +71,17 @@ class Test_UserDynamoDto:
     def test_from_entity_to_dynamo(self):
         repo = UserRepositoryMock()
 
-        user_dto = UserDynamoDTO.from_entity(user=repo.users_list[0])
+        user_dto = UserDynamoDTO.from_entity(user=repo.users_list[2])
 
         user_dynamo = user_dto.to_dynamo()
 
         expected_dict = {
             "entity": "user",
-            "name": repo.users_list[0].name,
-            "email": repo.users_list[0].email,
-            "user_id": repo.users_list[0].user_id,
-            "role": repo.users_list[0].role.value,
-            "restaurant": repo.users_list[0].restaurant.value if repo.users_list[0].restaurant is not None else None
+            "name": repo.users_list[2].name,
+            "email": repo.users_list[2].email,
+            "user_id": repo.users_list[2].user_id,
+            "role": repo.users_list[2].role.value,
+            "restaurant": repo.users_list[2].restaurant.value
         }
 
         assert user_dynamo == expected_dict
