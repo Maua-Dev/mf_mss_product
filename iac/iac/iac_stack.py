@@ -60,9 +60,9 @@ class IacStack(Stack):
 
         
 
-        self.cognito_auth = CognitoUserPoolsAuthorizer(self, f"mf_cognito_auth_{self.github_ref}",
+        self.cognito_auth = CognitoUserPoolsAuthorizer(self, f"mf_cognito_auth_{self.github_ref_name}",
                                                      cognito_user_pools=[aws_cognito.UserPool.from_user_pool_arn(
-                                                            self, f"mf_cognito_auth_userpool_{self.github_ref}",
+                                                            self, f"mf_cognito_auth_userpool_{self.github_ref_name}",
                                                             self.dev_auth_system_userpool_arn
                                                      )]
                                                      )
