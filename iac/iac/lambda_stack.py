@@ -19,6 +19,7 @@ class LambdaStack(Construct):
             handler=f"app.{module_name}_presenter.lambda_handler",
             runtime=lambda_.Runtime.PYTHON_3_9,
             layers=[self.lambda_layer],
+            memory_size=512,
             environment=environment_variables,
             timeout=Duration.seconds(15)
         )
