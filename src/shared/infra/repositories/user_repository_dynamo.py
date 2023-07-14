@@ -59,9 +59,9 @@ class UserRepositoryDynamo(IUserRepository):
         return UserDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def delete_user_by_id(self, user_id: str) -> Optional[User]:
-        delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(user_id=user_id))
+        deleted_user = self.dynamo.delete_item(partition_key=self.partition_key_format(user_id=user_id))
 
-        if 'users_list' not in delete_product:
+        if 'Attributes' not in deleted_user:
             return None
 
-        return UserDynamoDTO.from_dynamo(delete_product["users_list"]).to_entity()
+        return UserDynamoDTO.from_dynamo(deleted_user["Attributes"]).to_entity()
