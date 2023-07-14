@@ -57,7 +57,7 @@ class IacStack(Stack):
             # "DYNAMO_PARTITION_KEY": self.dynamo_stack.partition_key_name_user,
             # "DYNAMO_SORT_KEY": self.dynamo_stack.sort_key_name,
             "DYNAMO_TABLE_NAME_USER": self.dynamo_stack.dynamo_table_user.table_name,
-            "DYNAMO_PARTITION_KEY_USER": self.dynamo_stack.dynamo_table_user.partition_key_name,
+            "DYNAMO_PARTITION_KEY_USER": "PK",
             "AWS_REGION": self.aws_region,
         }
 
