@@ -105,6 +105,12 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        functions_that_need_dynamo_user_permissions = [
+            self.create_user,
+            self.update_user,
+            self.get_user,
+            self.delete_user
+        ]
 
 
         # functions_that_need_dynamo_permissions = [
