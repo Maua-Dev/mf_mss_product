@@ -14,11 +14,11 @@ class CreateProductUsecase:
         self.repo_product = repo_product
         self.repo_user = repo_user
 
-    def __call__(self, available: bool, price: float, name:str, description: str, meal_type: MEAL_TYPE, photo: str, restaurant: RESTAURANT, prepare_time: int, product_id: str, user_id: str) -> Product:
+    def __call__(self, available: bool, price: float, name:str, description: str, meal_type: MEAL_TYPE, photo: str, restaurant: RESTAURANT, prepare_time: int, user_id: str) -> Product:
 
         user = self.repo_user.get_user_by_id(user_id)
 
-        if user.role not in [ROLE.OWNER,ROLE.ADMIN]:
+        if user.role not in [ROLE.OWNER, ROLE.ADMIN]:
             raise UserNotAllowed()
 
         product_id = str(uuid.uuid4())

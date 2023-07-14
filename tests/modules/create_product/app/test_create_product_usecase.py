@@ -18,7 +18,7 @@ class Test_CreateProductUsecase:
         user = repo_user.users_list[0]
         user.role = ROLE.OWNER
 
-        product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user.user_id, product_id="cf8b01e6-ea9f-40fc-8344-d77d61789fff")
+        product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user.user_id)
         
         assert repo_prod.products[-1].available == product.available
         assert repo_prod.products[-1].price == product.price
@@ -29,7 +29,6 @@ class Test_CreateProductUsecase:
         assert repo_prod.products[-1].photo == product.photo
         assert repo_prod.products[-1].restaurant == product.restaurant
         assert repo_user.users_list[0].user_id == user.user_id
-        assert repo_prod.products[-1].product_id == product.product_id
 
     def test_create_product_usecase_user_role_not_allowed(self):
         repo_prod = ProductRepositoryMock()
@@ -40,4 +39,4 @@ class Test_CreateProductUsecase:
         user.role = ROLE.USER
 
         with pytest.raises(UserNotAllowed):
-            product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user.user_id, product_id="cf8b01e6-ea9f-40fc-8344-d77d61789fff")
+            product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user.user_id)

@@ -16,21 +16,22 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {
+                "available": True,
+                "price": 14.0,
+                "name": "Lanche de Mortadela",
+                "description": "Mortadela",
+                "meal_type": repo_product.products[0].meal_type.value,
+                "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                "restaurant": repo_product.products[0].restaurant.value,
+                "prepare_time": 20}
         })
 
         response = controller(request=request)
@@ -53,24 +54,25 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20,
-            "user_id":repo_user.users_list[0].user_id,
-            "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {
+                "price": 14.0,
+                "name": "Lanche de Mortadela",
+                "description": "Mortadela",
+                "meal_type": repo_product.products[0].meal_type.value,
+                "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                "restaurant": repo_product.products[0].restaurant.value,
+                "prepare_time": 20,
+                "user_id": repo_user.users_list[0].user_id,
+            }
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -81,22 +83,23 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -107,22 +110,23 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -133,22 +137,23 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -159,22 +164,23 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -185,22 +191,23 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -211,22 +218,23 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -237,22 +245,22 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value}
         })
-        
+
         response = controller(request=request)
 
         assert response.status_code == 400
@@ -263,43 +271,45 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":"INVALID_TYPE",
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": "INVALID_TYPE",
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
-        
+
     def test_create_product_controller_meal_type_is_not_str(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":{},
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": {},
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
@@ -312,76 +322,79 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":"RESTAURANT[BANANA]",
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": "RESTAURANT[BANANA]",
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field restaurant is not valid"
-        
+
     def test_create_product_controller_restaurant_is_not_str(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":1,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": 1,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
 
         assert response.status_code == 400
         assert response.body == "Field restaurant is not valid"
-    
+
     def test_create_product_controller_invalid_available(self):
         repo_product = ProductRepositoryMock()
-        
+
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":2,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": 2,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
@@ -394,21 +407,22 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":"EH O RODAS",
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": "EH O RODAS",
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
@@ -421,21 +435,22 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":[],
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": [],
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
@@ -448,21 +463,22 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":696969,
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": 696969,
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
@@ -475,21 +491,22 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":False,
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":20, "user_id":repo_user.users_list[0].user_id, "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": False,
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
+                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
         })
 
         response = controller(request=request)
@@ -502,21 +519,21 @@ class Test_CreteProductController:
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
         controller = CreateProductController(usecase=usecase)
-        
+
         request = HttpRequest(body={'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
-                    "custom:isMaua": True
-                },
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo_product.products[0].meal_type.value,
-            "photo":"https://avatars.githubusercontent.com/u/30812461?v=4",
-            "restaurant":repo_product.products[0].restaurant.value,
-            "prepare_time":"EH O CRUDAS"
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "product": {"available": True,
+                        "price": 14.0,
+                        "name": "Lanche de Mortadela",
+                        "description": "Mortadela",
+                        "meal_type": repo_product.products[0].meal_type.value,
+                        "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                        "restaurant": repo_product.products[0].restaurant.value,
+                        "prepare_time": "EH O CRUDAS"}
         })
 
         response = controller(request=request)
