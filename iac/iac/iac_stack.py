@@ -54,10 +54,10 @@ class IacStack(Stack):
             "STAGE": stage,
             "S3_ASSETS_CDN": self.s3_assets_cdn,
             # "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
-            # "DYNAMO_PARTITION_KEY": self.dynamo_stack.partition_key_name,
+            # "DYNAMO_PARTITION_KEY": self.dynamo_stack.partition_key_name_user,
             # "DYNAMO_SORT_KEY": self.dynamo_stack.sort_key_name,
             "DYNAMO_TABLE_NAME_USER": self.dynamo_stack.dynamo_table_user.table_name,
-            "DYNAMO_PARTITION_KEY_USER": self.dynamo_stack.dynamo_table_user.partition_key_name_user,
+            "DYNAMO_PARTITION_KEY_USER": self.dynamo_stack.dynamo_table_user.partition_key_name,
             "AWS_REGION": self.aws_region,
         }
 
