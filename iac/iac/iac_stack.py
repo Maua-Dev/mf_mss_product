@@ -1,14 +1,13 @@
 import os
 from aws_cdk import (
-    # Duration,
     Stack,
-    # aws_sqs as sqs,
+    aws_cognito
 )
 from constructs import Construct
 from .dynamo_stack import DynamoStack
 
 from .lambda_stack import LambdaStack
-from aws_cdk.aws_apigateway import RestApi, Cors
+from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
 
 class IacStack(Stack):
@@ -20,7 +19,8 @@ class IacStack(Stack):
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
         self.s3_assets_cdn = os.environ.get("S3_ASSETS_CDN")
-        
+        self.dev_auth_system_userpool_arn = os.environ.get("AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
+
         # self.dynamo_stack = DynamoStack(self)
         
         self.rest_api = RestApi(self, f"MauaFood_RestApi_{self.github_ref_name}",
@@ -58,8 +58,17 @@ class IacStack(Stack):
             # "DYNAMO_SORT_KEY": self.dynamo_stack.sort_key_name,
         }
 
+        
+
+        self.cognito_auth = CognitoUserPoolsAuthorizer(self, f"mf_cognito_auth_{self.github_ref}",
+                                                     cognito_user_pools=[aws_cognito.UserPool.from_user_pool_arn(
+                                                            self, f"mf_cognito_auth_userpool_{self.github_ref}",
+                                                            self.dev_auth_system_userpool_arn
+                                                     )]
+                                                     )
+
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
-                                        environment_variables=ENVIRONMENT_VARIABLES)
+                                        environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
 
         # for f in self.lambda_stack.functions_that_need_dynamo_permissions:
         #     self.dynamo_stack.dynamo_table.grant_read_write_data(f)
