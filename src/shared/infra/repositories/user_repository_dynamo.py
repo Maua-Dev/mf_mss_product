@@ -33,8 +33,10 @@ class UserRepositoryDynamo(IUserRepository):
         return new_user
     
     def get_user_by_id(self, user_id: str) -> Optional[User]:
+        print("user_id: ", user_id)
         user_data = self.dynamo.get_item(partition_key=self.partition_key_format(user_id=user_id))                    
         
+        print("user_data: ", user_data)
         if 'Item' not in user_data:
             return None
 
