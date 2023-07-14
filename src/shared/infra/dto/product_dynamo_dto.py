@@ -51,7 +51,7 @@ class ProductDynamoDTO:
 
     def to_dynamo(self) -> dict:
         """
-        Parse data from ProductDynamoDTO to dict
+        Parse data from UserDynamoDTO to dict
         """
         data = {
             "entity": "product",

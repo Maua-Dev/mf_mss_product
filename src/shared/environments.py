@@ -25,8 +25,10 @@ class Environments:
     stage: STAGE
     s3_bucket_name: str
     region: str
-    endpoint_url: str = None
-    dynamo_table_name: str
+    endpoint_url_product: str = None
+    endpoint_url_user: str = None
+    dynamo_table_name_product: str
+    dynamo_table_name_user: str
     dynamo_partition_key: str
     dynamo_sort_key: str
     cloud_front_distribution_domain: str
@@ -46,10 +48,14 @@ class Environments:
         if self.stage == STAGE.TEST:
             self.s3_bucket_name = "bucket-test"
             self.region = "sa-east-1"
-            self.endpoint_url = "http://localhost:8000"
-            self.dynamo_table_name = "mf_mss_product-table"
-            self.dynamo_partition_key = "PK"
-            self.dynamo_sort_key = "SK"
+            self.endpoint_url_product = "http://localhost:8000"
+            self.endpoint_url_user = "http://localhost:8000"
+            self.dynamo_table_name_product = "mf_mss_product-table"
+            self.dynamo_table_name_user = "mf_mss_user-table"
+            self.dynamo_partition_key_product = "PK"
+            self.dynamo_sort_key_product = "SK"
+            self.dynamo_partition_key_user = "PK"
+            # self.dynamo_sort_key_user = "SK"
             self.s3_assets_cdn = "https://mauafood-assets.cloudfront.net/"
             self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
             self.dynamo_gsi_partition_key = "GSI1-PK"
@@ -59,10 +65,14 @@ class Environments:
             self.s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
             self.s3_assets_cdn = os.environ.get("S3_ASSETS_CDN")
             self.region = os.environ.get("AWS_REGION")
-            self.endpoint_url = os.environ.get("ENDPOINT_URL")
-            # self.dynamo_table_name = os.environ.get("DYNAMO_TABLE_NAME") 
-            # self.dynamo_partition_key = os.environ.get("DYNAMO_PARTITION_KEY")
-            # self.dynamo_sort_key = os.environ.get("DYNAMO_SORT_KEY")
+            self.endpoint_url_product = os.environ.get("ENDPOINT_URL_PRODUCT")
+            self.endpoint_url_user = os.environ.get("ENDPOINT_URL_USER")
+            # self.dynamo_table_name_product = os.environ.get("DYNAMO_TABLE_NAME_PRODUCT") 
+            # self.dynamo_table_name_user = os.environ.get("DYNAMO_TABLE_NAME_USER") 
+            # self.dynamo_partition_key_product = os.environ.get("DYNAMO_PARTITION_KEY")
+            # self.dynamo_sort_key_product = os.environ.get("DYNAMO_SORT_KEY")
+            # self.dynamo_partition_key_user = os.environ.get("DYNAMO_PARTITION_KEY")
+            # self.dynamo_sort_key_user = os.environ.get("DYNAMO_SORT_KEY")
             self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
             self.dynamo_gsi_partition_key = os.environ.get("DYNAMO_GSI_PARTITION_KEY")
             self.dynamo_gsi_sort_key = os.environ.get("DYNAMO_GSI_SORT_KEY")

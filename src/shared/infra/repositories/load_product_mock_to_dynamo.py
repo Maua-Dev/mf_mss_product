@@ -7,11 +7,12 @@ def setup_dynamo_table():
     print('Setting up dynamo table...')
     dynamo_client = boto3.client('dynamodb', endpoint_url='http://localhost:8000', region_name='sa-east-1')
     tables = dynamo_client.list_tables()['TableNames']
+    table_name = "mf_mss_product-table"
 
-    if not tables:
+    if not table_name in tables:
         print('Creating table...')
         dynamo_client.create_table(
-            TableName="mf_mss_product-table",
+            TableName= table_name,
             KeySchema=[
                 {
                     'AttributeName': 'PK',
