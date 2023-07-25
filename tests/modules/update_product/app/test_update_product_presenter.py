@@ -18,23 +18,18 @@ class Test_UpdateProductPresenter:
                 "header1": "value1",
                 "header2": "value1,value2"
             },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
             "requestContext": {
                 "accountId": "123456789012",
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48abb",
+                            "name": "Laura Carolina",
+                            "email": "email.da.laura@gmail.com",
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -51,7 +46,19 @@ class Test_UpdateProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
+            "body": {
+                "product": {
+                    "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                    "restaurant": "SOUZA_DE_ABREU",
+                    "new_available": True,
+                    "new_name": "Nome Atualizado",
+                    "new_price": 16.0,
+                    "new_description": "Descrição Atualizada",
+                    "new_meal_type": "DRINKS",
+                    "new_photo": "new_photo",
+                    "new_prepare_time": 35
+                }
+            },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -61,10 +68,10 @@ class Test_UpdateProductPresenter:
             'product_id':'8a705b91-c9e9-4353-a755-07f13afafed3',
             'restaurant':'SOUZA_DE_ABREU',
             'available':True,
-            'price':15.0,
+            'price':16.0,
             'name':'Nome Atualizado',
             'description':'Descrição Atualizada',
-            'prepare_time':20,
+            'prepare_time':35,
             'meal_type':'DRINKS',
             'photo':'new_photo',
             'last_update': int(datetime.datetime.now().timestamp())
@@ -89,23 +96,18 @@ class Test_UpdateProductPresenter:
                 "header1": "value1",
                 "header2": "value1,value2"
             },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
             "requestContext": {
                 "accountId": "123456789012",
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48abb",
+                            "name": "Laura Carolina",
+                            "email": "email.da.laura@gmail.com",
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -122,7 +124,19 @@ class Test_UpdateProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"restaurant": "SOUZA_DE_ABREU", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
+            "body": {
+                "product": {
+
+                    "restaurant": "HORA_H",
+                    "new_available": True,
+                    "new_name": "Nome Atualizado",
+                    "new_price": 16.0,
+                    "new_description": "Descrição Atualizada",
+                    "new_meal_type": "DRINKS",
+                    "new_photo": "new_photo",
+                    "new_prepare_time": 35
+                }
+            },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -146,23 +160,18 @@ class Test_UpdateProductPresenter:
                 "header1": "value1",
                 "header2": "value1,value2"
             },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
             "requestContext": {
                 "accountId": "123456789012",
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48abb",
+                            "name": "Laura Carolina",
+                            "email": "email.da.laura@gmail.com",
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -179,7 +188,19 @@ class Test_UpdateProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
+            "body": {
+                "product": {
+                    "product_id": "71ede2ce-31c6-4b22-bab5-da2175654308",
+
+                    "new_available": True,
+                    "new_name": "Nome Atualizado",
+                    "new_price": 16.0,
+                    "new_description": "Descrição Atualizada",
+                    "new_meal_type": "DRINKS",
+                    "new_photo": "new_photo",
+                    "new_prepare_time": 35
+                }
+            },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -203,23 +224,18 @@ class Test_UpdateProductPresenter:
                 "header1": "value1",
                 "header2": "value1,value2"
             },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
             "requestContext": {
                 "accountId": "123456789012",
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48abb",
+                            "name": "Laura Carolina",
+                            "email": "email.da.laura@gmail.com",
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -236,7 +252,19 @@ class Test_UpdateProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZINHA", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
+            "body": {
+                "product": {
+                    "product_id": "71ede2ce-31c6-4b22-bab5-da2175654308",
+                    "restaurant": "Souzinha_de_abreu",
+                    "new_available": True,
+                    "new_name": "Nome Atualizado",
+                    "new_price": 16.0,
+                    "new_description": "Descrição Atualizada",
+                    "new_meal_type": "DRINKS",
+                    "new_photo": "new_photo",
+                    "new_prepare_time": 35
+                }
+            },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -260,23 +288,18 @@ class Test_UpdateProductPresenter:
                 "header1": "value1",
                 "header2": "value1,value2"
             },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
             "requestContext": {
                 "accountId": "123456789012",
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48abb",
+                            "name": "Laura Carolina",
+                            "email": "email.da.laura@gmail.com",
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -293,7 +316,19 @@ class Test_UpdateProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"BEBIDINHAS", "new_photo": "new_photo"}',
+            "body": {
+                "product": {
+                    "product_id": "71ede2ce-31c6-4b22-bab5-da2175654308",
+                    "restaurant": "HORA_H",
+                    "new_available": True,
+                    "new_name": "Nome Atualizado",
+                    "new_price": 16.0,
+                    "new_description": "Descrição Atualizada",
+                    "new_meal_type": "Bebidinhas",
+                    "new_photo": "new_photo",
+                    "new_prepare_time": 35
+                }
+            },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
