@@ -43,9 +43,6 @@ class CreateProductController:
             if meal_type not in [meal_type_value.value for meal_type_value in MEAL_TYPE]:
                 raise EntityError('meal_type')
 
-            if request.data.get("product").get("photo") is None:
-                raise MissingParameters("photo")
-
             if request.data.get("product").get("restaurant") is None:
                 raise MissingParameters("restaurant")
 

@@ -8,7 +8,7 @@ class ProductViewmodel:
     name: str
     description: str
     meal_type: MEAL_TYPE
-    photo: str
+    photo: str = None
     product_id: str
     last_update: int 
     restaurant: RESTAURANT
