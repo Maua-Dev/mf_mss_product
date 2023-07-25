@@ -1,4 +1,4 @@
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, UserNotAllowed, UnregisteredUser
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .update_product_usecase import UpdateProductUsecase
 from .update_product_viewmodel import UpdateProductViewmodel
@@ -66,6 +66,9 @@ class UpdateProductController:
 
         except UserNotAllowed as err:
             return Forbidden(body=err.message)
+
+        except UnregisteredUser as err:
+            return BadRequest(body=err.message)
 
         except EntityError as err:
             return BadRequest(body=err.message)
