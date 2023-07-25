@@ -2,18 +2,28 @@ from src.modules.delete_product.app.delete_product_controller import DeleteProdu
 from src.modules.delete_product.app.delete_product_usecase import DeleteProductUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_DeleteProductController:
     def test_delete_product_controller(self):
-        repo = ProductRepositoryMock()
-        usecase = DeleteProductUsecase(repo=repo)
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DeleteProductUsecase(repo_product,repo_user)
         controller = DeleteProductController(usecase=usecase)
 
         request = HttpRequest(
             body={
-                "product_id": repo.products[0].product_id,
-                "restaurant": repo.products[0].restaurant.value
+                'requester_user': {
+                    "sub": repo_user.users_list[0].user_id,
+                    "name": repo_user.users_list[0].name,
+                    "email": repo_user.users_list[0].email,
+                    "custom:isMaua": True
+                },
+                'product': {
+                    "product_id": repo_product.products[0].product_id,
+                    "restaurant": repo_product.products[0].restaurant.value
+                }
             }
         )
 
@@ -25,13 +35,23 @@ class Test_DeleteProductController:
         assert response.body['message'] == "the product was deleted"
         
     def test_delete_product_product_id_is_missing(self):
-        repo = ProductRepositoryMock()
-        usecase = DeleteProductUsecase(repo=repo)
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DeleteProductUsecase(repo_product,repo_user)
         controller = DeleteProductController(usecase=usecase)
-        
+
         request = HttpRequest(
             body={
-                "restaurant": repo.products[0].restaurant.value
+                'requester_user': {
+                    "sub": repo_user.users_list[0].user_id,
+                    "name": repo_user.users_list[0].name,
+                    "email": repo_user.users_list[0].email,
+                    "custom:isMaua": True
+                },
+                'product': {
+
+                    "restaurant": repo_product.products[0].restaurant.value
+                }
             }
         )
 
@@ -41,13 +61,23 @@ class Test_DeleteProductController:
         assert response.body == "Field product_id is missing"
 
     def test_delete_product_restaurant_is_missing(self):
-        repo = ProductRepositoryMock()
-        usecase = DeleteProductUsecase(repo=repo)
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DeleteProductUsecase(repo_product,repo_user)
         controller = DeleteProductController(usecase=usecase)
-        
+
         request = HttpRequest(
             body={
-                "product_id": repo.products[0].product_id
+                'requester_user': {
+                    "sub": repo_user.users_list[0].user_id,
+                    "name": repo_user.users_list[0].name,
+                    "email": repo_user.users_list[0].email,
+                    "custom:isMaua": True
+                },
+                'product': {
+                    "product_id": repo_product.products[0].product_id,
+
+                }
             }
         )
 
@@ -57,14 +87,23 @@ class Test_DeleteProductController:
         assert response.body == "Field restaurant is missing"
 
     def test_delete_product_restaurant_not_valid(self):
-        repo = ProductRepositoryMock()
-        usecase = DeleteProductUsecase(repo=repo)
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DeleteProductUsecase(repo_product,repo_user)
         controller = DeleteProductController(usecase=usecase)
-        
+
         request = HttpRequest(
             body={
-                "product_id": repo.products[0].product_id,
-                "restaurant": "Molas"
+                'requester_user': {
+                    "sub": repo_user.users_list[0].user_id,
+                    "name": repo_user.users_list[0].name,
+                    "email": repo_user.users_list[0].email,
+                    "custom:isMaua": True
+                },
+                'product': {
+                    "product_id": repo_product.products[0].product_id,
+                    "restaurant": "Pimbas"
+                }
             }
         )
 

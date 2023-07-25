@@ -31,7 +31,6 @@ class CreateProductController:
                 raise MissingParameters("price")
 
             if request.data.get("product").get("name") is None:
-
                 raise MissingParameters("name")
 
             if request.data.get("product").get("description") is None:
