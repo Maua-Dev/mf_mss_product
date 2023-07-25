@@ -6,7 +6,7 @@ from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, UserNotAllowed, UnregisteredUser
 
 
 class UpdateProductUsecase:
@@ -16,6 +16,9 @@ class UpdateProductUsecase:
 
     def __call__(self, product_id: str, restaurant: RESTAURANT, user_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
         user = self.repo_user.get_user_by_id(user_id)
+
+        if user is None:
+            raise UnregisteredUser()
 
         if user.role not in [ROLE.OWNER, ROLE.ADMIN, ROLE.SELLER]:
             raise UserNotAllowed()
