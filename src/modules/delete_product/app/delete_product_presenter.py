@@ -3,8 +3,9 @@ from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHt
 from .delete_product_controller import DeleteProductController
 from .delete_product_usecase import DeleteProductUsecase
 
-repo = Environments.get_product_repo()()
-usecase = DeleteProductUsecase(repo=repo)
+repo_product = Environments.get_product_repo()()
+repo_user = Environments.get_user_repo()()
+usecase = DeleteProductUsecase(repo_product,repo_user)
 controller = DeleteProductController(usecase=usecase)
 
 def lambda_handler(event, context):
