@@ -140,26 +140,6 @@ class Test_CreteProductController:
         assert response.status_code == 400
         assert response.body == "Field meal_type is missing"
 
-    def test_create_product_controller_photo_is_missing(self):
-        repo = ProductRepositoryMock()
-        usecase = CreateProductUsecase(repo=repo)
-        controller = CreateProductController(usecase=usecase)
-        
-        request = HttpRequest(body={
-            "available":True,
-            "price":14.0,
-            "name":"Lanche de Mortadela",
-            "description":"Mortadela",
-            "meal_type":repo.products[0].meal_type.value,
-            "restaurant":repo.products[0].restaurant.value,
-            "prepare_time":20
-        })
-        
-        response = controller(request=request)
-
-        assert response.status_code == 400
-        assert response.body == "Field photo is missing"
-
     def test_create_product_controller_restaurant_is_missing(self):
         repo = ProductRepositoryMock()
         usecase = CreateProductUsecase(repo=repo)
@@ -404,3 +384,23 @@ class Test_CreteProductController:
 
         assert response.status_code == 400
         assert response.body == "Field prepare_time is not valid"
+
+    def test_create_product_controller_without_photo(self):
+        repo = ProductRepositoryMock()
+        usecase = CreateProductUsecase(repo=repo)
+        controller = CreateProductController(usecase=usecase)
+        
+        request = HttpRequest(body={
+            "available":True,
+            "price":14.0,
+            "name":"Lanche de Mortadela",
+            "description":"Mortadela",
+            "meal_type":repo.products[0].meal_type.value,
+            "photo":None,
+            "restaurant":repo.products[0].restaurant.value,
+            "prepare_time":20
+        })
+
+        response = controller(request=request)
+
+        assert response.status_code == 201
