@@ -218,28 +218,26 @@ class ProductRepositoryMock(IProductRepository):
         return product
             
     def update_product(self, product_id: str, restaurant: RESTAURANT, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
-        for product in self.products:
-            if product.product_id == product_id and product.restaurant == restaurant:
-                if new_available != None:
-                    product.available = new_available
-                if new_price != None:
-                    product.price = new_price
-                if new_name != None:
-                    product.name = new_name
-                if new_description != None:
-                    product.description = new_description
-                if new_prepare_time != None:
-                    product.prepare_time = new_prepare_time
-                if new_meal_type != None:
-                    product.meal_type = new_meal_type
-                if new_photo != None:
-                    product.photo = new_photo
-                if new_last_update != None:
-                    product.last_update = new_last_update
-                return product
-            else:
-                return None
-                
+        product = self.get_product(product_id, restaurant)
+
+        if new_available is not None:
+            product.available = new_available
+        if new_price is not None:
+            product.price = new_price
+        if new_name is not None:
+            product.name = new_name
+        if new_description is not None:
+            product.description = new_description
+        if new_prepare_time is not None:
+            product.prepare_time = new_prepare_time
+        if new_meal_type is not None:
+            product.meal_type = new_meal_type
+        if new_photo is not None:
+            product.photo = new_photo
+        if new_last_update is not None:
+            product.last_update = new_last_update
+        return product
+
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         for product in self.products:
             if product.product_id == product_id and product.restaurant == restaurant:
