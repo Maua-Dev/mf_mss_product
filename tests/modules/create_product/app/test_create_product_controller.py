@@ -186,33 +186,6 @@ class Test_CreteProductController:
         assert response.status_code == 400
         assert response.body == "Field meal_type is missing"
 
-    def test_create_product_controller_photo_is_missing(self):
-        repo_product = ProductRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = CreateProductUsecase(repo_product, repo_user)
-        controller = CreateProductController(usecase=usecase)
-
-        request = HttpRequest(body={'requester_user': {
-            "sub": repo_user.users_list[0].user_id,
-            "name": repo_user.users_list[0].name,
-            "email": repo_user.users_list[0].email,
-            "custom:isMaua": True
-        },
-            "product": {"available": True,
-                        "price": 14.0,
-                        "name": "Lanche de Mortadela",
-                        "description": "Mortadela",
-                        "meal_type": repo_product.products[0].meal_type.value,
-                        "restaurant": repo_product.products[0].restaurant.value,
-                        "prepare_time": 20, "user_id": repo_user.users_list[0].user_id,
-                        "product_id": "22781c75-1a8a-42d5-be88-046ca81f7254"}
-        })
-
-        response = controller(request=request)
-
-        assert response.status_code == 400
-        assert response.body == "Field photo is missing"
-
     def test_create_product_controller_restaurant_is_missing(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -540,3 +513,23 @@ class Test_CreteProductController:
 
         assert response.status_code == 400
         assert response.body == "Field prepare_time is not valid"
+
+    def test_create_product_controller_without_photo(self):
+        repo = ProductRepositoryMock()
+        usecase = CreateProductUsecase(repo=repo)
+        controller = CreateProductController(usecase=usecase)
+        
+        request = HttpRequest(body={
+            "available":True,
+            "price":14.0,
+            "name":"Lanche de Mortadela",
+            "description":"Mortadela",
+            "meal_type":repo.products[0].meal_type.value,
+            "photo":None,
+            "restaurant":repo.products[0].restaurant.value,
+            "prepare_time":20
+        })
+
+        response = controller(request=request)
+
+        assert response.status_code == 201

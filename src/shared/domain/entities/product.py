@@ -3,6 +3,7 @@ import abc
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.domain_errors import EntityError
+from typing import Optional
 
 class Product(abc.ABC):
     available: bool
@@ -10,7 +11,7 @@ class Product(abc.ABC):
     name: str
     description: str
     meal_type: MEAL_TYPE
-    photo: str
+    photo: Optional[str] = None
     product_id: str
     last_update: int  #miliseconds
     restaurant: RESTAURANT
@@ -23,11 +24,11 @@ class Product(abc.ABC):
                 name: str,
                 description: str,
                 meal_type: MEAL_TYPE,
-                photo: str,
                 product_id: str,
                 last_update: int,
                 restaurant: RESTAURANT,
-                prepare_time: int = None):
+                prepare_time: int = None,
+                photo: str = None):
         
         if type(available) != bool:
             raise EntityError("available")
@@ -49,8 +50,9 @@ class Product(abc.ABC):
             raise EntityError("meal_type")
         self.meal_type = meal_type
         
-        if type(photo) != str:
-            raise EntityError("photo")
+        if photo is not None:
+            if type(photo) != str:
+                raise EntityError("photo")
         self.photo = photo
         
         if not self.validate_product_id(product_id=product_id):
