@@ -91,7 +91,6 @@ class Test_UserDynamoDto:
                                 'email' : 'milas@maua.br',
                                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
                                 'role': 'USER',
-                                'restaurant': None,
                                 'PK': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
                                 'entity': 'user'},
                        'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
@@ -111,7 +110,6 @@ class Test_UserDynamoDto:
             email="milas@maua.br",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf",
             role=ROLE.USER,
-            restaurant=None
         )
 
         assert user_dto == expected_user_dto
@@ -170,7 +168,6 @@ class Test_UserDynamoDto:
                                 'email': 'ze@porteiros.br',
                                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af1',
                                 'role': 'USER',
-                                'restaurant': None,
                                 'state': 'APPROVED',
                                 'PK': '93bc6ada-c0d1-7054-66ab-e17414c48af1',
                                 'entity': 'user',
@@ -185,12 +182,10 @@ class Test_UserDynamoDto:
             email='ze@porteiros.br',
             user_id='93bc6ada-c0d1-7054-66ab-e17414c48af1',
             role=ROLE.USER,
-            restaurant=None
         )
 
         assert user.name == expected_user.name
         assert user.email == expected_user.email
         assert user.user_id == expected_user.user_id
         assert user.role == expected_user.role
-        assert user.restaurant == expected_user.restaurant
        

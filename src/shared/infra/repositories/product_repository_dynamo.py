@@ -100,13 +100,13 @@ class ProductRepositoryDynamo(IProductRepository):
             sort_key=self.sort_key_format(product_id=product_id),
             update_dict={
                 "available": new_available,
-                "price": Decimal(new_price),
+                "price": Decimal(new_price) if new_price is not None else None,
                 "name": new_name,
                 "description": new_description,
-                "prepare_time": Decimal(new_prepare_time),
+                "prepare_time": Decimal(new_prepare_time) if new_prepare_time is not None else None,
                 "meal_type": new_meal_type.value,
                 "photo": new_photo,
-                "last_update": Decimal(new_last_update)
+                "last_update": Decimal(new_last_update) if new_last_update is not None else None
                 })
 
         if "Attributes" not in response:
