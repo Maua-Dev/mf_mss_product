@@ -142,7 +142,7 @@ class Test_Product:
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
-            photo=int,
+            photo=300,
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,

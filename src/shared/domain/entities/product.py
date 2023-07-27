@@ -3,6 +3,7 @@ import abc
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.domain_errors import EntityError
+from typing import Optional
 
 class Product(abc.ABC):
     available: bool
@@ -10,7 +11,7 @@ class Product(abc.ABC):
     name: str
     description: str
     meal_type: MEAL_TYPE
-    photo: str = None
+    photo: Optional[str] = None
     product_id: str
     last_update: int  #miliseconds
     restaurant: RESTAURANT
