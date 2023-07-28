@@ -2,7 +2,7 @@ import datetime
 import json
 from src.modules.update_product.app.update_product_presenter import lambda_handler
 from src.shared.domain.entities.product import Product
-from src.shared.helpers.functions.get_event_for_presenter_tests import get_event_for_test_presenter
+from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
