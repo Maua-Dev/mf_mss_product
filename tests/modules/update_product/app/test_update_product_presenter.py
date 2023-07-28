@@ -6,6 +6,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 user_repo = UserRepositoryMock()
 user = user_repo.users_list[0]
 
+
 class Test_UpdateProductPresenter:
     def test_update_product_presenter(self):
         event = {
@@ -70,15 +71,15 @@ class Test_UpdateProductPresenter:
         }
 
         expected = {
-            'product_id':'8a705b91-c9e9-4353-a755-07f13afafed3',
-            'restaurant':'SOUZA_DE_ABREU',
-            'available':True,
-            'price':15.0,
-            'name':'Nome Atualizado',
-            'description':'Descrição Atualizada',
-            'prepare_time':20,
-            'meal_type':'DRINKS',
-            'photo':'new_photo',
+            'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+            'restaurant': 'SOUZA_DE_ABREU',
+            'available': True,
+            'price': 15.0,
+            'name': 'Nome Atualizado',
+            'description': 'Descrição Atualizada',
+            'prepare_time': 20,
+            'meal_type': 'DRINKS',
+            'photo': 'new_photo',
             'last_update': int(datetime.datetime.now().timestamp())
         }
 
@@ -306,3 +307,78 @@ class Test_UpdateProductPresenter:
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
         assert json.loads(response["body"]) == "No items found for new_meal_type"
+
+    def test_update_only_name_and_photo(self):
+        event = {
+            "version": "2.0",
+            "routeKey": "$default",
+            "rawPath": "/my/path",
+            "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
+            "cookies": [
+                "cookie1",
+                "cookie2"
+            ],
+            "headers": {
+                "header1": "value1",
+                "header2": "value1,value2"
+            },
+            "queryStringParameters": {
+                'query_params': "value1"
+            },
+            "requestContext": {
+                "accountId": "123456789012",
+                "apiId": "<urlid>",
+                "authentication": None,
+                "authorizer": {
+                    "claims":
+                        {
+                            "sub": user.user_id,
+                            "name": user.name,
+                            "email": user.email,
+                            "custom:isMaua": True
+                        }
+                },
+                "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
+                "domainPrefix": "<url-id>",
+                "external_interfaces": {
+                    "method": "POST",
+                    "path": "/my/path",
+                    "protocol": "HTTP/1.1",
+                    "sourceIp": "123.123.123.123",
+                    "userAgent": "agent"
+                },
+                "requestId": "id",
+                "routeKey": "$default",
+                "stage": "$default",
+                "time": "12/Mar/2020:19:03:58 +0000",
+                "timeEpoch": 1583348638390
+            },
+            "body": {
+
+                "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                "restaurant": "SOUZA_DE_ABREU",
+                "new_name": "Nome Atualizado",
+                "new_photo": "olha que bela foto"
+            },
+            "pathParameters": None,
+            "isBase64Encoded": None,
+            "stageVariables": None
+        }
+
+        expected = {
+            'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+            'restaurant': 'SOUZA_DE_ABREU',
+            'available': True,
+            'price': 19,
+            'name': 'Nome Atualizado',
+            'description': 'Hamburguer/Mussarela/Maionese/Alface/Tomate',
+            'prepare_time': 20,
+            'meal_type': 'SANDWICHES',
+            'photo': 'olha que bela foto',
+            'last_update': int(datetime.datetime.now().timestamp())
+        }
+
+        response = lambda_handler(event, None)
+        assert response["statusCode"] == 200
+        assert json.loads(response["body"])['product'] == expected
+        assert json.loads(response["body"])['message'] == "the product was updated"
