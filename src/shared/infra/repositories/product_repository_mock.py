@@ -231,7 +231,7 @@ class ProductRepositoryMock(IProductRepository):
             product.name = new_name
         if new_description is not None:
             product.description = new_description
-        if new_prepare_time is not None:
+        if new_prepare_time is None or new_prepare_time >= 0:
             product.prepare_time = new_prepare_time
         if new_meal_type is not None:
             product.meal_type = new_meal_type
