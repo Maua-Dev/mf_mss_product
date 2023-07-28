@@ -138,7 +138,7 @@ class Test_UpdateProductPresenter:
 
         event = get_event_for_test_presenter({
             "product_id": product_old_values.product_id,
-            "restaurant": product_old_values.restaurant,
+            "restaurant": product_old_values.restaurant.value,
             "new_name": "Nome Atualizado",
             "new_photo": "olha que bela foto"})
 
