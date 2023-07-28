@@ -1,7 +1,10 @@
 import datetime
 import json
 from src.modules.update_product.app.update_product_presenter import lambda_handler
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
+user_repo = UserRepositoryMock()
+user = user_repo.users_list[0]
 
 class Test_UpdateProductPresenter:
     def test_update_product_presenter(self):
@@ -26,15 +29,13 @@ class Test_UpdateProductPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": user.user_id,
+                            "name": user.name,
+                            "email": user.email,
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -51,7 +52,18 @@ class Test_UpdateProductPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
+            "body": """{
+
+                "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                "restaurant": "SOUZA_DE_ABREU",
+                "new_available": "True",
+                "new_price": 15.0,
+                "new_name": "Nome Atualizado",
+                "new_description": "Descrição Atualizada",
+                "new_prepare_time": 20,
+                "new_meal_type":"DRINKS",
+                "new_photo": "new_photo"
+            }""",
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -97,15 +109,13 @@ class Test_UpdateProductPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": user.user_id,
+                            "name": user.name,
+                            "email": user.email,
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -154,15 +164,13 @@ class Test_UpdateProductPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": user.user_id,
+                            "name": user.name,
+                            "email": user.email,
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -211,15 +219,13 @@ class Test_UpdateProductPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": user.user_id,
+                            "name": user.name,
+                            "email": user.email,
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
@@ -268,15 +274,13 @@ class Test_UpdateProductPresenter:
                 "apiId": "<urlid>",
                 "authentication": None,
                 "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
+                    "claims":
+                        {
+                            "sub": user.user_id,
+                            "name": user.name,
+                            "email": user.email,
+                            "custom:isMaua": True
+                        }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
                 "domainPrefix": "<url-id>",
