@@ -106,6 +106,21 @@ class Test_UpdateProductUsecase:
                               new_name='Nome Atualizado', new_description='Descrição Atualizada', new_prepare_time=20,
                               new_meal_type=MEAL_TYPE.DRINKS, new_photo='new_photo')
 
+    def test_update_only_name(self):
+        repo = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
+
+        product_old_description = repo.get_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+                                                   restaurant=RESTAURANT.SOUZA_DE_ABREU).description
+
+        product = usecase(
+            user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            new_name='Nome Atualizado')
+
+        assert product.name == 'Nome Atualizado'
+        assert product.description == product_old_description
+
     def test_update_product_price_invalid_type(self):
         repo = ProductRepositoryMock()
         usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
@@ -115,6 +130,21 @@ class Test_UpdateProductUsecase:
                               restaurant=RESTAURANT.SOUZA_DE_ABREU, new_available=True, new_price=15,
                               new_name='Nome Atualizado', new_description='Descrição Atualizada', new_prepare_time=20,
                               new_meal_type=MEAL_TYPE.DRINKS, new_photo='new_photo')
+
+    def test_update_only_price(self):
+        repo = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
+
+        product_old_description = repo.get_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+                                                   restaurant=RESTAURANT.SOUZA_DE_ABREU).description
+
+        product = usecase(
+            user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            new_price=42.0)
+
+        assert product.price == 42.0
+        assert product.description == product_old_description
 
     def test_update_product_name_invalid_type(self):
         repo = ProductRepositoryMock()
@@ -136,6 +166,21 @@ class Test_UpdateProductUsecase:
                               new_name='Nome Atualizado', new_description=RESTAURANT.SOUZA_DE_ABREU,
                               new_prepare_time=20, new_meal_type=MEAL_TYPE.DRINKS, new_photo='new_photo')
 
+    def test_update_only_description(self):
+        repo = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
+
+        product_old_name = repo.get_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+                                            restaurant=RESTAURANT.SOUZA_DE_ABREU).name
+
+        product = usecase(
+            user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            new_description="Minha nova descricao")
+
+        assert product.description == 'Minha nova descricao'
+        assert product.name == product_old_name
+
     def test_update_product_prepare_time_invalid_type(self):
         repo = ProductRepositoryMock()
         usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
@@ -145,6 +190,54 @@ class Test_UpdateProductUsecase:
                               restaurant=RESTAURANT.SOUZA_DE_ABREU, new_available=True, new_price=15.0,
                               new_name='Nome Atualizado', new_description='Descrição Atualizada', new_prepare_time=20.2,
                               new_meal_type=MEAL_TYPE.DRINKS, new_photo='new_photo')
+
+    def test_update_only_prepare_time(self):
+        repo = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
+
+        product_old_name = repo.get_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+                                            restaurant=RESTAURANT.SOUZA_DE_ABREU).name
+
+        product = usecase(
+            user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            new_prepare_time=90)
+
+        assert product.prepare_time == 90
+        assert product.name == product_old_name
+
+    def test_update_only_prepare_time_with_none_value(self):
+        repo = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
+
+        product_old_name = repo.get_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+                                            restaurant=RESTAURANT.SOUZA_DE_ABREU).name
+
+        product = usecase(
+            user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            new_prepare_time=None)
+
+        assert product.prepare_time is None
+        assert product.name == product_old_name
+
+    def test_update_name_and_price(self):
+        repo = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
+
+        product_old_description = repo.get_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+                                                   restaurant=RESTAURANT.SOUZA_DE_ABREU).description
+
+        product = usecase(
+            user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            new_price=420.0,
+            new_name="Novo nome"
+        )
+
+        assert product.name == 'Novo nome'
+        assert product.price == 420.0
+        assert product.description == product_old_description
 
     def test_update_product_meal_type_invalid_type(self):
         repo = ProductRepositoryMock()
@@ -162,6 +255,11 @@ class Test_UpdateProductUsecase:
 
         with pytest.raises(EntityError):
             product = usecase(user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
-                              restaurant=RESTAURANT.SOUZA_DE_ABREU, new_available=True, new_price=15.0,
-                              new_name='Nome Atualizado', new_description='Descrição Atualizada', new_prepare_time=20,
-                              new_meal_type=MEAL_TYPE.DRINKS, new_photo=1678744638)
+                              restaurant=RESTAURANT.SOUZA_DE_ABREU,
+                              new_available=True, new_price=15.0,
+                              new_name='Nome Atualizado',
+                              new_description='Descrição Atualizada',
+                              new_prepare_time=20,
+                              new_meal_type=MEAL_TYPE.DRINKS,
+                              new_photo=1678744638
+                              )
