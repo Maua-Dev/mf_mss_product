@@ -22,7 +22,7 @@ class UpdateProductUsecase:
                  new_available: Optional[bool] = None,
                  new_price: Optional[float] = None,
                  new_name: Optional[str] = None,
-                 new_description: Optional[str] = None,
+                 new_description: Optional[str] = '',
                  new_prepare_time: Optional[int] = -1,
                  new_meal_type: Optional[MEAL_TYPE] = None,
                  new_photo: Optional[str] = None,

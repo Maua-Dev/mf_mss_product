@@ -26,15 +26,18 @@ class UpdateProductController:
             new_avaible = request.data.get("new_available")
             new_price = request.data.get("new_price")
             new_name = request.data.get("new_name")
-            new_description = request.data.get("new_description")
             new_meal_type = request.data.get("new_meal_type")
             new_photo = request.data.get("new_photo")
 
-            new_prepare_time = -1     # Since prepare time can be none, I am dealing with it in a different way
+            new_prepare_time = -1  # Since prepare time can be none, I am dealing with it in a different way
             if 'new_prepare_time' in request.data.keys():
                 new_prepare_time = request.data.get('new_prepare_time')
                 if new_prepare_time is not None:
                     new_prepare_time = int(new_prepare_time)
+
+            new_description = ''
+            if 'new_description' in request.data.keys():
+                new_description = request.data.get('new_description')
 
             if product_id is None:
                 raise MissingParameters('product_id')
@@ -62,7 +65,7 @@ class UpdateProductController:
                 new_available=bool(new_avaible) if new_avaible is not None else None,
                 new_price=float(new_price) if new_price is not None else None,
                 new_name=str(new_name) if new_name is not None else None,
-                new_description=str(new_description) if new_description is not None else None,
+                new_description=new_description if new_description is not None else None,
                 new_prepare_time=new_prepare_time,
                 new_meal_type=MEAL_TYPE(new_meal_type) if new_meal_type is not None else None,
                 new_photo=str(new_photo) if new_photo is not None else None,
