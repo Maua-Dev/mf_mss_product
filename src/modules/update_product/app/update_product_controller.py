@@ -46,14 +46,14 @@ class UpdateProductController:
             for item in RESTAURANT:
                 restaurants.append(item.value)
 
-            if restaurant not in restaurants:
+            if restaurant.value not in restaurants:
                 raise NoItemsFound("restaurant")
 
             meal_types = list()
             for item in MEAL_TYPE:
                 meal_types.append(item.value)
 
-            if new_meal_type is not None and new_meal_type not in meal_types:
+            if new_meal_type is not None and new_meal_type.value not in meal_types:
                 raise NoItemsFound("new_meal_type")
 
             product = self.UpdateProductUsecase(
