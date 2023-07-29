@@ -53,6 +53,29 @@ class Test_UpdateProductController:
         assert response.body["product"]["last_update"] == int(datetime.datetime.now().timestamp())
         assert response.body["message"] == "the product was updated"
 
+    def test_update_only_product_name(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={"requester_user": {
+                "sub": repo_user.users_list[0].user_id,
+                "name": repo_user.users_list[0].name,
+                "email": repo_user.users_list[0].email,
+                "custom:isMaua": True
+            },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_name': 'Novo nome do produto',
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["name"] == "Novo nome do produto"
+        assert response.body["message"] == "the product was updated"
 
     def test_update_product_with_nonexistent_user(self):
         repo_prod = ProductRepositoryMock()
@@ -157,7 +180,7 @@ class Test_UpdateProductController:
                 'requester_user': {
                     'sub': repo_user.users_list[0].user_id,
                     'name': repo_user.users_list[0].name,
-                                   'email': repo_user.users_list[0].email, 'custom:isMaua': True},
+                    'email': repo_user.users_list[0].email, 'custom:isMaua': True},
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
                 'new_available': True,
                 'new_price': 15.0,
@@ -199,6 +222,31 @@ class Test_UpdateProductController:
         assert response.status_code == 404
         assert response.body == "No items found for restaurant"
 
+
+    def test_update_only_product_description(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={"requester_user": {
+                "sub": repo_user.users_list[0].user_id,
+                "name": repo_user.users_list[0].name,
+                "email": repo_user.users_list[0].email,
+                "custom:isMaua": True
+            },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_description': 'minha nova descrição!!'
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["description"] == "minha nova descrição!!"
+        assert response.body["message"] == "the product was updated"
+
     def test_update_product_controller_meal_type_not_valid(self):
         repo_prod = ProductRepositoryMock()
         usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
@@ -228,3 +276,155 @@ class Test_UpdateProductController:
 
         assert response.status_code == 404
         assert response.body == "No items found for new_meal_type"
+
+    def test_update_price_with_integer_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_price': 15,
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["price"] == 15
+        assert response.body["message"] == "the product was updated"
+
+
+    def test_update_prepare_time_with_none_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_prepare_time': None
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["prepare_time"] == None
+        assert response.body["message"] == "the product was updated"
+
+    def test_update_prepare_time_with_integer_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_prepare_time': 42
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["prepare_time"] == 42
+        assert response.body["message"] == "the product was updated"
+
+    def test_update_prepare_time_with_float_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_prepare_time': 42.00
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["prepare_time"] == 42
+        assert response.body["message"] == "the product was updated"
+
+
+    def test_update_description_with_none_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_description': None
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["description"] == None
+        assert response.body["message"] == "the product was updated"
+
+    def test_update_description_with_a_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_description': 'Minha nova descricao'
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["description"] == 'Minha nova descricao'
+        assert response.body["message"] == "the product was updated"
