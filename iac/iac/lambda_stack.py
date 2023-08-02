@@ -114,7 +114,10 @@ class LambdaStack(Construct):
             self.create_user,
             self.update_user,
             self.get_user,
-            self.delete_user
+            self.delete_user,
+            self.delete_product,
+            self.create_product,
+            self.update_product
         ]
 
 
