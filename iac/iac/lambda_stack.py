@@ -51,14 +51,16 @@ class LambdaStack(Construct):
             module_name="delete_product",
             method="POST",
             api_resource=api_gateway_resource,
-            environment_variables=environment_variables
+            environment_variables=environment_variables,
+            authorizer=authorizer
         )
 
         self.create_product = self.create_lambda_api_gateway_integration(
             module_name="create_product",
             method="POST",
             api_resource=api_gateway_resource,
-            environment_variables=environment_variables
+            environment_variables=environment_variables,
+            authorizer=authorizer
         )
         
         self.get_product = self.create_lambda_api_gateway_integration(
@@ -72,7 +74,8 @@ class LambdaStack(Construct):
             module_name="update_product",
             method="POST",
             api_resource=api_gateway_resource,
-            environment_variables=environment_variables
+            environment_variables=environment_variables,
+            authorizer=authorizer
         )
           
         self.create_user = self.create_lambda_api_gateway_integration(
