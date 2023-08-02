@@ -21,18 +21,18 @@ class DeleteProductController:
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
-            if request.data.get("product").get("restaurant") is None:
+            if request.data.get("restaurant") is None:
                 raise MissingParameters("restaurant")
 
-            restaurant = request.data.get("product").get('restaurant')
+            restaurant = request.data.get('restaurant')
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise EntityError('restaurant')
             
-            if request.data.get("product").get("product_id") is None:
+            if request.data.get("product_id") is None:
                 raise MissingParameters("product_id")
 
             product = self.DeleteProductUsecase(
-                product_id=request.data.get("product").get("product_id"),
+                product_id=request.data.get("product_id"),
                 restaurant=RESTAURANT[restaurant],
                 user_id=requester_user.user_id)
             
