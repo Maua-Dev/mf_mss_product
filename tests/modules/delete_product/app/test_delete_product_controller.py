@@ -9,7 +9,7 @@ class Test_DeleteProductController:
     def test_delete_product_controller(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DeleteProductUsecase(repo_product,repo_user)
+        usecase = DeleteProductUsecase(repo_product, repo_user)
         controller = DeleteProductController(usecase=usecase)
 
         request = HttpRequest(
@@ -20,10 +20,10 @@ class Test_DeleteProductController:
                     "email": repo_user.users_list[0].email,
                     "custom:isMaua": True
                 },
-                'product': {
-                    "product_id": repo_product.products[0].product_id,
-                    "restaurant": repo_product.products[0].restaurant.value
-                }
+
+                "product_id": repo_product.products[0].product_id,
+                "restaurant": repo_product.products[0].restaurant.value
+
             }
         )
 
@@ -33,11 +33,11 @@ class Test_DeleteProductController:
         assert response.body['product']['product_id'] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert response.body['product']['restaurant'] == "SOUZA_DE_ABREU"
         assert response.body['message'] == "the product was deleted"
-        
+
     def test_delete_product_product_id_is_missing(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DeleteProductUsecase(repo_product,repo_user)
+        usecase = DeleteProductUsecase(repo_product, repo_user)
         controller = DeleteProductController(usecase=usecase)
 
         request = HttpRequest(
@@ -48,10 +48,9 @@ class Test_DeleteProductController:
                     "email": repo_user.users_list[0].email,
                     "custom:isMaua": True
                 },
-                'product': {
 
-                    "restaurant": repo_product.products[0].restaurant.value
-                }
+                "restaurant": repo_product.products[0].restaurant.value
+
             }
         )
 
@@ -63,7 +62,7 @@ class Test_DeleteProductController:
     def test_delete_product_restaurant_is_missing(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DeleteProductUsecase(repo_product,repo_user)
+        usecase = DeleteProductUsecase(repo_product, repo_user)
         controller = DeleteProductController(usecase=usecase)
 
         request = HttpRequest(
@@ -74,10 +73,7 @@ class Test_DeleteProductController:
                     "email": repo_user.users_list[0].email,
                     "custom:isMaua": True
                 },
-                'product': {
-                    "product_id": repo_product.products[0].product_id,
-
-                }
+                "product_id": repo_product.products[0].product_id,
             }
         )
 
@@ -89,7 +85,7 @@ class Test_DeleteProductController:
     def test_delete_product_restaurant_not_valid(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = DeleteProductUsecase(repo_product,repo_user)
+        usecase = DeleteProductUsecase(repo_product, repo_user)
         controller = DeleteProductController(usecase=usecase)
 
         request = HttpRequest(
@@ -100,10 +96,9 @@ class Test_DeleteProductController:
                     "email": repo_user.users_list[0].email,
                     "custom:isMaua": True
                 },
-                'product': {
-                    "product_id": repo_product.products[0].product_id,
-                    "restaurant": "Pimbas"
-                }
+                "product_id": repo_product.products[0].product_id,
+                "restaurant": "Pimbas"
+
             }
         )
 

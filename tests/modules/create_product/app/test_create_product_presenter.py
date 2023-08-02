@@ -51,7 +51,6 @@ class Test_CreateProductPresenter:
                 "timeEpoch": 1583348638390
             },
             "body": {
-                "product": {
                     "available": True,
                     "name": "Misto",
                     "price": 16.0,
@@ -60,7 +59,6 @@ class Test_CreateProductPresenter:
                     "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
                     "restaurant": "HORA_H",
                     "prepare_time": 15
-                }
             },
             "pathParameters": None,
             "isBase64Encoded": None,
@@ -102,7 +100,6 @@ class Test_CreateProductPresenter:
                                     'routeKey': '$default', 'stage': '$default', 'time': '12/Mar/2020:19:03:58 +0000',
                                     'timeEpoch': 1583348638390},
                  "body": {
-                     "product": {
                          "available": True,
                          "name": "Misto",
                          "description": "Mussarela e Presunto",
@@ -110,7 +107,6 @@ class Test_CreateProductPresenter:
                          "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
                          "restaurant": "HORA_H",
                          "prepare_time": 15
-                     }
                  },
                  'pathParameters': None, 'isBase64Encoded': None, 'stageVariables': None}
         response = lambda_handler(event, None)
@@ -139,7 +135,6 @@ class Test_CreateProductPresenter:
                                     'routeKey': '$default', 'stage': '$default', 'time': '12/Mar/2020:19:03:58 +0000',
                                     'timeEpoch': 1583348638390},
                  "body": {
-                     "product": {
                          "available": True,
                          "price": 16.0,
                          "description": "Mussarela e Presunto",
@@ -147,7 +142,6 @@ class Test_CreateProductPresenter:
                          "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
                          "restaurant": "HORA_H",
                          "prepare_time": 15
-                     }
                  },
                  'pathParameters': None, 'isBase64Encoded': None, 'stageVariables': None}
 
