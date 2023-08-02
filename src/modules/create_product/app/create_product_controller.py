@@ -24,43 +24,43 @@ class CreateProductController:
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
-            if request.data.get("product").get("available") is None:
+            if request.data.get("available") is None:
                 raise MissingParameters("available")
 
-            if request.data.get("product").get("price") is None:
+            if request.data.get("price") is None:
                 raise MissingParameters("price")
 
-            if request.data.get("product").get("name") is None:
+            if request.data.get("name") is None:
                 raise MissingParameters("name")
 
-            if request.data.get("product").get("description") is None:
+            if request.data.get("description") is None:
                 raise MissingParameters("description")
 
-            if request.data.get("product").get("meal_type") is None:
+            if request.data.get("meal_type") is None:
                 raise MissingParameters("meal_type")
 
-            meal_type = request.data.get("product").get('meal_type')
+            meal_type = request.data.get('meal_type')
             if meal_type not in [meal_type_value.value for meal_type_value in MEAL_TYPE]:
                 raise EntityError('meal_type')
 
-            if request.data.get("product").get('restaurant') is None:
+            if request.data.get('restaurant') is None:
                 raise MissingParameters("restaurant")
 
-            restaurant = request.data.get("product").get('restaurant')
+            restaurant = request.data.get('restaurant')
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise EntityError('restaurant')
 
-            if request.data.get("product").get("prepare_time") is None:
+            if request.data.get("prepare_time") is None:
                 raise MissingParameters("prepare_time")
 
-            product = self.CreateProductUsecase(available=request.data.get("product").get("available"),
-                                                price=request.data.get("product").get("price"),
-                                                name=request.data.get("product").get("name"),
-                                                description=request.data.get("product").get("description"),
+            product = self.CreateProductUsecase(available=request.data.get("available"),
+                                                price=request.data.get("price"),
+                                                name=request.data.get("name"),
+                                                description=request.data.get("description"),
                                                 meal_type=MEAL_TYPE[meal_type],
-                                                photo=request.data.get("product").get("photo"),
+                                                photo=request.data.get("photo"),
                                                 restaurant=RESTAURANT[restaurant],
-                                                prepare_time=request.data.get("product").get("prepare_time"),
+                                                prepare_time=request.data.get("prepare_time"),
                                                 user_id=requester_user.user_id)
 
             viewmodel = CreateProductViewmodel(product=product)
