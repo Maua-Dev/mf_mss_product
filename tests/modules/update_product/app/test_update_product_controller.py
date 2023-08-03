@@ -428,3 +428,34 @@ class Test_UpdateProductController:
         assert response.status_code == 200
         assert response.body["product"]["description"] == 'Minha nova descricao'
         assert response.body["message"] == "the product was updated"
+
+    def test_update_product_unregistered_user(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': "id",
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_available': True,
+                'new_price': 15.0,
+                'new_name': 'Nome Atualizado',
+                'new_description': 'Descrição Atualizada',
+                'new_prepare_time': 20,
+                'new_meal_type': 'DRINKS',
+                'new_photo': 'new_photo'
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "That user is not registered"
+
