@@ -1,5 +1,5 @@
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
 from .create_product_usecase import CreateProductUsecase
 from .create_product_viewmodel import CreateProductViewmodel
 from src.shared.domain.entities.product import Product
@@ -72,6 +72,9 @@ class CreateProductController:
 
         except UserNotAllowed as err:
             return Forbidden(body=err.message)
+        
+        except UnregisteredUser as err:
+            return BadRequest(body=err.message)
 
         except EntityError as err:
             return BadRequest(body=err.message)

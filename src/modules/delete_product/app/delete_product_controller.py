@@ -1,5 +1,5 @@
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .delete_product_viewmodel import DeleteProductViewmodel
 from .delete_product_usecase import DeleteProductUsecase
@@ -46,6 +46,9 @@ class DeleteProductController:
             return Forbidden(body=err.message)
 
         except EntityError as err:
+            return BadRequest(body=err.message)
+        
+        except UnregisteredUser as err:
             return BadRequest(body=err.message)
 
         except Exception as err:
