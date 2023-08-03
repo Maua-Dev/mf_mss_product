@@ -2,7 +2,7 @@ import pytest
 from src.modules.delete_product.app.delete_product_usecase import DeleteProductUsecase
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotAllowed
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -72,4 +72,15 @@ class Test_DeleteProductUsecase:
 
         with pytest.raises(NoItemsFound):
             product = usecase(product_id="6d6b38c0-927d-4c43-93b7-b33ea9278cma", restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user_id)
+
+    def test_delete_product_unregistered_user(self):
+        repo_prod = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DeleteProductUsecase(repo_prod,repo_user)
+
+        user_id = "id"
+
+        with pytest.raises(UnregisteredUser):
+            product = usecase(product_id="6d6b38c0-927d-4c43-93b7-b33ea9278cma", restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user_id)
+
 

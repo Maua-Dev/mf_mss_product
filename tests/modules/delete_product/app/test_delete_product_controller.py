@@ -106,3 +106,28 @@ class Test_DeleteProductController:
 
         assert response.status_code == 400
         assert response.body == "Field restaurant is not valid"
+
+    def test_delete_product_unregisted_user(self):
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = DeleteProductUsecase(repo_product, repo_user)
+        controller = DeleteProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    "sub": "id",
+                    "name": repo_user.users_list[0].name,
+                    "email": repo_user.users_list[0].email,
+                    "custom:isMaua": True
+                },
+                "product_id": repo_product.products[0].product_id,
+                "restaurant": repo_product.products[0].restaurant.value
+
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+        assert response.body == "That user is not registered"

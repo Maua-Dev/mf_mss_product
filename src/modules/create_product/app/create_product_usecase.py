@@ -7,7 +7,7 @@ from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
 
 class CreateProductUsecase:
     def __init__(self, repo_product: IProductRepository, repo_user: IUserRepository):
@@ -17,6 +17,9 @@ class CreateProductUsecase:
     def __call__(self, available: bool, price: float, name:str, description: str, meal_type: MEAL_TYPE, photo: str, restaurant: RESTAURANT, prepare_time: int, user_id: str) -> Product:
 
         user = self.repo_user.get_user_by_id(user_id)
+
+        if user is None:
+            raise UnregisteredUser()
 
         if user.role not in [ROLE.OWNER, ROLE.ADMIN]:
             raise UserNotAllowed()
