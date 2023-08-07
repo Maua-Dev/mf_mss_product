@@ -67,10 +67,10 @@ class Environments:
             self.region = os.environ.get("AWS_REGION")
             self.endpoint_url_product = os.environ.get("ENDPOINT_URL_PRODUCT")
             self.endpoint_url_user = os.environ.get("ENDPOINT_URL_USER")
-            # self.dynamo_table_name_product = os.environ.get("DYNAMO_TABLE_NAME_PRODUCT") 
+            self.dynamo_table_name_product = os.environ.get("DYNAMO_TABLE_NAME_PRODUCT") 
             self.dynamo_table_name_user = os.environ.get("DYNAMO_TABLE_NAME_USER") 
-            # self.dynamo_partition_key_product = os.environ.get("DYNAMO_PARTITION_KEY")
-            # self.dynamo_sort_key_product = os.environ.get("DYNAMO_SORT_KEY")
+            self.dynamo_partition_key_product = os.environ.get("DYNAMO_PARTITION_KEY")
+            self.dynamo_sort_key_product = os.environ.get("DYNAMO_SORT_KEY")
             self.dynamo_partition_key_user = os.environ.get("DYNAMO_PARTITION_KEY")
             # self.dynamo_sort_key_user = os.environ.get("DYNAMO_SORT_KEY")
             self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
@@ -83,8 +83,8 @@ class Environments:
             from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
             return ProductRepositoryMock
         elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
-            from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock#from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
-            return ProductRepositoryMock #ProductRepositoryDynamo        
+            from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
+            return ProductRepositoryDynamo        
         else:
             raise Exception("No repository found for this stage")
         
