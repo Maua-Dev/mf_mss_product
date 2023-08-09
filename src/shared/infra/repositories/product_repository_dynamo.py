@@ -58,10 +58,11 @@ class ProductRepositoryDynamo(IProductRepository):
         products = dict()
 
         for item in response["Items"]:
-            if item["restaurant"] not in products.keys():
-                products[RESTAURANT[item["restaurant"]]] = list()
+            restaurant = RESTAURANT[item["restaurant"]]
+            if restaurant not in products.keys():
+                products[restaurant] = list()
 
-            products[RESTAURANT[item["restaurant"]]].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+            products[restaurant].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
         return products
 
