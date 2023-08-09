@@ -53,11 +53,12 @@ class IacStack(Stack):
         ENVIRONMENT_VARIABLES = {
             "STAGE": stage,
             "S3_ASSETS_CDN": self.s3_assets_cdn,
-            "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
-            # "DYNAMO_PARTITION_KEY": self.dynamo_stack.partition_key_name_user,
-            # "DYNAMO_SORT_KEY": self.dynamo_stack.sort_key_name,
+            "DYNAMO_TABLE_NAME_PRODUCT": self.dynamo_stack.dynamo_table_product.table_name,
             "DYNAMO_TABLE_NAME_USER": self.dynamo_stack.dynamo_table_user.table_name,
             "DYNAMO_PARTITION_KEY": "PK",
+            "DYNAMO_SORT_KEY": "SK",
+            "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
+            "DYNAMO_GSI_SORT_KEY": "GSI1-SK"
         }
 
         
@@ -73,7 +74,7 @@ class IacStack(Stack):
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
         
         for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
-            self.dynamo_stack.dynamo_table.grant_read_write_data(f)
+            self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
 
         for f in self.lambda_stack.functions_that_need_dynamo_user_permissions:
             self.dynamo_stack.dynamo_table_user.grant_read_write_data(f)
