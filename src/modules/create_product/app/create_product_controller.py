@@ -54,13 +54,13 @@ class CreateProductController:
                 raise MissingParameters("prepare_time")
 
             product = self.CreateProductUsecase(available=request.data.get("available"),
-                                                price=request.data.get("price"),
+                                                price=float(request.data.get("price")),
                                                 name=request.data.get("name"),
                                                 description=request.data.get("description"),
                                                 meal_type=MEAL_TYPE[meal_type],
                                                 photo=request.data.get("photo"),
                                                 restaurant=RESTAURANT[restaurant],
-                                                prepare_time=request.data.get("prepare_time"),
+                                                prepare_time=int(request.data.get("prepare_time")),
                                                 user_id=requester_user.user_id)
 
             viewmodel = CreateProductViewmodel(product=product)
