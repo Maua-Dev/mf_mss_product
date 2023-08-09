@@ -44,7 +44,7 @@ class DynamoStack(Construct):
                 ),
                 index_name="GSI1"
             )
-            
+
             self.dynamo_table_user = aws_dynamodb.Table(
                 self, "MauaFood_User_Table",
                 partition_key=aws_dynamodb.Attribute(

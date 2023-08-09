@@ -59,9 +59,9 @@ class ProductRepositoryDynamo(IProductRepository):
 
         for item in response["Items"]:
             if item["restaurant"] not in products.keys():
-                products[item["restaurant"]] = list()
+                products[RESTAURANT[item["restaurant"]]] = list()
 
-            products[item["restaurant"]].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+            products[RESTAURANT[item["restaurant"]]].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
         return products
 
@@ -83,10 +83,10 @@ class ProductRepositoryDynamo(IProductRepository):
         delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(restaurant=restaurant),
                                                 sort_key=self.sort_key_format(product_id=product_id))
         
-        if 'Products' not in delete_product:
+        if 'Attributes' not in delete_product:
             return None
 
-        return ProductDynamoDTO.from_dynamo(delete_product["Products"]).to_entity()
+        return ProductDynamoDTO.from_dynamo(delete_product['Attributes']).to_entity()
 
     def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
 
