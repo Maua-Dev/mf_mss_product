@@ -118,7 +118,7 @@ class ProductRepositoryDynamo(IProductRepository):
             "name": new_name,
             "description": correct_description_value,
             "prepare_time": Decimal(str(correct_prepare_time_value)) if correct_prepare_time_value is not None else None,
-            "meal_type": new_meal_type.value,
+            "meal_type": new_meal_type.value if new_meal_type is not None else None,
             "photo": new_photo,
             "last_update": Decimal(str(new_last_update)) if new_last_update is not None else None
         }
