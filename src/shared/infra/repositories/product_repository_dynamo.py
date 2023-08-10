@@ -58,10 +58,11 @@ class ProductRepositoryDynamo(IProductRepository):
         products = dict()
 
         for item in response["Items"]:
-            if item["restaurant"] not in products.keys():
-                products[item["restaurant"]] = list()
+            restaurant = RESTAURANT[item["restaurant"]]
+            if restaurant not in products.keys():
+                products[restaurant] = list()
 
-            products[item["restaurant"]].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+            products[restaurant].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
         return products
 
@@ -83,10 +84,10 @@ class ProductRepositoryDynamo(IProductRepository):
         delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(restaurant=restaurant),
                                                 sort_key=self.sort_key_format(product_id=product_id))
         
-        if 'Products' not in delete_product:
+        if 'Attributes' not in delete_product:
             return None
 
-        return ProductDynamoDTO.from_dynamo(delete_product["Products"]).to_entity()
+        return ProductDynamoDTO.from_dynamo(delete_product['Attributes']).to_entity()
 
     def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
 
@@ -100,13 +101,13 @@ class ProductRepositoryDynamo(IProductRepository):
             sort_key=self.sort_key_format(product_id=product_id),
             update_dict={
                 "available": new_available,
-                "price": Decimal(new_price) if new_price is not None else None,
+                "price": Decimal(str(new_price)) if new_price is not None else None,
                 "name": new_name,
                 "description": new_description,
-                "prepare_time": Decimal(new_prepare_time) if new_prepare_time is not None else None,
+                "prepare_time": Decimal(str(new_prepare_time)) if new_prepare_time is not None else None,
                 "meal_type": new_meal_type.value,
                 "photo": new_photo,
-                "last_update": Decimal(new_last_update) if new_last_update is not None else None
+                "last_update": Decimal(str(new_last_update)) if new_last_update is not None else None
                 })
 
         if "Attributes" not in response:

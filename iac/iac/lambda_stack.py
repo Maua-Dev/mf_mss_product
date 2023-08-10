@@ -120,11 +120,10 @@ class LambdaStack(Construct):
             self.update_product
         ]
 
-
-        # functions_that_need_dynamo_permissions = [
-        #     self.get_all_products_group_by_restaurant_function,
-        #     self.delete_product,
-        #     self.create_product,
-        #     self.get_product,
-        #     self.update_product
-        # ]
+        self.functions_that_need_dynamo_product_permissions = [
+            self.get_all_products_group_by_restaurant_function,
+            self.delete_product,
+            self.create_product,
+            self.get_product,
+            self.update_product
+        ]

@@ -32,7 +32,19 @@ class DynamoStack(Construct):
                 billing_mode=aws_dynamodb.BillingMode.PAY_PER_REQUEST,
                 removal_policy=REMOVAL_POLICY
             )
-            
+
+            self.dynamo_table_product.add_global_secondary_index(
+                partition_key=aws_dynamodb.Attribute(
+                    name="GSI1-PK",
+                    type=aws_dynamodb.AttributeType.STRING
+                ),
+                sort_key=aws_dynamodb.Attribute(
+                    name="GSI1-SK",
+                    type=aws_dynamodb.AttributeType.STRING
+                ),
+                index_name="GSI1"
+            )
+
             self.dynamo_table_user = aws_dynamodb.Table(
                 self, "MauaFood_User_Table",
                 partition_key=aws_dynamodb.Attribute(
