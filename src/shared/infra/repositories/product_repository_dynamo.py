@@ -19,11 +19,11 @@ class ProductRepositoryDynamo(IProductRepository):
     @staticmethod
     def sort_key_format(product_id: str) -> str:
         return f"product#{product_id}"
-    
+
     @staticmethod
     def gsi_partition_key_format(product_id: str) -> str:
         return f"{product_id}"
-    
+
     @staticmethod
     def gsi_sort_key_format(restaurant: RESTAURANT) -> str:
         return f"product#{restaurant.value}"
@@ -36,12 +36,12 @@ class ProductRepositoryDynamo(IProductRepository):
                                        sort_key=Environments.get_envs().dynamo_sort_key_product,
                                        gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
-        
+
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
-        
+
         product_data = self.dynamo.get_item(partition_key=self.partition_key_format(restaurant=restaurant),
                                             sort_key=self.sort_key_format(product_id=product_id))
-        
+
         if 'Item' not in product_data:
             return None
 
@@ -80,35 +80,55 @@ class ProductRepositoryDynamo(IProductRepository):
         return new_product
 
     def delete_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
-        
+
         delete_product = self.dynamo.delete_item(partition_key=self.partition_key_format(restaurant=restaurant),
-                                                sort_key=self.sort_key_format(product_id=product_id))
-        
+                                                 sort_key=self.sort_key_format(product_id=product_id))
+
         if 'Attributes' not in delete_product:
             return None
 
         return ProductDynamoDTO.from_dynamo(delete_product['Attributes']).to_entity()
 
-    def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None, new_price: float = None, new_name: str = None, new_description: str = None, new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None, new_last_update: int = None) -> Product:
+    def update_product(self, restaurant: RESTAURANT, product_id: str, new_available: bool = None,
+                       new_price: float = None, new_name: str = None, new_description: str = None,
+                       new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None,
+                       new_last_update: int = None) -> Product:
 
         product_to_update = self.get_product(product_id=product_id, restaurant=restaurant)
 
-        if product_to_update is None: 
+        if product_to_update is None:
             return None
+
+        correct_description_value = ''
+        correct_prepare_time_value = -1
+
+        if new_description is not None and new_description != '':
+            correct_description_value = new_description
+        else:
+            correct_description_value = None
+
+        if new_prepare_time is not None and new_prepare_time >= 0:
+            correct_prepare_time_value = new_prepare_time
+        else:
+            correct_prepare_time_value = None
+
+        update_dict = {
+            "available": new_available,
+            "price": Decimal(str(new_price)) if new_price is not None else None,
+            "name": new_name,
+            "description": correct_description_value,
+            "prepare_time": Decimal(str(correct_prepare_time_value)) if correct_prepare_time_value is not None else None,
+            "meal_type": new_meal_type.value,
+            "photo": new_photo,
+            "last_update": Decimal(str(new_last_update)) if new_last_update is not None else None
+        }
+
+        update_dict_without_none_values = {k: v for k, v in update_dict.items() if v is not None}
 
         response = self.dynamo.update_item(
             partition_key=self.partition_key_format(restaurant=restaurant),
             sort_key=self.sort_key_format(product_id=product_id),
-            update_dict={
-                "available": new_available,
-                "price": Decimal(str(new_price)) if new_price is not None else None,
-                "name": new_name,
-                "description": new_description,
-                "prepare_time": Decimal(str(new_prepare_time)) if new_prepare_time is not None else None,
-                "meal_type": new_meal_type.value,
-                "photo": new_photo,
-                "last_update": Decimal(str(new_last_update)) if new_last_update is not None else None
-                })
+            update_dict=update_dict_without_none_values)
 
         if "Attributes" not in response:
             return None
