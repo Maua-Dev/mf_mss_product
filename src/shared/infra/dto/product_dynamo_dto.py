@@ -56,14 +56,14 @@ class ProductDynamoDTO:
         data = {
             "entity": "product",
             "available": self.available,
-            "price": Decimal(self.price),
+            "price": Decimal(str(self.price)),
             "name": self.name,
             "description": self.description,
-            "prepare_time": Decimal(self.prepare_time) if self.prepare_time is not None else None,
+            "prepare_time": Decimal(str(self.prepare_time)) if self.prepare_time is not None else None,
             "meal_type": self.meal_type.value,
             "photo": self.photo,
             "product_id": self.product_id,
-            "last_update": Decimal(self.last_update),
+            "last_update": Decimal(str(self.last_update)),
             "restaurant": self.restaurant.value
         }
     
