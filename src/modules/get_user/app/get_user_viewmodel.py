@@ -9,7 +9,7 @@ class UserViewmodel:
     role: str
     restaurant: Optional[RESTAURANT] = None
     user_id: str
-    photo: Optional[RESTAURANT] = None
+    photo: str = None
 
     def __init__(self, user: User):
         self.user_name = user.name
