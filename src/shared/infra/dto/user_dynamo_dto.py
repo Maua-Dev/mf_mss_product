@@ -10,13 +10,15 @@ class UserDynamoDTO:
     role: ROLE
     restaurant: Optional[RESTAURANT] = None
     user_id: str
+    photo: str
 
-    def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: Optional[RESTAURANT] = None):
+    def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
         self.name = name
         self.email = email
         self.role = role
         self.restaurant = restaurant
         self.user_id = user_id
+        self.photo = photo
 
     @staticmethod
     def from_entity(user: User) -> "UserDynamoDTO":
@@ -28,7 +30,8 @@ class UserDynamoDTO:
             email = user.email,    
             role = user.role,
             restaurant = user.restaurant,
-            user_id = user.user_id
+            user_id = user.user_id,
+            photo = user.photo
         )
 
     def to_dynamo(self) -> dict:
@@ -41,7 +44,8 @@ class UserDynamoDTO:
             "email": self.email,
             "user_id": self.user_id,
             "role": self.role.value,
-            "restaurant": self.restaurant.value if self.restaurant is not None else None
+            "restaurant": self.restaurant.value if self.restaurant is not None else None,
+            "photo": self.photo
         }
 
         data_without_none_values = {k: v for k, v in data.items() if v is not None}
@@ -59,7 +63,8 @@ class UserDynamoDTO:
             email=str(user_data["email"]),
             user_id=str(user_data["user_id"]),
             role=ROLE(user_data["role"]),
-            restaurant=RESTAURANT(user_data.get("restaurant")) if user_data.get("restaurant") is not None else None
+            restaurant=RESTAURANT(user_data.get("restaurant")) if user_data.get("restaurant") is not None else None,
+            photo=str(user_data.get("photo")) if user_data.get("photo") is not None else None
         )
 
     def to_entity(self) -> User:
@@ -71,11 +76,12 @@ class UserDynamoDTO:
             email=self.email,
             user_id=self.user_id,
             role=self.role,
-            restaurant=self.restaurant
+            restaurant=self.restaurant,
+            photo=self.photo
         )
 
     def __repr__(self):
-        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, role={self.role.value}, restaurant={self.restaurant.value})"
+        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, role={self.role.value}, restaurant={self.restaurant.value}, photo={self.photo})"
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
