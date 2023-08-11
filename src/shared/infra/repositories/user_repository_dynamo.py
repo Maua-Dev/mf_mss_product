@@ -51,7 +51,7 @@ class UserRepositoryDynamo(IUserRepository):
         response = self.dynamo.update_item(
             partition_key=self.partition_key_format(user_id=user_id),
             sort_key=None,
-            update_dict={"name": new_name})
+            update_dict={"name": new_name, "photo": new_photo})
 
         if "Attributes" not in response:
             return None
