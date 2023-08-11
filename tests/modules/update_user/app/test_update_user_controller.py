@@ -19,7 +19,8 @@ class Test_UpdateUserController:
                     "custom:isMaua": True
                 },
 
-                "new_name": "Meu novo nome"
+                "new_name": "Meu novo nome",
+                "new_photo": "https://www.thestatesman.com/wp-content/uploads/2022/07/AmericanBullysobakabarobaka-4ce0d4dc0e144dccadb5159b222e275e-e1657808052501.jpg"
             }
         )
 
@@ -29,7 +30,8 @@ class Test_UpdateUserController:
                 "email": first_user.email,
                 "role": first_user.role.value,
                 "user_id": first_user.user_id,
-                "restaurant": first_user.restaurant
+                "restaurant": first_user.restaurant,
+                "photo": "https://www.thestatesman.com/wp-content/uploads/2022/07/AmericanBullysobakabarobaka-4ce0d4dc0e144dccadb5159b222e275e-e1657808052501.jpg"
             },
             "message": "the user was updated"
         }
@@ -64,7 +66,8 @@ class Test_UpdateUserController:
                 "email": first_user.email,
                 "role": first_user.role.value,
                 "user_id": first_user.user_id,
-                "restaurant": first_user.restaurant
+                "restaurant": first_user.restaurant,
+                "photo": first_user.photo
             },
             "message": "the user was updated"
         }
@@ -178,6 +181,30 @@ class Test_UpdateUserController:
         response = controller(request=request)
 
         assert response.status_code == 400
+        
+    def test_update_user_with_invalid_photo(self):
+        repo_mock = UserRepositoryMock()
+        usecase = UpdateUserUsecase(repo_mock)
+        first_user = repo_mock.users_list[0]
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    "sub": first_user.user_id,
+                    "name": first_user.name,
+                    "email": first_user.email,
+                    "custom:isMaua": True
+                },
+                "new_name": "Michael Jackson",
+                "new_photo": 123123
+            }
+        )
+
+        controller = UpdateUserController(usecase=usecase)
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
 
     def test_update_user_with_same_name(self):
         repo_mock = UserRepositoryMock()
@@ -201,6 +228,31 @@ class Test_UpdateUserController:
         response = controller(request=request)
 
         assert response.status_code == 400
+        
+    def test_update_user_with_same_photo(self):
+        repo_mock = UserRepositoryMock()
+        usecase = UpdateUserUsecase(repo_mock)
+        first_user = repo_mock.users_list[0]
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    "sub": first_user.user_id,
+                    "name": first_user.name,
+                    "email": first_user.email,
+                    "custom:isMaua": True
+                },
+                "new_name": "Michael Jackson",
+                "new_photo": first_user.photo
+            }
+        )
+
+        controller = UpdateUserController(usecase=usecase)
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
 
     # def test_update_user_with_invalid_email(self):
     #     repo_mock = UserRepositoryMock()
