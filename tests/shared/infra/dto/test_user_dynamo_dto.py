@@ -17,6 +17,7 @@ class Test_UserDynamoDto:
             user_id=repo.users_list[0].user_id,
             role=repo.users_list[0].role,
             restaurant=repo.users_list[0].restaurant,
+            photo=repo.users_list[0].photo
         )
 
         assert user_dto == expected_user_dto
@@ -30,6 +31,7 @@ class Test_UserDynamoDto:
             user_id=repo.users_list[2].user_id,
             role=repo.users_list[2].role,
             restaurant=repo.users_list[2].restaurant,
+            photo=repo.users_list[2].photo
         )
 
         user_dynamo = user_dto.to_dynamo()
@@ -40,7 +42,8 @@ class Test_UserDynamoDto:
             "email": repo.users_list[2].email,
             "user_id": repo.users_list[2].user_id,
             "role": repo.users_list[2].role.value,
-            "restaurant": repo.users_list[2].restaurant.value
+            "restaurant": repo.users_list[2].restaurant.value,
+            "photo": repo.users_list[2].photo
         }
 
         assert user_dynamo == expected_dict
@@ -54,6 +57,7 @@ class Test_UserDynamoDto:
             user_id=repo.users_list[0].user_id,
             role=repo.users_list[0].role,
             restaurant=repo.users_list[0].restaurant,
+            photo=repo.users_list[0].photo
         )
 
         user_dynamo = user_dto.to_dynamo()
@@ -63,7 +67,8 @@ class Test_UserDynamoDto:
             "name": repo.users_list[0].name,
             "email": repo.users_list[0].email,
             "user_id": repo.users_list[0].user_id,
-            "role": repo.users_list[0].role.value
+            "role": repo.users_list[0].role.value,
+            "photo": repo.users_list[0].photo
         }
 
         assert user_dynamo == expected_dict
@@ -81,7 +86,8 @@ class Test_UserDynamoDto:
             "email": repo.users_list[2].email,
             "user_id": repo.users_list[2].user_id,
             "role": repo.users_list[2].role.value,
-            "restaurant": repo.users_list[2].restaurant.value
+            "restaurant": repo.users_list[2].restaurant.value,
+            "photo": repo.users_list[2].photo
         }
 
         assert user_dynamo == expected_dict
@@ -92,7 +98,8 @@ class Test_UserDynamoDto:
                                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
                                 'role': 'USER',
                                 'PK': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
-                                'entity': 'user'},
+                                'entity': 'user',
+                                'photo': 'https://i.imgur.com/3Gv7kc8.jpg'},
                        'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
                                             'HTTPStatusCode': 200,
                                             'HTTPHeaders': {'date': 'Fri, 16 Dec 2022 15:40:29 GMT',
@@ -110,6 +117,7 @@ class Test_UserDynamoDto:
             email="milas@maua.br",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf",
             role=ROLE.USER,
+            photo="https://i.imgur.com/3Gv7kc8.jpg"
         )
 
         assert user_dto == expected_user_dto
@@ -153,6 +161,7 @@ class Test_UserDynamoDto:
             user_id=repo.users_list[0].user_id,
             role=repo.users_list[0].role,
             restaurant=repo.users_list[0].restaurant,
+            photo=repo.users_list[0].photo
         )
 
         user = user_dto.to_entity()
@@ -162,6 +171,7 @@ class Test_UserDynamoDto:
         assert user.user_id == repo.users_list[0].user_id
         assert user.role == repo.users_list[0].role
         assert user.restaurant == repo.users_list[0].restaurant
+        assert user.photo == repo.users_list[0].photo
 
     def test_from_dynamo_to_entity(self):
         dynamo_item = {'Item': {'name': 'José',
@@ -171,7 +181,8 @@ class Test_UserDynamoDto:
                                 'state': 'APPROVED',
                                 'PK': '93bc6ada-c0d1-7054-66ab-e17414c48af1',
                                 'entity': 'user',
-                                }}
+                                'photo': 'https://i.imgur.com/3Gv7kc8.jpg'},
+                                }
 
         user_dto = UserDynamoDTO.from_dynamo(user_data=dynamo_item["Item"])
 
@@ -182,10 +193,12 @@ class Test_UserDynamoDto:
             email='ze@porteiros.br',
             user_id='93bc6ada-c0d1-7054-66ab-e17414c48af1',
             role=ROLE.USER,
+            photo="https://i.imgur.com/3Gv7kc8.jpg"
         )
 
         assert user.name == expected_user.name
         assert user.email == expected_user.email
         assert user.user_id == expected_user.user_id
         assert user.role == expected_user.role
+        assert user.photo == expected_user.photo
        

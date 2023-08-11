@@ -42,7 +42,7 @@ class UserRepositoryDynamo(IUserRepository):
 
         return user
 
-    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None) -> User:
+    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None, new_photo: Optional[str] = None) -> User:
         user_to_update = self.get_user_by_id(user_id=user_id)
 
         if user_to_update is None: 
@@ -51,7 +51,7 @@ class UserRepositoryDynamo(IUserRepository):
         response = self.dynamo.update_item(
             partition_key=self.partition_key_format(user_id=user_id),
             sort_key=None,
-            update_dict={"name": new_name})
+            update_dict={"name": new_name, "photo": new_photo})
 
         if "Attributes" not in response:
             return None

@@ -10,7 +10,7 @@ class UpdateUserUsecase:
     def __init__(self, repo: IUserRepository):
         self.repository = repo
 
-    def __call__(self, user_id: str, new_name: Optional[str] = None):
+    def __call__(self, user_id: str, new_name: Optional[str] = None, new_photo: Optional[str] = None):
         if not User.validate_user_id(user_id):
             raise EntityError("user_id")
 
@@ -24,7 +24,8 @@ class UpdateUserUsecase:
             name=user_to_update.name,
             email=user_to_update.email,
             role=user_to_update.role,
-            restaurant=user_to_update.restaurant
+            restaurant=user_to_update.restaurant,
+            photo=user_to_update.photo
         )
 
         if new_name is not None:
@@ -36,6 +37,15 @@ class UpdateUserUsecase:
 
             new_user.name = new_name
 
+        if new_photo is not None:
+            if not User.validate_photo(new_photo):
+                raise EntityError("user_photo")
+            
+            if new_photo == user_to_update.photo:
+                raise UnecessaryUpdate("user_photo")
+            
+            new_user.photo = new_photo
+
         # if new_email is not None:
         #     if new_email == user_to_update.email:
         #         raise DuplicatedItem("user_email")
@@ -45,4 +55,4 @@ class UpdateUserUsecase:
         #
         #     new_user.email = new_email
 
-        return self.repository.update_user_by_id(user_id=new_user.user_id, new_name=new_user.name)
+        return self.repository.update_user_by_id(user_id=new_user.user_id, new_name=new_user.name, new_photo=new_user.photo)

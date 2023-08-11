@@ -13,6 +13,6 @@ class CreateUserUsecase:
         if self.repo.get_user_by_id(user_id=user_id) is not None:
             raise DuplicatedItem("user_id")
         
-        user = User(name=name, email=email, role=ROLE.USER, restaurant=None, user_id=user_id)
+        user = User(name=name, email=email, role=ROLE.USER, restaurant=None, user_id=user_id, photo=None)
 
         return self.repo.create_user(user)

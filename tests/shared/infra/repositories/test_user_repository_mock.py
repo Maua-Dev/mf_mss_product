@@ -35,6 +35,14 @@ class Test_UserRepositoryMock:
         assert repo_mock.users_list[0].name == "Sacul Zeud"
         assert repo_mock.users_list[0].email == response.email
 
+    def test_update_user_photo(self):
+        repo_mock = UserRepositoryMock()
+
+        response = repo_mock.update_user_by_id(first_user_id, new_photo="https://www.thestatesman.com/wp-content/uploads/2022/07/AmericanBullysobakabarobaka-4ce0d4dc0e144dccadb5159b222e275e-e1657808052501.jpg")
+
+        assert repo_mock.users_list[0].photo == "https://www.thestatesman.com/wp-content/uploads/2022/07/AmericanBullysobakabarobaka-4ce0d4dc0e144dccadb5159b222e275e-e1657808052501.jpg"
+        assert repo_mock.users_list[0].email == response.email
+        
     # def test_update_user_email(self):
     #     repo_mock = UserRepositoryMock()
     #

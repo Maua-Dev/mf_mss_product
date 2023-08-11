@@ -38,9 +38,10 @@ class Test_UserRepositoryDynamo:
 
         user = repo_mock.users_list[4]
 
-        update_product = repo_dynamo.update_user_by_id(user_id=user.user_id, new_name="João Brancass")
+        update_product = repo_dynamo.update_user_by_id(user_id=user.user_id, new_name="João Brancass", new_photo="https://www.google.com")
 
         assert update_product.name == "João Brancass"
+        assert update_product.photo == "https://www.google.com"
 
     @pytest.mark.skip("Can't test dynamo in Github")
     def test_delete_user_by_id(self):
