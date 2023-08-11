@@ -15,7 +15,7 @@ class IUserRepository(ABC):
         pass
 
     @abstractmethod
-    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None) -> User:
+    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None, new_photo: Optional[str] = None) -> User:
         pass
 
     @abstractmethod
