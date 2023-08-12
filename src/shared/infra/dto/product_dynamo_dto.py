@@ -96,7 +96,7 @@ class ProductDynamoDTO:
         """
         return Product(
             available=self.available,
-            price=self.price,
+            input_price=self.price,
             name=self.name,
             description=self.description,
             prepare_time=self.prepare_time,

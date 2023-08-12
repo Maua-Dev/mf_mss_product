@@ -127,7 +127,7 @@ class Test_UpdateProductPresenter:
             available=product_repo.products[3].available,
             product_id=product_repo.products[3].product_id,
             restaurant=product_repo.products[3].restaurant,
-            price=product_repo.products[3].price,
+            input_price=product_repo.products[3].price,
             name=product_repo.products[3].name,
             description=product_repo.products[3].description,
             meal_type=product_repo.products[3].meal_type,

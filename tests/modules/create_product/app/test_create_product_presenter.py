@@ -168,3 +168,39 @@ class Test_CreateProductPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
+
+    def test_create_product_with_negative_price(self):
+        event = get_event_for_test_presenter(
+            body={
+                "available": True,
+                "name": "Misto",
+                "price": -16.0,
+                "description": "Mussarela e Presunto",
+                "meal_type": "SANDWICHES",
+                "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                "restaurant": "HORA_H",
+                "prepare_time": 15
+            }
+        )
+
+        response = lambda_handler(event, None)
+
+        assert response["statusCode"] == 400
+
+    def test_create_product_with_none_price(self):
+        event = get_event_for_test_presenter(
+            body={
+                "available": True,
+                "name": "Misto",
+                "price": None,
+                "description": "Mussarela e Presunto",
+                "meal_type": "SANDWICHES",
+                "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                "restaurant": "HORA_H",
+                "prepare_time": 15
+            }
+        )
+
+        response = lambda_handler(event, None)
+
+        assert response["statusCode"] == 400
