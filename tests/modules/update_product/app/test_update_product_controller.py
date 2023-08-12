@@ -379,6 +379,29 @@ class Test_UpdateProductController:
         assert response.body["message"] == "the product was updated"
 
 
+    def test_update_prepare_time_with_negative_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_prepare_time': -42.00
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
     def test_update_description_with_none_value(self):
         repo_prod = ProductRepositoryMock()
         usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
