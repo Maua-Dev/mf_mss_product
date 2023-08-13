@@ -539,3 +539,81 @@ class Test_CreteProductController:
 
         assert response.status_code == 400
         assert response.body == "That user is not registered"
+
+    def test_create_product_with_negative_prepare_time(self):
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateProductUsecase(repo_product, repo_user)
+        controller = CreateProductController(usecase=usecase)
+
+        request = HttpRequest(body={'requester_user': {
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "available": True,
+            "price": 14.0,
+            "name": "Lanche de Mortadela",
+            "description": "Mortadela",
+            "meal_type": repo_product.products[0].meal_type.value,
+            "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+            "restaurant": repo_product.products[0].restaurant.value,
+            "prepare_time": -20}
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
+    def test_create_product_with_negative_price(self):
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateProductUsecase(repo_product, repo_user)
+        controller = CreateProductController(usecase=usecase)
+
+        request = HttpRequest(body={'requester_user': {
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "available": True,
+            "price": -14.0,
+            "name": "Lanche de Mortadela",
+            "description": "Mortadela",
+            "meal_type": repo_product.products[0].meal_type.value,
+            "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+            "restaurant": repo_product.products[0].restaurant.value,
+            "prepare_time": 20}
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
+    def test_create_product_with_none_price(self):
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateProductUsecase(repo_product, repo_user)
+        controller = CreateProductController(usecase=usecase)
+
+        request = HttpRequest(body={'requester_user': {
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
+            "available": True,
+            "price": None,
+            "name": "Lanche de Mortadela",
+            "description": "Mortadela",
+            "meal_type": repo_product.products[0].meal_type.value,
+            "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+            "restaurant": repo_product.products[0].restaurant.value,
+            "prepare_time": 20}
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400

@@ -7,7 +7,7 @@ from typing import Optional
 
 class Product(abc.ABC):
     available: bool
-    price: float
+    _price: float
     name: str
     description: str
     meal_type: MEAL_TYPE
@@ -19,24 +19,24 @@ class Product(abc.ABC):
     PRODUCT_ID_LENGTH = 36
     
     def __init__(self,
-                available: bool,
-                price: float,
-                name: str,
-                description: str,
-                meal_type: MEAL_TYPE,
-                product_id: str,
-                last_update: int,
-                restaurant: RESTAURANT,
-                prepare_time: int = None,
-                photo: str = None):
+                 available: bool,
+                 input_price: float,
+                 name: str,
+                 description: str,
+                 meal_type: MEAL_TYPE,
+                 product_id: str,
+                 last_update: int,
+                 restaurant: RESTAURANT,
+                 prepare_time: int = None,
+                 photo: str = None):
         
         if type(available) != bool:
             raise EntityError("available")
         self.available = available
         
-        if type(price) != float:
+        if type(input_price) != float or input_price < 0:
             raise EntityError("price")
-        self.price = price
+        self._price = input_price
         
         if type(name) != str:
             raise EntityError("name")
@@ -71,7 +71,18 @@ class Product(abc.ABC):
             if type(prepare_time) != int:
                 raise EntityError("prepare_time")
         self.prepare_time = prepare_time
-        
+
+
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, value):
+        if value is None or value < 0:
+            raise EntityError('price')
+        self._price = value
+
     
     @staticmethod
     def validate_product_id(product_id: str) -> bool:
@@ -81,4 +92,4 @@ class Product(abc.ABC):
             
             
     def __repr__(self):
-        return f"Product(available={self.available}, price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepare_time={self.prepare_time})"
+        return f"Product(available={self.available}, _price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepare_time={self.prepare_time})"

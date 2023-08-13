@@ -127,7 +127,7 @@ class Test_UpdateProductPresenter:
             available=product_repo.products[3].available,
             product_id=product_repo.products[3].product_id,
             restaurant=product_repo.products[3].restaurant,
-            price=product_repo.products[3].price,
+            input_price=product_repo.products[3].price,
             name=product_repo.products[3].name,
             description=product_repo.products[3].description,
             meal_type=product_repo.products[3].meal_type,
@@ -159,3 +159,17 @@ class Test_UpdateProductPresenter:
         assert response["statusCode"] == 200
         assert json.loads(response["body"])['product'] == expected
         assert json.loads(response["body"])['message'] == "the product was updated"
+
+
+    def test_update_product_with_negative_prepare_time(self):
+        event = get_event_for_test_presenter(
+            body={
+                "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                "restaurant": "SOUZA_DE_ABREU",
+                "new_prepare_time": -20,
+            }
+        )
+
+        response = lambda_handler(event, None)
+
+        assert response['statusCode'] == 400

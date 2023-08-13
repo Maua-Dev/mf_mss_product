@@ -1,4 +1,4 @@
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError
 from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
 from .create_product_usecase import CreateProductUsecase
 from .create_product_viewmodel import CreateProductViewmodel
@@ -53,6 +53,9 @@ class CreateProductController:
             if request.data.get("prepare_time") is None:
                 raise MissingParameters("prepare_time")
 
+            if type(request.data.get("prepare_time")) == int and request.data.get("prepare_time") < 0:
+                raise EntityParameterError("prepare_time can't be less than zero")
+
             product = self.CreateProductUsecase(available=request.data.get("available"),
                                                 price=float(request.data.get("price")) if type(request.data.get("price")) == int else request.data.get("price"),
                                                 name=request.data.get("name"),
@@ -74,6 +77,9 @@ class CreateProductController:
             return Forbidden(body=err.message)
         
         except UnregisteredUser as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterError as err:
             return BadRequest(body=err.message)
 
         except EntityError as err:

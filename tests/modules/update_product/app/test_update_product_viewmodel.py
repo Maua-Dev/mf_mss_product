@@ -9,7 +9,7 @@ from src.shared.infra.repositories.product_repository_mock import ProductReposit
 class Test_UpdateProductViewmodel:
     def test_update_product_viewmodel(self):
         
-        product = Product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", restaurant=RESTAURANT.SOUZA_DE_ABREU, available=True, price=15.0, name='Nome Atualizado', description='Descrição Atualizada', prepare_time=20, meal_type=MEAL_TYPE.DRINKS, photo='new_photo', last_update=int(datetime.datetime.now().timestamp()))
+        product = Product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", restaurant=RESTAURANT.SOUZA_DE_ABREU, available=True, input_price=15.0, name='Nome Atualizado', description='Descrição Atualizada', prepare_time=20, meal_type=MEAL_TYPE.DRINKS, photo='new_photo', last_update=int(datetime.datetime.now().timestamp()))
 
         viewmodel = UpdateProductViewmodel(product=product)
 
