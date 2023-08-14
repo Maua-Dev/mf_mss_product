@@ -248,7 +248,7 @@ class ProductRepositoryMock(IProductRepository):
                 return product
         return None
     
-    def request_upload_product_photo(self, product_id: str, user_id: str, time_created: int) -> dict:
+    def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
 
         time_created=int(datetime.datetime.now().timestamp()*1000)
 

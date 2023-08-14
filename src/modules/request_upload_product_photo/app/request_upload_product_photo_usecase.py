@@ -14,6 +14,12 @@ class RequestUploadProductPhotoUsecase:
 
     def __call__(self, product_id: str, user_id: str) -> dict:
         
+        if not Product.validate_product_id(product_id):
+            raise EntityError('product_id')
+        
+        if not User.validate_user_id(user_id):
+            raise EntityError('user_id')
+        
         user = self.repo_user.get_user_by_id(user_id)
 
         if user is None:
@@ -22,9 +28,6 @@ class RequestUploadProductPhotoUsecase:
         if user.role not in [ROLE.OWNER, ROLE.ADMIN]:
             raise UserNotAllowed()
         
-        if not Product.validate_product_id(product_id):
-            raise EntityError('product_id')
-        
-        presignedPost = self.repo_product.request_upload_product_photo(product_id=product_id, user_id=user.user_id, time_created=int(datetime.datetime.now().timestamp()*1000))
+        presigned_post = self.repo_product.request_upload_product_photo(product_id=product_id, user_id=user.user_id)
 
-        return presignedPost
+        return presigned_post

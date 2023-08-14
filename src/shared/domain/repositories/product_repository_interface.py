@@ -28,6 +28,6 @@ class IProductRepository(ABC):
         pass
 
     @abstractmethod   
-    def request_upload_product_photo(self, product_id: str) -> dict:
+    def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
         pass
     

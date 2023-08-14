@@ -12,12 +12,12 @@ class Test_RequestUploadProductPhotoUsecase:
         repo_user = UserRepositoryMock()
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
        
-        presignedPost = usecase(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae5")
+        presigned_post = usecase(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae5")
        
-        assert presignedPost['url'] == "https://test-upload-product-photo.s3.amazonaws.com/"
-        assert presignedPost['metadata']['product_id'] == "8a705b91-c9e9-4353-a755-07f13afafed3"
-        assert presignedPost['metadata']['user_id'] == "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
-        assert presignedPost['metadata']['time_created'] == str(int(datetime.datetime.now().timestamp()*1000))
+        assert presigned_post['url'] == "https://test-upload-product-photo.s3.amazonaws.com/"
+        assert presigned_post['metadata']['product_id'] == "8a705b91-c9e9-4353-a755-07f13afafed3"
+        assert presigned_post['metadata']['user_id'] == "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
+        assert presigned_post['metadata']['time_created'] == str(int(datetime.datetime.now().timestamp()*1000))
         
     def test_request_upload_product_photo_user_not_allowed(self):
         repo_product = ProductRepositoryMock()
@@ -25,15 +25,15 @@ class Test_RequestUploadProductPhotoUsecase:
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
        
         with pytest.raises(UserNotAllowed):
-            presignedPost = usecase(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", user_id="93bc6ada-c0d1-7054-66ab-e17414c48af9")
+            presigned_post = usecase(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", user_id="93bc6ada-c0d1-7054-66ab-e17414c48af9")
        
-    def test_request_upload_product_photo_unregisted_user(self):
+    def test_request_upload_product_photo_invalid_user_id(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
        
-        with pytest.raises(UnregisteredUser):
-            presignedPost = usecase(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", user_id="id")
+        with pytest.raises(EntityError):
+            presigned_post = usecase(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", user_id="id")
 
     def test_request_upload_product_photo_invalid_product_id(self):
         repo_product = ProductRepositoryMock()
@@ -41,5 +41,13 @@ class Test_RequestUploadProductPhotoUsecase:
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
        
         with pytest.raises(EntityError):
-            presignedPost = usecase(product_id="um product_id", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae5")
+            presigned_post = usecase(product_id="um product_id", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae5")
+
+    def test_request_upload_product_photo_unregistered_user(self):
+        repo_product = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
+       
+        with pytest.raises(UnregisteredUser):
+            presigned_post = usecase(product_id="8a705b91-c9e9-4353-a755-07f13afafed3", user_id="93bc6ada-c0d1-7054-66ab-e17414c48a00")
     
