@@ -6,9 +6,9 @@ class EntityError(BaseError):
         super().__init__(f'Field {message} is not valid')
 
 
-class EntityParameterExcededMaximumValue(EntityError):
+class EntityParameterExcededMaximumValue(BaseError):
     def __init__(self, field: str, maximum_value: str):
-        super().__init__(f'Field {field} must be less or equal than {maximum_value}')
+        super().__init__(f'Field {field} must be equal or less than {maximum_value}')
 
 
 class EntityParameterTypeError(EntityError):
