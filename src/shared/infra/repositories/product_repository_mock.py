@@ -247,4 +247,12 @@ class ProductRepositoryMock(IProductRepository):
                 return product
         return None
     
+    def request_upload_product_photo(self, product_id: str) -> dict:
+        return {
+                "url":"https://test-upload-product-photo.s3.amazonaws.com/",
+                "metadata":{
+                    "product_id":f"{product_id}"
+                }
+              }
+    
     

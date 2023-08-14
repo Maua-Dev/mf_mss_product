@@ -26,4 +26,8 @@ class IProductRepository(ABC):
     @abstractmethod   
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
         pass
+
+    @abstractmethod   
+    def request_upload_product_photo(self, product_id: str) -> dict:
+        pass
     
