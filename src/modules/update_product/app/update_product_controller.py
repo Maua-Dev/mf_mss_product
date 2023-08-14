@@ -5,7 +5,8 @@ from .update_product_viewmodel import UpdateProductViewmodel
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.controller_errors import MissingParameters
-from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError, \
+    EntityParameterExcededMaximumValue
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, InternalServerError, NotFound, Forbidden
 
@@ -91,6 +92,9 @@ class UpdateProductController:
             return BadRequest(body=err.message)
 
         except EntityParameterError as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterExcededMaximumValue as err:
             return BadRequest(body=err.message)
 
         except EntityError as err:
