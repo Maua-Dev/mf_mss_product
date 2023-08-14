@@ -4,6 +4,7 @@ import pytest
 
 from src.modules.update_product.app.update_product_controller import UpdateProductController
 from src.modules.update_product.app.update_product_usecase import UpdateProductUsecase
+from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.external_interfaces.http_codes import Forbidden
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
@@ -415,6 +416,29 @@ class Test_UpdateProductController:
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
                 'restaurant': 'SOUZA_DE_ABREU',
                 'new_price': -42
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
+    def test_update_product_with_too_high_price(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_price': Product.MAXIMUM_PRICE+1
             }
         )
 
