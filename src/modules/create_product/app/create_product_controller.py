@@ -1,4 +1,5 @@
-from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError, \
+    EntityParameterExcededMaximumValue
 from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
 from .create_product_usecase import CreateProductUsecase
 from .create_product_viewmodel import CreateProductViewmodel
@@ -80,6 +81,9 @@ class CreateProductController:
             return BadRequest(body=err.message)
 
         except EntityParameterError as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterExcededMaximumValue as err:
             return BadRequest(body=err.message)
 
         except EntityError as err:
