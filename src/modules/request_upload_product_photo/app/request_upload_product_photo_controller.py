@@ -1,3 +1,4 @@
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .request_upload_product_photo_usecase import RequestUploadProductPhotoUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
@@ -11,13 +12,16 @@ class RequestUploadProductPhotoController:
 
     def __call__(self, request: HttpRequest) -> HttpResponse:
         try:
+
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
+
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
+
             if request.body.get('product_id') is None:
                 raise MissingParameters('product_id')
 
-            if request.body.get('user_id') is None:
-                raise MissingParameters('user_id')
-
-            presigned_post = self.requestUploadSelfieUsecase(product_id=request.body.get('product_id'), user_id=request.body.get('user_id'))
+            presigned_post = self.requestUploadSelfieUsecase(product_id=request.body.get('product_id'), user_id=requester_user.user_id)
 
             message = {"message": f"Foto enviada com sucesso."}
             response = OK(message) 

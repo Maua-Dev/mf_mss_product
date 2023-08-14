@@ -14,9 +14,13 @@ class Test_RequestUploadProductPhotoController:
         repo_user = UserRepositoryMock()
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
         controller = RequestUploadProductPhotoController(usecase=usecase)
-        request = HttpRequest(body={
+        request = HttpRequest(body={'requester_user': {
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
             "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
-            "user_id": "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
         })
         
         response = controller(request=request)
@@ -29,8 +33,12 @@ class Test_RequestUploadProductPhotoController:
         repo_user = UserRepositoryMock()
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
         controller = RequestUploadProductPhotoController(usecase=usecase)
-        request = HttpRequest(body={
-            "user_id": "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
+        request = HttpRequest(body={'requester_user': {
+            "sub": repo_user.users_list[0].user_id,
+            "name": repo_user.users_list[0].name,
+            "email": repo_user.users_list[0].email,
+            "custom:isMaua": True
+        },
         })
         
         response = controller(request=request)
@@ -38,7 +46,7 @@ class Test_RequestUploadProductPhotoController:
         assert response.status_code == 400
         assert response.body == "Field product_id is missing"
 
-    def test_request_upload_product_photo_controller_user_id_is_missing(self):
+    def test_request_upload_product_photo_controller_requester_user_is_missing(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
@@ -50,7 +58,7 @@ class Test_RequestUploadProductPhotoController:
         response = controller(request=request)
         
         assert response.status_code == 400
-        assert response.body == "Field user_id is missing"
+        assert response.body == "Field requester_user is missing"
 
     
 
