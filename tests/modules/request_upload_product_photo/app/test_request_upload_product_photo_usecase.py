@@ -1,3 +1,4 @@
+import datetime
 from src.modules.request_upload_product_photo.app.request_upload_product_photo_usecase import RequestUploadProductPhotoUsecase
 from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -16,7 +17,8 @@ class Test_RequestUploadProductPhotoUsecase:
         assert presignedPost['url'] == "https://test-upload-product-photo.s3.amazonaws.com/"
         assert presignedPost['metadata']['product_id'] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert presignedPost['metadata']['user_id'] == "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
-
+        assert presignedPost['metadata']['time_created'] == str(int(datetime.datetime.now().timestamp()*1000))
+        
     def test_request_upload_product_photo_user_not_allowed(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
