@@ -85,7 +85,7 @@ class ProductDynamoDTO:
             description=str(product_data["description"]),
             prepare_time=int(product_data.get("prepare_time")) if product_data.get("prepare_time") is not None else None,
             meal_type=MEAL_TYPE(product_data["meal_type"]),
-            photo=str(product_data["photo"]) if product_data["photo"] is not None else None,
+            photo=str(product_data["photo"]) if product_data.get('photo') is not None else None,
             product_id=str(product_data["product_id"]),
             last_update=int(product_data["last_update"]),
             restaurant=RESTAURANT(product_data["restaurant"]),
