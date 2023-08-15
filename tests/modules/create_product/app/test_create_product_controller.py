@@ -212,7 +212,7 @@ class Test_CreteProductController:
         assert response.status_code == 400
         assert response.body == "Field restaurant is missing"
 
-    def test_create_product_controller_prepare_time_is_missing(self):
+    def test_create_product_controller_prepare_time_is_missing_must_be_set_to_none(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = CreateProductUsecase(repo_product, repo_user)
@@ -235,8 +235,9 @@ class Test_CreteProductController:
 
         response = controller(request=request)
 
-        assert response.status_code == 400
-        assert response.body == "Field prepare_time is missing"
+        assert response.status_code == 201
+        assert response.body["product"]["prepare_time"] is None
+
 
     def test_create_product_controller_invalid_meal_type(self):
         repo_product = ProductRepositoryMock()

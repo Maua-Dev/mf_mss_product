@@ -51,9 +51,6 @@ class CreateProductController:
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise EntityError('restaurant')
 
-            if request.data.get("prepare_time") is None:
-                raise MissingParameters("prepare_time")
-
             if type(request.data.get("prepare_time")) == int and request.data.get("prepare_time") < 0:
                 raise EntityParameterError("prepare_time can't be less than zero")
 
