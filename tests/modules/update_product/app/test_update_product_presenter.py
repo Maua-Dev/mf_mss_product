@@ -173,3 +173,43 @@ class Test_UpdateProductPresenter:
         response = lambda_handler(event, None)
 
         assert response['statusCode'] == 400
+
+    def test_update_description_with_void_value(self):
+        product_repo = ProductRepositoryMock()
+        product_old_values = Product(
+            available=product_repo.products[3].available,
+            product_id=product_repo.products[3].product_id,
+            restaurant=product_repo.products[3].restaurant,
+            input_price=product_repo.products[3].price,
+            name=product_repo.products[3].name,
+            description=product_repo.products[3].description,
+            meal_type=product_repo.products[3].meal_type,
+            photo=product_repo.products[3].photo,
+            prepare_time=product_repo.products[3].prepare_time,
+            last_update=product_repo.products[3].last_update
+        )
+
+        event = get_event_for_test_presenter({
+            "product_id": product_old_values.product_id,
+            "restaurant": product_old_values.restaurant.value,
+            "new_name": "Nome Atualizado",
+            'new_description':''
+        })
+
+        expected = {
+            'product_id': product_old_values.product_id,
+            'restaurant': product_old_values.restaurant.value,
+            'available': product_old_values.available,
+            'price': product_old_values.price,
+            'name': 'Nome Atualizado',
+            'description': '',
+            'prepare_time': product_old_values.prepare_time,
+            'meal_type': product_old_values.meal_type.value,
+            'photo': product_old_values.photo,
+            'last_update': int(datetime.datetime.now().timestamp())
+        }
+
+        response = lambda_handler(event, None)
+        assert response["statusCode"] == 200
+        assert json.loads(response["body"])['product'] == expected
+        assert json.loads(response["body"])['message'] == "the product was updated"

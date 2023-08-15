@@ -38,7 +38,7 @@ class UpdateProductController:
                     if new_prepare_time < 0:
                         raise EntityParameterError("prepare_time can't be less than zero")
 
-            new_description = ''
+            new_description = '-1'
             if 'new_description' in request.data.keys():
                 new_description = request.data.get('new_description')
 

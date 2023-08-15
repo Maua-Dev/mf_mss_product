@@ -48,3 +48,26 @@ class Test_CreateProductUsecase:
 
         with pytest.raises(UnregisteredUser):
             product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='Mortadela', prepare_time=20, meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4', restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id="id")
+
+
+    def test_create_product_with_a_void_description(self):
+        repo_prod = ProductRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = CreateProductUsecase(repo_prod, repo_user)
+
+        user = repo_user.users_list[0]
+        user.role = ROLE.OWNER
+
+        product = usecase(available=True, price=14.0, name='Lanche Mortadela', description='', prepare_time=20,
+                      meal_type=MEAL_TYPE.SANDWICHES, photo='https://avatars.githubusercontent.com/u/30812461?v=4',
+                      restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user.user_id)
+
+        assert repo_prod.products[-1].available == product.available
+        assert repo_prod.products[-1].price == product.price
+        assert repo_prod.products[-1].name == product.name
+        assert repo_prod.products[-1].description == ''
+        assert repo_prod.products[-1].prepare_time == product.prepare_time
+        assert repo_prod.products[-1].meal_type == product.meal_type
+        assert repo_prod.products[-1].photo == product.photo
+        assert repo_prod.products[-1].restaurant == product.restaurant
+        assert repo_user.users_list[0].user_id == user.user_id

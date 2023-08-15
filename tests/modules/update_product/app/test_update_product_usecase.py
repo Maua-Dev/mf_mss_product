@@ -181,6 +181,21 @@ class Test_UpdateProductUsecase:
         assert product.description == 'Minha nova descricao'
         assert product.name == product_old_name
 
+    def test_update_only_description_to_a_void_string(self):
+        repo = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)
+
+        product_old_name = repo.get_product(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+                                            restaurant=RESTAURANT.SOUZA_DE_ABREU).name
+
+        product = usecase(
+            user_id=user_id, product_id="8a705b91-c9e9-4353-a755-07f13afafed3",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            new_description="")
+
+        assert product.description == ''
+        assert product.name == product_old_name
+
     def test_update_product_prepare_time_invalid_type(self):
         repo = ProductRepositoryMock()
         usecase = UpdateProductUsecase(repo_prod=repo, repo_user=user_repo)

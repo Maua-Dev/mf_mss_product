@@ -105,10 +105,10 @@ class ProductRepositoryDynamo(IProductRepository):
         if product_to_update is None:
             return None
 
-        correct_description_value = ''
+        correct_description_value = '-1'
         correct_prepare_time_value = -1
 
-        if new_description is not None and new_description != '':
+        if new_description is not None and new_description != -1:
             correct_description_value = new_description
         else:
             correct_description_value = None
