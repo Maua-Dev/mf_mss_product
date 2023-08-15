@@ -177,16 +177,16 @@ class Test_UpdateProductPresenter:
     def test_update_description_with_void_value(self):
         product_repo = ProductRepositoryMock()
         product_old_values = Product(
-            available=product_repo.products[3].available,
-            product_id=product_repo.products[3].product_id,
-            restaurant=product_repo.products[3].restaurant,
-            input_price=product_repo.products[3].price,
-            name=product_repo.products[3].name,
-            description=product_repo.products[3].description,
-            meal_type=product_repo.products[3].meal_type,
-            photo=product_repo.products[3].photo,
-            prepare_time=product_repo.products[3].prepare_time,
-            last_update=product_repo.products[3].last_update
+            available=product_repo.products[4].available,
+            product_id=product_repo.products[4].product_id,
+            restaurant=product_repo.products[4].restaurant,
+            input_price=product_repo.products[4].price,
+            name=product_repo.products[4].name,
+            description=product_repo.products[4].description,
+            meal_type=product_repo.products[4].meal_type,
+            photo=product_repo.products[4].photo,
+            prepare_time=product_repo.products[4].prepare_time,
+            last_update=product_repo.products[4].last_update
         )
 
         event = get_event_for_test_presenter({
