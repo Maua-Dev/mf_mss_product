@@ -45,9 +45,12 @@ class ProductRepositoryDynamo(IProductRepository):
         if 'Item' not in product_data:
             return None
 
-        product = ProductDynamoDTO.from_dynamo(product_data.get("Item")).to_entity()
+        try:
+            product = ProductDynamoDTO.from_dynamo(product_data.get("Item")).to_entity()
 
-        return product
+            return product
+        except:
+            print("Algum produto está quebrado! Chame o cara do back")
 
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
         response = self.dynamo.get_all_items()
@@ -57,14 +60,17 @@ class ProductRepositoryDynamo(IProductRepository):
 
         products = dict()
 
-        for item in response["Items"]:
-            restaurant = RESTAURANT[item["restaurant"]]
-            if restaurant not in products.keys():
-                products[restaurant] = list()
+        try:
+            for item in response["Items"]:
+                restaurant = RESTAURANT[item["restaurant"]]
+                if restaurant not in products.keys():
+                    products[restaurant] = list()
 
-            products[restaurant].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+                products[restaurant].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
-        return products
+            return products
+        except:
+            print("Algum produto está quebrado! Chame o cara do back")
 
     def create_product(self, new_product: Product) -> Product:
         product_dto = ProductDynamoDTO.from_entity(product=new_product)
@@ -117,7 +123,8 @@ class ProductRepositoryDynamo(IProductRepository):
             "price": Decimal(str(new_price)) if new_price is not None else None,
             "name": new_name,
             "description": correct_description_value,
-            "prepare_time": Decimal(str(correct_prepare_time_value)) if correct_prepare_time_value is not None else None,
+            "prepare_time": Decimal(
+                str(correct_prepare_time_value)) if correct_prepare_time_value is not None else None,
             "meal_type": new_meal_type.value if new_meal_type is not None else None,
             "photo": new_photo,
             "last_update": Decimal(str(new_last_update)) if new_last_update is not None else None
