@@ -18,7 +18,7 @@ class Product(abc.ABC):
     restaurant: RESTAURANT
     prepare_time: int = None  # min
     PRODUCT_ID_LENGTH = 36
-    MAXIMUM_PRICE = 1000000.00
+    MAXIMUM_PRICE = 10000.00
 
     def __init__(self,
                  available: bool,

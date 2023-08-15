@@ -78,7 +78,7 @@ class Test_Product:
         with pytest.raises(EntityParameterExcededMaximumValue):
             Product(
                 available=True,
-                input_price=1000001.00,
+                input_price=Product.MAXIMUM_PRICE+1,
                 name="Carne",
                 description="Um lanche de Carne",
                 meal_type=MEAL_TYPE.PORTIONS,
@@ -105,7 +105,7 @@ class Test_Product:
                 prepare_time=None
             )
 
-            my_product.price = 1000001.00
+            my_product.price = Product.MAXIMUM_PRICE+1
 
     def test_product_price_invalid(self):
         with pytest.raises(EntityError):
