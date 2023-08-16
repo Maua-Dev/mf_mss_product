@@ -4,6 +4,8 @@ from aws_cdk import (
     aws_cognito
 )
 from constructs import Construct
+
+from iac.iac.bucket_stack import BucketStack
 from .dynamo_stack import DynamoStack
 
 from .lambda_stack import LambdaStack
