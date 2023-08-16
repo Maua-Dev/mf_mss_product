@@ -39,3 +39,6 @@ class OrderProducts(abc.ABC):
         if quantity < 1:
             return False
         return True
+    
+    def __repr__(self):
+        return f"OrderProducts(product_name={self.product_name}, product_id={self.product_id}, quantity={self.quantity})"
