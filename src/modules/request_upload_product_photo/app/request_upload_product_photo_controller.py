@@ -23,8 +23,11 @@ class RequestUploadProductPhotoController:
 
             presigned_post = self.requestUploadSelfieUsecase(product_id=request.body.get('product_id'), user_id=requester_user.user_id)
 
-            message = {"message": f"Foto enviada com sucesso."}
-            response = OK(message) 
+            message = {"message": f"Photo uploaded successufully."}
+
+            presigned_post.update(message)
+
+            response = OK(presigned_post) 
             
             return response
 

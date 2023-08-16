@@ -60,6 +60,6 @@ class Test_RequestUploadProductPhotoPresenter:
 
         assert response["statusCode"] == 200
         assert json.loads(response["body"])[
-                   "message"] == "Foto enviada com sucesso."
+                   "message"] == "Photo uploaded successufully."
         
         

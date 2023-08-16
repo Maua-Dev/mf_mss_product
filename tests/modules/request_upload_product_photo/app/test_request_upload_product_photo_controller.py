@@ -26,7 +26,7 @@ class Test_RequestUploadProductPhotoController:
         response = controller(request=request)
         
         assert response.status_code == 200
-        assert response.body['message'] == "Foto enviada com sucesso."
+        assert response.body['message'] == "Photo uploaded successufully."
         
     def test_request_upload_product_photo_controller_product_id_is_missing(self):
         repo_product = ProductRepositoryMock()
