@@ -2,9 +2,7 @@ import datetime
 from typing import Dict, List
 from decimal import Decimal
 import uuid
-
 import boto3
-from botocore.config import Config
 
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
@@ -45,7 +43,7 @@ class ProductRepositoryDynamo(IProductRepository):
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
         
         self.S3_BUCKET_NAME = Environments.get_envs().s3_bucket_name
-        self.s3_client = boto3.client('s3', config=Config(signature_version='s3v4'), region_name=Environments.get_envs().region)
+        self.s3_client = boto3.client('s3',region_name=Environments.get_envs().region)
 
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
 
