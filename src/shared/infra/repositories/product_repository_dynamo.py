@@ -17,7 +17,6 @@ from src.shared.infra.external.dynamo.datasources.dynamo_datasource import Dynam
 class ProductRepositoryDynamo(IProductRepository):
     S3_BUCKET_NAME: str
 
-
     @staticmethod
     def partition_key_format(restaurant: RESTAURANT) -> str:
         return f"{restaurant.value}"
@@ -42,7 +41,7 @@ class ProductRepositoryDynamo(IProductRepository):
                                        sort_key=Environments.get_envs().dynamo_sort_key_product,
                                        gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
-        
+
         self.S3_BUCKET_NAME = Environments.get_envs().s3_bucket_name
 
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
@@ -54,7 +53,8 @@ class ProductRepositoryDynamo(IProductRepository):
             return None
 
         try:
-            product = ProductDynamoDTO.from_dynamo(product_data.get("Item")).to_entity()
+            product = ProductDynamoDTO.from_dynamo(
+                product_data.get("Item")).to_entity()
 
             return product
         except:
@@ -74,7 +74,8 @@ class ProductRepositoryDynamo(IProductRepository):
                 if restaurant not in products.keys():
                     products[restaurant] = list()
 
-                products[restaurant].append(ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+                products[restaurant].append(
+                    ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
             return products
         except:
@@ -84,8 +85,10 @@ class ProductRepositoryDynamo(IProductRepository):
         product_dto = ProductDynamoDTO.from_entity(product=new_product)
         item = product_dto.to_dynamo()
 
-        item[self.dynamo.gsi_partition_key] = self.gsi_partition_key_format(new_product.product_id)
-        item[self.dynamo.gsi_sort_key] = self.gsi_sort_key_format(new_product.restaurant)
+        item[self.dynamo.gsi_partition_key] = self.gsi_partition_key_format(
+            new_product.product_id)
+        item[self.dynamo.gsi_sort_key] = self.gsi_sort_key_format(
+            new_product.restaurant)
 
         resp = self.dynamo.put_item(partition_key=self.partition_key_format(new_product.restaurant),
                                     sort_key=self.sort_key_format(new_product.product_id), item=item,
@@ -108,7 +111,8 @@ class ProductRepositoryDynamo(IProductRepository):
                        new_prepare_time: int = None, new_meal_type: MEAL_TYPE = None, new_photo: str = None,
                        new_last_update: int = None) -> Product:
 
-        product_to_update = self.get_product(product_id=product_id, restaurant=restaurant)
+        product_to_update = self.get_product(
+            product_id=product_id, restaurant=restaurant)
 
         if product_to_update is None:
             return None
@@ -138,7 +142,8 @@ class ProductRepositoryDynamo(IProductRepository):
             "last_update": Decimal(str(new_last_update)) if new_last_update is not None else None
         }
 
-        update_dict_without_none_values = {k: v for k, v in update_dict.items() if v is not None}
+        update_dict_without_none_values = {
+            k: v for k, v in update_dict.items() if v is not None}
 
         response = self.dynamo.update_item(
             partition_key=self.partition_key_format(restaurant=restaurant),
@@ -151,20 +156,22 @@ class ProductRepositoryDynamo(IProductRepository):
         return ProductDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def generate_key(self, product_id: str, time_created: int):
-        
+
         key = f"{product_id}/product-{time_created}.jpeg"
         return key
-    
+
     def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
         my_config = Config(
-            region_name = Environments.get_envs().region,
-            signature_version = 'v4',
+            region_name=Environments.get_envs().region,
+            signature_version='s3v4',
         )
-        self.s3_client = boto3.client('s3', config=my_config, region_name=Environments.get_envs().region)
-       
-        time_created=int(datetime.datetime.now().timestamp()*1000)
+        self.s3_client = boto3.client(
+            's3', config=my_config, region_name=Environments.get_envs().region)
 
-        key = self.generate_key(product_id=product_id,time_created=time_created)
+        time_created = int(datetime.datetime.now().timestamp()*1000)
+
+        key = self.generate_key(product_id=product_id,
+                                time_created=time_created)
 
         meta = {
             "product_id": product_id,
