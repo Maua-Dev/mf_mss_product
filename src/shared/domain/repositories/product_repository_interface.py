@@ -29,5 +29,9 @@ class IProductRepository(ABC):
 
     @abstractmethod   
     def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
+        """
+        The method above gives the user a momentary permission to upload a product photo file in our bucket.
+        """
         pass
+    
     

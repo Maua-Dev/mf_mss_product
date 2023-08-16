@@ -8,7 +8,7 @@ from src.shared.helpers.external_interfaces.http_models import HttpRequest
 
 class RequestUploadProductPhotoController:
     def __init__(self, usecase: RequestUploadProductPhotoUsecase):
-        self.requestUploadSelfieUsecase = usecase
+        self.requestUploadProductUsecase = usecase
 
     def __call__(self, request: HttpRequest) -> HttpResponse:
         try:
@@ -21,7 +21,7 @@ class RequestUploadProductPhotoController:
             if request.body.get('product_id') is None:
                 raise MissingParameters('product_id')
 
-            presigned_post = self.requestUploadSelfieUsecase(product_id=request.body.get('product_id'), user_id=requester_user.user_id)
+            presigned_post = self.requestUploadProductUsecase(product_id=request.body.get('product_id'), user_id=requester_user.user_id)
 
             message = {"message": f"Photo uploaded successufully."}
 
