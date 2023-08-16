@@ -37,15 +37,15 @@ class BucketStack(Construct):
                                        removal_policy=REMOVAL_POLICY
                                        )
 
-        oac = aws_cloudfront.CfnOriginAcessControl(self, "MauaFood_Product_Photo_OAC",
-                                                   origin_access_control_config=aws_cloudfront.CfnOriginAccessControl.OriginAccessControlConfigProperty(
-                                                       name="MauaFood_Bucket_OAC_" + self.github_ref_name,
-                                                       origin_access_control_origin_type="s3",
-                                                       signing_behavior="always",
-                                                       signing_protocol="sigv4",
+        oac = aws_cloudfront.CfnOriginAccessControl(self, "MauaFood_Product_Photo_OAC",
+                                                    origin_access_control_config=aws_cloudfront.CfnOriginAccessControl.OriginAccessControlConfigProperty(
+                                                        name="MauaFood_Bucket_OAC_" + self.github_ref_name,
+                                                        origin_access_control_origin_type="s3",
+                                                        signing_behavior="always",
+                                                        signing_protocol="sigv4",
 
-                                                       description="This is MauaFood product photo OAC"
-                                                   ))
+                                                        description="This is MauaFood product photo OAC"
+                                                    ))
 
         self.s3_bucket.grant_read(oac)
 
