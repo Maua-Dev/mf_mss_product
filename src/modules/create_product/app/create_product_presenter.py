@@ -3,12 +3,12 @@ from .create_product_controller import CreateProductController
 from .create_product_usecase import CreateProductUsecase
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
-def lambda_handler(event, context):
+repo_product = Environments.get_product_repo()()
+repo_user = Environments.get_user_repo()()
+usecase = CreateProductUsecase(repo_product, repo_user)
+controller = CreateProductController(usecase=usecase)
 
-    repo_product = Environments.get_product_repo()()
-    repo_user = Environments.get_user_repo()()
-    usecase = CreateProductUsecase(repo_product, repo_user)
-    controller = CreateProductController(usecase=usecase)
+def lambda_handler(event, context):
 
     httpRequest = LambdaHttpRequest(data=event)
     httpRequest.data['requester_user'] = event.get('requestContext', {}).get('authorizer', {}).get('claims', None)

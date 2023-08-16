@@ -5,12 +5,13 @@ from .request_upload_product_photo_controller import RequestUploadProductPhotoCo
 from .request_upload_product_photo_usecase import RequestUploadProductPhotoUsecase
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
+repo_product = Environments.get_product_repo()()
+repo_user = Environments.get_user_repo()()
+usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
+controller = RequestUploadProductPhotoController(usecase)
+
 
 def lambda_handler(event, context):
-    repo_product = Environments.get_product_repo()()
-    repo_user = Environments.get_user_repo()()
-    usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
-    controller = RequestUploadProductPhotoController(usecase)
 
     httpRequest = LambdaHttpRequest(data=event)
     httpRequest.data['requester_user'] = event.get('requestContext', {}).get('authorizer', {}).get('claims', None)
