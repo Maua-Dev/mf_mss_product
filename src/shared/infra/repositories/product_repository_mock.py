@@ -1,3 +1,4 @@
+import datetime
 import os
 from typing import Dict, List
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
@@ -720,3 +721,16 @@ class ProductRepositoryMock(IProductRepository):
             if product.product_id == product_id and product.restaurant == restaurant:
                 return product
         return None
+    
+    def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
+
+        time_created=int(datetime.datetime.now().timestamp()*1000)
+
+        return {
+                "url":"https://test-upload-product-photo.s3.amazonaws.com/",
+                "metadata":{
+                    "product_id":f"{product_id}",
+                    "user_id": f"{user_id}",
+                    "time_created": f"{time_created}"
+                }
+              }

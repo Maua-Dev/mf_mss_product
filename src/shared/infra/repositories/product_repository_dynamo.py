@@ -1,5 +1,8 @@
+import datetime
 from typing import Dict, List
 from decimal import Decimal
+import uuid
+import boto3
 
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
@@ -11,6 +14,8 @@ from src.shared.infra.external.dynamo.datasources.dynamo_datasource import Dynam
 
 
 class ProductRepositoryDynamo(IProductRepository):
+    S3_BUCKET_NAME: str
+
 
     @staticmethod
     def partition_key_format(restaurant: RESTAURANT) -> str:
@@ -36,6 +41,9 @@ class ProductRepositoryDynamo(IProductRepository):
                                        sort_key=Environments.get_envs().dynamo_sort_key_product,
                                        gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
+        
+        self.S3_BUCKET_NAME = Environments.get_envs().s3_bucket_name
+        self.s3_client = boto3.client('s3',region_name=Environments.get_envs().region)
 
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
 
@@ -141,3 +149,41 @@ class ProductRepositoryDynamo(IProductRepository):
             return None
 
         return ProductDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
+
+    def generate_key(self, product_id: str, time_created: int):
+        
+        key = f"{product_id}/product-{time_created}.jpeg"
+        return key
+    
+    def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
+       
+        time_created=int(datetime.datetime.now().timestamp()*1000)
+
+        key = self.generate_key(product_id=product_id,time_created=time_created)
+
+        meta = {
+            "product_id": product_id,
+            "user_id": user_id,
+            "time_created": str(time_created)
+        }
+
+        try:
+            presigned_url = self.s3_client.generate_presigned_url(
+                ClientMethod='put_object',
+                Params={
+                    'Bucket': self.S3_BUCKET_NAME,
+                    'Key': key,
+                    'Metadata': meta,
+                },
+                ExpiresIn=600,
+            )
+
+        except Exception as e:
+            print("Error while trying to upload file to S3")
+            print(e)
+            raise e
+
+        return {
+            "url": presigned_url,
+            "metadata": meta
+        }
