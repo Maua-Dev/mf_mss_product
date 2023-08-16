@@ -14,6 +14,7 @@ class Test_DeleteUserViewmodel:
                 'email': "lucas.santos@gmail.com",
                 'restaurant': None,
                 'role': "ADMIN",
+                'photo': "https://img.freepik.com/free-photo/red-white-cat-i-white-studio_155003-13189.jpg?w=2000"
             },
             "message": "the user was deleted"
         }

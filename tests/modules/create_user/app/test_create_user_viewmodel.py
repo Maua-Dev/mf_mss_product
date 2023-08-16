@@ -9,7 +9,8 @@ class Test_CreateUserViewModel:
             name="Rodrigo",
             email="rodrigo.morales@gmail.com",
             restaurant=None,
-            role=ROLE.USER
+            role=ROLE.USER,
+            photo=None
         )
         userViewmodel = CreateUserViewmodel(user=user).to_dict()
         expected = {
@@ -19,6 +20,7 @@ class Test_CreateUserViewModel:
                 'email': 'rodrigo.morales@gmail.com',
                 'restaurant': None,
                 'role':'USER',
+                'photo': None
             },
             'message': 'the user was created successfully'
         }

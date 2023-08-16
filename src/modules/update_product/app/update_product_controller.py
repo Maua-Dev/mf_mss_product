@@ -5,7 +5,8 @@ from .update_product_viewmodel import UpdateProductViewmodel
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.controller_errors import MissingParameters
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError, \
+    EntityParameterExcededMaximumValue
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, InternalServerError, NotFound, Forbidden
 
@@ -34,8 +35,10 @@ class UpdateProductController:
                 new_prepare_time = request.data.get('new_prepare_time')
                 if new_prepare_time is not None:
                     new_prepare_time = int(new_prepare_time)
+                    if new_prepare_time < 0:
+                        raise EntityParameterError("prepare_time can't be less than zero")
 
-            new_description = ''
+            new_description = '-1'
             if 'new_description' in request.data.keys():
                 new_description = request.data.get('new_description')
 
@@ -86,6 +89,12 @@ class UpdateProductController:
             return Forbidden(body=err.message)
 
         except UnregisteredUser as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterError as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterExcededMaximumValue as err:
             return BadRequest(body=err.message)
 
         except EntityError as err:

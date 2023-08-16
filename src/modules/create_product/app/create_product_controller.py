@@ -1,4 +1,5 @@
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError, \
+    EntityParameterExcededMaximumValue
 from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
 from .create_product_usecase import CreateProductUsecase
 from .create_product_viewmodel import CreateProductViewmodel
@@ -50,8 +51,8 @@ class CreateProductController:
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise EntityError('restaurant')
 
-            if request.data.get("prepare_time") is None:
-                raise MissingParameters("prepare_time")
+            if type(request.data.get("prepare_time")) == int and request.data.get("prepare_time") < 0:
+                raise EntityParameterError("prepare_time can't be less than zero")
 
             product = self.CreateProductUsecase(available=request.data.get("available"),
                                                 price=float(request.data.get("price")) if type(request.data.get("price")) == int else request.data.get("price"),
@@ -74,6 +75,12 @@ class CreateProductController:
             return Forbidden(body=err.message)
         
         except UnregisteredUser as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterError as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterExcededMaximumValue as err:
             return BadRequest(body=err.message)
 
         except EntityError as err:

@@ -1,4 +1,5 @@
 from decimal import Decimal
+from typing import Optional
 
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
@@ -12,7 +13,7 @@ class ProductDynamoDTO:
     description: str
     prepare_time: int = None
     meal_type: MEAL_TYPE
-    photo: str
+    photo: Optional[str] = None
     product_id: str
     last_update: int
     restaurant: RESTAURANT
@@ -84,7 +85,7 @@ class ProductDynamoDTO:
             description=str(product_data["description"]),
             prepare_time=int(product_data.get("prepare_time")) if product_data.get("prepare_time") is not None else None,
             meal_type=MEAL_TYPE(product_data["meal_type"]),
-            photo=str(product_data["photo"]),
+            photo=str(product_data["photo"]) if product_data.get('photo') is not None else None,
             product_id=str(product_data["product_id"]),
             last_update=int(product_data["last_update"]),
             restaurant=RESTAURANT(product_data["restaurant"]),
@@ -96,7 +97,7 @@ class ProductDynamoDTO:
         """
         return Product(
             available=self.available,
-            price=self.price,
+            input_price=self.price,
             name=self.name,
             description=self.description,
             prepare_time=self.prepare_time,

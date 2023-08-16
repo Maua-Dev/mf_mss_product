@@ -4,6 +4,7 @@ import pytest
 
 from src.modules.update_product.app.update_product_controller import UpdateProductController
 from src.modules.update_product.app.update_product_usecase import UpdateProductUsecase
+from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.external_interfaces.http_codes import Forbidden
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
@@ -222,7 +223,6 @@ class Test_UpdateProductController:
         assert response.status_code == 404
         assert response.body == "No items found for restaurant"
 
-
     def test_update_only_product_description(self):
         repo_prod = ProductRepositoryMock()
         usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
@@ -302,7 +302,6 @@ class Test_UpdateProductController:
         assert response.body["product"]["price"] == 15
         assert response.body["message"] == "the product was updated"
 
-
     def test_update_prepare_time_with_none_value(self):
         repo_prod = ProductRepositoryMock()
         usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
@@ -378,6 +377,103 @@ class Test_UpdateProductController:
         assert response.body["product"]["prepare_time"] == 42
         assert response.body["message"] == "the product was updated"
 
+    def test_update_prepare_time_with_negative_value(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_prepare_time': -42.00
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
+    def test_update_with_negative_price(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_price': -42
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
+    def test_update_product_with_too_high_price(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_price': Product.MAXIMUM_PRICE+1
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 400
+
+    def test_update_with_none_price(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        product_updated = repo_prod.products[0]
+
+        price_before = product_updated.price
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': repo_prod.products[0].product_id,
+                'restaurant': repo_prod.products[0].restaurant.value,
+                'new_price': None
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert product_updated.price is not None
+        assert product_updated.price == price_before
 
     def test_update_description_with_none_value(self):
         repo_prod = ProductRepositoryMock()
@@ -402,6 +498,32 @@ class Test_UpdateProductController:
 
         assert response.status_code == 200
         assert response.body["product"]["description"] == None
+        assert response.body["message"] == "the product was updated"
+
+
+    def test_update_description_with_void_string(self):
+        repo_prod = ProductRepositoryMock()
+        usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
+        controller = UpdateProductController(usecase=usecase)
+
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    'sub': repo_user.users_list[0].user_id,
+                    'name': repo_user.users_list[0].name,
+                    'email': repo_user.users_list[0].email,
+                    'custom:isMaua': True
+                },
+                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                'restaurant': 'SOUZA_DE_ABREU',
+                'new_description': ''
+            }
+        )
+
+        response = controller(request=request)
+
+        assert response.status_code == 200
+        assert response.body["product"]["description"] == ''
         assert response.body["message"] == "the product was updated"
 
     def test_update_description_with_a_value(self):
@@ -458,4 +580,3 @@ class Test_UpdateProductController:
 
         assert response.status_code == 400
         assert response.body == "That user is not registered"
-

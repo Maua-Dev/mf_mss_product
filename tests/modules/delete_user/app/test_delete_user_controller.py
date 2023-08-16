@@ -29,7 +29,8 @@ class Test_DeleteUserController:
                 "email": user.email,
                 "role": user.role.value,
                 "user_id": user.user_id,
-                "restaurant": user.restaurant
+                "restaurant": user.restaurant,
+                "photo": user.photo
             },
             "message": "the user was deleted"
         }
