@@ -43,7 +43,6 @@ class ProductRepositoryDynamo(IProductRepository):
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
         
         self.S3_BUCKET_NAME = Environments.get_envs().s3_bucket_name
-        self.s3_client = boto3.client('s3',region_name=Environments.get_envs().region)
 
     def get_product(self, product_id: str, restaurant: RESTAURANT) -> Product:
 
@@ -156,6 +155,7 @@ class ProductRepositoryDynamo(IProductRepository):
         return key
     
     def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
+        self.s3_client = boto3.client('s3',region_name=Environments.get_envs().region)
        
         time_created=int(datetime.datetime.now().timestamp()*1000)
 
