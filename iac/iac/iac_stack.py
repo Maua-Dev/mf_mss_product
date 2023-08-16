@@ -41,6 +41,8 @@ class IacStack(Stack):
                 "allow_headers": Cors.DEFAULT_HEADERS
             }
         )
+        self.bucket_stack = BucketStack(self)
+
         if 'prod' in self.github_ref_name:
             stage = 'PROD'
 
@@ -58,7 +60,8 @@ class IacStack(Stack):
             "DYNAMO_PARTITION_KEY": "PK",
             "DYNAMO_SORT_KEY": "SK",
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
-            "DYNAMO_GSI_SORT_KEY": "GSI1-SK"
+            "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
+            "S3_BUCKET_NAME": self.bucket_stack.s3_bucket.bucket_name,
         }
 
         
