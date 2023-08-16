@@ -1,5 +1,6 @@
 import json
 from src.modules.create_product.app.create_product_presenter import lambda_handler
+from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter
@@ -222,3 +223,21 @@ class Test_CreateProductPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 201
+
+    def test_create_product_with_too_high_price(self):
+        event = get_event_for_test_presenter(
+            body={
+                "available": True,
+                "name": "Misto",
+                "price": Product.MAXIMUM_PRICE+1,
+                "description": "Mussarela e Presunto",
+                "meal_type": "SANDWICHES",
+                "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
+                "restaurant": "HORA_H",
+                "prepare_time": 15
+            }
+        )
+
+        response = lambda_handler(event, None)
+
+        assert response["statusCode"] == 400

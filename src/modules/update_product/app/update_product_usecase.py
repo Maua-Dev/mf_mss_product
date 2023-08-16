@@ -7,7 +7,7 @@ from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterExcededMaximumValue
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UserNotAllowed, UnregisteredUser
 
 
@@ -41,6 +41,9 @@ class UpdateProductUsecase:
 
         if type(new_price) != float and new_price is not None:
             raise EntityError("new_price")
+
+        if new_price is not None and new_price > 10000.00:
+            raise EntityParameterExcededMaximumValue("price", Product.MAXIMUM_PRICE)
 
         if type(new_name) != str and new_name is not None:
             raise EntityError("new_name")
