@@ -5,7 +5,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from iac.iac.bucket_stack import BucketStack
+from .bucket_stack import BucketStack
 from .dynamo_stack import DynamoStack
 
 from .lambda_stack import LambdaStack
