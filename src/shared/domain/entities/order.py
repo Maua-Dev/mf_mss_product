@@ -111,4 +111,4 @@ class Order(abc.ABC):
         return True
     
     def __repr__(self):
-        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time={self.creation_time}, restaurant={self.restaurant}, observation={self.observation}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price})"
+        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, observation={self.observation}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price})"
