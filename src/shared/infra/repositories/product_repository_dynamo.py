@@ -3,6 +3,7 @@ from typing import Dict, List
 from decimal import Decimal
 import uuid
 import boto3
+from botocore.config import Config
 
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
@@ -155,7 +156,11 @@ class ProductRepositoryDynamo(IProductRepository):
         return key
     
     def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
-        self.s3_client = boto3.client('s3',region_name=Environments.get_envs().region)
+        my_config = Config(
+            region_name = Environments.get_envs().region,
+            signature_version = 'v4',
+        )
+        self.s3_client = boto3.client('s3', config=my_config, region_name=Environments.get_envs().region)
        
         time_created=int(datetime.datetime.now().timestamp()*1000)
 
