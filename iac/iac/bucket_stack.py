@@ -37,32 +37,48 @@ class BucketStack(Construct):
                                        removal_policy=REMOVAL_POLICY
                                        )
 
-        oac = aws_cloudfront.CfnOriginAccessControl(self, "MauaFood_Product_Photo_OAC",
-                                                    origin_access_control_config=aws_cloudfront.CfnOriginAccessControl.OriginAccessControlConfigProperty(
-                                                        name="MauaFood_Bucket_OAC_" + self.github_ref_name,
-                                                        origin_access_control_origin_type="s3",
-                                                        signing_behavior="always",
-                                                        signing_protocol="sigv4",
-
-                                                        description="This is MauaFood product photo OAC"
-                                                    ))
-
-        self.s3_bucket.grant_read(oac)
+        oai = aws_cloudfront.OriginAccessIdentity(self, "MauaFood_Product_Photo_OAI",
+                                                  comment="This is MauaFood product photo OAI")
+        
+        self.s3_bucket.grant_read_write(oai)
 
         self.cloudfront_distribution = aws_cloudfront.Distribution(self, "MauaFood_Product_Photo_CloudFront_Distribution",
-                                                                   default_behavior=aws_cloudfront.BehaviorOptions(
-                                                                       origin=aws_cloudfront_origins.S3Origin(
-                                                                           self.s3_bucket,
-                                                                           origin_access_control=oac),
-                                                                       origin_request_policy=aws_cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
-                                                                       viewer_protocol_policy=aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-                                                                       response_headers_policy=aws_cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
-                                                                       cache_policy=aws_cloudfront.CachePolicy.CACHING_OPTIMIZED,
-                                                                       allowed_methods=aws_cloudfront.AllowedMethods.ALLOW_ALL
-                                                                   )
-                                                                   )
+                                                                     default_behavior=aws_cloudfront.BehaviorOptions(
+                                                                          origin=aws_cloudfront_origins.S3Origin(
+                                                                            self.s3_bucket,
+                                                                            origin_access_identity=oai),
+                                                                          origin_request_policy=aws_cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
+                                                                          viewer_protocol_policy=aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                                                                          response_headers_policy=aws_cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
+                                                                          cache_policy=aws_cloudfront.CachePolicy.CACHING_OPTIMIZED,
+                                                                          allowed_methods=aws_cloudfront.AllowedMethods.ALLOW_ALL
+                                                                     )
+                                                                     )
 
-        cfn_distribution = self.cloudfront_distribution.node.default_child
+        # oac = aws_cloudfront.CfnOriginAccessControl(self, "MauaFood_Product_Photo_OAC",
+        #                                             origin_access_control_config=aws_cloudfront.CfnOriginAccessControl.OriginAccessControlConfigProperty(
+        #                                                 name="MauaFood_Bucket_OAC_" + self.github_ref_name,
+        #                                                 origin_access_control_origin_type="s3",
+        #                                                 signing_behavior="always",
+        #                                                 signing_protocol="sigv4",
 
-        cfn_distribution.addPropertyOverride(
-            'DistributionConfig.Origins.0.OriginAccessControlId', oac.getAtt('Id'))
+        #                                                 description="This is MauaFood product photo OAC"
+        #                                             ))
+
+        # self.cloudfront_distribution = aws_cloudfront.Distribution(self, "MauaFood_Product_Photo_CloudFront_Distribution",
+        #                                                            default_behavior=aws_cloudfront.BehaviorOptions(
+        #                                                                origin=aws_cloudfront_origins.S3Origin(
+        #                                                                    self.s3_bucket,
+        #                                                                    origin_access_control=oac),
+        #                                                                origin_request_policy=aws_cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
+        #                                                                viewer_protocol_policy=aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        #                                                                response_headers_policy=aws_cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
+        #                                                                cache_policy=aws_cloudfront.CachePolicy.CACHING_OPTIMIZED,
+        #                                                                allowed_methods=aws_cloudfront.AllowedMethods.ALLOW_ALL
+        #                                                            )
+        #                                                            )
+
+        # cfn_distribution = self.cloudfront_distribution.node.default_child
+
+        # cfn_distribution.addPropertyOverride(
+        #     'DistributionConfig.Origins.0.OriginAccessControlId', oac.getAtt('Id'))
