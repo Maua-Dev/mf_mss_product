@@ -54,3 +54,6 @@ class Connection(abc.ABC):
         if len(id) != Connection.ID_LENGTH:
             return False
         return True
+    
+    def __repr__(self):
+        return f"Connection(connection_id={self.connection_id}, client_id={self.client_id}, expire_date_seconds={self.expire_date_seconds}, creation_time_seconds={self.creation_time_seconds}, user_id={self.user_id}, restaurant={self.restaurant})"
