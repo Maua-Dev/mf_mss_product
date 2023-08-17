@@ -57,8 +57,8 @@ class ProductRepositoryDynamo(IProductRepository):
                 product_data.get("Item")).to_entity()
 
             return product
-        except:
-            print("Algum produto está quebrado! Chame o cara do back")
+        except BaseException as err:
+            print(err)
 
     def get_all_products_group_by_restaurant(self) -> Dict[RESTAURANT, List[Product]]:
         response = self.dynamo.get_all_items()
@@ -78,8 +78,8 @@ class ProductRepositoryDynamo(IProductRepository):
                     ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
             return products
-        except:
-            print("Algum produto está quebrado! Chame o cara do back")
+        except BaseException as err:
+            print(err)
 
     def create_product(self, new_product: Product) -> Product:
         product_dto = ProductDynamoDTO.from_entity(product=new_product)
