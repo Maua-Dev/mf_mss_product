@@ -194,7 +194,7 @@ class ProductRepositoryDynamo(IProductRepository):
             )
 
             presigned_url = presigned_url.replace(
-                f"https://{self.S3_BUCKET_NAME}.s3.amazonaws.com", cloud_front_distribution_domain_assets)
+                f"{self.S3_BUCKET_NAME}.s3.amazonaws.com", cloud_front_distribution_domain_assets)
 
         except Exception as e:
             print("Error while trying to upload file to S3")
