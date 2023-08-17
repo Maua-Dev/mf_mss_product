@@ -189,6 +189,7 @@ class ProductRepositoryDynamo(IProductRepository):
                     'Bucket': self.S3_BUCKET_NAME,
                     'Key': key,
                     'Metadata': meta,
+                    'ContentLengthRange': "0 - 1048576"
                 },
                 ExpiresIn=600,
             )
