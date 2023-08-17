@@ -64,7 +64,7 @@ class IacStack(Stack):
             "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
             "S3_BUCKET_NAME": self.bucket_stack.s3_bucket.bucket_name,
-            "CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS": self.bucket_stack.cloud_front_distribution.domain_name,
+            "CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS": self.bucket_stack.cloudfront_distribution.domain_name,
         }
 
         
