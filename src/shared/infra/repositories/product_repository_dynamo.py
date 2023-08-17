@@ -168,6 +168,9 @@ class ProductRepositoryDynamo(IProductRepository):
         self.s3_client = boto3.client(
             's3', config=my_config, region_name=Environments.get_envs().region)
 
+        cloud_front_distribution_domain_assets = Environments.get_envs(
+        ).cloud_front_distribution_domain_assets
+
         time_created = int(datetime.datetime.now().timestamp()*1000)
 
         key = self.generate_key(product_id=product_id,
@@ -189,6 +192,9 @@ class ProductRepositoryDynamo(IProductRepository):
                 },
                 ExpiresIn=600,
             )
+
+            presigned_url = presigned_url.replace(
+                f"https://{self.S3_BUCKET_NAME}.s3.amazonaws.com", cloud_front_distribution_domain_assets)
 
         except Exception as e:
             print("Error while trying to upload file to S3")

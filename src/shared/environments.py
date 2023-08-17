@@ -57,7 +57,7 @@ class Environments:
             self.dynamo_partition_key_user = "PK"
             # self.dynamo_sort_key_user = "SK"
             self.s3_assets_cdn = "https://mauafood-assets.cloudfront.net/"
-            self.cloud_front_distribution_domain = "https://d3q9q9q9q9q9q9.cloudfront.net"
+            self.cloud_front_distribution_domain_assets = "https://d3q9q9q9q9q9q9.cloudfront.net"
             self.dynamo_gsi_partition_key = "GSI1-PK"
             self.dynamo_gsi_sort_key = "GSI1-SK"
 
@@ -73,7 +73,7 @@ class Environments:
             self.dynamo_sort_key_product = os.environ.get("DYNAMO_SORT_KEY")
             self.dynamo_partition_key_user = os.environ.get("DYNAMO_PARTITION_KEY")
             # self.dynamo_sort_key_user = os.environ.get("DYNAMO_SORT_KEY")
-            self.cloud_front_distribution_domain = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN")
+            self.cloud_front_distribution_domain_assets = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS")
             self.dynamo_gsi_partition_key = os.environ.get("DYNAMO_GSI_PARTITION_KEY")
             self.dynamo_gsi_sort_key = os.environ.get("DYNAMO_GSI_SORT_KEY")
 
