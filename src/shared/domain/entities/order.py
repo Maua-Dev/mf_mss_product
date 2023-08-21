@@ -1,7 +1,7 @@
 import abc
 import re
 from typing import Dict, List, Optional
-from src.shared.domain.entities.order_products import OrderProducts
+from src.shared.domain.entities.order_product import OrderProduct
 
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
@@ -12,7 +12,7 @@ class Order(abc.ABC):
     order_id: str
     user_name: str
     user_id: str
-    products: List[Dict[OrderProducts, any]]
+    products: List[Dict[OrderProduct, any]]
     creation_time_milliseconds: int
     restaurant: RESTAURANT
     observation: Optional[str] = None
@@ -26,7 +26,7 @@ class Order(abc.ABC):
                  order_id: str,
                  user_name: str,
                  user_id: str,
-                 products: List[Dict[OrderProducts, any]],
+                 products: List[Dict[OrderProduct, any]],
                  creation_time_milliseconds: int,
                  restaurant: RESTAURANT, 
                  status: STATUS,
@@ -98,7 +98,7 @@ class Order(abc.ABC):
         return bool(re.fullmatch(regex, user_name))
     
     @staticmethod
-    def validate_products(products: List[Dict[OrderProducts, any]]) -> bool:
+    def validate_products(products: List[Dict[OrderProduct, any]]) -> bool:
         keys = ["product_name", "product_id", "quantity"]
         if type(products) != list:
             return False

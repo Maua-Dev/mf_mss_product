@@ -3,7 +3,7 @@ import abc
 from src.shared.helpers.errors.domain_errors import EntityError
 
 
-class OrderProducts(abc.ABC):
+class OrderProduct(abc.ABC):
     product_name: str
     product_id: str
     quantity: int
@@ -29,7 +29,7 @@ class OrderProducts(abc.ABC):
     @staticmethod
     def validate_product_id(product_id: str) -> bool:
         if type(product_id) != str: return False
-        if len(product_id) != OrderProducts.PRODUCT_ID_LENGTH: return False
+        if len(product_id) != OrderProduct.PRODUCT_ID_LENGTH: return False
         return True
     
     @staticmethod
