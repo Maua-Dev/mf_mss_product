@@ -26,7 +26,7 @@ class BucketStack(Construct):
         self.s3_bucket = aws_s3.Bucket(self, "MauaFood_Product_Photo_S3_Bucket",
                                        versioned=True,
                                        block_public_access=aws_s3.BlockPublicAccess.BLOCK_ALL,
-                                       event_bridge_enabled=True,
+                                       event_bridge_enabled=False,
                                        cors=[aws_s3.CorsRule(
                                              allowed_methods=[
                                                  aws_s3.HttpMethods.GET, aws_s3.HttpMethods.PUT, aws_s3.HttpMethods.POST],
