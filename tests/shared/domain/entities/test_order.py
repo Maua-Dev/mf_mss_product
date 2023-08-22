@@ -1,6 +1,7 @@
 import pytest
 
 from src.shared.domain.entities.order import Order
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -12,11 +13,7 @@ class Test_Order:
             order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
             user_name="Lucas Milas",
             user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-            products=[
-                "Saladinha",
-                "305c486c-ce77-423d-97c1-1710a4c302da",
-                2
-            ],
+            products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
             creation_time_milliseconds=1692061296,
             restaurant=RESTAURANT.SOUZA_DE_ABREU, 
             status=STATUS.PENDING,
@@ -29,10 +26,9 @@ class Test_Order:
         assert order.order_id == "b3f6c5aa-80ad-4f95-ae16-455b4f87fb53"
         assert order.user_name == "Lucas Milas"
         assert order.user_id == "f15d32eb-403f-46a4-8efc-804d9f8bed0f"
-        assert order.products == ["Saladinha", "305c486c-ce77-423d-97c1-1710a4c302da", 2]
-        assert order.products[0] == "Saladinha"
-        assert order.products[1] == "305c486c-ce77-423d-97c1-1710a4c302da"
-        assert order.products[2] == 2
+        assert order.products[0].product_name == "Saladinha"
+        assert order.products[0].product_id == "305c486c-ce77-423d-97c1-1710a4c302da"
+        assert order.products[0].quantity == 2
         assert order.creation_time_milliseconds == 1692061296
         assert order.restaurant == RESTAURANT.SOUZA_DE_ABREU
         assert order.status == STATUS.PENDING
@@ -44,21 +40,11 @@ class Test_Order:
             user_name="Lucas Milas",
             user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
             products=[
-                [
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
-                [
-                    "Coquinha Gelada",
-                    "deab0b72-c97f-4626-9f60-1111a1436d73",
-                    1
-                ],
-                [
-                    "Vasco Delicia",
-                    "bbab90c4-769c-4a31-885d-f5ac374b59fe",
-                    1
-                ],
+                OrderProduct(product_name="Saladinha", product_id="305c486c-ce77-423d-97c1-1710a4c302da", quantity=2),
+
+                OrderProduct(product_name="Coquinha Gelada", product_id="deab0b72-c97f-4626-9f60-1111a1436d73", quantity=1),
+
+                OrderProduct(product_name="Vasco Delicia", product_id="bbab90c4-769c-4a31-885d-f5ac374b59fe", quantity=3)
             ],
             creation_time_milliseconds=1692061296,
             restaurant=RESTAURANT.SOUZA_DE_ABREU, 
@@ -72,23 +58,9 @@ class Test_Order:
         assert order.order_id == "b3f6c5aa-80ad-4f95-ae16-455b4f87fb53"
         assert order.user_name == "Lucas Milas"
         assert order.user_id == "f15d32eb-403f-46a4-8efc-804d9f8bed0f"
-        assert order.products == [
-                [
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
-                [
-                    "Coquinha Gelada",
-                    "deab0b72-c97f-4626-9f60-1111a1436d73",
-                    1
-                ],
-                [
-                    "Vasco Delicia",
-                    "bbab90c4-769c-4a31-885d-f5ac374b59fe",
-                    1
-                ],
-            ]
+        assert order.products[0].product_name == "Saladinha"
+        assert order.products[1].product_id == "deab0b72-c97f-4626-9f60-1111a1436d73"
+        assert order.products[2].quantity == 3
         assert order.creation_time_milliseconds == 1692061296
         assert order.restaurant == RESTAURANT.SOUZA_DE_ABREU
         assert order.status == STATUS.PENDING
@@ -100,11 +72,7 @@ class Test_Order:
                 order_id=666,
                 user_name="Lucas Milas",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,
@@ -119,11 +87,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="Lucas Milas",
                 user_id="f15d32eb-403f-46a4-8efc",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,
@@ -138,11 +102,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name=True,
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,
@@ -157,11 +117,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="Lu",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,
@@ -176,11 +132,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="L#c@s M!l*$",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,
@@ -195,11 +147,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="Lucas Milas",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products={
-                    "product_name": "Saladinha",
-                    "product_id": "305c486c-ce77-423d-97c1-1710a4c302da",
-                    "quantity": 2
-                },
+                products=OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2),
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,
@@ -214,11 +162,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="Lucas Milas",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds="1692061296",
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,
@@ -233,11 +177,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="Lucas Milas",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=STATUS.PREPARING, 
                 status=STATUS.PENDING,
@@ -251,11 +191,7 @@ class Test_Order:
             order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
             user_name="Lucas Milas",
             user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-            products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+            products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
             creation_time_milliseconds=1692061296,
             restaurant=RESTAURANT.SOUZA_DE_ABREU, 
             status=STATUS.PENDING,
@@ -270,11 +206,7 @@ class Test_Order:
             order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
             user_name="Lucas Milas",
             user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-            products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+            products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
             creation_time_milliseconds=1692061296,
             restaurant=RESTAURANT.SOUZA_DE_ABREU, 
             status=STATUS.PENDING,
@@ -291,11 +223,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="Lucas Milas",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=RESTAURANT.CANTINA_DO_MOLEZA,
@@ -310,11 +238,7 @@ class Test_Order:
                 order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 user_name="Lucas Milas",
                 user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
-                products=[
-                    "Saladinha",
-                    "305c486c-ce77-423d-97c1-1710a4c302da",
-                    2
-                ],
+                products=[OrderProduct(product_name='Saladinha', product_id='305c486c-ce77-423d-97c1-1710a4c302da', quantity=2)],
                 creation_time_milliseconds=1692061296,
                 restaurant=RESTAURANT.SOUZA_DE_ABREU, 
                 status=STATUS.PENDING,

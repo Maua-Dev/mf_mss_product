@@ -41,4 +41,4 @@ class OrderProduct(abc.ABC):
         return True
     
     def __repr__(self):
-        return f"OrderProducts(product_name={self.product_name}, product_id={self.product_id}, quantity={self.quantity})"
+        return f"OrderProduct(product_name={self.product_name}, product_id={self.product_id}, quantity={self.quantity})"
