@@ -12,7 +12,7 @@ class Order(abc.ABC):
     order_id: str
     user_name: str
     user_id: str
-    products: List[Dict[OrderProduct, any]]
+    products: List[OrderProduct]
     creation_time_milliseconds: int
     restaurant: RESTAURANT
     observation: Optional[str] = None
@@ -26,7 +26,7 @@ class Order(abc.ABC):
                  order_id: str,
                  user_name: str,
                  user_id: str,
-                 products: List[Dict[OrderProduct, any]],
+                 products: List[OrderProduct],
                  creation_time_milliseconds: int,
                  restaurant: RESTAURANT, 
                  status: STATUS,
@@ -98,16 +98,9 @@ class Order(abc.ABC):
         return bool(re.fullmatch(regex, user_name))
     
     @staticmethod
-    def validate_products(products: List[Dict[OrderProduct, any]]) -> bool:
-        keys = ["product_name", "product_id", "quantity"]
+    def validate_products(products: List[OrderProduct]) -> bool:
         if type(products) != list:
             return False
-        for product in products:
-            if type(product) != dict:
-                return False
-            product_keys = list(product.keys())
-            if keys != product_keys:
-                return False
         return True
     
     def __repr__(self):
