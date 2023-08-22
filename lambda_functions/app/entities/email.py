@@ -1,5 +1,5 @@
 import os
-from typing import Tuple, Any
+from typing import Tuple, Any, Dict
 from datetime import datetime
 
 import boto3
@@ -13,7 +13,8 @@ class Email:
 
     def __init__(self, sender_email: str = None, subject: str = None, body: str = None, to_address: str = None) -> None:
 
-        self.__client = boto3.client('ses', region_name=os.environ.get("AWS_REGION"))
+        self.status_code = None
+        self.client = boto3.client('ses', region_name=os.environ.get("AWS_REGION"))
 
         validation_sender_email = self.validate_email(sender_email)
         if not validation_sender_email[0]:
@@ -33,7 +34,7 @@ class Email:
         validation_to_addresses = self.validate_email(to_address)
         if not validation_to_addresses[0]:
             raise Exception(validation_to_addresses[1])
-        self.to_addresses = to_address
+        self.to_address = to_address
 
     @staticmethod
     def validate_email(email: str = None) -> Tuple[bool, str or None]:
@@ -61,28 +62,47 @@ class Email:
             return False, "Body must be a string"
         return True, None
 
-    def send_email(self) -> tuple[Any, str]:
-        response = self.__client.send_email(
-            Source=self.sender_email,
-            Destination={
-                'ToAddresses': [
-                    self.to_addresses
-                ]
-            },
-            Message={
-                'Subject': {
-                    'Data': self.subject,
-                    'Charset': 'UTF-8'
+    def send(self, user: Any | None = None) -> Dict[str, Any]:
+        try:
+            response = self.client.send_email(
+                Destination={
+                    'ToAddresses': [
+                        user.email,
+                    ],
+                    'BccAddresses':
+                        [
+                            os.environ.get("HIDDEN_COPY")
+                        ]
                 },
-                'Body': {
-                    'Text': {
-                        'Data': self.body,
-                        'Charset': 'UTF-8'
-                    }
+                Message={
+                    'Body': {
+                        'Html': {
+                            'Charset': "UTF-8",
+                            'Data': self.body,
+                        },
+                    },
+                    'Subject': {
+                        'Charset': "UTF-8",
+                        'Data': self.subject,
+                    },
+                },
+                ReplyToAddresses=[
+                    os.environ.get("REPLY_TO_EMAIL"),
+                ],
+                Source=os.environ.get("FROM_EMAIL")
+            )
+
+            date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+            self.status_code = 200
+            return {
+                "body": {
+                    "message": f"Email sent at {date_time}"
                 }
             }
-        )
 
-        date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
-        return response, date_time
+        except Exception as e:
+            self.status_code = 500
+            return {
+                "body": e
+            }

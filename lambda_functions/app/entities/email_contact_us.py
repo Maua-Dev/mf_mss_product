@@ -7,7 +7,6 @@ import os
 
 
 class EmailContactUs(Email):
-    client = boto3.client('ses', region_name=os.environ.get("AWS_REGION"))
 
     def __init__(self, to_address: str = None, message: str = None) -> None:
         super().__init__(sender_email=os.environ.get("FROM_EMAIL"), subject="MauaFood - Contato", to_address=to_address)
