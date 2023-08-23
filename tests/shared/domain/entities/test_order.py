@@ -246,3 +246,18 @@ class Test_Order:
                 observation=None,
                 aborted_reason=None
             )
+
+    def test_invalid_products(self):
+        with pytest.raises(EntityError):
+            order = Order(
+                order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
+                user_name="Lucas Milas",
+                user_id="f15d32eb-403f-46a4-8efc-804d9f8bed0f",
+                products=[{"product_name": "Saladinha", "product_id": "305c486c-ce77-423d-97c1-1710a4c302da", "quantity": 2}],
+                creation_time_milliseconds=1692061296,
+                restaurant=RESTAURANT.SOUZA_DE_ABREU, 
+                status=STATUS.PENDING,
+                total_price=35.00,
+                observation=None,
+                aborted_reason=None
+            )
