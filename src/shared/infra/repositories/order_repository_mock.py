@@ -1,3 +1,4 @@
+from ast import Dict
 from typing import List
 
 from src.shared.domain.entities.order import Order
@@ -41,3 +42,6 @@ class OrderRepositoryMock(IOrderRepository):
     def create_order(self, order: Order) -> Order:
         self.orders.append(order)
         return order
+    
+    def get_all_active_orders_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
+        return [order for order in self.orders if order.status in [STATUS.PENDING, STATUS.PREPARING] and order.restaurant == restaurant] 

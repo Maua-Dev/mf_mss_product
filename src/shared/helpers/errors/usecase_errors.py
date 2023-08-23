@@ -29,3 +29,8 @@ class UnregisteredUser(BaseError):
 class ForbiddenAction(BaseError):
     def __init__(self, message: str):
         super().__init__(f'That action is forbidden for this {message}')
+
+
+class UnregisteredEmployee(BaseError):
+    def __init__(self, message: str):
+        super().__init__(f'This employee is unregistered.')
