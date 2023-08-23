@@ -1,72 +1,43 @@
 import datetime
 import json
 from src.modules.update_product.app.update_product_presenter import lambda_handler
+from src.shared.domain.entities.product import Product
+from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter
+from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+
+user_repo = UserRepositoryMock()
+user = user_repo.users_list[0]
 
 
 class Test_UpdateProductPresenter:
     def test_update_product_presenter(self):
-        event = {
-            "version": "2.0",
-            "routeKey": "$default",
-            "rawPath": "/my/path",
-            "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-            "cookies": [
-                "cookie1",
-                "cookie2"
-            ],
-            "headers": {
-                "header1": "value1",
-                "header2": "value1,value2"
-            },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
-            "requestContext": {
-                "accountId": "123456789012",
-                "apiId": "<urlid>",
-                "authentication": None,
-                "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
-                },
-                "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                "domainPrefix": "<url-id>",
-                "external_interfaces": {
-                    "method": "POST",
-                    "path": "/my/path",
-                    "protocol": "HTTP/1.1",
-                    "sourceIp": "123.123.123.123",
-                    "userAgent": "agent"
-                },
-                "requestId": "id",
-                "routeKey": "$default",
-                "stage": "$default",
-                "time": "12/Mar/2020:19:03:58 +0000",
-                "timeEpoch": 1583348638390
-            },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
-            "pathParameters": None,
-            "isBase64Encoded": None,
-            "stageVariables": None
-        }
+        event = get_event_for_test_presenter(
+            body=
+            {
+
+                "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                "restaurant": "SOUZA_DE_ABREU",
+                "new_available": "True",
+                "new_price": 15.0,
+                "new_name": "Nome Atualizado",
+                "new_description": "Descrição Atualizada",
+                "new_prepare_time": 20,
+                "new_meal_type": "DRINKS",
+                "new_photo": "new_photo"
+            }
+        )
 
         expected = {
-            'product_id':'8a705b91-c9e9-4353-a755-07f13afafed3',
-            'restaurant':'SOUZA_DE_ABREU',
-            'available':True,
-            'price':15.0,
-            'name':'Nome Atualizado',
-            'description':'Descrição Atualizada',
-            'prepare_time':20,
-            'meal_type':'DRINKS',
-            'photo':'new_photo',
+            'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+            'restaurant': 'SOUZA_DE_ABREU',
+            'available': True,
+            'price': 15.0,
+            'name': 'Nome Atualizado',
+            'description': 'Descrição Atualizada',
+            'prepare_time': 20,
+            'meal_type': 'DRINKS',
+            'photo': 'new_photo',
             'last_update': int(datetime.datetime.now().timestamp())
         }
 
@@ -76,229 +47,169 @@ class Test_UpdateProductPresenter:
         assert json.loads(response["body"])['message'] == "the product was updated"
 
     def test_update_product_presenter_product_id_is_missing(self):
-        event = {
-            "version": "2.0",
-            "routeKey": "$default",
-            "rawPath": "/my/path",
-            "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-            "cookies": [
-                "cookie1",
-                "cookie2"
-            ],
-            "headers": {
-                "header1": "value1",
-                "header2": "value1,value2"
-            },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
-            "requestContext": {
-                "accountId": "123456789012",
-                "apiId": "<urlid>",
-                "authentication": None,
-                "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
-                },
-                "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                "domainPrefix": "<url-id>",
-                "external_interfaces": {
-                    "method": "POST",
-                    "path": "/my/path",
-                    "protocol": "HTTP/1.1",
-                    "sourceIp": "123.123.123.123",
-                    "userAgent": "agent"
-                },
-                "requestId": "id",
-                "routeKey": "$default",
-                "stage": "$default",
-                "time": "12/Mar/2020:19:03:58 +0000",
-                "timeEpoch": 1583348638390
-            },
-            "body": '{"restaurant": "SOUZA_DE_ABREU", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
-            "pathParameters": None,
-            "isBase64Encoded": None,
-            "stageVariables": None
-        }
+        event = get_event_for_test_presenter(
+            body=
+            {
+                "restaurant": "SOUZA_DE_ABREU",
+                "new_available": "True",
+                "new_price": 15.0,
+                "new_name": "Nome Atualizado",
+                "new_description": "Descrição Atualizada",
+                "new_prepare_time": 20,
+                "new_meal_type": "DRINKS",
+                "new_photo": "new_photo"
+            }
+        )
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field product_id is missing"
 
     def test_update_product_presenter_restaurant_is_missing(self):
-        event = {
-            "version": "2.0",
-            "routeKey": "$default",
-            "rawPath": "/my/path",
-            "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-            "cookies": [
-                "cookie1",
-                "cookie2"
-            ],
-            "headers": {
-                "header1": "value1",
-                "header2": "value1,value2"
-            },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
-            "requestContext": {
-                "accountId": "123456789012",
-                "apiId": "<urlid>",
-                "authentication": None,
-                "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
-                },
-                "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                "domainPrefix": "<url-id>",
-                "external_interfaces": {
-                    "method": "POST",
-                    "path": "/my/path",
-                    "protocol": "HTTP/1.1",
-                    "sourceIp": "123.123.123.123",
-                    "userAgent": "agent"
-                },
-                "requestId": "id",
-                "routeKey": "$default",
-                "stage": "$default",
-                "time": "12/Mar/2020:19:03:58 +0000",
-                "timeEpoch": 1583348638390
-            },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
-            "pathParameters": None,
-            "isBase64Encoded": None,
-            "stageVariables": None
-        }
+        event = get_event_for_test_presenter(
+            body=
+            {
+                "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                "new_available": "True",
+                "new_price": 15.0,
+                "new_name": "Nome Atualizado",
+                "new_description": "Descrição Atualizada",
+                "new_prepare_time": 20,
+                "new_meal_type": "DRINKS",
+                "new_photo": "new_photo"
+            }
+        )
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field restaurant is missing"
 
     def test_update_product_presenter_restaurant_not_found(self):
-        event = {
-            "version": "2.0",
-            "routeKey": "$default",
-            "rawPath": "/my/path",
-            "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-            "cookies": [
-                "cookie1",
-                "cookie2"
-            ],
-            "headers": {
-                "header1": "value1",
-                "header2": "value1,value2"
-            },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
-            "requestContext": {
-                "accountId": "123456789012",
-                "apiId": "<urlid>",
-                "authentication": None,
-                "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
-                },
-                "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                "domainPrefix": "<url-id>",
-                "external_interfaces": {
-                    "method": "POST",
-                    "path": "/my/path",
-                    "protocol": "HTTP/1.1",
-                    "sourceIp": "123.123.123.123",
-                    "userAgent": "agent"
-                },
-                "requestId": "id",
-                "routeKey": "$default",
-                "stage": "$default",
-                "time": "12/Mar/2020:19:03:58 +0000",
-                "timeEpoch": 1583348638390
-            },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZINHA", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"DRINKS", "new_photo": "new_photo"}',
-            "pathParameters": None,
-            "isBase64Encoded": None,
-            "stageVariables": None
-        }
-
+        event = get_event_for_test_presenter(
+            body=
+            {
+                "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                "restaurant": "SOUZINHA",
+                "new_available": "True",
+                "new_price": 15.0,
+                "new_name": "Nome Atualizado",
+                "new_description": "Descrição Atualizada",
+                "new_prepare_time": 20,
+                "new_meal_type": "DRINKS",
+                "new_photo": "new_photo"}
+        )
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
         assert json.loads(response["body"]) == "No items found for restaurant"
 
     def test_update_product_presenter_meal_type_not_found(self):
-        event = {
-            "version": "2.0",
-            "routeKey": "$default",
-            "rawPath": "/my/path",
-            "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-            "cookies": [
-                "cookie1",
-                "cookie2"
-            ],
-            "headers": {
-                "header1": "value1",
-                "header2": "value1,value2"
-            },
-            "queryStringParameters": {
-                'query_params': "value1"
-            },
-            "requestContext": {
-                "accountId": "123456789012",
-                "apiId": "<urlid>",
-                "authentication": None,
-                "authorizer": {
-                    "iam": {
-                        "accessKey": "AKIA...",
-                        "accountId": "111122223333",
-                        "callerId": "AIDA...",
-                        "cognitoIdentity": None,
-                        "principalOrgId": None,
-                        "userArn": "arn:aws:iam::111122223333:user/example-user",
-                        "userId": "AIDA..."
-                    }
-                },
-                "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                "domainPrefix": "<url-id>",
-                "external_interfaces": {
-                    "method": "POST",
-                    "path": "/my/path",
-                    "protocol": "HTTP/1.1",
-                    "sourceIp": "123.123.123.123",
-                    "userAgent": "agent"
-                },
-                "requestId": "id",
-                "routeKey": "$default",
-                "stage": "$default",
-                "time": "12/Mar/2020:19:03:58 +0000",
-                "timeEpoch": 1583348638390
-            },
-            "body": '{"product_id": "8a705b91-c9e9-4353-a755-07f13afafed3", "restaurant": "SOUZA_DE_ABREU", "new_available": "True", "new_price": 15.0, "new_name": "Nome Atualizado", "new_description": "Descrição Atualizada", "new_prepare_time": 20, "new_meal_type":"BEBIDINHAS", "new_photo": "new_photo"}',
-            "pathParameters": None,
-            "isBase64Encoded": None,
-            "stageVariables": None
+        event = get_event_for_test_presenter(body=
+        {
+            "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+            "restaurant": "SOUZA_DE_ABREU",
+            "new_available": "True",
+            "new_price": 15.0,
+            "new_name": "Nome Atualizado",
+            "new_description": "Descrição Atualizada",
+            "new_prepare_time": 20,
+            "new_meal_type": "BEBIDINHAS",
+            "new_photo": "new_photo"
         }
+        )
 
         response = lambda_handler(event, None)
         assert response["statusCode"] == 404
         assert json.loads(response["body"]) == "No items found for new_meal_type"
+
+    def test_update_only_name_and_photo(self):
+        product_repo = ProductRepositoryMock()
+        product_old_values = Product(
+            available=product_repo.products[3].available,
+            product_id=product_repo.products[3].product_id,
+            restaurant=product_repo.products[3].restaurant,
+            input_price=product_repo.products[3].price,
+            name=product_repo.products[3].name,
+            description=product_repo.products[3].description,
+            meal_type=product_repo.products[3].meal_type,
+            photo=product_repo.products[3].photo,
+            prepare_time=product_repo.products[3].prepare_time,
+            last_update=product_repo.products[3].last_update
+        )
+
+        event = get_event_for_test_presenter({
+            "product_id": product_old_values.product_id,
+            "restaurant": product_old_values.restaurant.value,
+            "new_name": "Nome Atualizado",
+            "new_photo": "olha que bela foto"})
+
+        expected = {
+            'product_id': product_old_values.product_id,
+            'restaurant': product_old_values.restaurant.value,
+            'available': product_old_values.available,
+            'price': product_old_values.price,
+            'name': 'Nome Atualizado',
+            'description': product_old_values.description,
+            'prepare_time': product_old_values.prepare_time,
+            'meal_type': product_old_values.meal_type.value,
+            'photo': 'olha que bela foto',
+            'last_update': int(datetime.datetime.now().timestamp())
+        }
+
+        response = lambda_handler(event, None)
+        assert response["statusCode"] == 200
+        assert json.loads(response["body"])['product'] == expected
+        assert json.loads(response["body"])['message'] == "the product was updated"
+
+
+    def test_update_product_with_negative_prepare_time(self):
+        event = get_event_for_test_presenter(
+            body={
+                "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
+                "restaurant": "SOUZA_DE_ABREU",
+                "new_prepare_time": -20,
+            }
+        )
+
+        response = lambda_handler(event, None)
+
+        assert response['statusCode'] == 400
+
+    def test_update_description_with_void_value(self):
+        product_repo = ProductRepositoryMock()
+        product_old_values = Product(
+            available=product_repo.products[4].available,
+            product_id=product_repo.products[4].product_id,
+            restaurant=product_repo.products[4].restaurant,
+            input_price=product_repo.products[4].price,
+            name=product_repo.products[4].name,
+            description=product_repo.products[4].description,
+            meal_type=product_repo.products[4].meal_type,
+            photo=product_repo.products[4].photo,
+            prepare_time=product_repo.products[4].prepare_time,
+            last_update=product_repo.products[4].last_update
+        )
+
+        event = get_event_for_test_presenter({
+            "product_id": product_old_values.product_id,
+            "restaurant": product_old_values.restaurant.value,
+            "new_name": "Nome Atualizado",
+            'new_description':''
+        })
+
+        expected = {
+            'product_id': product_old_values.product_id,
+            'restaurant': product_old_values.restaurant.value,
+            'available': product_old_values.available,
+            'price': product_old_values.price,
+            'name': 'Nome Atualizado',
+            'description': '',
+            'prepare_time': product_old_values.prepare_time,
+            'meal_type': product_old_values.meal_type.value,
+            'photo': product_old_values.photo,
+            'last_update': int(datetime.datetime.now().timestamp())
+        }
+
+        response = lambda_handler(event, None)
+        assert response["statusCode"] == 200
+        assert json.loads(response["body"])['product'] == expected
+        assert json.loads(response["body"])['message'] == "the product was updated"

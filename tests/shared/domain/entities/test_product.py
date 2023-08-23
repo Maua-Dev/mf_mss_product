@@ -3,14 +3,14 @@ import pytest
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterExcededMaximumValue
 
 
 class Test_Product:
     def test_product(self):
         product = Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -36,7 +36,7 @@ class Test_Product:
     def test_product_prepare_time_None(self): 
         product = Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -63,7 +63,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=10,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -73,12 +73,45 @@ class Test_Product:
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepare_time=None
         )
-    
-    def test_product_price_invalid(self): 
+
+    def test_instantiate_product_with_high_price(self):
+        with pytest.raises(EntityParameterExcededMaximumValue):
+            Product(
+                available=True,
+                input_price=Product.MAXIMUM_PRICE+1,
+                name="Carne",
+                description="Um lanche de Carne",
+                meal_type=MEAL_TYPE.PORTIONS,
+                photo="https://avatars.githubusercontent.com/u/30812461?v=4",
+                product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
+                last_update=1639323013000,
+                restaurant=RESTAURANT.SOUZA_DE_ABREU,
+                prepare_time=None
+            )
+
+
+    def test_change_price_too_high(self):
+        with pytest.raises(EntityParameterExcededMaximumValue):
+            my_product = Product(
+                available=True,
+                input_price=1.00,
+                name="Carne",
+                description="Um lanche de Carne",
+                meal_type=MEAL_TYPE.PORTIONS,
+                photo="https://avatars.githubusercontent.com/u/30812461?v=4",
+                product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
+                last_update=1639323013000,
+                restaurant=RESTAURANT.SOUZA_DE_ABREU,
+                prepare_time=None
+            )
+
+            my_product.price = Product.MAXIMUM_PRICE+1
+
+    def test_product_price_invalid(self):
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price="Lanche",
+            input_price="Lanche",
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -88,12 +121,43 @@ class Test_Product:
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             prepare_time=None
         )
-    
+
+
+    def test_product_negative_price(self):
+        with pytest.raises(EntityError):
+            Product(
+            available=True,
+            input_price=-20.00,
+            name="Carne",
+            description="Um lanche de Carne",
+            meal_type=MEAL_TYPE.PORTIONS,
+            photo="https://avatars.githubusercontent.com/u/30812461?v=4",
+            product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
+            last_update=1639323013000,
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            prepare_time=8
+            )
+
+    def test_product_with_none_price(self):
+        with pytest.raises(EntityError):
+            Product(
+                available=True,
+                input_price=None,
+                name="Carne",
+                description="Um lanche de Carne",
+                meal_type=MEAL_TYPE.PORTIONS,
+                photo="https://avatars.githubusercontent.com/u/30812461?v=4",
+                product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
+                last_update=1639323013000,
+                restaurant=RESTAURANT.SOUZA_DE_ABREU,
+                prepare_time=8
+            )
+
     def test_product_name_invalid(self):
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name=5,
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -108,7 +172,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description=8,
             meal_type=MEAL_TYPE.PORTIONS,
@@ -123,7 +187,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=True,
@@ -138,11 +202,11 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
-            photo=None,
+            photo=300,
             product_id="22cfca1a-dd56-4fd9-9c62-9a5aad49879c",
             last_update=1639323013000,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
@@ -153,7 +217,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -168,7 +232,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -183,7 +247,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -198,7 +262,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,
@@ -213,7 +277,7 @@ class Test_Product:
         with pytest.raises(EntityError):
             Product(
             available=True,
-            price=20.00,
+            input_price=20.00,
             name="Carne",
             description="Um lanche de Carne",
             meal_type=MEAL_TYPE.PORTIONS,

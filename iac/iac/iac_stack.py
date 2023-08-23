@@ -1,14 +1,15 @@
 import os
 from aws_cdk import (
-    # Duration,
     Stack,
-    # aws_sqs as sqs,
+    aws_cognito
 )
 from constructs import Construct
+
+from .bucket_stack import BucketStack
 from .dynamo_stack import DynamoStack
 
 from .lambda_stack import LambdaStack
-from aws_cdk.aws_apigateway import RestApi, Cors
+from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
 
 class IacStack(Stack):
@@ -20,8 +21,9 @@ class IacStack(Stack):
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
         self.s3_assets_cdn = os.environ.get("S3_ASSETS_CDN")
-        
-        # self.dynamo_stack = DynamoStack(self)
+        self.dev_auth_system_userpool_arn = os.environ.get("AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
+
+        self.dynamo_stack = DynamoStack(self)
         
         self.rest_api = RestApi(self, f"MauaFood_RestApi_{self.github_ref_name}",
                                 rest_api_name=f"MauaFood_RestApi_{self.github_ref_name}",
@@ -41,6 +43,8 @@ class IacStack(Stack):
                 "allow_headers": Cors.DEFAULT_HEADERS
             }
         )
+        self.bucket_stack = BucketStack(self)
+
         if 'prod' in self.github_ref_name:
             stage = 'PROD'
 
@@ -53,13 +57,30 @@ class IacStack(Stack):
         ENVIRONMENT_VARIABLES = {
             "STAGE": stage,
             "S3_ASSETS_CDN": self.s3_assets_cdn,
-            # "DYNAMO_TABLE_NAME": self.dynamo_stack.dynamo_table.table_name,
-            # "DYNAMO_PARTITION_KEY": self.dynamo_stack.partition_key_name,
-            # "DYNAMO_SORT_KEY": self.dynamo_stack.sort_key_name,
+            "DYNAMO_TABLE_NAME_PRODUCT": self.dynamo_stack.dynamo_table_product.table_name,
+            "DYNAMO_TABLE_NAME_USER": self.dynamo_stack.dynamo_table_user.table_name,
+            "DYNAMO_PARTITION_KEY": "PK",
+            "DYNAMO_SORT_KEY": "SK",
+            "DYNAMO_GSI_PARTITION_KEY": "GSI1-PK",
+            "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
+            "S3_BUCKET_NAME": self.bucket_stack.s3_bucket.bucket_name,
+            "CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS": self.bucket_stack.cloudfront_distribution.domain_name,
         }
 
-        self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
-                                        environment_variables=ENVIRONMENT_VARIABLES)
+        
 
-        # for f in self.lambda_stack.functions_that_need_dynamo_permissions:
-        #     self.dynamo_stack.dynamo_table.grant_read_write_data(f)
+        self.cognito_auth = CognitoUserPoolsAuthorizer(self, f"mf_cognito_auth_{self.github_ref_name}",
+                                                     cognito_user_pools=[aws_cognito.UserPool.from_user_pool_arn(
+                                                            self, f"mf_cognito_auth_userpool_{self.github_ref_name}",
+                                                            self.dev_auth_system_userpool_arn
+                                                     )]
+                                                     )
+
+        self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
+                                        environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
+        
+        for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
+            self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
+
+        for f in self.lambda_stack.functions_that_need_dynamo_user_permissions:
+            self.dynamo_stack.dynamo_table_user.grant_read_write_data(f)

@@ -9,7 +9,7 @@ class Test_CreateProductViewmodel:
 
         product = Product(
             available=True,
-            price=16.0,
+            input_price=16.0,
             name="X-Salada",
             description="Hamburguer/Mussarela/Maionese/Alface/Tomate",
             meal_type=MEAL_TYPE.SANDWICHES,
