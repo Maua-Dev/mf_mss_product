@@ -99,8 +99,13 @@ class Order(abc.ABC):
     
     @staticmethod
     def validate_products(products: List[OrderProduct]) -> bool:
+        i = 0
         if type(products) != list:
             return False
+        for product in products:
+            if product != products[i]:
+                return False
+            i += 1
         return True
     
     def __repr__(self):
