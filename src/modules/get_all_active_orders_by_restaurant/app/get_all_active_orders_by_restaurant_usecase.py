@@ -13,7 +13,7 @@ class GetAllActiveOrdersByRestaurantUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, user_id: str) -> List[Order]:
+    def __call__(self, user_id: str, restaurant: RESTAURANT) -> List[Order]:
         
         user = self.repo_user.get_user_by_id(user_id)
 
@@ -26,4 +26,4 @@ class GetAllActiveOrdersByRestaurantUsecase:
         if user.restaurant is None:
             raise UnregisteredEmployee()
 
-        return self.repo_order.get_all_active_orders_by_restaurant(restaurant=RESTAURANT)
+        return self.repo_order.get_all_active_orders_by_restaurant(restaurant=restaurant)
