@@ -34,7 +34,7 @@ class Test_ProductRepositoryMock():
         len_before = len(repo.products)
         product = repo.create_product(Product(
             available=True, 
-            price=17.0, 
+            input_price=17.0,
             name='Lanche Mortadela', 
             description='Mortadela', 
             prepare_time=20, 

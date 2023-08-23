@@ -94,3 +94,16 @@ class Test_ProductRepositoryDynamo:
         get_all_products = repo_dynamo.get_all_products_group_by_restaurant()
 
         assert len([restaurant_value.value for restaurant_value in RESTAURANT]) == len(get_all_products.keys())
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_request_upload_product_photo(self):
+        repo_dynamo = ProductRepositoryDynamo()
+        
+        presigned_post = repo_dynamo.request_upload_product_photo(product_id="8a705b91-c9e9-4353-a755-07f13afafed3",user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3")
+
+        assert type(presigned_post) == dict
+        assert presigned_post["metadata"]["product_id"] == "8a705b91-c9e9-4353-a755-07f13afafed3"
+        assert presigned_post["metadata"]["user_id"] == "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
+        assert presigned_post["metadata"]["time_created"].isdecimal()
+        assert type(presigned_post["url"]) == str
+        

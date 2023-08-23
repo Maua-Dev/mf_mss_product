@@ -57,3 +57,4 @@ jobs:
               GITHUB_REF_NAME: ${{ github.ref_name }}
               MSS_NAME: ${{ github.event.repository.name }}
               S3_ASSETS_CDN: ${{ vars.S3_ASSETS_CDN }}
+              AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV: ${{ secrets.AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV }}
