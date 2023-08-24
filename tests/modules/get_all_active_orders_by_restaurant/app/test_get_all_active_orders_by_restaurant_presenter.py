@@ -50,7 +50,7 @@ class Test_GetAllActiveOrdersByRestaurantPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": 'Visualize all the orders',
+            "body": 'Visualize all the active orders',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -71,10 +71,10 @@ class Test_GetAllActiveOrdersByRestaurantPresenter:
                                            'total_price': 25.5,
                                            'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9',
                                            'user_name':'Rodrigo Morales'}],
-                    'message': 'the orders were retrieved',
+                    'message': 'the active orders were retrieved',
                     }
 
         assert response["statusCode"] == 200
-        assert json.loads(response["body"])["message"] == "the orders were retrieved"
+        assert json.loads(response["body"])["message"] == "the active orders were retrieved"
         assert json.loads(response["body"]) == expected
 

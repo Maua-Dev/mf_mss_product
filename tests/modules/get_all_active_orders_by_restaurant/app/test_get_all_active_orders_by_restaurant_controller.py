@@ -22,7 +22,7 @@ class Test_GetAllActiveOrdersByRestaurantController:
         response = controller(request=request)
         
         assert response.status_code == 200
-        assert response.data["message"] == "the orders were retrieved"
+        assert response.data["message"] == "the active orders were retrieved"
 
     def test_get_all_products_group_by_restaurant_controller_unregistered_user(self):
         repo_order = OrderRepositoryMock()

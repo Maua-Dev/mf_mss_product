@@ -66,5 +66,5 @@ class GetAllActiveOrdersByRestaurantViewmodel:
     def to_dict(self):
         return {
             'all_active_orders': [OrderViewmodel(order).to_dict() for order in self.all_active_orders],
-            'message': "the orders were retrieved"
+            'message': "the active orders were retrieved"
         }

@@ -22,9 +22,9 @@ class GetAllActiveOrdersByRestaurantController:
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
-            all_orders = self.GetAllActiveOrdersByRestaurantUsecase(user_id=requester_user.user_id)
+            all_active_orders = self.GetAllActiveOrdersByRestaurantUsecase(user_id=requester_user.user_id)
             
-            viewmodel = GetAllActiveOrdersByRestaurantViewmodel(all_active_orders=all_orders)
+            viewmodel = GetAllActiveOrdersByRestaurantViewmodel(all_active_orders=all_active_orders)
 
             return OK(viewmodel.to_dict())
 

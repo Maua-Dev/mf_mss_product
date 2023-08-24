@@ -26,7 +26,7 @@ class Test_GetAllActiveOrdersByRestaurantViewmodel:
                                            'total_price': 25.5,
                                            'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9',
                                            'user_name':'Rodrigo Morales'}],
-                    'message': 'the orders were retrieved',
+                    'message': 'the active orders were retrieved',
                     }
 
         assert viewmodel.to_dict() == expected
