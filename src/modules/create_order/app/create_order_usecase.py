@@ -34,8 +34,6 @@ class CreateOrderUsecase:
             
             price += product_val.price * product.quantity
         
-        
-
         order_id = str(uuid.uuid4())
         creation_time_milliseconds = int(datetime.datetime.now().timestamp() * 1000)
         status = STATUS.PENDING
