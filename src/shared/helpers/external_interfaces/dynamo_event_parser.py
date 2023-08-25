@@ -30,6 +30,8 @@ def parse_dynamo(image: dict):
     resp = {}
     for key in image:
         value = list(image[key].values())[0]
+        if type(value) == list and len(value) > 0 and list(value[0].keys())[0] == "M":
+            value = [parse_dynamo(item['M']) for item in value]
         resp[key] = value
 
     return resp
