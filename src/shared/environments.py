@@ -1,9 +1,11 @@
 import enum
 from enum import Enum
 import os
+from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
+from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 
 
 
@@ -96,6 +98,17 @@ class Environments:
         elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
             from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
             return UserRepositoryDynamo
+        else:
+            raise Exception("No repository found for this stage")
+        
+    @staticmethod
+    def get_order_repo() -> IOrderRepository:
+        if Environments.get_envs().stage == STAGE.TEST:
+            from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
+            return OrderRepositoryMock
+        # elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
+            # from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
+            # return OrderRepositoryDynamo
         else:
             raise Exception("No repository found for this stage")
 
