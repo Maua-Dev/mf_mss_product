@@ -28,10 +28,13 @@ class CreateOrderUsecase:
         price = 0
         for product in products:
             product_val = self.repo_product.get_product(product_id=product.product_id, restaurant=restaurant)
+
+            if product_val is None:
+                raise NoItemsFound("product_id or restaurant")
+            
             price += product_val.price * product.quantity
         
-        if product_val is None:
-            raise NoItemsFound("product_id or restaurant")
+        
 
         order_id = str(uuid.uuid4())
         creation_time_milliseconds = int(datetime.datetime.now().timestamp() * 1000)

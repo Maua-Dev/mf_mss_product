@@ -56,7 +56,7 @@ class Test_CreateOrderUsecase:
         usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
 
         with pytest.raises(NoItemsFound):
-            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa12", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, total_price=10.0, obervation="Com ketchup")
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa12", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, obervation="Com ketchup")
 
     def test_create_order_usecase_no_items_found_restaurant(self):
         repo_order = OrderRepositoryMock()
@@ -65,4 +65,4 @@ class Test_CreateOrderUsecase:
         usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
 
         with pytest.raises(NoItemsFound):
-            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=STATUS.CANCELLED, total_price=10.0, obervation="Com ketchup")
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=STATUS.CANCELLED, obervation="Com ketchup")
