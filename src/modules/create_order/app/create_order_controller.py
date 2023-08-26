@@ -1,4 +1,3 @@
-from typing import List
 from .create_order_usecase import CreateOrderUsecase
 from .create_order_viewmodel import CreateOrderViewmodel
 from src.shared.domain.entities.order_product import OrderProduct
