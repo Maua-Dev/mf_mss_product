@@ -5,7 +5,6 @@ from src.shared.domain.repositories.order_repository_interface import IOrderRepo
 
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 
 
 
@@ -106,9 +105,9 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
             return OrderRepositoryMock
-        # elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
-            # from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
-            # return OrderRepositoryDynamo
+        #elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
+            #from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
+            #return OrderRepositoryDynamo
         else:
             raise Exception("No repository found for this stage")
 
