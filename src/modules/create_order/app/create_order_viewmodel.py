@@ -58,7 +58,7 @@ class OrderViewmodel:
         }
     
 class CreateOrderViewmodel:
-    order: Order
+    order: OrderViewmodel
 
     def __init__(self, order: Order):
         self.order = OrderViewmodel(order=order)
