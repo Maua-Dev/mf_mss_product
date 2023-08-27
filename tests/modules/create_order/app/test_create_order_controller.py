@@ -192,6 +192,6 @@ class Test_CreateOrderController:
         response = controller(request)
 
         assert response.status_code == 404
-        assert response.body == "No items found for restaurant"
+        assert response.body == "Field 'Tech Food?' is not a restaurant"
 
     

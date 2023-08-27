@@ -257,5 +257,5 @@ class Test_CreateOrderPresenter:
         response = lambda_handler(event, None)
     
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == "No items found for restaurant"
+        assert json.loads(response["body"]) == "Field 'Tech Food' is not a restaurant"
 

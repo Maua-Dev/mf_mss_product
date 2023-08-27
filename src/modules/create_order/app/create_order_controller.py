@@ -2,9 +2,8 @@ from .create_order_usecase import CreateOrderUsecase
 from .create_order_viewmodel import CreateOrderViewmodel
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.shared.helpers.errors.controller_errors import MissingParameters
+from src.shared.helpers.errors.controller_errors import MissingParameters, RestaurantNotFound
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import NoItemsFound
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import BadRequest, Created, InternalServerError, NotFound
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
@@ -41,7 +40,7 @@ class CreateOrderController:
 
             restaurant = request.data.get('restaurant')
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
-                raise NoItemsFound('restaurant')
+                raise RestaurantNotFound(restaurant)
             
             order = self.CreateOrderUsecase(user_name=str(requester_user.name),
                                             user_id=str(requester_user.user_id),
@@ -57,7 +56,7 @@ class CreateOrderController:
         except MissingParameters as err:
             return BadRequest(body=err.message)
         
-        except NoItemsFound as err:
+        except RestaurantNotFound as err:
             return NotFound(body=err.message)
 
         except EntityError as err:
