@@ -30,7 +30,7 @@ class CreateOrderUsecase:
             product_val = self.repo_product.get_product(product_id=product.product_id, restaurant=restaurant)
 
             if product_val is None:
-                raise NoItemsFound("product_id or restaurant")
+                raise NoItemsFound("product")
             
             price += product_val.price * product.quantity
         
