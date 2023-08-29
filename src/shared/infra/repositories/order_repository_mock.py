@@ -10,6 +10,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 
 class OrderRepositoryMock(IOrderRepository):
+
     orders: List[Order]
 
     def __init__(self):
@@ -41,3 +42,8 @@ class OrderRepositoryMock(IOrderRepository):
     def create_order(self, order: Order) -> Order:
         self.orders.append(order)
         return order
+
+    def get_order_by_id(self, order_id: str) -> Order:
+        for order in self.orders:
+            if order.order_id == order_id:
+                return order

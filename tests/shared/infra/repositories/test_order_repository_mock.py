@@ -17,3 +17,13 @@ class Test_OrderRepositoryMock:
 
         assert len(repo.orders) == len_before + 1
         assert repo.orders[-1] == order
+
+    def test_get_order_by_id(self):
+        repo = OrderRepositoryMock()
+        order_id = repo.orders[1].order_id
+
+        response = repo.get_order_by_id(order_id=order_id)
+
+        assert response.order_id == order_id
+        assert response is repo.orders[1]
+
