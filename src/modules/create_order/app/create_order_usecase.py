@@ -1,5 +1,5 @@
 import datetime
-from typing import List, Optional
+from typing import List
 import uuid
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
@@ -26,13 +26,16 @@ class CreateOrderUsecase:
             raise UnregisteredUser()
         
         price = 0
-        for product in products:
-            product_val = self.repo_product.get_product(product_id=product.product_id, restaurant=restaurant)
+        
+        product_val = self.repo_product.batch_get_product(products=products, restaurant=restaurant)
 
-            if product_val is None:
+        if product_val is None:
                 raise NoItemsFound("product")
-            
-            price += product_val.price * product.quantity
+
+        i = 0
+        for product in product_val:
+            price += product.price * products[i].quantity
+            i += 1
         
         order_id = str(uuid.uuid4())
         creation_time_milliseconds = int(datetime.datetime.now().timestamp() * 1000)
