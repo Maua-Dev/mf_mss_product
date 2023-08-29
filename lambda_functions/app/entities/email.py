@@ -6,17 +6,15 @@ import boto3
 
 
 class Email:
-    email_address: str = os.environ.get("FROM_EMAIL")
-    subject: str = "MauaFood - Contato"
+    email_address: str
+    subject: str
     message: str
     user_registered_email: str
     requested_email: str
 
-    def __init__(self, sender_email: str = email_address, subject: str = subject, message: str = None,
+    def __init__(self, sender_email: str = None, subject: str = None, message: str = None,
                  user_registered_email: str = None, requested_email: str = None) -> None:
 
-        self.status_code = None
-        self.client = boto3.client('ses', region_name=os.environ.get("AWS_REGION"))
         self.sender_email = sender_email
         self.subject = subject
         self.date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -411,48 +409,3 @@ class Email:
         if type(body) != str:
             return False, "Body must be a string"
         return True, None
-
-    def send(self, user: Any | None = None) -> Dict[str, Any]:
-        try:
-            response = self.client.send_email(
-                Destination={
-                    'ToAddresses': [
-                        user.email,
-                    ],
-                    'BccAddresses':
-                        [
-                            os.environ.get("HIDDEN_COPY")
-                        ]
-                },
-                Message={
-                    'Body': {
-                        'Html': {
-                            'Charset': "UTF-8",
-                            'Data': self.body,
-                        },
-                    },
-                    'Subject': {
-                        'Charset': "UTF-8",
-                        'Data': self.subject,
-                    },
-                },
-                ReplyToAddresses=[
-                    os.environ.get("REPLY_TO_EMAIL"),
-                ],
-                Source=os.environ.get("FROM_EMAIL")
-            )
-
-            date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
-            self.status_code = 200
-            return {
-                "body": {
-                    "message": f"Email sent at {date_time}"
-                }
-            }
-
-        except Exception as e:
-            self.status_code = 500
-            return {
-                "body": e
-            }
