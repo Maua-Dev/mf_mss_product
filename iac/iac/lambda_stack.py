@@ -118,6 +118,14 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.get_all_active_orders_by_restaurant = self.create_lambda_api_gateway_integration(
+            module_name="get_all_active_orders_by_restaurant",
+            method="GET",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
         self.functions_that_need_dynamo_user_permissions = [
             self.create_user,
             self.update_user,
@@ -126,7 +134,8 @@ class LambdaStack(Construct):
             self.delete_product,
             self.create_product,
             self.update_product,
-            self.request_upload_product_photo
+            self.request_upload_product_photo,
+            self.get_all_active_orders_by_restaurant
         ]
 
         self.functions_that_need_dynamo_product_permissions = [
@@ -135,5 +144,6 @@ class LambdaStack(Construct):
             self.create_product,
             self.get_product,
             self.update_product,
-            self.request_upload_product_photo
+            self.request_upload_product_photo,
+            self.get_all_active_orders_by_restaurant
         ]

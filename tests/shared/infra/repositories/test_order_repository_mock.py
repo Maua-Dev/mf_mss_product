@@ -26,4 +26,10 @@ class Test_OrderRepositoryMock:
 
         assert response.order_id == order_id
         assert response is repo.orders[1]
+        
+    def test_get_all_active_orders_by_restaurant(self):
+        repo = OrderRepositoryMock()
+        orders = repo.get_all_active_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+        
+        assert len(orders) == 2
 
