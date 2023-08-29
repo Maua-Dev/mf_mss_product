@@ -17,3 +17,10 @@ class Test_OrderRepositoryMock:
 
         assert len(repo.orders) == len_before + 1
         assert repo.orders[-1] == order
+
+    def test_get_all_active_orders_by_restaurant(self):
+        repo = OrderRepositoryMock()
+        orders = repo.get_all_active_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+        
+        assert len(orders) == 2
+
