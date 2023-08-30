@@ -21,7 +21,6 @@ class LambdaContactUsStack(Construct):
             "FROM_EMAIL": os.environ.get("FROM_EMAIL"),
             "REPLY_TO_EMAIL": os.environ.get("REPLY_TO_EMAIL"),
             "HIDDEN_COPY": os.environ.get("HIDDEN_COPY"),
-            "AWS_REGION": os.environ.get("AWS_REGION"),
             "STAGE": stage
         }
 
