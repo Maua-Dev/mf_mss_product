@@ -15,7 +15,7 @@ class LambdaContactUsStack(Construct):
                  lambda_layer: LayerVersion = None, stage: str = None) -> None:
         super().__init__(scope, "MauaFood_LambdaContactUs")
 
-        module_name = "LambdaContactUs"
+        module_name = "contact_us"
 
         environment_variables = {
             "FROM_EMAIL": os.environ.get("FROM_EMAIL"),
