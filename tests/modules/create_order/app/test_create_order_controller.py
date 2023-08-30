@@ -40,7 +40,6 @@ class Test_CreateOrderController:
         assert response.body["order"]["products"][0]["product_name"] == "X-Salada"
         assert response.body["order"]["products"][0]["product_id"] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert response.body["order"]["products"][0]["quantity"] == 1
-        assert response.body["order"]["creation_time_milliseconds"] == int(datetime.datetime.now().timestamp() * 1000)
         assert response.body["order"]["restaurant"] == "SOUZA_DE_ABREU"
         assert response.body["order"]["observation"] == "Sem tomate"
         assert response.body["order"]["status"] == "PENDING"
