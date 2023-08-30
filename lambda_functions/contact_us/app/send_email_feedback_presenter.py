@@ -8,7 +8,7 @@ from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHt
 
 def send_email(event, context):
     http_request = LambdaHttpRequest(data=event)
-    user = http_request.data.get('requestContext', {}).get('authorizer', {}).get('claims', None)
+    user = event.get('requestContext', {}).get('authorizer', {}).get('claims', None)
     user_email = http_request.data.get("email") if user is None else user.get("email")
 
     print(f"User: {user}")
