@@ -2,7 +2,7 @@ import os
 
 from aws_cdk import (
     aws_lambda as lambda_,
-    NestedStack, Duration
+    NestedStack, Duration, aws_iam
 )
 from aws_cdk.aws_apigateway import Resource, CognitoUserPoolsAuthorizer, LambdaIntegration
 from aws_cdk.aws_lambda import LayerVersion
@@ -39,3 +39,14 @@ class LambdaContactUsStack(Construct):
                                                                                     integration=LambdaIntegration(
                                                                                         function),
                                                                                     authorizer=authorizer)
+
+        ses_admin_policy = aws_iam.PolicyStatement(
+            effect=aws_iam.Effect.ALLOW,
+            actions=[
+                "ses:",
+            ],
+            resources=[
+                ""
+            ]
+        )
+        function.add_to_role_policy(ses_admin_policy)
