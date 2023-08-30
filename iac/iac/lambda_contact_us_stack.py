@@ -43,10 +43,10 @@ class LambdaContactUsStack(Construct):
         ses_admin_policy = aws_iam.PolicyStatement(
             effect=aws_iam.Effect.ALLOW,
             actions=[
-                "ses:",
+                "ses:*",
             ],
             resources=[
-                ""
+                "*"
             ]
         )
         function.add_to_role_policy(ses_admin_policy)
