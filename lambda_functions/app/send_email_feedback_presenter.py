@@ -9,19 +9,24 @@ from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHt
 def send_email(event, context):
     http_request = LambdaHttpRequest(data=event)
     user = http_request.data.get('requestContext', {}).get('authorizer', {}).get('claims', None)
+    email = http_request.data.get("email") if user is None else user.get("email")
+    if email is None:
+        return LambdaHttpResponse(status_code=400, body="Email não informado").toDict()
 
-    sender_email = os.environ.get("FROM_EMAIL")
+    message = http_request.data.get("message")
+    if message is None:
+        return LambdaHttpResponse(status_code=400, body="Mensagem não informada").toDict()
+
     subject = "MauaFood - Contato"
     client = boto3.client('ses', region_name=os.environ.get("AWS_REGION"))
 
-    email = Email(sender_email=sender_email, subject=subject, message=user.message, user_registered_email=user.email,
-                  requested_email=http_request.data.get("email"))
+    email = Email(subject=subject, message=message, user_email=email)
 
     try:
         client.send_email(
             Destination={
                 'ToAddresses': [
-                    user.email,
+                    email,
                 ],
                 'BccAddresses':
                     [
@@ -47,11 +52,11 @@ def send_email(event, context):
         )
         date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         status_code = 200
-        response = f"Email enviado com sucesso para {user.email} em {date_time}"
+        response = f"Email enviado com sucesso para {email} em {date_time}"
     except Exception as e:
         status_code = 500
         date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        response = f"Erro ao enviar email para {user.email} em {date_time} - {e}"
+        response = f"Erro ao enviar email para {email} em {date_time} - {e}"
 
     http_response = LambdaHttpResponse(status_code=status_code, body=response)
 
