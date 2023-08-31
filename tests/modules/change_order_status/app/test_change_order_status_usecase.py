@@ -26,6 +26,7 @@ class Test_ChangeOrderStatusUsecase:
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         repo_order.orders[0].status = STATUS.READY
+        last_update_before = repo_order.orders[0].last_status_update_milliseconds
 
         usecase = ChangeOrderStatusUsecase(repo_order=repo_order, repo_user=repo_user)
 
@@ -40,6 +41,8 @@ class Test_ChangeOrderStatusUsecase:
 
         assert type(response) == Order
         assert response.status == STATUS.REFUSED
+        assert response.last_status_update_milliseconds > last_update_before
+        assert response.last_status_update_milliseconds > response.creation_time_milliseconds
 
     def test_change_order_status_to_refused_by_owner_of_restaurant(self):
         repo_order = OrderRepositoryMock()

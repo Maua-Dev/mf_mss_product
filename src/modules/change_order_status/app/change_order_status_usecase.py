@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from src.shared.domain.entities.order import Order
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
@@ -18,11 +20,16 @@ class ChangeOrderStatusUsecase:
             raise UserNotAllowed()
 
         if user.role == ROLE.ADMIN:
-            return self.repo_order.update_order(order_id=order_id, new_status=new_status)
+            updated_order = self.repo_order.update_order(order_id=order_id, new_status=new_status)
+            updated_order.last_status_update_milliseconds = int(datetime.now().timestamp() * 1000)
+            return updated_order
 
         order_to_update: Order = self.repo_order.get_order_by_id(order_id)
 
         if user.restaurant != order_to_update.restaurant:
             raise ForbiddenAction("order")
 
-        return self.repo_order.update_order(order_id=order_id, new_status=new_status)
+        updated_order = self.repo_order.update_order(order_id=order_id, new_status=new_status)
+        updated_order.last_status_update_milliseconds = int(datetime.now().timestamp() * 1000)
+
+        return updated_order
