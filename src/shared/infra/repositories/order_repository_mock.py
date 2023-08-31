@@ -2,6 +2,7 @@ from ast import Dict
 from typing import List, Optional
 
 from src.shared.domain.entities.order import Order
+from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
@@ -12,6 +13,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 class OrderRepositoryMock(IOrderRepository):
     orders: List[Order]
+    connections: List[Connection]
 
     def __init__(self):
         users_repo = UserRepositoryMock().users_list
@@ -87,16 +89,23 @@ class OrderRepositoryMock(IOrderRepository):
                   restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=24.00, observation=None,
                   aborted_reason=None),
 
-            Order(order_id="135ef881-1b1f-4f38-a662-8ff7156e6c27", user_name="Julião",
-                  user_id="34c82913-2942-4d55-9e64-489e79574948", products=[
-                    OrderProduct(product_name=products_repo[71].name, product_id=products_repo[71].product_id,
-                                 quantity=2),
-                    OrderProduct(product_name=products_repo[67].name, product_id=products_repo[67].product_id,
-                                 quantity=1),
-                    OrderProduct(product_name=products_repo[33].name, product_id=products_repo[33].product_id,
-                                 quantity=3)], creation_time_milliseconds=1692157822,
-                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=35.5, observation=None,
-                  aborted_reason=None)
+            Order(order_id="135ef881-1b1f-4f38-a662-8ff7156e6c27", user_name=users_repo[9].name, user_id=users_repo[9].user_id, products=[OrderProduct(product_name=products_repo[71].name, product_id=products_repo[71].product_id, quantity=2), OrderProduct(product_name=products_repo[67].name, product_id=products_repo[67].product_id, quantity=1), OrderProduct(product_name=products_repo[33].name, product_id=products_repo[33].product_id, quantity=3)], creation_time_milliseconds=1692157822, restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=35.5, observation=None, aborted_reason=None)
+        ]
+
+        self.connections = [
+            Connection(connection_id="4b1e0f88-2c34-3t2", api_id="63c02df8-d1", expire_date_seconds=1693418400, creation_time_seconds=1693414800, user_id=users_repo[2].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA),
+
+            Connection(connection_id="d43e0f88-ab24-ec2", api_id="b1f02df8-g1", expire_date_seconds=1693328400, creation_time_seconds=1693324800, user_id=users_repo[3].user_id, restaurant=RESTAURANT.SOUZA_DE_ABREU),
+
+            Connection(connection_id="ad2e0f88-2c34-bv2", api_id="efc02df8-r1", expire_date_seconds=1683291600, creation_time_seconds=1683288000, user_id=users_repo[1].user_id, restaurant=RESTAURANT.HORA_H),
+
+            Connection(connection_id="yu120f88-2c34-45u", api_id="gdc02df8-j2", expire_date_seconds=1682265600, creation_time_seconds=1682262000, user_id=users_repo[0].user_id, restaurant=RESTAURANT.HORA_H),
+
+            Connection(connection_id="9efe0f88-tu34-cd3", api_id="a9kpodf8-a0", expire_date_seconds=1686848400, creation_time_seconds=1686844800, user_id=users_repo[4].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA),
+
+            Connection(connection_id="48kl9abc-kd20-af2", api_id="52h4g57l-u2", expire_date_seconds=1675087200, creation_time_seconds=1675083600, user_id=users_repo[5].user_id, restaurant=RESTAURANT.HORA_H),
+
+            Connection(connection_id="8abc9064-r9lq-ul2", api_id="av2c2df8-d8", expire_date_seconds=1677636000, creation_time_seconds=1677632400, user_id=users_repo[6].user_id, restaurant=RESTAURANT.SOUZA_DE_ABREU),
         ]
 
     def create_order(self, order: Order) -> Order:
@@ -110,9 +119,14 @@ class OrderRepositoryMock(IOrderRepository):
         return None
 
     def get_all_active_orders_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
-        return [order for order in self.orders if
-                order.status in [STATUS.PENDING, STATUS.PREPARING] and order.restaurant == restaurant]
+        return [order for order in self.orders if order.status in [STATUS.PENDING, STATUS.PREPARING] and order.restaurant == restaurant]
 
+    def get_order_by_id(self, order_id: str) -> Optional[Order]:
+        for order in self.orders:
+            if order.order_id == order_id:
+                return order
+        return None
+    
     def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
                      new_total_price: Optional[float] = None, new_observation: Optional[str] = None,
@@ -146,3 +160,21 @@ class OrderRepositoryMock(IOrderRepository):
                 order_to_update.aborted_reason = new_aborted_reason
 
         return order_to_update
+    
+    def get_all_connections_by_restaurant(self, restaurant: RESTAURANT) -> List[Connection]:
+        return [connection for connection in self.connections if connection.restaurant == restaurant]
+    
+    def create_connection(self, connection: Connection) -> Connection:
+        self.connections.append(connection)
+        return connection
+
+    def abort_connection(self, connection_id: str, restaurant: RESTAURANT) -> Connection:
+        for connection in self.connections:
+            if connection_id == connection.connection_id and restaurant == connection.restaurant:
+                self.connections.remove(connection)
+                return connection
+        return None
+    
+    def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
+        return True
+
