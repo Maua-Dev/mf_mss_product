@@ -1,5 +1,6 @@
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.entities.connection import Connection
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
@@ -91,5 +92,25 @@ class Test_OrderRepositoryMock:
         connections_list = repo.get_all_connections_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
         assert len(connections_list) == 2
-
     
+    def test_create_connection(self):
+        repo = OrderRepositoryMock()
+        len_before = len(repo.connections)
+
+        connection = Connection(connection_id="4b133f88-2c34-3t2", api_id="63c02df8-55", expire_date_seconds=1693418600, creation_time_seconds=1693414200, user_id="93bc6ada-c0d1-7054-42je-e17414c48af1", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+
+        repo.create_connection(connection=connection)
+
+        assert len(repo.connections) == len_before + 1
+        assert repo.connections[-1] == connection
+
+    def test_abort_connection(self):
+        repo = OrderRepositoryMock()
+        len_before = len(repo.connections)
+
+        connection_id = repo.connections[0].connection_id
+        restaurant = repo.connections[0].restaurant
+
+        repo.abort_connection(connection_id, restaurant)
+
+        assert len(repo.connections) == len_before - 1

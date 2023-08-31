@@ -32,3 +32,15 @@ class IOrderRepository(ABC):
     @abstractmethod
     def get_all_connections_by_restaurant(self, restaurant: RESTAURANT) -> List[Connection]:
         pass
+
+    @abstractmethod
+    def create_connection(self, connection: Connection) -> Connection:
+        pass
+
+    @abstractmethod
+    def abort_connection(self, connection_id: str, restaurant: RESTAURANT) -> Connection:
+        pass
+    
+    @abstractmethod
+    def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
+        pass
