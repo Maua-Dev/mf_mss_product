@@ -20,7 +20,76 @@ class Test_OrderRepositoryMock:
 
     def test_get_all_active_orders_by_restaurant(self):
         repo = OrderRepositoryMock()
-        orders = repo.get_all_active_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
-        
-        assert len(orders) == 2
+        orders_list = repo.get_all_active_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
+        assert len(orders_list) == 2
+
+    def test_get_order_by_id(self):
+        repo = OrderRepositoryMock()
+        order_id = repo.orders[1].order_id
+
+        response = repo.get_order_by_id(order_id=order_id)
+
+        assert response.order_id == order_id
+        assert response is repo.orders[1]
+
+    def test_update_all_orders_attributes(self):
+        repo = OrderRepositoryMock()
+        order = repo.orders[1]
+        order_id = order.order_id
+
+        response = repo.update_order(
+            order_id=order_id,
+            new_products=[],
+            new_status=STATUS.REFUSED,
+            new_total_price=42.20,
+            new_observation="Olha que bela observação",
+            new_aborted_reason="Abortar missão, soldado"
+        )
+
+        assert order.products == []
+        assert order.status == STATUS.REFUSED
+        assert order.total_price == 42.20
+        assert order.observation == "Olha que bela observação"
+        assert order.aborted_reason == "Abortar missão, soldado"
+
+    def test_update_only_total_price(self):
+        repo = OrderRepositoryMock()
+        order = repo.orders[1]
+        order_id = order.order_id
+
+        response = repo.update_order(
+            order_id=order_id,
+            new_total_price=42.20,
+        )
+        assert order.total_price == 42.20
+
+    def test_update_observation_to_none(self):
+        repo = OrderRepositoryMock()
+        order = repo.orders[1]
+        order_id = order.order_id
+
+        response = repo.update_order(
+            order_id=order_id,
+            new_observation=""
+        )
+        assert order.observation is None
+
+    def test_update_abortation_to_none(self):
+        repo = OrderRepositoryMock()
+        order = repo.orders[1]
+        order_id = order.order_id
+
+        response = repo.update_order(
+            order_id=order_id,
+            new_aborted_reason=None
+        )
+        assert order.aborted_reason is None
+
+    def test_get_all_connections_by_restaurant(self):
+        repo = OrderRepositoryMock()
+        connections_list = repo.get_all_connections_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        assert len(connections_list) == 2
+
+    
