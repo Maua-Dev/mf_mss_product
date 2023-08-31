@@ -3,9 +3,9 @@ from src.modules.change_order_status.app.change_order_status_viewmodel import Ch
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UnregisteredUser, ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UnregisteredUser, ForbiddenAction, NoItemsFound
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
-from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, Forbidden, InternalServerError
+from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, Forbidden, InternalServerError, NotFound
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 
@@ -46,6 +46,9 @@ class ChangeOrderStatusController:
 
         except ForbiddenAction as err:
             return Forbidden(body=err.message)
+
+        except NoItemsFound as err:
+            return NotFound(body=err.message)
 
         except UnregisteredUser as err:
             return BadRequest(body=err.message)

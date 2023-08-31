@@ -5,7 +5,7 @@ from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed, ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import UserNotAllowed, ForbiddenAction, NoItemsFound
 
 
 class ChangeOrderStatusUsecase:
@@ -19,12 +19,15 @@ class ChangeOrderStatusUsecase:
         if user.role == ROLE.USER:
             raise UserNotAllowed()
 
+        order_to_update: Order = self.repo_order.get_order_by_id(order_id)
+        if order_to_update is None:
+            raise NoItemsFound("order")
+
         if user.role == ROLE.ADMIN:
             updated_order = self.repo_order.update_order(order_id=order_id, new_status=new_status)
             updated_order.last_status_update_milliseconds = int(datetime.now().timestamp() * 1000)
             return updated_order
 
-        order_to_update: Order = self.repo_order.get_order_by_id(order_id)
 
         if user.restaurant != order_to_update.restaurant:
             raise ForbiddenAction("order")
