@@ -1,6 +1,6 @@
 import abc
 import re
-from typing import Dict, List, Optional
+from typing import List, Optional
 from src.shared.domain.entities.order_product import OrderProduct
 
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
@@ -28,11 +28,12 @@ class Order(abc.ABC):
                  user_id: str,
                  products: List[OrderProduct],
                  creation_time_milliseconds: int,
-                 restaurant: RESTAURANT, 
+                 restaurant: RESTAURANT,
                  status: STATUS,
                  total_price: float,
                  observation: Optional[str] = None,
-                 aborted_reason: Optional[str] = None):
+                 aborted_reason: Optional[str] = None
+                 ):
         
         if not Order.validate_id(id=order_id):
             raise EntityError("order_id")
@@ -53,6 +54,7 @@ class Order(abc.ABC):
         if type(creation_time_milliseconds) != int:
             raise EntityError("creation_time_milliseconds")
         self.creation_time_milliseconds = creation_time_milliseconds
+        self.last_status_update_milliseconds = self.creation_time_milliseconds
 
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")
@@ -107,4 +109,4 @@ class Order(abc.ABC):
         return True
     
     def __repr__(self):
-        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, observation={self.observation}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price})"
+        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, observation={self.observation}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price}, last_status_update={self.last_status_update_milliseconds})"
