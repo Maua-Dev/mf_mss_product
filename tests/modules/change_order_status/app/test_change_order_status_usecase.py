@@ -6,7 +6,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UserNotAllowed, ForbiddenAction
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -41,7 +41,7 @@ class Test_ChangeOrderStatusUsecase:
         assert type(response) == Order
         assert response.status == STATUS.REFUSED
 
-    def test_change_order_status_to_refused_by_owner_of_restaurante(self):
+    def test_change_order_status_to_refused_by_owner_of_restaurant(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
 
@@ -62,7 +62,46 @@ class Test_ChangeOrderStatusUsecase:
         assert response.status == STATUS.REFUSED
         assert response.restaurant == user.restaurant
 
-    def test_change_order_status_to_refused_by_seller_of_restaurante(self):
+    def test_other_owner_cant_change_order_status(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        user = create_test_user(repo_user)
+        user.restaurant = RESTAURANT.HORA_H
+
+        usecase = ChangeOrderStatusUsecase(repo_order=repo_order, repo_user=repo_user)
+
+        order = repo_order.orders[0]
+        order.restaurant = RESTAURANT.CANTINA_DO_MOLEZA
+
+        with pytest.raises(ForbiddenAction):
+            response: Order = usecase(
+                order_id=order.order_id,
+                user_id=user.user_id,
+                new_status=STATUS.REFUSED
+            )
+
+    def test_other_seller_cant_change_order_status(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        user = create_test_user(repo_user)
+        user.role = ROLE.SELLER
+        user.restaurant = RESTAURANT.HORA_H
+
+        usecase = ChangeOrderStatusUsecase(repo_order=repo_order, repo_user=repo_user)
+
+        order = repo_order.orders[0]
+        order.restaurant = RESTAURANT.CANTINA_DO_MOLEZA
+
+        with pytest.raises(ForbiddenAction):
+            response: Order = usecase(
+                order_id=order.order_id,
+                user_id=user.user_id,
+                new_status=STATUS.REFUSED
+            )
+
+    def test_change_order_status_to_refused_by_seller_of_restaurant(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         repo_order.orders[0].status = STATUS.READY
