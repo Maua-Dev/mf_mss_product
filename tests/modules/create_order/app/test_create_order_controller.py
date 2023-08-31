@@ -5,7 +5,7 @@ from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
-
+from freezegun import freeze_time
 
 class Test_CreateOrderController:
     def test_create_order_controller(self):
@@ -45,6 +45,7 @@ class Test_CreateOrderController:
         assert response.body["order"]["status"] == "PENDING"
         assert response.body["order"]["total_price"] == 19.00
 
+    @freeze_time("2023-08-30")
     def test_create_order_controller_several_orders(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
