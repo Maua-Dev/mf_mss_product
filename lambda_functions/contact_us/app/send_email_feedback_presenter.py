@@ -2,31 +2,29 @@ import os
 from datetime import datetime
 import boto3
 
-from .entities.email import Email
+from lambda_functions.contact_us.app.entities.email import Email
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
 
 def send_email(event, context):
     http_request = LambdaHttpRequest(data=event)
     user = event.get('requestContext', {}).get('authorizer', {}).get('claims', None)
+    subject = "MauaFood - Contato"
+    client = boto3.client('ses', region_name=os.environ.get("AWS_REGION"))
+
     user_email = http_request.data.get("email") if user is None else user.get("email")
-
-    print(f"User: {user}")
-    print(f"User_email {user_email}")
-
-    print(f"Event {event}")
-
     if user_email is None:
         return LambdaHttpResponse(status_code=400, body="Email não informado").toDict()
+
+    user_name = http_request.data.get("name") if user is None else user.get("name")
+    if user_name is None:
+        return LambdaHttpResponse(status_code=400, body="Nome não informado").toDict()
 
     message = http_request.data.get("message")
     if message is None:
         return LambdaHttpResponse(status_code=400, body="Mensagem não informada").toDict()
 
-    subject = "MauaFood - Contato"
-    client = boto3.client('ses', region_name=os.environ.get("AWS_REGION"))
-
-    email = Email(subject=subject, message=message, user_email=user_email)
+    email = Email(subject=subject, message=message, user_name=user_name, user_email=user_email)
 
     try:
         client.send_email(
@@ -54,7 +52,7 @@ def send_email(event, context):
             ReplyToAddresses=[
                 os.environ.get("REPLY_TO_EMAIL"),
             ],
-            Source=os.environ.get("FROM_EMAIL")
+            Source=os.environ.get("FROM_EMAIL"),
         )
         date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         status_code = 200
