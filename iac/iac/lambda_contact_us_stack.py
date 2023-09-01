@@ -36,11 +36,10 @@ class LambdaContactUsStack(Construct):
         )
 
         api_gateway_resource.add_resource(module_name.replace("_", "-")).add_method("POST",
-                                                                                    integration=LambdaIntegration(
-                                                                                        function),
+                                                                                    integration=LambdaIntegration(function),
                                                                                     authorizer=authorizer)
 
-        api_gateway_resource.add_resource("public").add_resource(module_name.replace("_", "-")).add_method("POST",
+        api_gateway_resource.add_resource(module_name.replace("_", "-")).add_resource("public").add_method("POST",
                                                                                     integration=LambdaIntegration(function))
 
         ses_admin_policy = aws_iam.PolicyStatement(
