@@ -20,7 +20,7 @@ class CreateConnectionUsecase:
         if user is None:
             raise UnregisteredUser()
         
-        creation_time_seconds = int(datetime.datetime.now().timestamp() * 1000)
+        creation_time_seconds = int(datetime.datetime.now().timestamp())
         expire_date_seconds = creation_time_seconds + 3600
 
         connection = Connection(connection_id=connection_id, api_id=api_id, expire_date_seconds=expire_date_seconds, creation_time_seconds=creation_time_seconds, user_id=user_id, restaurant=restaurant)
