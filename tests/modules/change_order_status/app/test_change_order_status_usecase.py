@@ -6,7 +6,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed, ForbiddenAction
+from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UserNotRelatedToRestaurant
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -77,7 +77,7 @@ class Test_ChangeOrderStatusUsecase:
         order = repo_order.orders[0]
         order.restaurant = RESTAURANT.CANTINA_DO_MOLEZA
 
-        with pytest.raises(ForbiddenAction):
+        with pytest.raises(UserNotRelatedToRestaurant):
             response: Order = usecase(
                 order_id=order.order_id,
                 user_id=user.user_id,
@@ -97,7 +97,7 @@ class Test_ChangeOrderStatusUsecase:
         order = repo_order.orders[0]
         order.restaurant = RESTAURANT.CANTINA_DO_MOLEZA
 
-        with pytest.raises(ForbiddenAction):
+        with pytest.raises(UserNotRelatedToRestaurant):
             response: Order = usecase(
                 order_id=order.order_id,
                 user_id=user.user_id,
