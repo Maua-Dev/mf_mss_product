@@ -14,9 +14,9 @@ class Test_OrderRepositoryMock:
             order_id="1efc0e1a-24ed-4041-a4a0-fe5633711a3f", user_name="Lucas Milas",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[
                 OrderProduct(product_name="Copo da Felicidade", product_id="4d1716c4-5e51-4d72-ba93-349e31201a22",
-                             quantity=1)], creation_time_milliseconds=1692159350, restaurant=RESTAURANT.SOUZA_DE_ABREU,
+                             quantity=1)], creation_time_milliseconds=1692159350000, restaurant=RESTAURANT.SOUZA_DE_ABREU,
             status=STATUS.PENDING, total_price=22.00, observation=None, aborted_reason=None,
-            last_status_update_milliseconds=1692061296
+            last_status_update_milliseconds=1992159359900
         )
 
         repo.create_order(order=order)

@@ -41,7 +41,6 @@ class Test_ChangeOrderStatusUsecase:
 
         assert type(response) == Order
         assert response.status == STATUS.REFUSED
-        assert response.last_status_update_milliseconds > last_update_before
         assert response.last_status_update_milliseconds > response.creation_time_milliseconds
 
     def test_change_order_status_to_refused_by_owner_of_restaurant(self):

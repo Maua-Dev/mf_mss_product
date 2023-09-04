@@ -2,7 +2,8 @@ from .change_order_status_usecase import ChangeOrderStatusUsecase
 from .change_order_status_viewmodel import ChangeOrderViewmodel
 from ....shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.controller_errors import MissingParameters
-from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError, \
+    EntityParameterExcededMaximumValue
 from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UnregisteredUser, ForbiddenAction, NoItemsFound, \
     UserNotRelatedToRestaurant
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
@@ -47,6 +48,9 @@ class ChangeOrderStatusController:
 
         except UserNotRelatedToRestaurant as err:
             return Forbidden(body=err.message)
+
+        except EntityParameterExcededMaximumValue as err:
+            return BadRequest(body=err.message)
 
         except NoItemsFound as err:
             return NotFound(body=err.message)

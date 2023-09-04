@@ -5,7 +5,7 @@ from src.shared.domain.entities.order_product import OrderProduct
 
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterExcededMaximumValue
 
 
 class Order(abc.ABC):
@@ -57,7 +57,10 @@ class Order(abc.ABC):
         self.creation_time_milliseconds = creation_time_milliseconds
 
         if type(last_status_update_milliseconds) != int:
-            raise EntityError("creation_time_milliseconds")
+            raise EntityError("last_status_update_milliseconds")
+        if last_status_update_milliseconds < creation_time_milliseconds:
+            raise EntityParameterExcededMaximumValue(field="last_status_update", maximum_value=str(creation_time_milliseconds))
+
         self.last_status_update_milliseconds = last_status_update_milliseconds
 
         if type(restaurant) != RESTAURANT:
