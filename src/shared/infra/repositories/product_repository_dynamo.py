@@ -70,12 +70,13 @@ class ProductRepositoryDynamo(IProductRepository):
 
         try:
             for item in response["Items"]:
-                restaurant = RESTAURANT[item["restaurant"]]
-                if restaurant not in products.keys():
-                    products[restaurant] = list()
-
-                products[restaurant].append(
-                    ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+                if 'product#' in item[self.dynamo.sort_key]:
+                    restaurant = RESTAURANT[item["restaurant"]]
+                    if restaurant not in products.keys():
+                        products[restaurant] = list()
+    
+                    products[restaurant].append(
+                        ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
             return products
         except BaseException as err:

@@ -62,7 +62,7 @@ class OrderViewmodel:
         }
 
 
-class CreateOrderViewmodel:
+class ChangeOrderViewmodel:
     order: OrderViewmodel
 
     def __init__(self, order: Order):
@@ -71,5 +71,5 @@ class CreateOrderViewmodel:
     def to_dict(self):
         return {
             "order": self.order.to_dict(),
-            "message": "the order was created"
+            "message": "the order status was updated"
         }

@@ -1,12 +1,12 @@
 import json
 from src.modules.delete_product.app.delete_product_presenter import lambda_handler
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
-from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter
+from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter_no_socket
 
 
 class Test_DeleteProductPresenter:
     def test_delete_product_presenter(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "product_id": "71ede2ce-31c6-4b22-bab5-da2175654308",
                 "restaurant": "HORA_H",
@@ -19,7 +19,7 @@ class Test_DeleteProductPresenter:
         assert json.loads(response["body"])['message'] == "the product was deleted"
 
     def test_delete_product_presenter_product_id_is_missing(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "restaurant": "HORA_H",
             }
@@ -31,7 +31,7 @@ class Test_DeleteProductPresenter:
         assert json.loads(response["body"]) == "Field product_id is missing"
 
     def test_delete_product_presenter_restaurant_is_missing(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "product_id": "71ede2ce-31c6-4b22-bab5-da2175654308",
             }
@@ -43,7 +43,7 @@ class Test_DeleteProductPresenter:
         assert json.loads(response["body"]) == "Field restaurant is missing"
 
     def test_delete_product_presenter_restaurant_not_valid(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "product_id": "71ede2ce-31c6-4b22-bab5-da2175654308",
                 "restaurant": "DAHORA_H",

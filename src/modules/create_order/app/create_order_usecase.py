@@ -42,6 +42,7 @@ class CreateOrderUsecase:
         status = STATUS.PENDING
         total_price = price
 
-        order = Order(order_id=order_id, user_name=user_name, user_id=user_id, products=products, creation_time_milliseconds=creation_time_milliseconds, restaurant=restaurant, status=status, total_price=total_price, observation=obervation, aborted_reason=None)
+        order = Order(order_id=order_id, user_name=user_name, user_id=user_id, products=products, creation_time_milliseconds=creation_time_milliseconds, restaurant=restaurant, status=status, total_price=total_price, observation=obervation, aborted_reason=None,
+                      last_status_update_milliseconds=creation_time_milliseconds)
 
         return self.repo_order.create_order(order=order)

@@ -3,7 +3,7 @@ from .create_order_viewmodel import CreateOrderViewmodel
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.controller_errors import MissingParameters, RestaurantNotFound
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterExcededMaximumValue
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import BadRequest, Created, InternalServerError, NotFound
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
@@ -60,6 +60,9 @@ class CreateOrderController:
             return NotFound(body=err.message)
 
         except EntityError as err:
+            return BadRequest(body=err.message)
+
+        except EntityParameterExcededMaximumValue as err:
             return BadRequest(body=err.message)
 
         except Exception as err:
