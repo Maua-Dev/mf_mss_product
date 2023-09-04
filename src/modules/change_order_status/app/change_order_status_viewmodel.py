@@ -31,6 +31,7 @@ class OrderViewmodel:
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
+    last_status_update: int
 
     def __init__(self, order: Order):
         self.order_id = order.order_id
@@ -43,6 +44,7 @@ class OrderViewmodel:
         self.status = order.status
         self.aborted_reason = order.aborted_reason
         self.total_price = order.total_price
+        self.last_status_update = order.last_status_update_milliseconds
 
     def to_dict(self) -> dict:
         return {
@@ -55,7 +57,8 @@ class OrderViewmodel:
             "observation": self.observation,
             "status": self.status.value,
             "aborted_reason": self.aborted_reason,
-            "total_price": self.total_price
+            "total_price": self.total_price,
+            "last_status_update": self.last_status_update
         }
 
 

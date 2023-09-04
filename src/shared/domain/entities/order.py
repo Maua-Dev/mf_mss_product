@@ -31,6 +31,7 @@ class Order(abc.ABC):
                  restaurant: RESTAURANT,
                  status: STATUS,
                  total_price: float,
+                 last_status_update_milliseconds: int,
                  observation: Optional[str] = None,
                  aborted_reason: Optional[str] = None
                  ):
@@ -54,7 +55,10 @@ class Order(abc.ABC):
         if type(creation_time_milliseconds) != int:
             raise EntityError("creation_time_milliseconds")
         self.creation_time_milliseconds = creation_time_milliseconds
-        self.last_status_update_milliseconds = self.creation_time_milliseconds
+
+        if type(last_status_update_milliseconds) != int:
+            raise EntityError("creation_time_milliseconds")
+        self.last_status_update_milliseconds = last_status_update_milliseconds
 
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")

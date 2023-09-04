@@ -1,6 +1,6 @@
-from src.modules.change_order_status.app.change_order_status_usecase import ChangeOrderStatusUsecase
-from src.modules.change_order_status.app.change_order_status_viewmodel import ChangeOrderViewmodel
-from src.shared.domain.enums.status_enum import STATUS
+from .change_order_status_usecase import ChangeOrderStatusUsecase
+from .change_order_status_viewmodel import ChangeOrderViewmodel
+from ....shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError
 from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UnregisteredUser, ForbiddenAction, NoItemsFound

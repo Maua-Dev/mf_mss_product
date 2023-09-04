@@ -1,3 +1,4 @@
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.base_error import BaseError
 
 
@@ -19,6 +20,11 @@ class UnecessaryUpdate(BaseError):
 class UserNotAllowed(BaseError):
     def __init__(self):
         super().__init__(f'That type of user has no permission for that action')
+
+
+class UserNotRelatedToRestaurant(BaseError):
+    def __init__(self, restaurant: RESTAURANT):
+        super().__init__(f'User has no permission in {restaurant.value} restaurant')
 
 
 class UnregisteredUser(BaseError):

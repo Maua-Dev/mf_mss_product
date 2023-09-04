@@ -13,11 +13,12 @@ class OrderProductViewmodel:
         self.order_product = order_product
 
     def to_dict(self) -> dict:
-        return{
-             "product_name": self.order_product.product_name,
-             "product_id": self.order_product.product_id,
-             "quantity": self.order_product.quantity
-            }
+        return {
+            "product_name": self.order_product.product_name,
+            "product_id": self.order_product.product_id,
+            "quantity": self.order_product.quantity
+        }
+
 
 class OrderViewmodel:
     order_id: str
@@ -30,6 +31,7 @@ class OrderViewmodel:
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
+    last_status_update: int
 
     def __init__(self, order: Order):
         self.order_id = order.order_id
@@ -42,21 +44,24 @@ class OrderViewmodel:
         self.status = order.status
         self.aborted_reason = order.aborted_reason
         self.total_price = order.total_price
+        self.last_status_update = order.last_status_update_milliseconds
 
     def to_dict(self) -> dict:
-        return{
-             "order_id": self.order_id,
-             "user_name": self.user_name,
-             "user_id": self.user_id,
-             "products": [order_product.to_dict() for order_product in self.products],
-             "creation_time_milliseconds": self.creation_time_milliseconds,
-             "restaurant": self.restaurant.value,
-             "observation": self.observation,
-             "status": self.status.value,
-             "aborted_reason": self.aborted_reason,
-             "total_price": self.total_price 
+        return {
+            "order_id": self.order_id,
+            "user_name": self.user_name,
+            "user_id": self.user_id,
+            "products": [order_product.to_dict() for order_product in self.products],
+            "creation_time_milliseconds": self.creation_time_milliseconds,
+            "restaurant": self.restaurant.value,
+            "observation": self.observation,
+            "status": self.status.value,
+            "aborted_reason": self.aborted_reason,
+            "total_price": self.total_price,
+            "last_status_update": self.last_status_update
         }
-    
+
+
 class CreateOrderViewmodel:
     order: OrderViewmodel
 
@@ -64,7 +69,7 @@ class CreateOrderViewmodel:
         self.order = OrderViewmodel(order=order)
 
     def to_dict(self):
-        return{
+        return {
             "order": self.order.to_dict(),
             "message": "the order was created"
         }

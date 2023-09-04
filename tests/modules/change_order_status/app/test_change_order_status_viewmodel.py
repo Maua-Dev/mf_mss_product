@@ -19,7 +19,8 @@ class Test_CreateOrderViewmodel:
             status=STATUS.READY,
             total_price=30.00,
             observation="Capricha no morango",
-            aborted_reason=None
+            aborted_reason=None,
+            last_status_update_milliseconds=1692061896
         )
 
         order_viewmodel = ChangeOrderViewmodel(order=order).to_dict()
@@ -39,7 +40,8 @@ class Test_CreateOrderViewmodel:
                 "observation": "Capricha no morango",
                 "status": "READY",
                 "aborted_reason": None,
-                "total_price": 30.00
+                "total_price": 30.00,
+                "last_status_update": 1692061896
             },
             "message": "the order status was updated"
         }
