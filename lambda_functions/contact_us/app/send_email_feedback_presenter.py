@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 import boto3
 
-from lambda_functions.contact_us.app.entities.email import Email
+from .entities.email import Email
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
 
