@@ -19,6 +19,7 @@ class Order(abc.ABC):
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
+    last_status_update_milliseconds: int
     ID_LENGTH = 36
     MIN_NAME_LENGTH = 2
 
