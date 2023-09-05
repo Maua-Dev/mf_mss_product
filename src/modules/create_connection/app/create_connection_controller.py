@@ -1,6 +1,6 @@
 from typing import Any
-from src.modules.create_connection.app.create_connection_usecase import CreateConnectionUsecase
-from src.modules.create_connection.app.create_connection_viewmodel import CreateConnectionViewmodel
+from .create_connection_usecase import CreateConnectionUsecase
+from .create_connection_viewmodel import CreateConnectionViewmodel
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.controller_errors import MissingParameters, RestaurantNotFound
 from src.shared.helpers.errors.domain_errors import EntityError
