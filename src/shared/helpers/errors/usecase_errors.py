@@ -41,3 +41,8 @@ class UnregisteredEmployee(BaseError):
     def __init__(self):
         """This error appears when there is a user which role is OWNER or SELLER and still doesn't have a restaurant assigned."""
         super().__init__(f'This employee is unregistered.')
+
+
+class UserNotDomainOrder(BaseError):
+    def __init__(self):
+        super().__init__(f'This user is not the owner of this order.')
