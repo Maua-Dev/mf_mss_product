@@ -19,6 +19,7 @@ class Order(abc.ABC):
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
+    last_status_update_milliseconds: int
     ID_LENGTH = 36
     MIN_NAME_LENGTH = 2
 
@@ -56,10 +57,11 @@ class Order(abc.ABC):
             raise EntityError("creation_time_milliseconds")
         self.creation_time_milliseconds = creation_time_milliseconds
 
-        if type(last_status_update_milliseconds) != int:
-            raise EntityError("last_status_update_milliseconds")
-        if last_status_update_milliseconds < creation_time_milliseconds:
-            raise EntityParameterExcededMaximumValue(field="last_status_update", maximum_value=str(creation_time_milliseconds))
+        if last_status_update_milliseconds is not None:
+            if type(last_status_update_milliseconds) != int:
+                raise EntityError("last_status_update_milliseconds")
+            if last_status_update_milliseconds < creation_time_milliseconds:
+                raise EntityParameterExcededMaximumValue(field="last_status_update", maximum_value=str(creation_time_milliseconds))
 
         self.last_status_update_milliseconds = last_status_update_milliseconds
 
