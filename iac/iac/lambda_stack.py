@@ -125,6 +125,22 @@ class LambdaStack(Construct):
             environment_variables=environment_variables,
             authorizer=authorizer
         )
+        
+        self.create_order = self.create_lambda_api_gateway_integration(
+            module_name="crete_order",
+            method="POST",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+        self.change_order_status = self.create_lambda_api_gateway_integration(
+            module_name="change_order_status",
+            method="POST",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
 
         self.functions_that_need_dynamo_user_permissions = [
             self.create_user,
@@ -135,7 +151,9 @@ class LambdaStack(Construct):
             self.create_product,
             self.update_product,
             self.request_upload_product_photo,
-            self.get_all_active_orders_by_restaurant
+            self.get_all_active_orders_by_restaurant,
+            self.create_order,
+            self.change_order_status
         ]
 
         self.functions_that_need_dynamo_product_permissions = [
@@ -144,6 +162,5 @@ class LambdaStack(Construct):
             self.create_product,
             self.get_product,
             self.update_product,
-            self.request_upload_product_photo,
-            self.get_all_active_orders_by_restaurant
+            self.request_upload_product_photo
         ]
