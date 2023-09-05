@@ -162,5 +162,6 @@ class LambdaStack(Construct):
             self.create_product,
             self.get_product,
             self.update_product,
-            self.request_upload_product_photo
+            self.request_upload_product_photo,
+            self.create_order
         ]
