@@ -75,3 +75,6 @@ class Connection(abc.ABC):
     
     def __repr__(self):
         return f"Connection(connection_id={self.connection_id}, api_id={self.api_id}, expire_date_seconds={self.expire_date_seconds}, creation_time_seconds={self.creation_time_seconds}, user_id={self.user_id}, restaurant={self.restaurant})"
+    
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__ 
