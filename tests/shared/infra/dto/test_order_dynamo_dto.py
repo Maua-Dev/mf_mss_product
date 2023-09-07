@@ -164,6 +164,42 @@ class Test_OrderDynamoDTO:
         }
 
         assert expected_dynamo == order_dynamo_dto.to_dynamo()
+    
+    def test_to_dynamo_last_status_update_milliseconds_none(self):
+        order_dynamo_dto = OrderDynamoDTO(
+            order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
+            user_name="Rodrigo Morales",
+            user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
+            products=[
+                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1),
+                ],
+            creation_time_milliseconds=1692061296000,
+            restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
+            status=STATUS.READY,
+            total_price=50.0,
+            observation="Ketchup para acompanhar",
+            aborted_reason="Recusada"
+        )
+
+        expected_dynamo = {
+            "order_id":"b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
+            "user_name":"Rodrigo Morales",
+            "user_id":"93bc6ada-c0d1-7054-66ab-e17414c48ae3",
+            "products":[
+                {"product_name":"X-Salada", 
+                "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", 
+                "quantity":1}
+                ],
+            "creation_time_milliseconds":1692061296000,
+            "restaurant":"CANTINA_DO_MOLEZA",
+            "status":"READY",
+            "total_price":50.0,
+            "observation":"Ketchup para acompanhar",
+            "aborted_reason":"Recusada",
+            "entity": "order"
+        }
+
+        assert expected_dynamo == order_dynamo_dto.to_dynamo()
 
     def test_from_entity_to_dynamo(self):
         order = Order(
@@ -344,6 +380,50 @@ class Test_OrderDynamoDTO:
         )
 
         assert order_dto == expected_order_dto
+
+    def test_from_dynamo_last_status_update_milliseconds_none(self):
+        dynamo_dict = {'Item': {'order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f87fb53',
+                                'user_name' : 'Rodrigo Morales',
+                                'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48abb',
+                                'products': [
+                                {
+                                'product_name': 'X-Salada',
+                                'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
+                                "quantity":1
+                                }
+                            ],
+                                'creation_time_milliseconds': 1692061296000,
+                                "restaurant":"CANTINA_DO_MOLEZA",
+                                "status":"READY",
+                                "total_price":50.0,
+                                "observation":"Ketchup para acompanhar",
+                                "aborted_reason":"Recusada",
+                                'entity': 'order'},
+                       'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
+                                            'HTTPStatusCode': 200,
+                                            'HTTPHeaders': {'date': 'Fri, 16 Dec 2022 15:40:29 GMT',
+                                                            'content-type': 'application/x-amz-json-1.0',
+                                                            'x-amz-crc32': '3909675734',
+                                                            'x-amzn-requestid': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
+                                                            'content-length': '174',
+                                                            'server': 'Jetty(9.4.48.v20220622)'},
+                                            'RetryAttempts': 0}}
+
+        order_dto = OrderDynamoDTO.from_dynamo(order_data=dynamo_dict["Item"])
+
+        expected_order_dto = OrderDynamoDTO(
+            order_id='b3f6c5aa-80ad-4f95-ae16-455b4f87fb53',
+            user_name="Rodrigo Morales",
+            user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
+            products=[
+                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1)],
+            creation_time_milliseconds=1692061296000,
+            restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
+            status=STATUS.READY,
+            total_price=50.0,
+            observation="Ketchup para acompanhar",
+            aborted_reason="Recusada"
+        )
 
     def test_to_entity(self):
         order_dynamo_dto = OrderDynamoDTO(

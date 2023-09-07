@@ -16,9 +16,9 @@ class OrderDynamoDTO:
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
-    last_status_update_milliseconds: int
+    last_status_update_milliseconds: int = None
 
-    def __init__(self, order_id: str, user_name: str, user_id: str, products: List[OrderProduct], creation_time_milliseconds: int, restaurant: RESTAURANT, status: STATUS, total_price: float, last_status_update_milliseconds: int, observation: Optional[str] = None, aborted_reason: Optional[str] = None):
+    def __init__(self, order_id: str, user_name: str, user_id: str, products: List[OrderProduct], creation_time_milliseconds: int, restaurant: RESTAURANT, status: STATUS, total_price: float, last_status_update_milliseconds: int = None, observation: Optional[str] = None, aborted_reason: Optional[str] = None):
         self.order_id = order_id
         self.user_name = user_name
         self.user_id = user_id
@@ -68,7 +68,7 @@ class OrderDynamoDTO:
             "restaurant": self.restaurant.value,
             "status": self.status.value,
             "total_price": Decimal(str(self.total_price)),
-            "last_status_update_milliseconds": Decimal(str(self.last_status_update_milliseconds)),
+            "last_status_update_milliseconds": Decimal(str(self.last_status_update_milliseconds)) if self.last_status_update_milliseconds is not None else None,
             "observation": self.observation if self.observation is not None else None,
             "aborted_reason": self.aborted_reason if self.aborted_reason is not None else None
         }
@@ -96,9 +96,9 @@ class OrderDynamoDTO:
             restaurant=RESTAURANT(order_data.get("restaurant")),
             status=STATUS(order_data.get("status")),
             total_price=float(order_data["total_price"]),
-            last_status_update_milliseconds=int(order_data["last_status_update_milliseconds"]),
-            observation=str(order_data.get("observation")) if order_data.get("observation") is not None else None,
-            aborted_reason=str(order_data.get("aborted_reason")) if order_data.get("aborted_reason") is not None else None
+            last_status_update_milliseconds=order_data.get("last_status_update_milliseconds") if order_data.get("last_status_update_milliseconds") is not None else None,
+            observation=order_data.get("observation") if order_data.get("observation") is not None else None,
+            aborted_reason=order_data.get("aborted_reason") if order_data.get("aborted_reason") is not None else None
         )
 
     def to_entity(self) -> Order:

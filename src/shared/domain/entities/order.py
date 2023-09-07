@@ -19,7 +19,7 @@ class Order(abc.ABC):
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
-    last_status_update_milliseconds: int
+    last_status_update_milliseconds: int = None
     ID_LENGTH = 36
     MIN_NAME_LENGTH = 2
 
@@ -32,7 +32,7 @@ class Order(abc.ABC):
                  restaurant: RESTAURANT,
                  status: STATUS,
                  total_price: float,
-                 last_status_update_milliseconds: int,
+                 last_status_update_milliseconds: int = None,
                  observation: Optional[str] = None,
                  aborted_reason: Optional[str] = None
                  ):
