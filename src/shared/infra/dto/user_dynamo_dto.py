@@ -10,7 +10,7 @@ class UserDynamoDTO:
     role: ROLE
     restaurant: Optional[RESTAURANT] = None
     user_id: str
-    photo: str
+    photo: Optional[str] = None
 
     def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
         self.name = name
