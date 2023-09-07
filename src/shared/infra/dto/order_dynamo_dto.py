@@ -96,7 +96,7 @@ class OrderDynamoDTO:
             restaurant=RESTAURANT(order_data.get("restaurant")),
             status=STATUS(order_data.get("status")),
             total_price=float(order_data["total_price"]),
-            last_status_update_milliseconds=order_data.get("last_status_update_milliseconds") if order_data.get("last_status_update_milliseconds") is not None else None,
+            last_status_update_milliseconds=order_data.get("last_status_update_milliseconds"),
             observation=order_data.get("observation") if order_data.get("observation") is not None else None,
             aborted_reason=order_data.get("aborted_reason") if order_data.get("aborted_reason") is not None else None
         )
