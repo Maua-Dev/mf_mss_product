@@ -12,3 +12,7 @@ class WrongTypeParameter(BaseError):
 class RestaurantNotFound(BaseError):
     def __init__(self, message: str):
         super().__init__(f"Field '{message}' is not a restaurant")
+
+class WrongTypeRouteKey(BaseError):
+    def __init__(self, message: str):
+        super().__init__(f"Field {message} is not a acceptable route_key value, must be $connect or $disconnect")
