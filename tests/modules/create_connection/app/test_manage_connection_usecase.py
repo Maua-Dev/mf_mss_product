@@ -14,7 +14,7 @@ class Test_ManageConnectionUsecase:
         usecase = ManageConnectionUsecase(repo_order, repo_user)
         len_before = len(repo_order.connections)
 
-        connection = usecase(connection_id="8abqw064-r9lq-ul2", api_id="av2c2df8-6c", user_id=repo_user.users_list[0].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+        connection = usecase(connection_id="8abqw064-r9lq-ul", api_id="av2c2df8-6", user_id=repo_user.users_list[0].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
         assert repo_order.connections[-1].connection_id == connection.connection_id
         assert repo_order.connections[-1].api_id == connection.api_id
@@ -30,7 +30,7 @@ class Test_ManageConnectionUsecase:
         usecase = ManageConnectionUsecase(repo_order, repo_user)
         len_before = len(repo_order.connections)
 
-        connection = usecase(connection_id="4b1e0f88-2c34-3t2", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+        connection = usecase(connection_id="4b1e0f88-2c34-3t", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
         assert len(repo_order.connections) == len_before - 1
 
@@ -40,7 +40,7 @@ class Test_ManageConnectionUsecase:
         usecase = ManageConnectionUsecase(repo_order, repo_user)
 
         with pytest.raises(NoItemsFound):
-            connection = usecase(connection_id="4b1e0f6h-2c34-3t2", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+            connection = usecase(connection_id="4b1e0f6h-2c34-3t", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
     def test_manage_connection_usecase_ungeristered_user(self):
         repo_order = OrderRepositoryMock()
@@ -48,4 +48,4 @@ class Test_ManageConnectionUsecase:
         usecase = ManageConnectionUsecase(repo_order, repo_user)
 
         with pytest.raises(UnregisteredUser):
-            connection = usecase(connection_id="8abqw064-r9lq-ul2", api_id="av2c2df8-6c", user_id="id não encontrado :(", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+            connection = usecase(connection_id="8abqw064-r9lq-ul", api_id="av2c2df8-6", user_id="id não encontrado :(", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)

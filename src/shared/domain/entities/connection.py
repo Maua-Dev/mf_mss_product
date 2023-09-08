@@ -12,8 +12,8 @@ class Connection(abc.ABC):
     creation_time_seconds: int
     user_id: str
     restaurant: Optional[RESTAURANT] = None
-    CONNECTION_ID_LENGTH = 17
-    API_ID_LENGTH = 11
+    CONNECTION_ID_LENGTH = 16
+    API_ID_LENGTH = 10
     USER_ID_LENGTH = 36
 
     def __init__(self,

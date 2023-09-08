@@ -20,8 +20,8 @@ class Test_ManageConnectionController:
                 "custom:isMaua": True
             },
             "route_key": '$connect',
-            "connection_id": "4b1e0f88-2ch6-3t2",
-            "api_id": "63c77df8-d1",
+            "connection_id": "4b1e0f88-2ch6-3t",
+            "api_id": "63c77df8-d",
             "restaurant": "HORA_H"
         })
 
@@ -29,8 +29,8 @@ class Test_ManageConnectionController:
 
         assert response.status_code == 201
         assert response.body["message"] == "the connection status"
-        assert response.body["connection"]["connection_id"] == "4b1e0f88-2ch6-3t2"
-        assert response.body["connection"]["api_id"] == "63c77df8-d1"
+        assert response.body["connection"]["connection_id"] == "4b1e0f88-2ch6-3t"
+        assert response.body["connection"]["api_id"] == "63c77df8-d"
         assert response.body["connection"]["user_id"] == "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
         assert response.body["connection"]["restaurant"] == "HORA_H"
 
@@ -42,7 +42,7 @@ class Test_ManageConnectionController:
 
         request = HttpRequest(body={
             "route_key": '$disconnect',
-            "connection_id": "4b1e0f88-2c34-3t2",
+            "connection_id": "4b1e0f88-2c34-3t",
             "restaurant": "CANTINA_DO_MOLEZA"
         })
 
@@ -50,8 +50,8 @@ class Test_ManageConnectionController:
 
         assert response.status_code == 200
         assert response.body["message"] == "the connection status"
-        assert response.body["connection"]["connection_id"] == "4b1e0f88-2c34-3t2"
-        assert response.body["connection"]["api_id"] == "63c02df8-d1"
+        assert response.body["connection"]["connection_id"] == "4b1e0f88-2c34-3t"
+        assert response.body["connection"]["api_id"] == "63c02df8-d"
         assert response.body["connection"]["user_id"] == "93bc6ada-c0d1-7054-66ab-e17414c48abb"
         assert response.body["connection"]["restaurant"] == "CANTINA_DO_MOLEZA"
 
@@ -69,8 +69,8 @@ class Test_ManageConnectionController:
                 "custom:isMaua": True
             },
             "route_key": '$default',
-            "connection_id": "4b1e0f88-2ch6-3t2",
-            "api_id": "63c77df8-d1",
+            "connection_id": "4b1e0f88-2ch6-3t",
+            "api_id": "63c77df8-d",
             "restaurant": "HORA_H"
         })
 
@@ -92,8 +92,8 @@ class Test_ManageConnectionController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "connection_id": "4b1e0f88-2ch6-3t2",
-            "api_id": "63c77df8-d1",
+            "connection_id": "4b1e0f88-2ch6-3t",
+            "api_id": "63c77df8-d",
             "restaurant": "HORA_H"
         })
 
@@ -110,8 +110,8 @@ class Test_ManageConnectionController:
 
         request = HttpRequest(body={
             "route_key": '$connect',
-            "connection_id": "4b1e0f88-2ch6-3t2",
-            "api_id": "63c77df8-d1",
+            "connection_id": "4b1e0f88-2ch6-3t",
+            "api_id": "63c77df8-d",
             "restaurant": "HORA_H"
         })
 
@@ -134,7 +134,7 @@ class Test_ManageConnectionController:
                 "custom:isMaua": True
             },
             "route_key": '$disconnect',
-            "api_id": "63c77df8-d1",
+            "api_id": "63c77df8-d",
             "restaurant": "HORA_H"
         })
 
@@ -157,7 +157,7 @@ class Test_ManageConnectionController:
                 "custom:isMaua": True
             },
             "route_key": '$connect',
-            "connection_id": "4b1e0f88-2ch6-3t2",
+            "connection_id": "4b1e0f88-2ch6-3t",
             "restaurant": "HORA_H"
         })
 
@@ -180,8 +180,8 @@ class Test_ManageConnectionController:
                 "custom:isMaua": True
             },
             "route_key": '$disconnect',
-            "connection_id": "4b1e0f88-2ch6-3t2",
-            "api_id": "63c77df8-d1",
+            "connection_id": "4b1e0f88-2ch6-3t",
+            "api_id": "63c77df8-d",
         })
 
         response = controller(request)
@@ -203,8 +203,8 @@ class Test_ManageConnectionController:
                 "custom:isMaua": True
             },
             "route_key": '$disconnect',
-            "connection_id": "4b1e0f88-2ch6-3t2",
-            "api_id": "63c77df8-d1",
+            "connection_id": "4b1e0f88-2ch6-3t",
+            "api_id": "63c77df8-d",
             "restaurant": "Tech Food"
         })
 
