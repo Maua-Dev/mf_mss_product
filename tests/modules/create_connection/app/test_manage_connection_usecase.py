@@ -16,11 +16,12 @@ class Test_ManageConnectionUsecase:
 
         connection = usecase(connection_id="8abqw064-r9lq-ul2", api_id="av2c2df8-6c", user_id=repo_user.users_list[0].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
-        assert connection == "the connection was created"
-        assert repo_order.connections[-1].connection_id == "8abqw064-r9lq-ul2"
-        assert repo_order.connections[-1].api_id == "av2c2df8-6c"
-        assert repo_order.connections[-1].user_id == "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
-        assert repo_order.connections[-1].restaurant == RESTAURANT.CANTINA_DO_MOLEZA
+        assert repo_order.connections[-1].connection_id == connection.connection_id
+        assert repo_order.connections[-1].api_id == connection.api_id
+        assert repo_order.connections[-1].user_id == connection.user_id
+        assert repo_order.connections[-1].creation_time_seconds == connection.creation_time_seconds
+        assert repo_order.connections[-1].expire_date_seconds == connection.expire_date_seconds
+        assert repo_order.connections[-1].restaurant == connection.restaurant
         assert len(repo_order.connections) == len_before + 1
 
     def test_abort_connection_usecase(self):
@@ -31,7 +32,6 @@ class Test_ManageConnectionUsecase:
 
         connection = usecase(connection_id="4b1e0f88-2c34-3t2", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
-        assert connection == "the connection was aborted"
         assert len(repo_order.connections) == len_before - 1
 
     def test_abort_connection_usecase_no_connections_found(self):

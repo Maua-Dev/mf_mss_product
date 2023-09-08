@@ -13,13 +13,15 @@ class ManageConnectionUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, connection_id: str, restaurant: RESTAURANT, api_id: str = None, user_id: str = None) -> str:
+    def __call__(self, connection_id: str, restaurant: RESTAURANT, api_id: str = None, user_id: str = None) -> Connection:
 
         if api_id == None and user_id == None:
-            connected = self.repo_order.abort_connection(connection_id=connection_id, restaurant=restaurant)
-            if connected is None:
+            disconnected = self.repo_order.abort_connection(connection_id=connection_id, restaurant=restaurant)
+            if disconnected is None:
                 raise NoItemsFound("connection")
-            connected = False
+            
+            return disconnected
+            # connected = False
 
         else:
             user = self.repo_user.get_user_by_id(user_id=user_id)
@@ -34,7 +36,9 @@ class ManageConnectionUsecase:
             
             connected = self.repo_order.create_connection(connection=connection)
 
-        if connected:
-            return "the connection was created"
-        else:
-            return "the connection was aborted"
+            return connected
+
+        # if connected:
+        #     return "the connection was created"
+        # else:
+        #     return "the connection was aborted"
