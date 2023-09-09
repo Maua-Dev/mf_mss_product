@@ -3,16 +3,15 @@ import pytest
 from src.modules.abort_order.app.abort_order_usecase import AbortOrderUsecase
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.user import User
-from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.role_enum import ROLE
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UserNotRelatedToRestaurant, UserNotDomainOrder
+from src.shared.helpers.errors.usecase_errors import UserNotOrderOwner, NoItemsFound, UnregisteredUser
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 def create_test_user(repo_user):
     return repo_user.create_user(User(
         name="Fernandão",
-        email="Fernandão@outlook.com",
+        email="fernandao@outlook.com",
         role=ROLE.USER,
         user_id="d05bbfae-c06b-4d99-ac03-28945e6c30f3"
     ))
@@ -97,18 +96,52 @@ class Test_AbortOrderUseCase:
         assert response.aborted_reason == "Minha aula já está prestes a começar! :( "
         assert response.last_status_update_milliseconds > response.creation_time_milliseconds
 
-    def test_user_not_domain_order(self):
+    def test_user_not_order_owner(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
 
         usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
 
-        with pytest.raises(UserNotDomainOrder):
+        user = create_test_user(repo_user)
+
+        with pytest.raises(UserNotOrderOwner):
             response: Order = usecase(
                 order_id=repo_order.orders[0].order_id,
-                user_id="551a2637-3aae-42ef-a7e3-c8d6e3353e1c",
-                new_aborted_reason="Minha aula já está prestes a começar! :( ",
+                user_id=user.user_id,
+                new_aborted_reason=repo_order.orders[0].aborted_reason,
             )
+
+    def test_abort_order_with_invalid_order_id(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
+
+        user = create_test_user(repo_user)
+
+        with pytest.raises(NoItemsFound):
+            response: Order = usecase(
+                order_id="invalid_order_id",
+                user_id=user.user_id,
+                new_aborted_reason=repo_order.orders[0].aborted_reason,
+            )
+
+    def test_abort_order_with_invalid_user_id(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+
+        usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
+
+        with pytest.raises(UnregisteredUser):
+            response: Order = usecase(
+                order_id=repo_order.orders[0].order_id,
+                user_id="invalid_user_id",
+                new_aborted_reason=repo_order.orders[0].aborted_reason,
+            )
+
+
+
+
 
 
 

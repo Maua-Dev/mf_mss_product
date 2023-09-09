@@ -15,19 +15,19 @@ class Test_AbortOrderController:
         request = HttpRequest(body={
             "requester_user": {
                 "sub": repo_user.users_list[0].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
+                "name": repo_user.users_list[6].name,
+                "email": repo_user.users_list[6].email,
                 "custom:isMaua": True
             },
-            "order_id": repo_order.orders[0].order_id,
-            "aborted_reason": "Desisti da compra!"
+            "order_id": repo_order.orders[5].order_id,
+            "aborted_reason": repo_order.orders[5].aborted_reason,
         })
 
         response = controller(request)
 
         assert response.status_code == 200
         assert response.body["message"] == "the order was aborted"
-        assert repo_order.orders[0].aborted_reason == "Desisti da compra!"
+        assert response.body['order']["aborted_reason"] == repo_order.orders[5].aborted_reason
 
     def test_requester_user_is_none(self):
         repo_order = OrderRepositoryMock()
@@ -36,8 +36,8 @@ class Test_AbortOrderController:
         controller = AbortOrderController(usecase)
 
         request = HttpRequest(body={
-            "order_id": repo_order.orders[0].order_id,
-            "aborted_reason": "Desisti da compra!"
+            "order_id": repo_order.orders[6].order_id,
+            "aborted_reason": "Minha aula já está prestes a começar! :( "
         })
 
         response = controller(request)
@@ -57,7 +57,7 @@ class Test_AbortOrderController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "aborted_reason": "Desisti da compra!"
+            "aborted_reason": "Minha aula já está prestes a começar! :( "
         })
 
         response = controller(request)

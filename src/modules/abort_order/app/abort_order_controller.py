@@ -29,12 +29,12 @@ class AbortOrderController:
 
             if request.data.get("aborted_reason") is None:
                 raise MissingParameters("aborted_reason")
-            aborted_reason = request.data.get("aborted_reason")
+            new_aborted_reason = request.data.get("aborted_reason")
 
             order = self.usecase(
                 order_id=order_id,
                 user_id=requester_user.user_id,
-                new_aborted_reason=aborted_reason,
+                new_aborted_reason=new_aborted_reason,
             )
             viewmodel = AbortOrderViewmodel(order)
 

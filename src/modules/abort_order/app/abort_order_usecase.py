@@ -4,7 +4,7 @@ from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotDomainOrder
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner
 
 
 class AbortOrderUsecase:
@@ -20,16 +20,19 @@ class AbortOrderUsecase:
             raise UnregisteredUser()
 
         order_to_update: Order = self.repo_order.get_order_by_id(order_id=order_id)
+
         if order_to_update is None:
             raise NoItemsFound("order")
 
-        if order_to_update.user_id != user_id:
-            raise UserNotDomainOrder()
-
         if user.role == ROLE.ADMIN:
-            updated_order = self.repo_order.update_order(order_id=order_id, new_aborted_reason=new_aborted_reason, new_status=STATUS.CANCELLED)
+            updated_order = self.repo_order.update_order(order_id=order_id, new_aborted_reason=new_aborted_reason,
+                                                         new_status=STATUS.CANCELLED)
             return updated_order
 
-        updated_order = self.repo_order.update_order(order_id=order_id, new_aborted_reason=new_aborted_reason, new_status=STATUS.CANCELLED)
+        if order_to_update.user_id != user_id:
+            raise UserNotOrderOwner()
+
+        updated_order = self.repo_order.update_order(order_id=order_id, new_aborted_reason=new_aborted_reason,
+                                                     new_status=STATUS.CANCELLED)
 
         return updated_order

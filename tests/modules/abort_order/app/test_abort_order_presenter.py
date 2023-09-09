@@ -14,7 +14,7 @@ class Test_AbortOrderPresenter:
         event = get_event_for_presenter_sockets_tests(
             body={
                 "order_id": order.order_id,
-                "aborted_reason": "Desisti da compra!"
+                "aborted_reason": "Minha aula já está prestes a começar! :( "
             }
         )
 
@@ -22,13 +22,13 @@ class Test_AbortOrderPresenter:
 
         assert response['statusCode'] == 200
         assert json.loads(response["body"])["message"] == "the order was aborted"
-        assert json.loads(response["body"])["order"]["aborted_reason"] == "Desisti da compra!"
+        assert json.loads(response["body"])["order"]["aborted_reason"] == "Minha aula já está prestes a começar! :( "
 
     def test_presenter_order_id_none(self):
         order = repo_order.orders[0]
         event = get_event_for_presenter_sockets_tests(
             body={
-                "aborted_reason": "Não tinha o produto"
+                "aborted_reason": "Minha aula já está prestes a começar! :( "
             }
         )
 
@@ -41,7 +41,7 @@ class Test_AbortOrderPresenter:
         event = get_event_for_presenter_sockets_tests(
             body={
                 "order_id": "135ef881-1b1f-4f38-a662-8ff7156e6xxx",  # id que não existe
-                "aborted_reason": "Desisti da compra!"
+                "aborted_reason": "Minha aula já está prestes a começar! :( "
             }
         )
 

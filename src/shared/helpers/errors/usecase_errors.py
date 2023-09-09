@@ -43,6 +43,6 @@ class UnregisteredEmployee(BaseError):
         super().__init__(f'This employee is unregistered.')
 
 
-class UserNotDomainOrder(BaseError):
+class UserNotOrderOwner(BaseError):
     def __init__(self):
         super().__init__(f'This user is not the owner of this order.')
