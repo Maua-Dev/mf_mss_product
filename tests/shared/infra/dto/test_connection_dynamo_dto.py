@@ -7,8 +7,8 @@ class Test_ConnectionDynamoDTO:
 
     def test_from_entity(self):
         connection = Connection(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -18,8 +18,8 @@ class Test_ConnectionDynamoDTO:
         connection_dynamo_dto = ConnectionDynamoDTO.from_entity(connection)
 
         expected_connection_dynamo_dto = ConnectionDynamoDTO(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -35,16 +35,16 @@ class Test_ConnectionDynamoDTO:
 
     def test_to_dynamo_restaurant_none(self):
         connection_dynamo_dto = ConnectionDynamoDTO(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA
         )
         expected_dynamo = {
-            "connection_id":"4b1e0f88-2c34-3t2",
-            "api_id":"63c02df8-d1",
+            "connection_id":"4b1e0f88-2c34-3t",
+            "api_id":"63c02df8-d",
             "expire_date_seconds":1693418400,
             "creation_time_seconds":1693414800,
             "user_id":"93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -56,15 +56,15 @@ class Test_ConnectionDynamoDTO:
 
     def test_to_dynamo(self):
         connection_dynamo_dto = ConnectionDynamoDTO(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb"
         )
         expected_dynamo = {
-            "connection_id":"4b1e0f88-2c34-3t2",
-            "api_id":"63c02df8-d1",
+            "connection_id":"4b1e0f88-2c34-3t",
+            "api_id":"63c02df8-d",
             "expire_date_seconds":1693418400,
             "creation_time_seconds":1693414800,
             "user_id":"93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -75,8 +75,8 @@ class Test_ConnectionDynamoDTO:
 
     def test_from_entity_to_dynamo(self):
         connection = Connection(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -86,8 +86,8 @@ class Test_ConnectionDynamoDTO:
         connection_dynamo_dto = ConnectionDynamoDTO.from_entity(connection)
 
         expected_dynamo = {
-            "connection_id":"4b1e0f88-2c34-3t2",
-            "api_id":"63c02df8-d1",
+            "connection_id":"4b1e0f88-2c34-3t",
+            "api_id":"63c02df8-d",
             "expire_date_seconds":1693418400,
             "creation_time_seconds":1693414800,
             "user_id":"93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -98,8 +98,8 @@ class Test_ConnectionDynamoDTO:
         assert expected_dynamo == connection_dynamo_dto.to_dynamo()
 
     def test_from_dynamo(self):
-        dynamo_dict = {'Item': {"connection_id":"4b1e0f88-2c34-3t2",
-                                "api_id":"63c02df8-d1",
+        dynamo_dict = {'Item': {"connection_id":"4b1e0f88-2c34-3t",
+                                "api_id":"63c02df8-d",
                                 "expire_date_seconds":1693418400,
                                 "creation_time_seconds":1693414800,
                                 "user_id":"93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -118,8 +118,8 @@ class Test_ConnectionDynamoDTO:
         connection_dto = ConnectionDynamoDTO.from_dynamo(connection_data=dynamo_dict["Item"])
 
         expected_connection_dto = ConnectionDynamoDTO(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -129,8 +129,8 @@ class Test_ConnectionDynamoDTO:
         assert connection_dto == expected_connection_dto
 
     def test_from_dynamo_restaurant_none(self):
-        dynamo_dict = {'Item': {"connection_id":"4b1e0f88-2c34-3t2",
-                                "api_id":"63c02df8-d1",
+        dynamo_dict = {'Item': {"connection_id":"4b1e0f88-2c34-3t",
+                                "api_id":"63c02df8-d",
                                 "expire_date_seconds":1693418400,
                                 "creation_time_seconds":1693414800,
                                 "user_id":"93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -148,8 +148,8 @@ class Test_ConnectionDynamoDTO:
         connection_dto = ConnectionDynamoDTO.from_dynamo(connection_data=dynamo_dict["Item"])
 
         expected_connection_dto = ConnectionDynamoDTO(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb"
@@ -159,8 +159,8 @@ class Test_ConnectionDynamoDTO:
 
     def test_to_entity(self):
         connection_dynamo_dto = ConnectionDynamoDTO(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -168,8 +168,8 @@ class Test_ConnectionDynamoDTO:
         )
 
         expected_connection = Connection(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -187,8 +187,8 @@ class Test_ConnectionDynamoDTO:
         assert expected_connection.restaurant == connection.restaurant
 
     def test_from_dynamo_to_entity(self):
-        dynamo_dict = {'Item': {"connection_id":"4b1e0f88-2c34-3t2",
-                                "api_id":"63c02df8-d1",
+        dynamo_dict = {'Item': {"connection_id":"4b1e0f88-2c34-3t",
+                                "api_id":"63c02df8-d",
                                 "expire_date_seconds":1693418400,
                                 "creation_time_seconds":1693414800,
                                 "user_id":"93bc6ada-c0d1-7054-66ab-e17414c48abb",
@@ -207,8 +207,8 @@ class Test_ConnectionDynamoDTO:
         connection_dto = ConnectionDynamoDTO.from_dynamo(connection_data=dynamo_dict["Item"])
 
         expected_connection = Connection(
-            connection_id="4b1e0f88-2c34-3t2",
-            api_id="63c02df8-d1",
+            connection_id="4b1e0f88-2c34-3t",
+            api_id="63c02df8-d",
             expire_date_seconds=1693418400,
             creation_time_seconds=1693414800,
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",

@@ -130,19 +130,19 @@ class OrderRepositoryMock(IOrderRepository):
         ]
 
         self.connections = [
-            Connection(connection_id="4b1e0f88-2c34-3t2", api_id="63c02df8-d1", expire_date_seconds=1693418400, creation_time_seconds=1693414800, user_id=users_repo[2].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA),
+            Connection(connection_id="4b1e0f88-2c34-3t", api_id="63c02df8-d", expire_date_seconds=1693418400, creation_time_seconds=1693414800, user_id=users_repo[2].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA),
 
-            Connection(connection_id="d43e0f88-ab24-ec2", api_id="b1f02df8-g1", expire_date_seconds=1693328400, creation_time_seconds=1693324800, user_id=users_repo[3].user_id, restaurant=RESTAURANT.SOUZA_DE_ABREU),
+            Connection(connection_id="d43e0f88-ab24-ec", api_id="b1f02df8-g", expire_date_seconds=1693328400, creation_time_seconds=1693324800, user_id=users_repo[3].user_id, restaurant=RESTAURANT.SOUZA_DE_ABREU),
 
-            Connection(connection_id="ad2e0f88-2c34-bv2", api_id="efc02df8-r1", expire_date_seconds=1683291600, creation_time_seconds=1683288000, user_id=users_repo[1].user_id, restaurant=RESTAURANT.HORA_H),
+            Connection(connection_id="ad2e0f88-2c34-bv", api_id="efc02df8-r", expire_date_seconds=1683291600, creation_time_seconds=1683288000, user_id=users_repo[1].user_id, restaurant=RESTAURANT.HORA_H),
 
-            Connection(connection_id="yu120f88-2c34-45u", api_id="gdc02df8-j2", expire_date_seconds=1682265600, creation_time_seconds=1682262000, user_id=users_repo[0].user_id, restaurant=RESTAURANT.HORA_H),
+            Connection(connection_id="yu120f88-2c34-45", api_id="gdc02df8-j", expire_date_seconds=1682265600, creation_time_seconds=1682262000, user_id=users_repo[0].user_id, restaurant=RESTAURANT.HORA_H),
 
-            Connection(connection_id="9efe0f88-tu34-cd3", api_id="a9kpodf8-a0", expire_date_seconds=1686848400, creation_time_seconds=1686844800, user_id=users_repo[4].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA),
+            Connection(connection_id="9efe0f88-tu34-cd", api_id="a9kpodf8-a", expire_date_seconds=1686848400, creation_time_seconds=1686844800, user_id=users_repo[4].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA),
 
-            Connection(connection_id="48kl9abc-kd20-af2", api_id="52h4g57l-u2", expire_date_seconds=1675087200, creation_time_seconds=1675083600, user_id=users_repo[5].user_id, restaurant=RESTAURANT.HORA_H),
+            Connection(connection_id="48kl9abc-kd20-af", api_id="52h4g57l-u", expire_date_seconds=1675087200, creation_time_seconds=1675083600, user_id=users_repo[5].user_id, restaurant=RESTAURANT.HORA_H),
 
-            Connection(connection_id="8abc9064-r9lq-ul2", api_id="av2c2df8-d8", expire_date_seconds=1677636000, creation_time_seconds=1677632400, user_id=users_repo[6].user_id, restaurant=RESTAURANT.SOUZA_DE_ABREU),
+            Connection(connection_id="8abc9064-r9lq-ul", api_id="av2c2df8-d", expire_date_seconds=1677636000, creation_time_seconds=1677632400, user_id=users_repo[6].user_id, restaurant=RESTAURANT.SOUZA_DE_ABREU),
         ]
 
     def create_order(self, order: Order) -> Order:
