@@ -78,7 +78,7 @@ class Test_Connection:
         with pytest.raises(EntityError):
             connection = Connection(
                 connection_id="66575282-1c20-49",
-                api_id="47c02df8-c1",
+                api_id="47c02df8-c",
                 expire_date_seconds=1692140512,
                 creation_time_seconds=1692140549,
                 user_id="f3c395bc-d496-4503",
@@ -89,7 +89,7 @@ class Test_Connection:
         with pytest.raises(EntityError):
             connection = Connection(
                 connection_id="66575282-1c20-49",
-                api_id="47c02df8-c1",
+                api_id="47c02df8-c",
                 expire_date_seconds="1692140512",
                 creation_time_seconds=1692140549,
                 user_id="f3c395bc-d496-4503-885c-36ada2b4e651",
@@ -100,7 +100,7 @@ class Test_Connection:
         with pytest.raises(EntityError):
             connection = Connection(
                 connection_id="66575282-1c20-49",
-                api_id="47c02df8-c1",
+                api_id="47c02df8-c",
                 expire_date_seconds=1692140512,
                 creation_time_seconds="1692140549",
                 user_id="f3c395bc-d496-4503-885c-36ada2b4e651",
@@ -111,7 +111,7 @@ class Test_Connection:
         with pytest.raises(EntityError):
             connection = Connection(
                 connection_id="66575282-1c20-49",
-                api_id="47c02df8-c1",
+                api_id="47c02df8-c",
                 expire_date_seconds=1692140512,
                 creation_time_seconds=1692140549,
                 user_id="f3c395bc-d496-4503-885c-36ada2b4e651",
