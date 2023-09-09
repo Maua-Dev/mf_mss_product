@@ -97,7 +97,7 @@ class Test_OrderRepositoryMock:
         repo = OrderRepositoryMock()
         len_before = len(repo.connections)
 
-        connection = Connection(connection_id="4b133f88-2c34-3t", api_id="47c02df8-c", expire_date_seconds=1693418600, creation_time_seconds=1693414200, user_id="93bc6ada-c0d1-7054-42je-e17414c48af1", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
+        connection = Connection(connection_id="4b133f88-2c34-3t", api_id="63c02df8-5", expire_date_seconds=1693418600, creation_time_seconds=1693414200, user_id="93bc6ada-c0d1-7054-42je-e17414c48af1", restaurant=RESTAURANT.CANTINA_DO_MOLEZA)
 
         repo.create_connection(connection=connection)
 
