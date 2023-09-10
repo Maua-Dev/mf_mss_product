@@ -35,3 +35,7 @@ class UnregisteredEmployee(BaseError):
     def __init__(self):
         """This error appears when there is a user which role is OWNER or SELLER and still doesn't have a restaurant assigned."""
         super().__init__(f'This employee is unregistered.')
+
+class WrongTypeRouteKey(BaseError):
+    def __init__(self, message: str):
+        super().__init__(f"Field {message} is not a acceptable route_key value, must be $connect or $disconnect")

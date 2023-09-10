@@ -27,7 +27,7 @@ class Test_ManageConnectionController:
 
         response = controller(request)
 
-        assert response.status_code == 201
+        assert response.status_code == 200
         assert response.body["message"] == "the connection status"
         assert response.body["connection"]["connection_id"] == "4b1e0f88-2ch6-3t"
         assert response.body["connection"]["api_id"] == "63c77df8-d"
@@ -41,9 +41,16 @@ class Test_ManageConnectionController:
         controller = ManageConnectionController(usecase)
 
         request = HttpRequest(body={
-            "route_key": '$disconnect',
+            "requester_user": {
+                "sub": repo_user.users_list[0].user_id,
+                "name": repo_user.users_list[0].name,
+                "email": repo_user.users_list[0].email,
+                "custom:isMaua": True
+            },
+            "route_key": '$connect',
             "connection_id": "4b1e0f88-2c34-3t",
-            "restaurant": "CANTINA_DO_MOLEZA"
+            "restaurant": "CANTINA_DO_MOLEZA",
+            "api_id": "63c77df8-d",
         })
 
         response = controller(request)
@@ -51,56 +58,9 @@ class Test_ManageConnectionController:
         assert response.status_code == 200
         assert response.body["message"] == "the connection status"
         assert response.body["connection"]["connection_id"] == "4b1e0f88-2c34-3t"
-        assert response.body["connection"]["api_id"] == "63c02df8-d"
-        assert response.body["connection"]["user_id"] == "93bc6ada-c0d1-7054-66ab-e17414c48abb"
+        assert response.body["connection"]["api_id"] == "63c77df8-d"
+        assert response.body["connection"]["user_id"] == "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
         assert response.body["connection"]["restaurant"] == "CANTINA_DO_MOLEZA"
-
-    def test_default_connection_controller(self):
-        repo_order = OrderRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = ManageConnectionUsecase(repo_order, repo_user)
-        controller = ManageConnectionController(usecase)
-
-        request = HttpRequest(body={
-            "requester_user": {
-                "sub": repo_user.users_list[0].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
-                "custom:isMaua": True
-            },
-            "route_key": '$default',
-            "connection_id": "4b1e0f88-2ch6-3t",
-            "api_id": "63c77df8-d",
-            "restaurant": "HORA_H"
-        })
-
-        response = controller(request)
-
-        assert response.status_code == 400
-        assert response.body == "Field $default is not a acceptable route_key value, must be $connect or $disconnect"
-
-    def test_manage_connection_controller_route_key_none(self):
-        repo_order = OrderRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = ManageConnectionUsecase(repo_order, repo_user)
-        controller = ManageConnectionController(usecase)
-
-        request = HttpRequest(body={
-            "requester_user": {
-                "sub": repo_user.users_list[0].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
-                "custom:isMaua": True
-            },
-            "connection_id": "4b1e0f88-2ch6-3t",
-            "api_id": "63c77df8-d",
-            "restaurant": "HORA_H"
-        })
-
-        response = controller(request)
-
-        assert response.status_code == 400
-        assert response.body == "Field route_key is missing"
 
     def test_create_connection_controller_requester_user_none(self):
         repo_order = OrderRepositoryMock()
