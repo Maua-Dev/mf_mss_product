@@ -1,11 +1,11 @@
 import abc
 import re
-from typing import Dict, List, Optional
+from typing import List, Optional
 from src.shared.domain.entities.order_product import OrderProduct
 
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
-from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterExcededMaximumValue
 
 
 class Order(abc.ABC):
@@ -19,6 +19,7 @@ class Order(abc.ABC):
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
+    last_status_update_milliseconds: int = None
     ID_LENGTH = 36
     MIN_NAME_LENGTH = 2
 
@@ -28,11 +29,13 @@ class Order(abc.ABC):
                  user_id: str,
                  products: List[OrderProduct],
                  creation_time_milliseconds: int,
-                 restaurant: RESTAURANT, 
+                 restaurant: RESTAURANT,
                  status: STATUS,
                  total_price: float,
+                 last_status_update_milliseconds: int = None,
                  observation: Optional[str] = None,
-                 aborted_reason: Optional[str] = None):
+                 aborted_reason: Optional[str] = None
+                 ):
         
         if not Order.validate_id(id=order_id):
             raise EntityError("order_id")
@@ -53,6 +56,14 @@ class Order(abc.ABC):
         if type(creation_time_milliseconds) != int:
             raise EntityError("creation_time_milliseconds")
         self.creation_time_milliseconds = creation_time_milliseconds
+
+        if last_status_update_milliseconds is not None:
+            if type(last_status_update_milliseconds) != int:
+                raise EntityError("last_status_update_milliseconds")
+            if last_status_update_milliseconds < creation_time_milliseconds:
+                raise EntityParameterExcededMaximumValue(field="last_status_update", maximum_value=str(creation_time_milliseconds))
+
+        self.last_status_update_milliseconds = last_status_update_milliseconds
 
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")
@@ -107,4 +118,4 @@ class Order(abc.ABC):
         return True
     
     def __repr__(self):
-        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, observation={self.observation}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price})"
+        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, observation={self.observation}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price}, last_status_update={self.last_status_update_milliseconds})"

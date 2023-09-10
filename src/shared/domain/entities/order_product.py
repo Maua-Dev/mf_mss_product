@@ -42,3 +42,6 @@ class OrderProduct(abc.ABC):
     
     def __repr__(self):
         return f"OrderProduct(product_name={self.product_name}, product_id={self.product_id}, quantity={self.quantity})"
+    
+    def __eq__(self, other):
+        return self.product_name == other.product_name and self.product_id == other.product_id and self.quantity == other.quantity
