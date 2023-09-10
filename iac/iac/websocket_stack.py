@@ -1,31 +1,51 @@
 import os
 from aws_cdk import (
     Stack,
+    aws_lambda as lambda_,
+    Duration,
     aws_cognito
 )
 from constructs import Construct
 
-from .bucket_stack import BucketStack
-from .dynamo_stack import DynamoStack
+from aws_cdk.aws_apigatewayv2 import WebSocketApi, WebSocketRouteOptions, WebSocketLambdaIntegration
+from aws_cdk.aws_lambda import LayerVersion
 
-from .lambda_stack import LambdaStack
-from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
+class WebSocketStack(Construct):
 
-class WebSocketStack(Stack):
-    lambda_stack: LambdaStack
-
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, lambda_layer: LayerVersion, environment_variables: dict, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
-        self.s3_assets_cdn = os.environ.get("S3_ASSETS_CDN")
-        self.dev_auth_system_userpool_arn = os.environ.get("AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
+        self.dev_auth_system_userpool_arn = os.environ.get(
+            "AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
 
-        self.dynamo_stack = DynamoStack(self)
+        manage_connection_function = lambda_.Function(
+            self, "ManageConnectionFunction",
+            code=lambda_.Code.from_asset(f"../src/modules/manage_connection"),
+            handler=f"app.manage_connection_presenter.lambda_handler",
+            runtime=lambda_.Runtime.PYTHON_3_9,
+            layers=[lambda_layer],
+            memory_size=512,
+            environment=environment_variables,
+            timeout=Duration.seconds(15),
+        )
 
-        self.websocket_api = WebSocketLambdaIntegration(self, api_name=f"MauaFood_WebSocketApi_{self.github_ref_name}",
-                                                        connect_route_options=[],
-                                                        disconnect_route_options=[],
-                                                        default_route_options=[],
-                                                        route_selection_expression=[],)
+        self.manage_connection_function_integration = WebSocketLambdaIntegration(
+            handler=manage_connection_function,
+            payload_format_version="1.0",
+        )     
+        
+        self.web_socket = WebSocketApi(
+            self, f"MauaFood_WebSocketApi_{self.github_ref_name}",
+            api_name=f"MauaFood_WebSocketApi_{self.github_ref_name}",
+            description="This is the MauaFood WebSocketApi",
+            connect_route_options=WebSocketRouteOptions(
+                integration=self.manage_connection_function_integration,
+                route_key="$connect",
+            ),
+            disconnect_route_options=WebSocketRouteOptions(
+                integration=self.manage_connection_function_integration,
+                route_key="$disconnect",
+            )   
+        )
