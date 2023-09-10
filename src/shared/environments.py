@@ -7,7 +7,6 @@ from src.shared.domain.repositories.product_repository_interface import IProduct
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 
 
-
 class STAGE(Enum):
     DOTENV = "DOTENV"
     DEV = "DEV"
@@ -68,14 +67,20 @@ class Environments:
             self.region = os.environ.get("AWS_REGION")
             self.endpoint_url_product = os.environ.get("ENDPOINT_URL_PRODUCT")
             self.endpoint_url_user = os.environ.get("ENDPOINT_URL_USER")
-            self.dynamo_table_name_product = os.environ.get("DYNAMO_TABLE_NAME_PRODUCT") 
-            self.dynamo_table_name_user = os.environ.get("DYNAMO_TABLE_NAME_USER") 
-            self.dynamo_partition_key_product = os.environ.get("DYNAMO_PARTITION_KEY")
+            self.dynamo_table_name_product = os.environ.get(
+                "DYNAMO_TABLE_NAME_PRODUCT")
+            self.dynamo_table_name_user = os.environ.get(
+                "DYNAMO_TABLE_NAME_USER")
+            self.dynamo_partition_key_product = os.environ.get(
+                "DYNAMO_PARTITION_KEY")
             self.dynamo_sort_key_product = os.environ.get("DYNAMO_SORT_KEY")
-            self.dynamo_partition_key_user = os.environ.get("DYNAMO_PARTITION_KEY")
+            self.dynamo_partition_key_user = os.environ.get(
+                "DYNAMO_PARTITION_KEY")
             # self.dynamo_sort_key_user = os.environ.get("DYNAMO_SORT_KEY")
-            self.cloud_front_distribution_domain_assets = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS")
-            self.dynamo_gsi_partition_key = os.environ.get("DYNAMO_GSI_PARTITION_KEY")
+            self.cloud_front_distribution_domain_assets = os.environ.get(
+                "CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS")
+            self.dynamo_gsi_partition_key = os.environ.get(
+                "DYNAMO_GSI_PARTITION_KEY")
             self.dynamo_gsi_sort_key = os.environ.get("DYNAMO_GSI_SORT_KEY")
 
     @staticmethod
@@ -85,10 +90,10 @@ class Environments:
             return ProductRepositoryMock
         elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
             from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
-            return ProductRepositoryDynamo        
+            return ProductRepositoryDynamo
         else:
             raise Exception("No repository found for this stage")
-        
+
     @staticmethod
     def get_user_repo() -> IUserRepository:
         if Environments.get_envs().stage == STAGE.TEST:
@@ -99,18 +104,19 @@ class Environments:
             return UserRepositoryDynamo
         else:
             raise Exception("No repository found for this stage")
-        
+
     @staticmethod
     def get_order_repo() -> IOrderRepository:
         if Environments.get_envs().stage == STAGE.TEST:
             from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
             return OrderRepositoryMock
-        #elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
-            #from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
-            #return OrderRepositoryDynamo
+        elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
+            # from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
+            # return OrderRepositoryDynamo
+            from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
+            return OrderRepositoryMock
         else:
             raise Exception("No repository found for this stage")
-
 
     @staticmethod
     def get_envs() -> "Environments":

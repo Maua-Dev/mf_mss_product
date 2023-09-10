@@ -1,3 +1,4 @@
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.base_error import BaseError
 
 
@@ -21,6 +22,11 @@ class UserNotAllowed(BaseError):
         super().__init__(f'That type of user has no permission for that action')
 
 
+class UserNotRelatedToRestaurant(BaseError):
+    def __init__(self, restaurant: RESTAURANT):
+        super().__init__(f'User has no permission in {restaurant.value} restaurant')
+
+
 class UnregisteredUser(BaseError):
     def __init__(self):
         super().__init__(f'That user is not registered')
@@ -35,6 +41,10 @@ class UnregisteredEmployee(BaseError):
     def __init__(self):
         """This error appears when there is a user which role is OWNER or SELLER and still doesn't have a restaurant assigned."""
         super().__init__(f'This employee is unregistered.')
+
+class UserNotOrderOwner(BaseError):
+    def __init__(self):
+        super().__init__(f'This user is not the owner of this order.')
 
 class WrongTypeRouteKey(BaseError):
     def __init__(self, message: str):

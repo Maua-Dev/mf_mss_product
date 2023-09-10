@@ -3,9 +3,9 @@ from typing import Dict, List, Optional
 
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
-from src.shared.domain.entities.connection import Connection
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.entities.connection import Connection
 
 class IOrderRepository(ABC):
 
@@ -18,7 +18,6 @@ class IOrderRepository(ABC):
         """This method return all orders which status are PENDING or PREPARING of a single restaurant  that the user wishes."""
         pass
 
-    @abstractmethod
     def get_order_by_id(self, order_id: str) -> Optional[Order]:
         pass
     
