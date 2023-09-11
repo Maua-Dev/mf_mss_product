@@ -1,6 +1,7 @@
 import datetime
 import os
 from typing import Dict, List
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
@@ -734,3 +735,13 @@ class ProductRepositoryMock(IProductRepository):
                     "time_created": f"{time_created}"
                 }
               }
+    
+    def batch_get_product(self, products: List[OrderProduct], restaurant: RESTAURANT) -> List[Product]:
+        products_list = list()
+        for product in products:
+            get_product = self.get_product(product_id=product.product_id, restaurant=restaurant)
+            if get_product is None:
+                return None
+            products_list.append(get_product)
+
+        return products_list
