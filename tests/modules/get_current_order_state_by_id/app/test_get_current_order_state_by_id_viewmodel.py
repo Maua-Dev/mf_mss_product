@@ -12,7 +12,7 @@ class Test_GetCurrentOrderStateViewmodel:
         expected = {
             "order": {
                 "order_id": order.order_id,
-                "order_status": order.status
+                "order_status": order.status.value
             },
             "message": "the order status object was retrieved"
         }

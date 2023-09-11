@@ -12,7 +12,7 @@ class OrderStatusViewmodel:
     def to_dict(self) -> dict:
         return {
             "order_id": self.order_id,
-            "order_status": self.current_status
+            "order_status": self.current_status.value
         }
 
 
