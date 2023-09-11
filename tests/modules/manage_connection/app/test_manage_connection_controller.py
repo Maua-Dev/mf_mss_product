@@ -1,5 +1,5 @@
-from src.modules.create_connection.app.manage_connection_controller import ManageConnectionController
-from src.modules.create_connection.app.manage_connection_usecase import ManageConnectionUsecase
+from src.modules.manage_connection.app.manage_connection_controller import ManageConnectionController
+from src.modules.manage_connection.app.manage_connection_usecase import ManageConnectionUsecase
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
