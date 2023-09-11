@@ -1,4 +1,4 @@
-from src.modules.create_connection.app.manage_connection_viewmodel import ManageConnectionViewmodel
+from src.modules.manage_connection.app.manage_connection_viewmodel import ManageConnectionViewmodel
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 

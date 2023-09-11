@@ -1,5 +1,5 @@
 import json
-from src.modules.create_connection.app.manage_connection_presenter import lambda_handler
+from src.modules.manage_connection.app.manage_connection_presenter import lambda_handler
 
 
 class Test_ManageConnectionPresenter:

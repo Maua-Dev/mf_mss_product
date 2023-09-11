@@ -1,5 +1,5 @@
 import pytest
-from src.modules.create_connection.app.manage_connection_usecase import ManageConnectionUsecase
+from src.modules.manage_connection.app.manage_connection_usecase import ManageConnectionUsecase
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotAllowed, WrongTypeRouteKey
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
