@@ -181,3 +181,11 @@ class Test_OrderRepositoryMock:
         repo.abort_connection(connection_id, restaurant)
 
         assert len(repo.connections) == len_before - 1
+
+    def test_get_all_orders_by_user(self):
+        repo = OrderRepositoryMock()
+        order = repo.orders[0]
+
+        order_list = repo.get_all_orders_by_user(user_id=order.user_id, order_id=order.order_id)
+
+        assert len(order_list) == 1

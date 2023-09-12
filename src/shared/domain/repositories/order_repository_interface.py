@@ -43,3 +43,7 @@ class IOrderRepository(ABC):
     @abstractmethod
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         pass
+
+    @abstractmethod
+    def get_all_orders_by_user(self, user_id: str, order_id: str or None) -> List[Order]:
+        pass

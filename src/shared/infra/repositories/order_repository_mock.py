@@ -212,4 +212,18 @@ class OrderRepositoryMock(IOrderRepository):
     
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         return True
+    
+    def get_all_orders_by_user(self, user_id: str, order_id: str or None) -> List[Order]:
+
+        user_orders = sorted([order for order in self.orders if order.user_id == user_id],
+                                   key=lambda order: order.creation_time_milliseconds, reverse=False)
+
+        if order_id:
+            for index, order in enumerate(user_orders):
+                if order.order_id == order_id:
+                    order_id_position = index
+                    return user_orders[order_id_position:order_id_position + 20]
+
+        else:
+            return user_orders[:20]
 
