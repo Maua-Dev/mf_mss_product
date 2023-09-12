@@ -7,7 +7,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketRouteOptions, WebSocketLambdaIntegration
+#from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketRouteOptions, WebSocketLambdaIntegration
 from aws_cdk.aws_lambda import LayerVersion
 
 class WebSocketStack(Construct):
@@ -31,21 +31,21 @@ class WebSocketStack(Construct):
             timeout=Duration.seconds(15),
         )
 
-        self.manage_connection_function_integration = WebSocketLambdaIntegration(
-            handler=manage_connection_function,
-            payload_format_version="1.0",
-        )     
-        
-        self.web_socket = WebSocketApi(
-            self, f"MauaFood_WebSocketApi_{self.github_ref_name}",
-            api_name=f"MauaFood_WebSocketApi_{self.github_ref_name}",
-            description="This is the MauaFood WebSocketApi",
-            connect_route_options=WebSocketRouteOptions(
-                integration=self.manage_connection_function_integration,
-                route_key="$connect",
-            ),
-            disconnect_route_options=WebSocketRouteOptions(
-                integration=self.manage_connection_function_integration,
-                route_key="$disconnect",
-            )   
-        )
+        #self.manage_connection_function_integration = WebSocketLambdaIntegration(
+        #    handler=manage_connection_function,
+        #    payload_format_version="1.0",
+        #)     
+        #
+        #self.web_socket = WebSocketApi(
+        #    self, f"MauaFood_WebSocketApi_{self.github_ref_name}",
+        #    api_name=f"MauaFood_WebSocketApi_{self.github_ref_name}",
+        #    description="This is the MauaFood WebSocketApi",
+        #    connect_route_options=WebSocketRouteOptions(
+        #        integration=self.manage_connection_function_integration,
+        #        route_key="$connect",
+        #    ),
+        #    disconnect_route_options=WebSocketRouteOptions(
+        #        integration=self.manage_connection_function_integration,
+        #        route_key="$disconnect",
+        #    )   
+        #)
