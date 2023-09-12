@@ -5,7 +5,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from .websocket_stack import WebSocketStack
+#from .websocket_stack import WebSocketStack
 
 from .bucket_stack import BucketStack
 from .dynamo_stack import DynamoStack
