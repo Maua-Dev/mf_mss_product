@@ -31,7 +31,8 @@ class Test_GetCurrentOrderStateByIdPresenter:
         expected_body = {
             "order": {
                 "order_id": order.order_id,
-                "order_status": order.status.value
+                "order_status": order.status.value,
+                "aborted_reason": None
             },
             "message": "the order status object was retrieved"
         }
@@ -84,3 +85,16 @@ class Test_GetCurrentOrderStateByIdPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 400
+
+    def test_nonexistent_order(self):
+        repo = OrderRepositoryMock()
+
+        event = get_event_for_presenter_sockets_tests(
+            body={
+                "order_id": "um id que não existe"
+            }
+        )
+
+        response = lambda_handler(event, None)
+
+        assert response["statusCode"] == 404

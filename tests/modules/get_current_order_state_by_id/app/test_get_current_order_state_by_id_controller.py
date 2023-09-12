@@ -2,6 +2,7 @@ from src.modules.get_current_order_state_by_id.app.get_current_order_state_by_id
     GetCurrentOrderStateByIdController
 from src.modules.get_current_order_state_by_id.app.get_current_order_state_by_id_usecase import \
     GetCurrentOrderStateByIdUsecase
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -40,12 +41,18 @@ class Test_GetCurrentOrderStateByIdController:
         controller = GetCurrentOrderStateByIdController(usecase)
 
         order = repo_order.orders[-1]
+
         user = repo_user.users_list[-1]
+        user.role = ROLE.USER
+
+        other_user = repo_user.users_list[0]
+        other_user.role = ROLE.USER
+
         order.user_id = user.user_id
 
         request = HttpRequest(body={
             "requester_user": {
-                "sub": repo_user.users_list[0].user_id,
+                "sub": other_user.user_id,
                 "name": user.name,
                 "email": user.email,
                 "custom:isMaua": True
@@ -79,3 +86,43 @@ class Test_GetCurrentOrderStateByIdController:
         response = controller(request)
 
         assert response.status_code == 400
+
+    def test_missing_requester_user(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetCurrentOrderStateByIdUsecase(user_repo=repo_user, order_repo=repo_order)
+        controller = GetCurrentOrderStateByIdController(usecase)
+
+        order = repo_order.orders[-1]
+        user = repo_user.users_list[-1]
+
+        request = HttpRequest(body={
+            "order_id": order.order_id
+        })
+
+        response = controller(request)
+
+        assert response.status_code == 400
+
+    def test_order_id_doesnt_exist(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetCurrentOrderStateByIdUsecase(user_repo=repo_user, order_repo=repo_order)
+        controller = GetCurrentOrderStateByIdController(usecase)
+
+        order = repo_order.orders[-1]
+        user = repo_user.users_list[-1]
+
+        request = HttpRequest(body={
+            "requester_user": {
+                "sub": user.user_id,
+                "name": user.name,
+                "email": user.email,
+                "custom:isMaua": True
+            },
+            "order_id": "Um id que não existe"
+        })
+
+        response = controller(request)
+
+        assert response.status_code == 404

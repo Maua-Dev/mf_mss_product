@@ -8,11 +8,13 @@ class OrderStatusViewmodel:
     def __init__(self, order: Order):
         self.order_id = order.order_id
         self.current_status = order.status
+        self.aborted_reason = order.aborted_reason
 
     def to_dict(self) -> dict:
         return {
             "order_id": self.order_id,
-            "order_status": self.current_status.value
+            "order_status": self.current_status.value,
+            "aborted_reason": self.aborted_reason
         }
 
 
