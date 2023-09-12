@@ -142,6 +142,14 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.get_current_order_state_by_id = self.create_lambda_api_gateway_integration(
+            module_name="get_current_order_state_by_id",
+            method="GET",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
         self.abort_order = self.create_lambda_api_gateway_integration(
             module_name="abort_order",
             method="POST",
@@ -173,4 +181,6 @@ class LambdaStack(Construct):
             self.update_product,
             self.request_upload_product_photo,
             self.create_order,
+            self.get_current_order_state_by_id,
         ]
+        
