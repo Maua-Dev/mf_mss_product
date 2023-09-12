@@ -18,6 +18,13 @@ class IOrderRepository(ABC):
         """This method return all orders which status are PENDING or PREPARING of a single restaurant  that the user wishes."""
         pass
 
+    @abstractmethod
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, order_id: str) -> List[Order]:
+        """
+        This method return the history of orders of the selected restaurant.
+        """
+        pass
+
     def get_order_by_id(self, order_id: str) -> Optional[Order]:
         pass
     
