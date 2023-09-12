@@ -127,7 +127,7 @@ class LambdaStack(Construct):
         )
         
         self.create_order = self.create_lambda_api_gateway_integration(
-            module_name="crete_order",
+            module_name="create_order",
             method="POST",
             api_resource=api_gateway_resource,
             environment_variables=environment_variables,
