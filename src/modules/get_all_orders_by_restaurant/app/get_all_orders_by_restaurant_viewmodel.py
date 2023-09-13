@@ -69,5 +69,6 @@ class GetAllOrdersByRestaurantViewmodel:
     def to_dict(self):
         return {
             'all_orders': [OrderViewmodel(order).to_dict() for order in self.all_orders],
+            'last_order_id': self.all_orders[-1].order_id if len(self.all_orders) > 0 else None,
             'message': "the orders were retrieved"
         }

@@ -11,18 +11,20 @@ class GetAllOrdersByRestaurantUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, user_id: str, order_id: str or None) -> List[Order]:
-        
-        user = self.repo_user.get_user_by_id(user_id)
-        order = self.repo_order.get_order_by_id(order_id) # can be None
+    def __call__(self, user_id: str, exclusive_start_key: str or None) -> List[Order]:
 
+        self.amount = 20
+
+        user = self.repo_user.get_user_by_id(user_id)
         if user is None:
             raise UnregisteredUser()
 
         if user.role not in [ROLE.OWNER, ROLE.ADMIN, ROLE.SELLER]:
             raise UserNotAllowed()
-        
+
         if user.restaurant is None:
             raise UnregisteredEmployee()
 
-        return self.repo_order.get_all_orders_by_restaurant(restaurant=user.restaurant, order_id=order_id)
+        return self.repo_order.get_all_orders_by_restaurant(restaurant=user.restaurant,
+                                                            exclusive_start_key=exclusive_start_key,
+                                                            amount=self.amount)
