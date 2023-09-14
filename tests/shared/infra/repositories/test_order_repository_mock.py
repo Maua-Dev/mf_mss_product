@@ -188,4 +188,4 @@ class Test_OrderRepositoryMock:
 
         order_list = repo.get_all_orders_by_user(user_id=order.user_id, order_id=order.order_id)
 
-        assert len(order_list) == 1
+        assert len(order_list) == 2

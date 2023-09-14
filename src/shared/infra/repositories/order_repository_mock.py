@@ -30,6 +30,15 @@ class OrderRepositoryMock(IOrderRepository):
                   last_status_update_milliseconds=1992061596999
                   ),
 
+            Order(order_id="b3f6c5aa-80ad-4f95-ae16-455b4f874553", user_name=users_repo[4].name,
+                  user_id=users_repo[4].user_id, products=[
+                    OrderProduct(product_name=products_repo[168].name, product_id=products_repo[168].product_id,
+                                 quantity=2)], creation_time_milliseconds=1692061297000,
+                  restaurant=RESTAURANT.CANTINA_DO_MOLEZA, status=STATUS.READY, total_price=14.00,
+                  observation=None, aborted_reason=None,
+                  last_status_update_milliseconds=1992061596999
+                  ),
+
             Order(order_id="d2b29a41-69a6-4ad8-87b9-2444119fbf66", user_name=users_repo[0].name,
                   user_id=users_repo[0].user_id, products=[
                     OrderProduct(product_name=products_repo[17].name, product_id=products_repo[17].product_id,
