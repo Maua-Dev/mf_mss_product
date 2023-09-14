@@ -4,7 +4,7 @@ from decimal import Decimal
 import uuid
 import boto3
 from botocore.config import Config
-
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
