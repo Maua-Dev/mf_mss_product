@@ -231,7 +231,8 @@ class OrderRepositoryMock(IOrderRepository):
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         return True
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> \
+    List[Order]:
         # Getting all orders from the requested restaurant sorted by creation_time_milliseconds
         restaurant_orders = sorted([order for order in self.orders if order.restaurant == restaurant],
                                    key=lambda order: order.creation_time_milliseconds, reverse=False)
@@ -241,7 +242,7 @@ class OrderRepositoryMock(IOrderRepository):
             for index, order in enumerate(restaurant_orders):
                 if order.order_id == exclusive_start_key:
                     order_id_position = index
-                    return restaurant_orders[order_id_position:order_id_position + 20]
+                    return restaurant_orders[order_id_position:order_id_position + amount]
 
         else:
-            return restaurant_orders[:20]
+            return restaurant_orders[:amount]
