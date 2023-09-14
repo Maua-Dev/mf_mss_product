@@ -6,6 +6,10 @@ class NoItemsFound(BaseError):
     def __init__(self, message: str):
         super().__init__(f'No items found for {message}')
 
+class OrderAlreadyPreparing(BaseError):
+    def __init__(self):
+        super().__init__(f'The order is already preparing')
+
 
 class DuplicatedItem(BaseError):
     def __init__(self, message: str):
