@@ -4,7 +4,7 @@ from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner, OrderAlreadyPreparing
 
 
 class AbortOrderUsecase:
@@ -23,6 +23,9 @@ class AbortOrderUsecase:
 
         if order_to_update is None:
             raise NoItemsFound("order")
+
+        if order_to_update.status != STATUS.PENDING and user.role != ROLE.ADMIN:
+            raise OrderAlreadyPreparing()
 
         if user.role == ROLE.ADMIN:
             updated_order = self.repo_order.update_order(order_id=order_id, new_aborted_reason=new_aborted_reason,
