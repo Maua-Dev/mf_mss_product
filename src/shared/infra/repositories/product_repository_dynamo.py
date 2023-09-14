@@ -160,7 +160,10 @@ class ProductRepositoryDynamo(IProductRepository):
 
         key = f"{product_id}/product-{time_created}.jpeg"
         return key
-
+        
+    def batch_get_product(self, products: List[OrderProduct], restaurant: RESTAURANT) -> List[Product]:
+        pass
+        
     def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
         my_config = Config(
             region_name=Environments.get_envs().region,
