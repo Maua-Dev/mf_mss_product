@@ -19,15 +19,15 @@ class Test_AbortOrderController:
                 "email": repo_user.users_list[6].email,
                 "custom:isMaua": True
             },
-            "order_id": repo_order.orders[5].order_id,
-            "aborted_reason": repo_order.orders[5].aborted_reason,
+            "order_id": repo_order.orders[6].order_id,
+            "aborted_reason": repo_order.orders[6].aborted_reason,
         })
 
         response = controller(request)
 
         assert response.status_code == 200
         assert response.body["message"] == "the order was aborted"
-        assert response.body['order']["aborted_reason"] == repo_order.orders[5].aborted_reason
+        assert response.body['order']["aborted_reason"] == repo_order.orders[6].aborted_reason
 
     def test_requester_user_is_none(self):
         repo_order = OrderRepositoryMock()
