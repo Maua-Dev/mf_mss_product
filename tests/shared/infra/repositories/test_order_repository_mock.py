@@ -92,6 +92,22 @@ class Test_OrderRepositoryMock:
 
         assert len(orders_list) == 2
 
+    def test_get_all_orders_by_restaurant_without_order_id(self):
+        repo = OrderRepositoryMock()
+        orders_list = repo.get_all_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU, exclusive_start_key=None,
+                                                        amount=20)
+
+        assert len(orders_list) == 7
+
+    def test_get_all_orders_by_restaurant_with_order_id(self):
+        repo = OrderRepositoryMock()
+        order_id = repo.orders[1].order_id
+        orders_list = repo.get_all_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU,
+                                                        exclusive_start_key=order_id,
+                                                        amount=20)
+
+        assert len(orders_list) == 6
+
     def test_get_order_by_id(self):
         repo = OrderRepositoryMock()
         order_id = repo.orders[1].order_id

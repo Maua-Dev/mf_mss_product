@@ -4,7 +4,7 @@ from decimal import Decimal
 import uuid
 import boto3
 from botocore.config import Config
-
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
@@ -160,7 +160,10 @@ class ProductRepositoryDynamo(IProductRepository):
 
         key = f"{product_id}/product-{time_created}.jpeg"
         return key
-
+        
+    def batch_get_product(self, products: List[OrderProduct], restaurant: RESTAURANT) -> List[Product]:
+        pass
+        
     def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
         my_config = Config(
             region_name=Environments.get_envs().region,
