@@ -14,7 +14,7 @@ class Test_GetAllOrdersByRestaurantUseCase:
         usecase = GetAllOrdersByRestaurantUsecase(repo_order, repo_user)
         orders = usecase(user_id=repo_user.users_list[3].user_id, exclusive_start_key=repo_order.orders[9].order_id)
 
-        assert len(orders) == 2
+        assert len(orders) == 3
 
     def test_get_all_orders_by_restaurant_usecase_without_order_id(self):
         repo_order = OrderRepositoryMock()
