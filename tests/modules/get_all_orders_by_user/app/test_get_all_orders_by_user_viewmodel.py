@@ -28,7 +28,8 @@ class Test_GetAllOrdersByUserViewmodel:
                 'status': 'PREPARING',
                 'total_price': 25.5,
                 'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48af9",
-                'user_name':'Rodrigo Morales'
+                'user_name':'Rodrigo Morales',
+                'last_status_update':1992061596999
             }],
             'message': 'the orders were retrieved',
         }
@@ -58,7 +59,8 @@ class Test_GetAllOrdersByUserViewmodel:
                 'status': 'READY',
                 'total_price': 30.00,
                 'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
-                'user_name':'Lucas Milas'
+                'user_name':'Lucas Milas',
+                'last_status_update':1992061596999
             },
             {
                 'aborted_reason': None,
@@ -74,7 +76,8 @@ class Test_GetAllOrdersByUserViewmodel:
                 'status': 'READY',
                 'total_price': 14.00,
                 'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
-                'user_name':'Lucas Milas'
+                'user_name':'Lucas Milas',
+                'last_status_update':1992061596999
             }],
             'message': 'the orders were retrieved',
         }

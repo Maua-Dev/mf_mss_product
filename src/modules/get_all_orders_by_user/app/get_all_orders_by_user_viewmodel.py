@@ -42,6 +42,7 @@ class OrderViewmodel:
         self.status = order.status
         self.aborted_reason = order.aborted_reason
         self.total_price = order.total_price
+        self.last_status_update_milliseconds = order.last_status_update_milliseconds
 
     def to_dict(self) -> dict:
         return{
@@ -54,7 +55,8 @@ class OrderViewmodel:
              "observation": self.observation,
              "status": self.status.value,
              "aborted_reason": self.aborted_reason,
-             "total_price": self.total_price 
+             "total_price": self.total_price,
+             "last_status_update": self.last_status_update_milliseconds
             }
 
 class GetAllOrdersByUserViewmodel:
