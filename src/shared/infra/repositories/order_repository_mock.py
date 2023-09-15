@@ -225,7 +225,7 @@ class OrderRepositoryMock(IOrderRepository):
     def get_all_orders_by_user(self, user_id: str, order_id: str or None) -> List[Order]:
 
         user_orders = sorted([order for order in self.orders if order.user_id == user_id],
-                                   key=lambda order: order.creation_time_milliseconds, reverse=False)
+                             key=lambda order: order.creation_time_milliseconds, reverse=False)
 
         if order_id:
             for index, order in enumerate(user_orders):
