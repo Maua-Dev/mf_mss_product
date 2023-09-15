@@ -40,7 +40,7 @@ class Test_AbortOrderUseCase:
     def test_abort_order_by_owner(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
-        last_update_before = repo_order.orders[6].last_status_update_milliseconds
+        last_update_before = repo_order.orders[7].last_status_update_milliseconds
 
         usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
 
@@ -48,7 +48,7 @@ class Test_AbortOrderUseCase:
         user.role = ROLE.OWNER
 
         response: Order = usecase(
-            order_id=repo_order.orders[6].order_id,
+            order_id=repo_order.orders[7].order_id,
             user_id=user.user_id,
             new_aborted_reason="Minha aula já está prestes a começar! :( ",
         )
@@ -60,7 +60,7 @@ class Test_AbortOrderUseCase:
     def test_abort_order_by_seller(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
-        last_update_before = repo_order.orders[6].last_status_update_milliseconds
+        last_update_before = repo_order.orders[7].last_status_update_milliseconds
 
         usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
 
@@ -68,7 +68,7 @@ class Test_AbortOrderUseCase:
         user.role = ROLE.SELLER
 
         response: Order = usecase(
-            order_id=repo_order.orders[6].order_id,
+            order_id=repo_order.orders[7].order_id,
             user_id=user.user_id,
             new_aborted_reason="Minha aula já está prestes a começar! :( ",
         )
@@ -80,14 +80,14 @@ class Test_AbortOrderUseCase:
     def test_abort_order_by_user(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
-        last_update_before = repo_order.orders[6].last_status_update_milliseconds
+        last_update_before = repo_order.orders[7].last_status_update_milliseconds
 
         usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
 
         user = create_test_user(repo_user)
 
         response: Order = usecase(
-            order_id=repo_order.orders[6].order_id,
+            order_id=repo_order.orders[7].order_id,
             user_id=user.user_id,
             new_aborted_reason="Minha aula já está prestes a começar! :( ",
         )
