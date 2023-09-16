@@ -209,3 +209,17 @@ class ProductRepositoryDynamo(IProductRepository):
             "url": presigned_url,
             "metadata": meta
         }
+    
+    def batch_get_product(self, products: List[OrderProduct], restaurant: RESTAURANT) -> List[Product]:
+        get_product_list = list()
+
+        for product in products:
+            keys = [{self.dynamo.partition_key: self.partition_key_format(restaurant), self.dynamo.sort_key: self.sort_key_format(product.product_id)}]
+
+            resp = self.dynamo.batch_get_items(keys=keys)
+
+            for item in resp.get("Responses", { }).get(self.dynamo.dynamo_table.name,[]):
+                if item.get("entity") == "product":
+                    get_product_list.append(ProductDynamoDTO.from_dynamo(item).to_entity())
+
+        return get_product_list
