@@ -127,7 +127,7 @@ class LambdaStack(Construct):
         )
         
         self.create_order = self.create_lambda_api_gateway_integration(
-            module_name="crete_order",
+            module_name="create_order",
             method="POST",
             api_resource=api_gateway_resource,
             environment_variables=environment_variables,
@@ -137,6 +137,14 @@ class LambdaStack(Construct):
         self.change_order_status = self.create_lambda_api_gateway_integration(
             module_name="change_order_status",
             method="POST",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+        self.get_current_order_state_by_id = self.create_lambda_api_gateway_integration(
+            module_name="get_current_order_state_by_id",
+            method="GET",
             api_resource=api_gateway_resource,
             environment_variables=environment_variables,
             authorizer=authorizer
@@ -173,4 +181,6 @@ class LambdaStack(Construct):
             self.update_product,
             self.request_upload_product_photo,
             self.create_order,
+            self.get_current_order_state_by_id,
         ]
+        

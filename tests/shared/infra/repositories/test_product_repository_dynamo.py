@@ -1,6 +1,7 @@
 import pytest
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 
@@ -107,3 +108,15 @@ class Test_ProductRepositoryDynamo:
         assert presigned_post["metadata"]["time_created"].isdecimal()
         assert type(presigned_post["url"]) == str
         
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_batch_get_product(self):
+        repo_dynamo = ProductRepositoryDynamo()
+        repo_order = OrderRepositoryMock()
+        repo_product = ProductRepositoryMock()
+
+        batch_get_product = repo_dynamo.batch_get_product(products=repo_order.orders[10].products, restaurant=repo_order.orders[10].restaurant)
+
+        assert type(batch_get_product) == list
+        assert repo_product.products[71] == batch_get_product[0]
+        assert repo_product.products[67] == batch_get_product[1]
+        assert repo_product.products[33] == batch_get_product[2]
