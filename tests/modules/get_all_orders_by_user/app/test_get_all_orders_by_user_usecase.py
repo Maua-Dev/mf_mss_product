@@ -30,6 +30,18 @@ class Test_GetAllOrdersByUserUsecase:
 
         assert len(get_all_orders) == 1
 
+    def test_get_all_orders_by_user_usecase_without_exclusive_start_key(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
+
+        user = repo_user.users_list[4]
+        order = repo_order.orders[0]
+
+        get_all_orders = usecase(user_id=user.user_id)
+
+        assert len(get_all_orders) == 2
+
     def test_get_all_orders_by_user_user_id_none(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()

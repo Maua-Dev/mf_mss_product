@@ -166,6 +166,80 @@ class Test_GetAllOrdersByUserPresenter:
         assert json.loads(response["body"])["message"] == "the orders were retrieved"
         assert json.loads(response["body"]) == expected
 
+    def test_get_all_orders_by_user_presenter_without_exclusive_start_key(self):
+        repo_user = UserRepositoryMock().users_list
+
+        event = {
+                "version": "2.0",
+                "routeKey": "$default",
+                "rawPath": "/my/path",
+                "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
+                "cookies": [
+                    "cookie1",
+                    "cookie2"
+                ],
+                "headers": {
+                    "header1": "value1",
+                    "header2": "value1,value2"
+                },
+                "requestContext": {
+                    "accountId": "123456789012",
+                    "apiId": "<urlid>",
+                    "authentication": None,
+                    "authorizer": {
+                        "claims":
+                            {
+                                "sub": repo_user[4].user_id,
+                                "name": repo_user[4].name,
+                                "email": repo_user[4].email,
+                                "custom:isMaua": True
+                            }
+                    },
+                    "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
+                    "domainPrefix": "<url-id>",
+                    "external_interfaces": {
+                        "method": "POST",
+                        "path": "/my/path",
+                        "protocol": "HTTP/1.1",
+                        "sourceIp": "123.123.123.123",
+                        "userAgent": "agent"
+                    },
+                    "requestId": "id",
+                    "routeKey": "$default",
+                    "stage": "$default",
+                    "time": "12/Mar/2020:19:03:58 +0000",
+                    "timeEpoch": 1583348638390
+                },
+                "body": {"amount": 1},
+                "pathParameters": None,
+                "isBase64Encoded": None,
+                "stageVariables": None
+            }
+
+        response = lambda_handler(event, None)
+
+        expected = {
+            'all_orders_by_user': [{
+                'order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f87fb53', 
+                'user_name': 'Lucas Milas', 
+                'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf', 
+                'products': [{
+                    'product_name': 'Cimento (400mL)', 
+                    'product_id': '4081a83a-516f-442c-85e2-b54bfb192e55', 
+                    'quantity': 2}], 
+                'creation_time_milliseconds': 1692061296000, 
+                'restaurant': 'CANTINA_DO_MOLEZA', 
+                'observation': 'Capricha no morango', 
+                'status': 'READY', 
+                'aborted_reason': None, 
+                'total_price': 30.0, 
+                'last_status_update': 1992061596999}], 
+            'message': 'the orders were retrieved'}
+        
+        assert response["statusCode"] == 200
+        assert json.loads(response["body"])["message"] == "the orders were retrieved"
+        assert json.loads(response["body"]) == expected
+
     def test_get_all_orders_by_user_presenter_requester_user_none(self):
         repo_user = UserRepositoryMock().users_list
 
@@ -213,61 +287,6 @@ class Test_GetAllOrdersByUserPresenter:
         
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field requester_user is missing"
-
-    def test_get_all_orders_by_user_presenter_exclusive_start_key_none(self):
-        repo_user = UserRepositoryMock().users_list
-
-        event = {
-                "version": "2.0",
-                "routeKey": "$default",
-                "rawPath": "/my/path",
-                "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-                "cookies": [
-                    "cookie1",
-                    "cookie2"
-                ],
-                "headers": {
-                    "header1": "value1",
-                    "header2": "value1,value2"
-                },
-                "requestContext": {
-                    "accountId": "123456789012",
-                    "apiId": "<urlid>",
-                    "authentication": None,
-                    "authorizer": {
-                        "claims":
-                            {
-                                "sub": repo_user[5].user_id,
-                                "name": repo_user[5].name,
-                                "email": repo_user[5].email,
-                                "custom:isMaua": True
-                            }
-                    },
-                    "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                    "domainPrefix": "<url-id>",
-                    "external_interfaces": {
-                        "method": "POST",
-                        "path": "/my/path",
-                        "protocol": "HTTP/1.1",
-                        "sourceIp": "123.123.123.123",
-                        "userAgent": "agent"
-                    },
-                    "requestId": "id",
-                    "routeKey": "$default",
-                    "stage": "$default",
-                    "time": "12/Mar/2020:19:03:58 +0000",
-                    "timeEpoch": 1583348638390
-                },
-                "body": {},
-                "pathParameters": None,
-                "isBase64Encoded": None,
-                "stageVariables": None
-            }
-
-        response = lambda_handler(event, None)
-        
-        assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field exclusive_start_key is missing"
 
     def test_get_all_orders_by_user_presenter_unregister_user(self):
         repo_user = UserRepositoryMock().users_list

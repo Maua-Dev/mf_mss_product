@@ -12,21 +12,22 @@ class GetAllOrdersByUserUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, user_id: str, exclusive_start_key: str or None, amount: int = None) -> List[Order]:
+    def __call__(self, user_id: str, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
         
         user = self.repo_user.get_user_by_id(user_id)
 
         if user is None:
             raise UnregisteredUser()
         
-        order = self.repo_order.get_order_by_id(exclusive_start_key)
+        if exclusive_start_key:
+            order = self.repo_order.get_order_by_id(exclusive_start_key)
 
-        if order is None:
-            raise NoItemsFound("exclusive_start_key")
+            if order is None:
+                raise NoItemsFound("exclusive_start_key")
         
-        if user.role != ROLE.ADMIN:
-            if order.user_id != user_id:
-                raise MismatchID()
+            if user.role != ROLE.ADMIN:
+                if order.user_id != user_id:
+                    raise MismatchID()
         
         if amount == None: amount = 20
 

@@ -26,22 +26,7 @@ class Test_GetAllOrdersByUserController:
         assert response.status_code == 200
         assert response.data["message"] == "the orders were retrieved"
 
-    def test_get_all_orders_by_user_controller_requester_user_none(self):
-        repo_order = OrderRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
-        controller = GetAllOrdersByUserController(usecase)
-
-        request = HttpRequest(body={
-            'exclusive_start_key': repo_order.orders[4].order_id
-        })
-
-        response = controller(request=request)
-        
-        assert response.status_code == 400
-        assert response.body == "Field requester_user is missing"
-
-    def test_get_all_orders_by_user_controller_exclusive_start_key_none(self):
+    def test_get_all_orders_by_user_controller_without_exclusive_start_key(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
@@ -57,8 +42,23 @@ class Test_GetAllOrdersByUserController:
 
         response = controller(request=request)
         
+        assert response.status_code == 200
+        assert response.data["message"] == "the orders were retrieved"
+
+    def test_get_all_orders_by_user_controller_requester_user_none(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
+        controller = GetAllOrdersByUserController(usecase)
+
+        request = HttpRequest(body={
+            'exclusive_start_key': repo_order.orders[4].order_id
+        })
+
+        response = controller(request=request)
+        
         assert response.status_code == 400
-        assert response.body == "Field exclusive_start_key is missing"
+        assert response.body == "Field requester_user is missing"
 
     def test_get_all_orders_by_user_controller_unregister_user(self):
         repo_order = OrderRepositoryMock()

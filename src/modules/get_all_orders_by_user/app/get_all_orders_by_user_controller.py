@@ -20,9 +20,6 @@ class GetAllOrdersByUserController:
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
-            if request.data.get('exclusive_start_key') is None:
-                raise MissingParameters("exclusive_start_key")
-
             all_orders = self.GetAllOrdersByUserController(user_id=requester_user.user_id, exclusive_start_key=request.data.get('exclusive_start_key'), amount=request.data.get('amount'))
 
             viewmodel = GetAllOrdersByUserViewmodel(all_orders)
