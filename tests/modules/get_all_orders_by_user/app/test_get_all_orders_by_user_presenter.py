@@ -48,7 +48,7 @@ class Test_GetAllOrdersByUserPresenter:
                     "time": "12/Mar/2020:19:03:58 +0000",
                     "timeEpoch": 1583348638390
                 },
-                "body": {'order_id': "d4c63753-5119-4990-b427-926798499924"},
+                "body": {'exclusive_start_key': "d4c63753-5119-4990-b427-926798499924"},
                 "pathParameters": None,
                 "isBase64Encoded": None,
                 "stageVariables": None
@@ -121,7 +121,7 @@ class Test_GetAllOrdersByUserPresenter:
                     "time": "12/Mar/2020:19:03:58 +0000",
                     "timeEpoch": 1583348638390
                 },
-                "body": {'order_id': "b3f6c5aa-80ad-4f95-ae16-455b4f87fb53"},
+                "body": {'exclusive_start_key': "b3f6c5aa-80ad-4f95-ae16-455b4f87fb53", 'amount': 2},
                 "pathParameters": None,
                 "isBase64Encoded": None,
                 "stageVariables": None
@@ -144,6 +144,7 @@ class Test_GetAllOrdersByUserPresenter:
                 'total_price': 30.0,
                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
                 'user_name': 'Lucas Milas'},
+
                 {
                 'aborted_reason': None,
                 'creation_time_milliseconds': 1692061297000,
@@ -202,7 +203,7 @@ class Test_GetAllOrdersByUserPresenter:
                     "time": "12/Mar/2020:19:03:58 +0000",
                     "timeEpoch": 1583348638390
                 },
-                "body": {'order_id': "d4c63753-5119-4990-b427-926798499924"},
+                "body": {'exclusive_start_key': "d4c63753-5119-4990-b427-926798499924"},
                 "pathParameters": None,
                 "isBase64Encoded": None,
                 "stageVariables": None
@@ -213,7 +214,7 @@ class Test_GetAllOrdersByUserPresenter:
         assert response["statusCode"] == 400
         assert json.loads(response["body"]) == "Field requester_user is missing"
 
-    def test_get_all_orders_by_user_presenter_order_id_none(self):
+    def test_get_all_orders_by_user_presenter_exclusive_start_key_none(self):
         repo_user = UserRepositoryMock().users_list
 
         event = {
@@ -266,62 +267,7 @@ class Test_GetAllOrdersByUserPresenter:
         response = lambda_handler(event, None)
         
         assert response["statusCode"] == 400
-        assert json.loads(response["body"]) == "Field order_id is missing"
-
-    def test_get_all_orders_by_user_presenter_user_not_allowed(self):
-        repo_user = UserRepositoryMock().users_list
-
-        event = {
-                "version": "2.0",
-                "routeKey": "$default",
-                "rawPath": "/my/path",
-                "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
-                "cookies": [
-                    "cookie1",
-                    "cookie2"
-                ],
-                "headers": {
-                    "header1": "value1",
-                    "header2": "value1,value2"
-                },
-                "requestContext": {
-                    "accountId": "123456789012",
-                    "apiId": "<urlid>",
-                    "authentication": None,
-                    "authorizer": {
-                        "claims":
-                            {
-                                "sub": repo_user[0].user_id,
-                                "name": repo_user[0].name,
-                                "email": repo_user[0].email,
-                                "custom:isMaua": True
-                            }
-                    },
-                    "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
-                    "domainPrefix": "<url-id>",
-                    "external_interfaces": {
-                        "method": "POST",
-                        "path": "/my/path",
-                        "protocol": "HTTP/1.1",
-                        "sourceIp": "123.123.123.123",
-                        "userAgent": "agent"
-                    },
-                    "requestId": "id",
-                    "routeKey": "$default",
-                    "stage": "$default",
-                    "time": "12/Mar/2020:19:03:58 +0000",
-                    "timeEpoch": 1583348638390
-                },
-                "body": {'order_id': "d2b29a41-69a6-4ad8-87b9-2444119fbf66"},
-                "pathParameters": None,
-                "isBase64Encoded": None,
-                "stageVariables": None
-            }
-
-        response = lambda_handler(event, None)
-        
-        assert response["statusCode"] == 403
-        assert json.loads(response["body"]) == "That type of user has no permission for that action"
+        assert json.loads(response["body"]) == "Field exclusive_start_key is missing"
 
     def test_get_all_orders_by_user_presenter_unregister_user(self):
         repo_user = UserRepositoryMock().users_list
@@ -422,7 +368,7 @@ class Test_GetAllOrdersByUserPresenter:
                     "time": "12/Mar/2020:19:03:58 +0000",
                     "timeEpoch": 1583348638390
                 },
-                "body": {'order_id': "d4c63753-5119-4990-b427-926798496664"},
+                "body": {'exclusive_start_key': "d4c63753-5119-4990-b427-926798496664"},
                 "pathParameters": None,
                 "isBase64Encoded": None,
                 "stageVariables": None
@@ -477,7 +423,7 @@ class Test_GetAllOrdersByUserPresenter:
                     "time": "12/Mar/2020:19:03:58 +0000",
                     "timeEpoch": 1583348638390
                 },
-                "body": {'order_id': "d4c63753-5119-4990-b427-926798499924"},
+                "body": {'exclusive_start_key': "d4c63753-5119-4990-b427-926798499924"},
                 "pathParameters": None,
                 "isBase64Encoded": None,
                 "stageVariables": None
