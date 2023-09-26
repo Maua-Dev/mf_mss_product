@@ -57,3 +57,7 @@ class OrderCantBeUpdated(BaseError):
     def __init__(self):
         super().__init__(f"You can't update a order after it's preparing has started")
 
+class OrderAlreadyPreparing(BaseError):
+    def __init__(self):
+        super().__init__(f'The order is already preparing')
+
