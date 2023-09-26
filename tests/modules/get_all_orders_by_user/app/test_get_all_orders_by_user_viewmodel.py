@@ -10,25 +10,25 @@ class Test_GetAllOrdersByUserViewmodel:
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
 
-        all_orders = usecase(user_id="93bc6ada-c0d1-7054-66ab-e17414c48af9", order_id="d4c63753-5119-4990-b427-926798499924")
+        all_orders = usecase(user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", exclusive_start_key="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53", amount=1)
         viewmodel = GetAllOrdersByUserViewmodel(all_orders)
 
         expected = {
             'all_orders_by_user': [{
                 'aborted_reason': None,
-                'creation_time_milliseconds': 1692156322000,
-                'observation': None,
-                'order_id': "d4c63753-5119-4990-b427-926798499924",
+                'creation_time_milliseconds': 1692061296000,
+                'observation': "Capricha no morango",
+                'order_id': "b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 'products': [{
-                        'product_id':'9589b258-ed44-4c24-b7d6-e96ae221baae', 
-                        'product_name':'Carteira',
-                        'quantity':3
+                        'product_id':'4081a83a-516f-442c-85e2-b54bfb192e55', 
+                        'product_name':'Cimento (400mL)',
+                        'quantity':2
                         }],
                 'restaurant': 'CANTINA_DO_MOLEZA',
-                'status': 'PREPARING',
-                'total_price': 25.5,
-                'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48af9",
-                'user_name':'Rodrigo Morales',
+                'status': 'READY',
+                'total_price': 30.00,
+                'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
+                'user_name':'Lucas Milas',
                 'last_status_update':1992061596999
             }],
             'message': 'the orders were retrieved',
@@ -41,7 +41,7 @@ class Test_GetAllOrdersByUserViewmodel:
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
 
-        all_orders = usecase(user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53")
+        all_orders = usecase(user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", exclusive_start_key="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53")
         viewmodel = GetAllOrdersByUserViewmodel(all_orders)
 
         expected = {
