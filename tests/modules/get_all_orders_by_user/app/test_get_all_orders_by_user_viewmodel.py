@@ -31,6 +31,7 @@ class Test_GetAllOrdersByUserViewmodel:
                 'user_name':'Lucas Milas',
                 'last_status_update':1992061596999
             }],
+            'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f87fb53',
             'message': 'the orders were retrieved',
         }
 
@@ -79,6 +80,7 @@ class Test_GetAllOrdersByUserViewmodel:
                 'user_name':'Lucas Milas',
                 'last_status_update':1992061596999
             }],
+            'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f874553',
             'message': 'the orders were retrieved',
         }
 

@@ -70,6 +70,7 @@ class Test_GetAllOrdersByUserPresenter:
                                     'total_price': 25.5,
                                     'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9',
                                     'user_name': 'Rodrigo Morales'}],
+            'last_order_id': 'd4c63753-5119-4990-b427-926798499924',
             'message': 'the orders were retrieved',
            }
         
@@ -159,6 +160,7 @@ class Test_GetAllOrdersByUserPresenter:
                 'total_price': 14.0,
                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
                 'user_name': 'Lucas Milas'}],
+            'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f874553',
             'message': 'the orders were retrieved'
            }
         
@@ -234,6 +236,7 @@ class Test_GetAllOrdersByUserPresenter:
                 'aborted_reason': None, 
                 'total_price': 30.0, 
                 'last_status_update': 1992061596999}], 
+            'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f87fb53',
             'message': 'the orders were retrieved'}
         
         assert response["statusCode"] == 200
