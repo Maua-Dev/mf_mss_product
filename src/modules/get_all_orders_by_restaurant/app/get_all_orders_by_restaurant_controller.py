@@ -20,7 +20,7 @@ class GetAllOrdersByRestaurantController:
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
-            exclusive_start_key = request.data.get('order_id')
+            exclusive_start_key = request.data.get('exclusive_start_key')
 
             all_orders = self.GetAllOrdersByRestaurantUsecase(user_id=requester_user.user_id,
                                                               exclusive_start_key=exclusive_start_key)

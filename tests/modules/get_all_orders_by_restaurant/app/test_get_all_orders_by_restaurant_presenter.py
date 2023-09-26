@@ -7,7 +7,7 @@ from src.modules.get_all_orders_by_restaurant.app.get_all_orders_by_restaurant_p
 
 class Test_GetAllOrdersByRestaurantPresenter:
 
-    def test_lambda_handler_with_order_id(self):
+    def test_lambda_handler_with_exclusive_start_key(self):
         user = UserRepositoryMock().users_list[3]
         order = OrderRepositoryMock().orders[9]
 
@@ -53,7 +53,7 @@ class Test_GetAllOrdersByRestaurantPresenter:
                 "timeEpoch": 1583348638390
             },
             "body": {
-                "order_id": order.order_id,
+                "exclusive_start_key": order.order_id,
             },
             "pathParameters": None,
             "isBase64Encoded": None,
@@ -66,7 +66,7 @@ class Test_GetAllOrdersByRestaurantPresenter:
         assert json.loads(response['body'])['message'] == "the orders were retrieved"
         assert [order_id["order_id"] for order_id in json.loads(response['body'])['all_orders']] == expected_all_orders
 
-    def test_lambda_handler_without_order_id(self):
+    def test_lambda_handler_without_exclusive_start_key(self):
         user = UserRepositoryMock().users_list[3]
         order = OrderRepositoryMock().orders[9]
 

@@ -8,7 +8,7 @@ from src.modules.get_all_orders_by_restaurant.app.get_all_orders_by_restaurant_u
 
 
 class Test_GetAllOrdersByRestaurantUseCase:
-    def test_get_all_orders_by_restaurant_usecase_with_order_id(self):
+    def test_get_all_orders_by_restaurant_usecase_with_exclusive_start_key(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByRestaurantUsecase(repo_order, repo_user)
@@ -16,7 +16,7 @@ class Test_GetAllOrdersByRestaurantUseCase:
 
         assert len(orders) == 2
 
-    def test_get_all_orders_by_restaurant_usecase_without_order_id(self):
+    def test_get_all_orders_by_restaurant_usecase_without_exclusive_start_key(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByRestaurantUsecase(repo_order, repo_user)
