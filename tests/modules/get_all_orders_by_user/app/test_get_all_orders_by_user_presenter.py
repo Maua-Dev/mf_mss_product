@@ -313,7 +313,7 @@ class Test_GetAllOrdersByUserPresenter:
                     "time": "12/Mar/2020:19:03:58 +0000",
                     "timeEpoch": 1583348638390
                 },
-                "body": {'order_id': "d4c63753-5119-4990-b427-926798499924"},
+                "body": {'exclusive_start_key': "d4c63753-5119-4990-b427-926798499924"},
                 "pathParameters": None,
                 "isBase64Encoded": None,
                 "stageVariables": None
