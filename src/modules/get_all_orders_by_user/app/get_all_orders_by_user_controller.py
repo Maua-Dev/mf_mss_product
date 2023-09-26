@@ -1,5 +1,5 @@
-from src.modules.get_all_orders_by_user.app.get_all_orders_by_user_usecase import GetAllOrdersByUserUsecase
-from src.modules.get_all_orders_by_user.app.get_all_orders_by_user_viewmodel import GetAllOrdersByUserViewmodel
+from .get_all_orders_by_user_usecase import GetAllOrdersByUserUsecase
+from .get_all_orders_by_user_viewmodel import GetAllOrdersByUserViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import MismatchID, NoItemsFound, UnregisteredUser, UserNotAllowed
