@@ -202,6 +202,6 @@ class Test_OrderRepositoryMock:
         repo = OrderRepositoryMock()
         order = repo.orders[0]
 
-        order_list = repo.get_all_orders_by_user(user_id=order.user_id, order_id=order.order_id)
+        order_list = repo.get_all_orders_by_user(user_id=order.user_id, exclusive_start_key=order.order_id, amount=2)
 
         assert len(order_list) == 2
