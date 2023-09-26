@@ -20,7 +20,8 @@ class DynamoDatasource:
                  endpoint_url: str = None, sort_key: str = None):
 
         s = boto3.Session(region_name=region)
-        dynamo = s.resource('dynamodb', endpoint_url=endpoint_url)
+        self.dynamo_resoruce = s.resource('dynamodb', endpoint_url=endpoint_url)
+        self.endpoint_url = endpoint_url
         self.dynamo_table = dynamo.Table(dynamo_table_name)
         self.partition_key = partition_key
         self.sort_key = sort_key
