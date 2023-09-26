@@ -240,19 +240,21 @@ class OrderRepositoryMock(IOrderRepository):
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         return True
     
-    def get_all_orders_by_user(self, user_id: str, order_id: str or None) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str or None, amount: int) -> List[Order]:
 
+        # Getting all orders from the requested user_id sorted by creation_time_milliseconds
         user_orders = sorted([order for order in self.orders if order.user_id == user_id],
                              key=lambda order: order.creation_time_milliseconds, reverse=False)
 
-        if order_id:
+        # Getting the order_id position in the list
+        if exclusive_start_key:
             for index, order in enumerate(user_orders):
-                if order.order_id == order_id:
+                if order.order_id == exclusive_start_key:
                     order_id_position = index
-                    return user_orders[order_id_position:order_id_position + 20]
+                    return user_orders[order_id_position:order_id_position + amount]
 
         else:
-            return user_orders[:20]
+            return user_orders[:amount]
 
     def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> \
     List[Order]:
