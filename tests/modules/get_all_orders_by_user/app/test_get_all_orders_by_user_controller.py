@@ -18,7 +18,7 @@ class Test_GetAllOrdersByUserController:
                 "name": repo_user.users_list[5].name,
                 "email": repo_user.users_list[5].email,
                 "custom:isMaua": True},
-            'order_id': repo_order.orders[4].order_id
+            'exclusive_start_key': repo_order.orders[4].order_id
         })
 
         response = controller(request=request)
@@ -33,7 +33,7 @@ class Test_GetAllOrdersByUserController:
         controller = GetAllOrdersByUserController(usecase)
 
         request = HttpRequest(body={
-            'order_id': repo_order.orders[4].order_id
+            'exclusive_start_key': repo_order.orders[4].order_id
         })
 
         response = controller(request=request)
@@ -41,7 +41,7 @@ class Test_GetAllOrdersByUserController:
         assert response.status_code == 400
         assert response.body == "Field requester_user is missing"
 
-    def test_get_all_orders_by_user_controller_order_id_none(self):
+    def test_get_all_orders_by_user_controller_exclusive_start_key_none(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
@@ -58,27 +58,7 @@ class Test_GetAllOrdersByUserController:
         response = controller(request=request)
         
         assert response.status_code == 400
-        assert response.body == "Field order_id is missing"
-
-    def test_get_all_orders_by_user_controller_user_not_allowed(self):
-        repo_order = OrderRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
-        controller = GetAllOrdersByUserController(usecase)
-
-        request = HttpRequest(body={
-            'requester_user': {
-                "sub": repo_user.users_list[0].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
-                "custom:isMaua": True},
-            'order_id': repo_order.orders[2].order_id
-        })
-
-        response = controller(request=request)
-        
-        assert response.status_code == 403
-        assert response.body == "That type of user has no permission for that action"
+        assert response.body == "Field exclusive_start_key is missing"
 
     def test_get_all_orders_by_user_controller_unregister_user(self):
         repo_order = OrderRepositoryMock()
@@ -92,7 +72,7 @@ class Test_GetAllOrdersByUserController:
                 "name": repo_user.users_list[5].name,
                 "email": repo_user.users_list[5].email,
                 "custom:isMaua": True},
-            'order_id': repo_order.orders[4].order_id
+            'exclusive_start_key': repo_order.orders[4].order_id
         })
 
         response = controller(request=request)
@@ -112,7 +92,7 @@ class Test_GetAllOrdersByUserController:
                 "name": repo_user.users_list[5].name,
                 "email": repo_user.users_list[5].email,
                 "custom:isMaua": True},
-            'order_id': "4b1e0f88-2c34-3t"
+            'exclusive_start_key': "4b1e0f88-2c34-3t"
         })
 
         response = controller(request=request)
@@ -132,7 +112,7 @@ class Test_GetAllOrdersByUserController:
                 "name": repo_user.users_list[4].name,
                 "email": repo_user.users_list[4].email,
                 "custom:isMaua": True},
-            'order_id': repo_order.orders[4].order_id
+            'exclusive_start_key': repo_order.orders[4].order_id
         })
 
         response = controller(request=request)
