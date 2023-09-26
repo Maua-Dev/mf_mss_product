@@ -98,7 +98,7 @@ class Test_GetAllOrdersByUserController:
         response = controller(request=request)
         
         assert response.status_code == 404
-        assert response.body == "No items found for order_id"
+        assert response.body == "No items found for exclusive_start_key"
 
     def test_get_all_orders_by_user_controller_mismatch_id(self):
         repo_order = OrderRepositoryMock()

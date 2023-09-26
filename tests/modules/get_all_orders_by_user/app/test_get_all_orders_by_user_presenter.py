@@ -377,7 +377,7 @@ class Test_GetAllOrdersByUserPresenter:
         response = lambda_handler(event, None)
         
         assert response["statusCode"] == 404
-        assert json.loads(response["body"]) == "No items found for order_id"
+        assert json.loads(response["body"]) == "No items found for exclusive_start_key"
 
     def test_get_all_orders_by_user_presenter_mismatch_id(self):
         repo_user = UserRepositoryMock().users_list
