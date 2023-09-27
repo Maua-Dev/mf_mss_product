@@ -1,3 +1,5 @@
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.helpers.errors.base_error import BaseError
 
 class OrderCantBeUpdated(BaseError):
     def __init__(self):
