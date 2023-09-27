@@ -179,6 +179,7 @@ class LambdaStack(Construct):
             self.create_order,
             self.change_order_status,
             self.abort_order,
+            self.get_all_orders_by_user,
         ]
 
         self.functions_that_need_dynamo_product_permissions = [
