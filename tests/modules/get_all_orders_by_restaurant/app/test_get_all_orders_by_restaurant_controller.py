@@ -6,7 +6,7 @@ from src.modules.get_all_orders_by_restaurant.app.get_all_orders_by_restaurant_c
 
 
 class Test_GetAllOrdersByRestaurantController:
-    def test_get_all_orders_by_restaurant_controller_without_order_id(self):
+    def test_get_all_orders_by_restaurant_controller_without_exclusive_start_key(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByRestaurantUsecase(repo_order, repo_user)
@@ -26,7 +26,7 @@ class Test_GetAllOrdersByRestaurantController:
         assert response.status_code == 200
         assert response.data["message"] == "the orders were retrieved"
 
-    def test_get_all_orders_by_restaurant_controller_with_order_id(self):
+    def test_get_all_orders_by_restaurant_controller_with_exclusive_start_key(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByRestaurantUsecase(repo_order, repo_user)
@@ -38,7 +38,7 @@ class Test_GetAllOrdersByRestaurantController:
                 "name": repo_user.users_list[2].name,
                 "email": repo_user.users_list[2].email,
                 "custom:isMaua": True},
-            'order_id': repo_order.orders[0].order_id
+            'exclusive_start_key': repo_order.orders[0].order_id
         })
 
         response = controller(request=request)

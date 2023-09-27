@@ -1,10 +1,20 @@
-from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.shared.helpers.errors.base_error import BaseError
+
+class OrderCantBeUpdated(BaseError):
+    def __init__(self):
+        super().__init__(f"You can't update a order after it's preparing has started")
 
 
+class ProducutsListCantBeEmpty(BaseError):
+    def __init__(self):
+        super().__init__(f"Products list can't be empty")
+        
 class NoItemsFound(BaseError):
     def __init__(self, message: str):
         super().__init__(f'No items found for {message}')
+
+class OrderAlreadyPreparing(BaseError):
+    def __init__(self):
+        super().__init__(f'The order is already preparing')
 
 
 class DuplicatedItem(BaseError):
@@ -53,14 +63,7 @@ class WrongTypeRouteKey(BaseError):
         super().__init__(f"Field {message} is not a acceptable route_key value, must be $connect or $disconnect")
 
 
-class OrderCantBeUpdated(BaseError):
+class UserNotOrderOwner(BaseError):
     def __init__(self):
-        super().__init__(f"You can't update a order after it's preparing has started")
+        super().__init__("The user_id does not match with the inserted order_id")
 
-class OrderAlreadyPreparing(BaseError):
-    def __init__(self):
-        super().__init__(f'The order is already preparing')
-
-class ProducutsListCantBeEmpty(BaseError):
-    def __init__(self):
-        super().__init__(f"Products list can't be empty")

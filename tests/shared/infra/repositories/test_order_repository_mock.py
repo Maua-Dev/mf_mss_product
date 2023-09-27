@@ -101,7 +101,7 @@ class Test_OrderRepositoryMock:
 
     def test_get_all_orders_by_restaurant_with_order_id(self):
         repo = OrderRepositoryMock()
-        order_id = repo.orders[1].order_id
+        order_id = repo.orders[2].order_id
         orders_list = repo.get_all_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU,
                                                         exclusive_start_key=order_id,
                                                         amount=20)
@@ -197,3 +197,11 @@ class Test_OrderRepositoryMock:
         repo.abort_connection(connection_id, restaurant)
 
         assert len(repo.connections) == len_before - 1
+
+    def test_get_all_orders_by_user(self):
+        repo = OrderRepositoryMock()
+        order = repo.orders[0]
+
+        order_list = repo.get_all_orders_by_user(user_id=order.user_id, exclusive_start_key=order.order_id, amount=2)
+
+        assert len(order_list) == 2
