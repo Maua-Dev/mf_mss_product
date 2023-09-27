@@ -158,6 +158,14 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.change_order_by_id = self.create_lambda_api_gateway_integration(
+            module_name="change_order_by_id",
+            method="POST",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
         self.functions_that_need_dynamo_user_permissions = [
             self.create_user,
             self.update_user,
@@ -171,6 +179,7 @@ class LambdaStack(Construct):
             self.create_order,
             self.change_order_status,
             self.abort_order,
+            self.change_order_by_id,
         ]
 
         self.functions_that_need_dynamo_product_permissions = [
