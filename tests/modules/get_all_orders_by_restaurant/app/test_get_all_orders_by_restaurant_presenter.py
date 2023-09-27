@@ -60,7 +60,7 @@ class Test_GetAllOrdersByRestaurantPresenter:
             "stageVariables": None
         }
         response = lambda_handler(event, None)
-        expected_all_orders = ["135ef881-1b1f-4f38-a662-8ff7156e6c27", '1eeef881-1b1f-4f38-a662-8ff7156e6c27']
+        expected_all_orders = ['8309d903-55ce-4299-9c70-13fa2e03bcdc', "135ef881-1b1f-4f38-a662-8ff7156e6c27", '1eeef881-1b1f-4f38-a662-8ff7156e6c27']
 
         assert response['statusCode'] == 200
         assert json.loads(response['body'])['message'] == "the orders were retrieved"
