@@ -1,5 +1,6 @@
 from src.modules.change_order_by_id.app.change_order_by_id_controller import ChangeOrderByIdController
 from src.modules.change_order_by_id.app.change_order_by_id_usecase import ChangeOrderByIdUsecase
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
@@ -62,7 +63,12 @@ class Test_ChangeOrderByIdController:
                 "custom:isMaua": True
             },
             "order_id": order.order_id,
-            "new_products": []
+            "new_products": [
+                {
+                    "product_name": "Pamonha",
+                    "product_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "quantity": 12}
+            ]
         })
 
         response = controller(request)
@@ -82,7 +88,6 @@ class Test_ChangeOrderByIdController:
         response = controller(request)
 
         assert response.status_code == 400
-
 
     def test_non_owner_user_cant_change_order(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo(order_belongs_to_user=False, is_user_admin=False)

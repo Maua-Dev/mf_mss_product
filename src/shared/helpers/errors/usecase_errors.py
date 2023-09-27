@@ -61,3 +61,6 @@ class OrderAlreadyPreparing(BaseError):
     def __init__(self):
         super().__init__(f'The order is already preparing')
 
+class ProducutsListCantBeEmpty(BaseError):
+    def __init__(self):
+        super().__init__(f"Products list can't be empty")

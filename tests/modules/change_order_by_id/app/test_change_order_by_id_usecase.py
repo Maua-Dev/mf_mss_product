@@ -2,10 +2,11 @@ import pytest
 
 from src.modules.change_order_by_id.app.change_order_by_id_usecase import ChangeOrderByIdUsecase
 from src.shared.domain.entities.order import Order
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner, \
-    OrderCantBeUpdated
+    OrderCantBeUpdated, ProducutsListCantBeEmpty
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -18,6 +19,8 @@ def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_
     user = user_repo.users_list[-1]
     order = order_repo.orders[-1]
     order.status = STATUS.PENDING
+    order.products = [OrderProduct("Pamonha", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 12)]
+
 
     if is_user_admin:
         user.role = ROLE.ADMIN
@@ -41,10 +44,10 @@ class Test_ChangeOrderByIdUsecase:
         response: Order = usecase(
             order_id=order.order_id,
             user_id=user.user_id,
-            new_prods_list=[]
+            new_prods_list=[OrderProduct("Pamonha", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 12)]
         )
 
-        assert len(response.products) == 0
+        assert len(response.products) == 1
         assert response.observation == "Uma bela de uma observação, ein"
 
     def test_change_order_obeservation(self):
@@ -114,6 +117,17 @@ class Test_ChangeOrderByIdUsecase:
                 order_id=order.order_id,
                 user_id=user.user_id,
                 new_observation="Uma nova observação"
+            )
+
+    def test_when_updating_list_it_cant_be_empty(self):
+        usecase, order, user = get_usecase_order_repo_and_user_repo()
+
+        with pytest.raises(ProducutsListCantBeEmpty):
+            response: Order = usecase(
+                order_id=order.order_id,
+                user_id=user.user_id,
+                new_observation="Uma nova observação",
+                new_prods_list=[]
             )
 
     def test_order_can_be_updated_if_user_is_admin(self):

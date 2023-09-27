@@ -30,6 +30,7 @@ def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_
 
     return usecase, order, user
 
+
 class Test_ChangeOrderByIdPresenter:
     def test_change_order_observation(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo()
@@ -51,8 +52,8 @@ class Test_ChangeOrderByIdPresenter:
 
         assert response['statusCode'] == 200
         assert json.loads(response["body"])["message"] == "the order was updated"
-        assert json.loads(response["body"])["order"]["observation"] == "Espero que tenha uma ótima noite de terça-feira - Laura"
-
+        assert json.loads(response["body"])["order"][
+                   "observation"] == "Espero que tenha uma ótima noite de terça-feira - Laura"
 
     def test_change_order_products(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo()
@@ -66,7 +67,12 @@ class Test_ChangeOrderByIdPresenter:
             },
             body={
                 "order_id": order.order_id,
-                "new_products": []
+                "new_products": [
+                    {
+                        "product_name": "Pamonha",
+                        "product_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        "quantity": 12}
+                ]
             }
         )
 
@@ -74,7 +80,12 @@ class Test_ChangeOrderByIdPresenter:
 
         assert response['statusCode'] == 200
         assert json.loads(response["body"])["message"] == "the order was updated"
-        assert json.loads(response["body"])["order"]["products"] == []
+        assert json.loads(response["body"])["order"]["products"] == [
+                {
+                    "product_name": "Pamonha",
+                    "product_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "quantity": 12}
+            ]
 
     def test_order_does_not_exist(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo()

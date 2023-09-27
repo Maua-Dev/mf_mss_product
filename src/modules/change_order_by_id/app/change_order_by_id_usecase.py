@@ -6,7 +6,7 @@ from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner, \
-    OrderCantBeUpdated
+    OrderCantBeUpdated, ProducutsListCantBeEmpty
 
 
 class ChangeOrderByIdUsecase:
@@ -30,6 +30,10 @@ class ChangeOrderByIdUsecase:
                 raise UserNotOrderOwner()
             if order.status != STATUS.PENDING:
                 raise OrderCantBeUpdated()
+
+        if new_prods_list is not None:
+            if len(new_prods_list) <= 0:
+                raise ProducutsListCantBeEmpty()
 
         updated_order = self.repo_order.update_order(
             order_id=order_id,

@@ -5,7 +5,7 @@ from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityParameterError, \
     EntityError
 from src.shared.helpers.errors.usecase_errors import UserNotAllowed, NoItemsFound, \
-    UnregisteredUser, UserNotOrderOwner, OrderCantBeUpdated
+    UnregisteredUser, UserNotOrderOwner, OrderCantBeUpdated, ProducutsListCantBeEmpty
 from src.shared.helpers.external_interfaces.external_interface import IResponse, IRequest
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, Forbidden, NotFound, InternalServerError
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
@@ -68,6 +68,9 @@ class ChangeOrderByIdController:
             return Forbidden(body=err.message)
 
         except OrderCantBeUpdated as err:
+            return Forbidden(body=err.message)
+
+        except ProducutsListCantBeEmpty as err:
             return Forbidden(body=err.message)
 
         except UnregisteredUser as err:
