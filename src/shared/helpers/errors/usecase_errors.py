@@ -57,6 +57,6 @@ class WrongTypeRouteKey(BaseError):
         super().__init__(f"Field {message} is not a acceptable route_key value, must be $connect or $disconnect")
 
 
-class MismatchID(BaseError):
+class UserNotOrderOwner(BaseError):
     def __init__(self):
         super().__init__("The user_id does not match with the inserted order_id")

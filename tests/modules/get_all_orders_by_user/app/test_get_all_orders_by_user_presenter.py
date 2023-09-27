@@ -401,7 +401,7 @@ class Test_GetAllOrdersByUserPresenter:
         assert response["statusCode"] == 404
         assert json.loads(response["body"]) == "No items found for exclusive_start_key"
 
-    def test_get_all_orders_by_user_presenter_mismatch_id(self):
+    def test_get_all_orders_by_user_presenter_user_not_order_owner(self):
         repo_user = UserRepositoryMock().users_list
 
         event = {

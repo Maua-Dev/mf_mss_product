@@ -3,7 +3,7 @@ from src.shared.domain.entities.order import Order
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.usecase_errors import MismatchID, NoItemsFound, UnregisteredUser, UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UserNotOrderOwner, NoItemsFound, UnregisteredUser
 
 
 class GetAllOrdersByUserUsecase:
@@ -27,7 +27,7 @@ class GetAllOrdersByUserUsecase:
         
             if user.role != ROLE.ADMIN:
                 if order.user_id != user_id:
-                    raise MismatchID()
+                    raise UserNotOrderOwner()
         
         if amount == None: amount = 20
 

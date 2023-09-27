@@ -100,7 +100,7 @@ class Test_GetAllOrdersByUserController:
         assert response.status_code == 404
         assert response.body == "No items found for exclusive_start_key"
 
-    def test_get_all_orders_by_user_controller_mismatch_id(self):
+    def test_get_all_orders_by_user_controller_user_not_order_owner(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)

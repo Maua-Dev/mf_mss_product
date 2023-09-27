@@ -2,9 +2,9 @@ from .get_all_orders_by_user_usecase import GetAllOrdersByUserUsecase
 from .get_all_orders_by_user_viewmodel import GetAllOrdersByUserViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import MismatchID, NoItemsFound, UnregisteredUser, UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UserNotOrderOwner, NoItemsFound, UnregisteredUser
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
-from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, Forbidden, InternalServerError, NotFound
+from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, InternalServerError, NotFound
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 
@@ -38,7 +38,7 @@ class GetAllOrdersByUserController:
         except NoItemsFound as err:
             return NotFound(body=err.message)
         
-        except MismatchID as err:
+        except UserNotOrderOwner as err:
             return BadRequest(body=err.message)
 
         except Exception as err:

@@ -1,6 +1,6 @@
 import pytest
 from src.modules.get_all_orders_by_user.app.get_all_orders_by_user_usecase import GetAllOrdersByUserUsecase
-from src.shared.helpers.errors.usecase_errors import MismatchID, NoItemsFound, UnregisteredUser, UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UserNotOrderOwner, NoItemsFound, UnregisteredUser
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -62,7 +62,7 @@ class Test_GetAllOrdersByUserUsecase:
         with pytest.raises(NoItemsFound):
             get_all_orders = usecase(user_id=user.user_id, exclusive_start_key="não achou")
 
-    def test_get_all_orders_by_user_mismatch_id(self):
+    def test_get_all_orders_by_user_user_not_order_owner(self):
         repo_order = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = GetAllOrdersByUserUsecase(repo_order, repo_user)
@@ -70,6 +70,6 @@ class Test_GetAllOrdersByUserUsecase:
         user = repo_user.users_list[4]
         order = repo_order.orders[3]
 
-        with pytest.raises(MismatchID):
+        with pytest.raises(UserNotOrderOwner):
             get_all_orders = usecase(user_id=user.user_id, exclusive_start_key=order.order_id)
 
