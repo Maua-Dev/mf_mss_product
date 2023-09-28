@@ -1,6 +1,5 @@
 from typing import List, Optional
 from src.shared.domain.entities.order import Order
-
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
