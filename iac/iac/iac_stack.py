@@ -5,7 +5,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-#from .websocket_stack import WebSocketStack
+from .websocket_stack import WebSocketStack
 
 from .bucket_stack import BucketStack
 from .dynamo_stack import DynamoStack
@@ -44,7 +44,7 @@ class IacStack(Stack):
             "allow_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": Cors.DEFAULT_HEADERS
         }
-        )
+                                                               )
         self.bucket_stack = BucketStack(self)
 
         if 'prod' in self.github_ref_name:
@@ -80,7 +80,8 @@ class IacStack(Stack):
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
 
         self.contact_us_lambda_stack = LambdaContactUsStack(self, api_gateway_resource=api_gateway_resource,
-                                                            authorizer=self.cognito_auth, lambda_layer=self.lambda_stack.lambda_layer,
+                                                            authorizer=self.cognito_auth,
+                                                            lambda_layer=self.lambda_stack.lambda_layer,
                                                             stage=stage)
 
         for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
@@ -89,5 +90,6 @@ class IacStack(Stack):
         for f in self.lambda_stack.functions_that_need_dynamo_user_permissions:
             self.dynamo_stack.dynamo_table_user.grant_read_write_data(f)
 
-        #self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
-        #                                      lambda_layer=self.lambda_stack.lambda_layer, environment_variables=ENVIRONMENT_VARIABLES)
+        self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
+                                              lambda_layer=self.lambda_stack.lambda_layer,
+                                              environment_variables=ENVIRONMENT_VARIABLES)
