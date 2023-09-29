@@ -43,7 +43,6 @@ class WebSocketStack(Construct):
            description="This is the MauaFood WebSocketApi",
            connect_route_options=WebSocketRouteOptions(
                integration=self.manage_connection_function_integration,
-               route_key="$connect",
            ),
            disconnect_route_options=WebSocketRouteOptions(
                integration=self.manage_connection_function_integration,
