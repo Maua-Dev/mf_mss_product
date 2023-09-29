@@ -47,6 +47,5 @@ class WebSocketStack(Construct):
            ),
            disconnect_route_options=WebSocketRouteOptions(
                integration=self.manage_connection_function_integration,
-               route_key="$disconnect",
            )
         )
