@@ -15,6 +15,7 @@ from .lambda_stack import LambdaStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
 
 
+
 class IacStack(Stack):
     lambda_stack: LambdaStack
 
