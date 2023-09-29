@@ -7,8 +7,9 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from aws_cdk.aws_apigatewayv2_alpha import WebSocketIntegrationType, WebSocketApi, WebSocketRouteOptions, WebSocketIntegration
+from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketRouteOptions
 from aws_cdk.aws_lambda import LayerVersion
+from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
 
 class WebSocketStack(Construct):
 
@@ -31,10 +32,9 @@ class WebSocketStack(Construct):
            timeout=Duration.seconds(15),
         )
 
-        self.manage_connection_function_integration = WebSocketIntegration(
+        self.manage_connection_function_integration = WebSocketLambdaIntegration(
+            id="ManageConnectionFunctionIntegration",
             handler=manage_connection_function,
-            integration_type=WebSocketIntegrationType.LAMBDA_PROXY,
-            payload_format_version="1.0"
         )
 
         self.web_socket = WebSocketApi(
