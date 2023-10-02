@@ -1,16 +1,15 @@
 import os
 from aws_cdk import (
-    Stack,
     aws_lambda as lambda_,
     Duration,
     aws_cognito
 )
 from constructs import Construct
 
-from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketRouteOptions, WebSocketAuthorizer
+from aws_cdk.aws_apigatewayv2_integrations_alpha import
+from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketRouteOptions
 from aws_cdk.aws_lambda import LayerVersion
 from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
-
 
 class WebSocketStack(Construct):
 
@@ -38,14 +37,6 @@ class WebSocketStack(Construct):
             handler=manage_connection_function
         )
 
-        self.web_socket_authorizer = WebSocketAuthorizer(
-            id="WebSocketAuthorizer",
-            authorizer_name="WebSocketAuthorizer",
-            authorizer_type=aws_cognito.CognitoAuthorizerType.USER_POOL,
-            authorizer_parameter_name="Authorization",
-            authorizer_identifiers=[f"{self.dev_auth_system_userpool_arn}"]
-        )
-
         self.web_socket = WebSocketApi(
             self, f"MauaFood_WebSocketApi_{self.github_ref_name}",
             api_name=f"MauaFood_WebSocketApi_{self.github_ref_name}",
@@ -55,8 +46,7 @@ class WebSocketStack(Construct):
                 authorizer=authorizer
             ),
             disconnect_route_options=WebSocketRouteOptions(
-                integration=self.manage_connection_function_integration,
-                authorizer=authorizer
+                integration=self.manage_connection_function_integration
             ),
         )
 
