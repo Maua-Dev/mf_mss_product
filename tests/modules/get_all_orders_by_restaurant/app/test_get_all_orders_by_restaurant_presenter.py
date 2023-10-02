@@ -7,7 +7,7 @@ from src.modules.get_all_orders_by_restaurant.app.get_all_orders_by_restaurant_p
 
 class Test_GetAllOrdersByRestaurantPresenter:
 
-    def test_lambda_handler_with_order_id(self):
+    def test_lambda_handler_with_exclusive_start_key(self):
         user = UserRepositoryMock().users_list[3]
         order = OrderRepositoryMock().orders[9]
 
@@ -53,20 +53,20 @@ class Test_GetAllOrdersByRestaurantPresenter:
                 "timeEpoch": 1583348638390
             },
             "body": {
-                "order_id": order.order_id,
+                "exclusive_start_key": order.order_id,
             },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
         }
         response = lambda_handler(event, None)
-        expected_all_orders = ["135ef881-1b1f-4f38-a662-8ff7156e6c27", '1eeef881-1b1f-4f38-a662-8ff7156e6c27']
+        expected_all_orders = ['8309d903-55ce-4299-9c70-13fa2e03bcdc', "135ef881-1b1f-4f38-a662-8ff7156e6c27", '1eeef881-1b1f-4f38-a662-8ff7156e6c27']
 
         assert response['statusCode'] == 200
         assert json.loads(response['body'])['message'] == "the orders were retrieved"
         assert [order_id["order_id"] for order_id in json.loads(response['body'])['all_orders']] == expected_all_orders
 
-    def test_lambda_handler_without_order_id(self):
+    def test_lambda_handler_without_exclusive_start_key(self):
         user = UserRepositoryMock().users_list[3]
         order = OrderRepositoryMock().orders[9]
 

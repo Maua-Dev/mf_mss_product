@@ -1,10 +1,10 @@
 from .change_order_status_usecase import ChangeOrderStatusUsecase
 from .change_order_status_viewmodel import ChangeOrderViewmodel
-from ....shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterError, \
     EntityParameterExcededMaximumValue
-from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UnregisteredUser, ForbiddenAction, NoItemsFound, \
+from src.shared.helpers.errors.usecase_errors import UserNotAllowed, UnregisteredUser, NoItemsFound, \
     UserNotRelatedToRestaurant
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, Forbidden, InternalServerError, NotFound
