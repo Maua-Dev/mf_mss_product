@@ -5,7 +5,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi
+from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketStage, WebSocketRouteOptions
 from aws_cdk.aws_lambda import LayerVersion
 from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
 
@@ -41,12 +41,18 @@ class WebSocketStack(Construct):
             self, f"MauaFood_WebSocketApi_{self.github_ref_name}",
             api_name=f"MauaFood_WebSocketApi_{self.github_ref_name}",
             description="This is the MauaFood WebSocketApi",
+            connect_route_options=WebSocketRouteOptions(
+                integration=self.manage_connection_function_integration,
+            ),
+            disconnect_route_options=WebSocketRouteOptions(
+                integration=self.manage_connection_function_integration,
+            )
         )
 
-        self.web_socket.add_route(route_key='$connect',
-                                  integration=self.manage_connection_function_integration,
-                                  authorizer=authorizer)
+        self.web_socket_stage = WebSocketStage(
+            self, f"MauaFood_WebSocketStage_{self.stage}",
+            web_socket_api=self.web_socket,
+            stage_name=self.stage,
+            auto_deploy=True,
+        )
 
-        self.web_socket.add_route(route_key='$disconnect',
-                                  integration=self.manage_connection_function_integration,
-                                  )
