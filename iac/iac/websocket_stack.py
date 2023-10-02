@@ -17,7 +17,6 @@ class WebSocketStack(Construct):
     def __init__(self, scope: Construct, construct_id: str, lambda_layer: LayerVersion, environment_variables: dict,
                  authorizer) -> None:
         super().__init__(scope, construct_id)
-
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
         self.dev_auth_system_userpool_arn = os.environ.get(
@@ -45,9 +44,10 @@ class WebSocketStack(Construct):
             description="This is the MauaFood WebSocketApi",
             connect_route_options=WebSocketRouteOptions(
                 integration=self.manage_connection_function_integration,
+                authorizer=authorizer
             ),
             disconnect_route_options=WebSocketRouteOptions(
                 integration=self.manage_connection_function_integration,
+                authorizer=authorizer
             ),
-            authorizer=authorizer
         )
