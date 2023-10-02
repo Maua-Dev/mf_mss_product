@@ -17,7 +17,7 @@ class WebSocketStack(Construct):
         super().__init__(scope, construct_id)
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
-        self.stage = os.environ.get("STAGE")
+        self.stage = 'prod'
         self.dev_auth_system_userpool_arn = os.environ.get(
             "AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
 
