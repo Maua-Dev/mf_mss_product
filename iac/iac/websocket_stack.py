@@ -6,9 +6,10 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketRouteOptions
+from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketStage, WebSocketRouteOptions, WebSocketAuthorizer
 from aws_cdk.aws_lambda import LayerVersion
 from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
+
 
 class WebSocketStack(Construct):
 
@@ -17,6 +18,7 @@ class WebSocketStack(Construct):
         super().__init__(scope, construct_id)
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
+        self.stage = os.environ.get("STAGE")
         self.dev_auth_system_userpool_arn = os.environ.get(
             "AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
 
@@ -40,12 +42,14 @@ class WebSocketStack(Construct):
             self, f"MauaFood_WebSocketApi_{self.github_ref_name}",
             api_name=f"MauaFood_WebSocketApi_{self.github_ref_name}",
             description="This is the MauaFood WebSocketApi",
-            connect_route_options=WebSocketRouteOptions(
-                integration=self.manage_connection_function_integration,
-                authorizer=authorizer
-            ),
-            disconnect_route_options=WebSocketRouteOptions(
-                integration=self.manage_connection_function_integration
-            ),
         )
 
+        self.web_socket.add_route('ConnectionRoute',
+                                  route_key='$connect',
+                                  integration=self.manage_connection_function_integration,
+                                  authorizer=authorizer)
+
+        self.web_socket.add_route('DisconnectionRoute',
+                                  route_key='$disconnect',
+                                  integration=self.manage_connection_function_integration,
+                                  )
