@@ -6,7 +6,6 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from aws_cdk.aws_apigatewayv2_integrations_alpha import
 from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketRouteOptions
 from aws_cdk.aws_lambda import LayerVersion
 from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
