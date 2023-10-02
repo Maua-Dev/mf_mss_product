@@ -35,8 +35,10 @@ class WebSocketStack(Construct):
 
         self.manage_connection_function_integration = WebSocketLambdaIntegration(
             id="ManageConnectionFunctionIntegration",
-            handler=manage_connection_function,
+            handler=manage_connection_function
         )
+
+
 
         self.web_socket = WebSocketApi(
             self, f"MauaFood_WebSocketApi_{self.github_ref_name}",
@@ -48,6 +50,6 @@ class WebSocketStack(Construct):
             ),
             disconnect_route_options=WebSocketRouteOptions(
                 integration=self.manage_connection_function_integration,
-                authorizer=authorizer
             ),
         )
+
