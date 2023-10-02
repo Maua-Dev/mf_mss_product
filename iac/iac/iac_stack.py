@@ -93,4 +93,5 @@ class IacStack(Stack):
 
         self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
                                               lambda_layer=self.lambda_stack.lambda_layer,
-                                              environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
+                                              environment_variables=ENVIRONMENT_VARIABLES,
+                                              authorizer=self.cognito_auth)
