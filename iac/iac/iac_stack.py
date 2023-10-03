@@ -81,9 +81,7 @@ class IacStack(Stack):
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
 
-        get_user_url = self.rest_api.url
-
-        ENVIRONMENT_VARIABLES["GET_USER_URL"] = get_user_url
+        ENVIRONMENT_VARIABLES['GET_USER_ARN'] = self.lambda_stack.get_user.function_arn
 
         self.contact_us_lambda_stack = LambdaContactUsStack(self, api_gateway_resource=api_gateway_resource,
                                                             authorizer=self.cognito_auth,
@@ -98,5 +96,4 @@ class IacStack(Stack):
 
         self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
                                               lambda_layer=self.lambda_stack.lambda_layer,
-                                              environment_variables=ENVIRONMENT_VARIABLES,
-                                              authorizer=self.cognito_auth)
+                                              environment_variables=ENVIRONMENT_VARIABLES)
