@@ -68,6 +68,7 @@ class IacStack(Stack):
             "DYNAMO_GSI_SORT_KEY": "GSI1-SK",
             "S3_BUCKET_NAME": self.bucket_stack.s3_bucket.bucket_name,
             "CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS": self.bucket_stack.cloudfront_distribution.domain_name,
+
         }
 
         self.cognito_auth = CognitoUserPoolsAuthorizer(self, f"mf_cognito_auth_{self.github_ref_name}",
@@ -79,6 +80,10 @@ class IacStack(Stack):
 
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
+
+        get_user_url = self.lambda_stack.get_user.url
+
+        ENVIRONMENT_VARIABLES["GET_USER_URL"] = get_user_url
 
         self.contact_us_lambda_stack = LambdaContactUsStack(self, api_gateway_resource=api_gateway_resource,
                                                             authorizer=self.cognito_auth,
