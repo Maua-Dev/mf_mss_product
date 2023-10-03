@@ -38,6 +38,8 @@ class ManageConnectionController:
             if requested_user.get('user') is None:
                 raise MissingParameters('requester_user')
 
+            print(os.getenv('GET_USER_URL'))
+
             requester_user = UserApiGatewayDTO.from_api_gateway(requested_user.get('user'))
 
             if request.data.get('api_id') is None:

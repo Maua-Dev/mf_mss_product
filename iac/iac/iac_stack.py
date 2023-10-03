@@ -81,7 +81,7 @@ class IacStack(Stack):
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
 
-        get_user_url = self.lambda_stack.get_user.url
+        get_user_url = self.rest_api.url
 
         ENVIRONMENT_VARIABLES["GET_USER_URL"] = get_user_url
 
