@@ -12,8 +12,7 @@ from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegrati
 
 class WebSocketStack(Construct):
 
-    def __init__(self, scope: Construct, construct_id: str, lambda_layer: LayerVersion, environment_variables: dict,
-                 authorizer) -> None:
+    def __init__(self, scope: Construct, construct_id: str, lambda_layer: LayerVersion, environment_variables: dict) -> None:
         super().__init__(scope, construct_id)
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
