@@ -44,7 +44,7 @@ class WebSocketStack(Construct):
             timeout=Duration.seconds(15),
         )
 
-        authorizer = WebSocketLambdaAuthorizer("Authorizer", handler=auth_lambda, identity_source=["request.header.Authorization"])
+        authorizer = WebSocketLambdaAuthorizer("Authorizer", handler=auth_lambda, identity_source="request.header.Authorization")
 
         self.manage_connection_function_integration = WebSocketLambdaIntegration(
             id="ManageConnectionFunctionIntegration",
