@@ -44,7 +44,7 @@ class WebSocketStack(Construct):
             timeout=Duration.seconds(15),
         )
 
-        # authorizer = authorizer = WebSocketLambdaAuthorizer("Authorizer", auth_lambda)
+        authorizer = WebSocketLambdaAuthorizer("Authorizer", handler=auth_lambda, identity_source=["$request.header.Authorization"])
 
         self.manage_connection_function_integration = WebSocketLambdaIntegration(
             id="ManageConnectionFunctionIntegration",
@@ -57,7 +57,7 @@ class WebSocketStack(Construct):
             description="This is the MauaFood WebSocketApi",
             connect_route_options=WebSocketRouteOptions(
                 integration=self.manage_connection_function_integration,
-                # authorizer=authorizer,
+                authorizer=authorizer,
             ),
             disconnect_route_options=WebSocketRouteOptions(
                 integration=self.manage_connection_function_integration,
