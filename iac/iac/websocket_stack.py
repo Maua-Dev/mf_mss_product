@@ -8,7 +8,7 @@ from constructs import Construct
 from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketStage, WebSocketRouteOptions
 from aws_cdk.aws_lambda import LayerVersion
 from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
-# from aws_cdk.aws_apigatewayv2_authorizers_alpha import WebSocketLambdaAuthorizer
+from aws_cdk.aws_apigatewayv2_authorizers_alpha import WebSocketLambdaAuthorizer
 
 
 class WebSocketStack(Construct):
@@ -32,25 +32,19 @@ class WebSocketStack(Construct):
             timeout=Duration.seconds(15),
         )
 
-        # auth_lambda = lambda_.Function(
-        #     self, "AuthFunction",
-        #     code=lambda_.Code.from_asset(
-        #         f"../lambda_functions/websocket_auth"),
-        #     handler=f"websocket_auth.lambda_handler",
-        #     runtime=lambda_.Runtime.PYTHON_3_9,
-        #     layers=[lambda_layer],
-        #     memory_size=512,
-        #     environment=environment_variables,
-        #     timeout=Duration.seconds(15),
-        # )
+        auth_lambda = lambda_.Function(
+            self, "AuthFunction",
+            code=lambda_.Code.from_asset(
+                f"../lambda_functions/websocket_auth"),
+            handler=f"websocket_auth.lambda_handler",
+            runtime=lambda_.Runtime.PYTHON_3_9,
+            layers=[lambda_layer],
+            memory_size=512,
+            environment=environment_variables,
+            timeout=Duration.seconds(15),
+        )
 
-        # authorizer = WebSocketLambdaAuthorizer(
-        #     self, "Authorizer",
-        #     authorizer_name="Authorizer",
-        #     handler=auth_lambda,
-        #     identity_source=["$request.header.Authorization"],
-        #     results_cache_ttl=Duration.seconds(300),
-        # )
+        # authorizer = authorizer = WebSocketLambdaAuthorizer("Authorizer", auth_lambda)
 
         self.manage_connection_function_integration = WebSocketLambdaIntegration(
             id="ManageConnectionFunctionIntegration",
