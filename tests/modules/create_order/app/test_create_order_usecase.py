@@ -16,7 +16,7 @@ class Test_CreateOrderUsecase:
         repo_product = ProductRepositoryMock()
         usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
 
-        order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, obervation="Com ketchup")
+        order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
         assert repo_order.orders[-1].order_id == order.order_id
         assert repo_order.orders[-1].user_name == order.user_name
@@ -26,7 +26,6 @@ class Test_CreateOrderUsecase:
         assert repo_order.orders[-1].restaurant == order.restaurant
         assert repo_order.orders[-1].status == order.status
         assert repo_order.orders[-1].total_price == order.total_price
-        assert repo_order.orders[-1].observation == order.observation
         assert repo_order.orders[-1].aborted_reason == order.aborted_reason
 
     def test_create_order_usecase_several_orders_to_test_total_price(self):
@@ -35,7 +34,7 @@ class Test_CreateOrderUsecase:
         repo_product = ProductRepositoryMock()
         usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
 
-        order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2), OrderProduct(product_name="Copo da Felicidade", product_id="4d1716c4-5e51-4d72-ba93-349e31201a22", quantity=3)], restaurant=RESTAURANT.SOUZA_DE_ABREU, obervation="Com ketchup")
+        order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2), OrderProduct(product_name="Copo da Felicidade", product_id="4d1716c4-5e51-4d72-ba93-349e31201a22", quantity=3)], restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
         assert repo_order.orders[-1].products == order.products
         assert repo_order.orders[-1].total_price == 86.00 #10*2 + 22*3
@@ -47,7 +46,7 @@ class Test_CreateOrderUsecase:
         usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
 
         with pytest.raises(UnregisteredUser):
-            order = usecase(user_name="Lucas Milas", user_id="outro", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, obervation="Com ketchup")
+            order = usecase(user_name="Lucas Milas", user_id="outro", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
     def test_create_order_usecase_no_items_found_product_id(self):
         repo_order = OrderRepositoryMock()
@@ -56,7 +55,7 @@ class Test_CreateOrderUsecase:
         usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
 
         with pytest.raises(NoItemsFound):
-            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa12", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, obervation="Com ketchup")
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa12", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
     def test_create_order_usecase_no_items_found_restaurant(self):
         repo_order = OrderRepositoryMock()
@@ -65,4 +64,4 @@ class Test_CreateOrderUsecase:
         usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
 
         with pytest.raises(NoItemsFound):
-            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=STATUS.CANCELLED, obervation="Com ketchup")
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=STATUS.CANCELLED)

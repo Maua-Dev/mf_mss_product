@@ -17,13 +17,13 @@ class Test_GetAllOrdersByUserViewmodel:
             'all_orders_by_user': [{
                 'aborted_reason': None,
                 'creation_time_milliseconds': 1692061296000,
-                'observation': "Capricha no morango",
                 'order_id': "b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 'products': [{
                         'product_id':'4081a83a-516f-442c-85e2-b54bfb192e55', 
                         'product_name':'Cimento (400mL)',
-                        'quantity':2
-                        }],
+                        'quantity':2,
+                        'observation': None,
+                }],
                 'restaurant': 'CANTINA_DO_MOLEZA',
                 'status': 'READY',
                 'total_price': 30.00,
@@ -49,12 +49,12 @@ class Test_GetAllOrdersByUserViewmodel:
             'all_orders_by_user': [{
                 'aborted_reason': None,
                 'creation_time_milliseconds': 1692061296000,
-                'observation': "Capricha no morango",
                 'order_id': "b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
                 'products': [{
                         'product_id':'4081a83a-516f-442c-85e2-b54bfb192e55', 
                         'product_name':'Cimento (400mL)',
-                        'quantity':2
+                        'quantity':2,
+                        "observation": None
                         }],
                 'restaurant': 'CANTINA_DO_MOLEZA',
                 'status': 'READY',
@@ -66,12 +66,12 @@ class Test_GetAllOrdersByUserViewmodel:
             {
                 'aborted_reason': None,
                 'creation_time_milliseconds': 1692061297000,
-                'observation': None,
                 'order_id': "b3f6c5aa-80ad-4f95-ae16-455b4f874553",
                 'products': [{
                         'product_id':'6624e731-1301-4b24-a036-1e7f2553e023', 
                         'product_name':'Salada de Frutas',
-                        'quantity':2
+                        'quantity':2,
+                        "observation": None
                         }],
                 'restaurant': 'CANTINA_DO_MOLEZA',
                 'status': 'READY',

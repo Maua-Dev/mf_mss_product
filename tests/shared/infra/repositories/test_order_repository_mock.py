@@ -15,7 +15,7 @@ class Test_OrderRepositoryMock:
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[
                 OrderProduct(product_name="Copo da Felicidade", product_id="4d1716c4-5e51-4d72-ba93-349e31201a22",
                              quantity=1)], creation_time_milliseconds=1692159350000, restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            status=STATUS.PENDING, total_price=22.00, observation=None, aborted_reason=None,
+            status=STATUS.PENDING, total_price=22.00, aborted_reason=None,
             last_status_update_milliseconds=1992159359900
         )
 
@@ -43,14 +43,12 @@ class Test_OrderRepositoryMock:
             new_products=[],
             new_status=STATUS.REFUSED,
             new_total_price=42.20,
-            new_observation="Olha que bela observação",
             new_aborted_reason="Abortar missão, soldado"
         )
 
         assert order.products == []
         assert order.status == STATUS.REFUSED
         assert order.total_price == 42.20
-        assert order.observation == "Olha que bela observação"
         assert order.aborted_reason == "Abortar missão, soldado"
 
     def test_update_only_total_price(self):
@@ -63,17 +61,6 @@ class Test_OrderRepositoryMock:
             new_total_price=42.20,
         )
         assert order.total_price == 42.20
-
-    def test_update_observation_to_none(self):
-        repo = OrderRepositoryMock()
-        order = repo.orders[1]
-        order_id = order.order_id
-
-        response = repo.update_order(
-            order_id=order_id,
-            new_observation=""
-        )
-        assert order.observation is None
 
     def test_update_abortation_to_none(self):
         repo = OrderRepositoryMock()
@@ -127,14 +114,12 @@ class Test_OrderRepositoryMock:
             new_products=[],
             new_status=STATUS.REFUSED,
             new_total_price=42.20,
-            new_observation="Olha que bela observação",
             new_aborted_reason="Abortar missão, soldado"
         )
 
         assert order.products == []
         assert order.status == STATUS.REFUSED
         assert order.total_price == 42.20
-        assert order.observation == "Olha que bela observação"
         assert order.aborted_reason == "Abortar missão, soldado"
 
     def test_update_only_total_price(self):
@@ -148,16 +133,6 @@ class Test_OrderRepositoryMock:
         )
         assert order.total_price == 42.20
 
-    def test_update_observation_to_none(self):
-        repo = OrderRepositoryMock()
-        order = repo.orders[1]
-        order_id = order.order_id
-
-        response = repo.update_order(
-            order_id=order_id,
-            new_observation=""
-        )
-        assert order.observation is None
 
     def test_update_abortation_to_none(self):
         repo = OrderRepositoryMock()

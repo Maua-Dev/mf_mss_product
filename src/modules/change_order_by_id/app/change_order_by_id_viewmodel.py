@@ -16,7 +16,8 @@ class OrderProductViewmodel:
         return {
             "product_name": self.order_product.product_name,
             "product_id": self.order_product.product_id,
-            "quantity": self.order_product.quantity
+            "quantity": self.order_product.quantity,
+            "observation": self.order_product.observation
         }
 
 
@@ -27,7 +28,6 @@ class OrderViewmodel:
     products: List[OrderProduct]
     creation_time_milliseconds: int
     restaurant: RESTAURANT
-    observation: Optional[str] = None
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
@@ -40,7 +40,6 @@ class OrderViewmodel:
         self.products = [OrderProductViewmodel(order_product) for order_product in order.products]
         self.creation_time_milliseconds = order.creation_time_milliseconds
         self.restaurant = order.restaurant
-        self.observation = order.observation
         self.status = order.status
         self.aborted_reason = order.aborted_reason
         self.total_price = order.total_price
@@ -54,7 +53,6 @@ class OrderViewmodel:
             "products": [order_product.to_dict() for order_product in self.products],
             "creation_time_milliseconds": self.creation_time_milliseconds,
             "restaurant": self.restaurant.value,
-            "observation": self.observation,
             "status": self.status.value,
             "aborted_reason": self.aborted_reason,
             "total_price": self.total_price,

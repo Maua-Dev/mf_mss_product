@@ -35,7 +35,7 @@ class IOrderRepository(ABC):
     @abstractmethod
     def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
-                     new_total_price: Optional[float] = None, new_observation: Optional[str] = None,
+                     new_total_price: Optional[float] = None,
                      new_aborted_reason: Optional[str] = None):
         pass
 

@@ -14,7 +14,7 @@ class ChangeOrderByIdUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, order_id: str, user_id: str, new_observation: Optional[str] = None,
+    def __call__(self, order_id: str, user_id: str,
                  new_prods_list: Optional[List[OrderProduct]] = None):
         order = self.repo_order.get_order_by_id(order_id=order_id)
         user = self.repo_user.get_user_by_id(user_id=user_id)
@@ -40,7 +40,6 @@ class ChangeOrderByIdUsecase:
             new_products=new_prods_list,
             new_status=None,
             new_total_price=None,
-            new_observation=new_observation,
             new_aborted_reason=None
         )
 

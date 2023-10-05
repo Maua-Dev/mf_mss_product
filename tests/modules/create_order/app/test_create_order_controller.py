@@ -25,10 +25,10 @@ class Test_CreateOrderController:
             "products": [{
                 "product_name": repo_product.products[0].name,
                 "product_id": repo_product.products[0].product_id,
-                "quantity": 1
+                "quantity": 1,
+                "observation": "Sem tomate"
             }],
             "restaurant": repo_product.products[0].restaurant.value,
-            "observation": "Sem tomate"
         })
 
         response = controller(request)
@@ -41,7 +41,6 @@ class Test_CreateOrderController:
         assert response.body["order"]["products"][0]["product_id"] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert response.body["order"]["products"][0]["quantity"] == 1
         assert response.body["order"]["restaurant"] == "SOUZA_DE_ABREU"
-        assert response.body["order"]["observation"] == "Sem tomate"
         assert response.body["order"]["status"] == "PENDING"
         assert response.body["order"]["total_price"] == 19.00
 
@@ -63,20 +62,22 @@ class Test_CreateOrderController:
             "products": [{
                 "product_name": repo_product.products[0].name,
                 "product_id": repo_product.products[0].product_id,
-                "quantity": 1
+                "quantity": 1,
+                "observation": "Sem tomate no X-Salada"
             },
             {
                 "product_name": repo_product.products[1].name,
                 "product_id": repo_product.products[1].product_id,
-                "quantity": 1
+                "quantity": 1,
+                "observation": "Sem tomate no X-Salada"
             },
             {
                 "product_name": repo_product.products[2].name,
                 "product_id": repo_product.products[2].product_id,
-                "quantity": 3
+                "quantity": 3,
+                "observation": "Sem tomate no X-Salada"
             }],
             "restaurant": repo_product.products[0].restaurant.value,
-            "observation": "Sem tomate no X-Salada"
         })
 
         response = controller(request)
@@ -90,7 +91,6 @@ class Test_CreateOrderController:
         assert response.body["order"]["products"][2]["quantity"] == 3
         assert response.body["order"]["restaurant"] == "SOUZA_DE_ABREU"
         assert response.body["order"]["creation_time_milliseconds"] == int(datetime.datetime.now().timestamp() * 1000)
-        assert response.body["order"]["observation"] == "Sem tomate no X-Salada"
         assert response.body["order"]["status"] == "PENDING"
         assert response.body["order"]["total_price"] == 66.00
 
@@ -105,10 +105,10 @@ class Test_CreateOrderController:
             "products": [{
                 "product_name": repo_product.products[0].name,
                 "product_id": repo_product.products[0].product_id,
-                "quantity": 1
+                "quantity": 1,
+                "observation": "Sem tomate"
             }],
             "restaurant": repo_product.products[0].restaurant.value,
-            "observation": "Sem tomate"
         })
 
         response = controller(request)
@@ -131,7 +131,6 @@ class Test_CreateOrderController:
                 "custom:isMaua": True
             },
             "restaurant": repo_product.products[0].restaurant.value,
-            "observation": "Sem tomate"
         })
 
         response = controller(request)
@@ -156,9 +155,9 @@ class Test_CreateOrderController:
             "products": [{
                 "product_name": repo_product.products[0].name,
                 "product_id": repo_product.products[0].product_id,
-                "quantity": 1
+                "quantity": 1,
+                "observation": "Sem tomate"
             }],
-            "observation": "Sem tomate"
         })
 
         response = controller(request)
@@ -183,10 +182,10 @@ class Test_CreateOrderController:
             "products": [{
                 "product_name": repo_product.products[0].name,
                 "product_id": repo_product.products[0].product_id,
-                "quantity": 1
+                "quantity": 1,
+                "observation": "Sem tomate"
             }],
             "restaurant": "Tech Food?",
-            "observation": "Sem tomate"
         })
 
         response = controller(request)

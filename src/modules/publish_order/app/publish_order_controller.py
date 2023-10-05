@@ -28,7 +28,7 @@ class PublishOrderController:
             order_dict = first_record["new_image"]
             products_dict_list = first_record["new_image"]["products"] 
             
-            products = [OrderProduct(product_id=product["product_id"], product_name=product["product_name"], quantity = int(product["quantity"])) for product in products_dict_list]
+            products = [OrderProduct(product_id=product["product_id"], product_name=product["product_name"], quantity = int(product["quantity"]), observation=product.get("observation")) for product in products_dict_list]
 
             order = Order(order_id=order_dict["order_id"],
                           user_name=order_dict["user_name"],
@@ -39,7 +39,6 @@ class PublishOrderController:
                           status=STATUS(order_dict["status"]),
                           total_price=float(order_dict["total_price"]),
                           last_status_update_milliseconds=int(order_dict.get("last_status_update_milliseconds")) if order_dict.get("last_status_update_milliseconds") is not None else None,
-                          observation=order_dict["observation"],
                           aborted_reason=order_dict.get("aborted_reason"))
 
             publish_order = self.PublishOrderUsecase(order=order)

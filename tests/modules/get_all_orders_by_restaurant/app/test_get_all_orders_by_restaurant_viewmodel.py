@@ -25,22 +25,24 @@ class Test_GetAllOrdersByRestaurantViewmodel:
                         {
                             "product_name": "Pão de Queijo",
                             "product_id": "0165b801-04c5-41b7-82bb-10f1501333ae",
-                            "quantity": 2
+                            "quantity": 2,
+                            "observation": None
                         },
                         {
                             "product_name": "Capuccino - gde.",
                             "product_id": "4e6979d6-c9c3-438e-9b8c-e4d799358720",
-                            "quantity": 1
+                            "quantity": 1,
+                            "observation": None
                         },
                         {
                             "product_name": "Paçoquita",
                             "product_id": "79e2706e-7621-43ab-b6d1-82aeb45fc57c",
-                            "quantity": 3
+                            "quantity": 3,
+                            "observation": None
                         }
                     ],
                     "creation_time_milliseconds": 1692157822000,
                     "restaurant": "SOUZA_DE_ABREU",
-                    "observation": None,
                     "status": "REFUSED",
                     "aborted_reason": None,
                     "total_price": 35.5,
