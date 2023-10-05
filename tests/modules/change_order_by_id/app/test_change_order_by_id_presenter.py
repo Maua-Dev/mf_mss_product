@@ -32,28 +32,6 @@ def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_
 
 
 class Test_ChangeOrderByIdPresenter:
-    def test_change_order_observation(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
-
-        event = get_event_for_presenter_sockets_tests(
-            claims={
-                "sub": user.user_id,
-                "name": user.name,
-                "email": user.email,
-                "custom:isMaua": True
-            },
-            body={
-                "order_id": order.order_id,
-                "new_observation": "Espero que tenha uma ótima noite de terça-feira - Laura"
-            }
-        )
-
-        response = lambda_handler(event, None)
-
-        assert response['statusCode'] == 200
-        assert json.loads(response["body"])["message"] == "the order was updated"
-        assert json.loads(response["body"])["order"][
-                   "observation"] == "Espero que tenha uma ótima noite de terça-feira - Laura"
 
     def test_change_order_products(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo()
@@ -84,7 +62,9 @@ class Test_ChangeOrderByIdPresenter:
                 {
                     "product_name": "Pamonha",
                     "product_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    "quantity": 12}
+                    "quantity": 12,
+                    "observation": None
+                }
             ]
 
     def test_order_does_not_exist(self):

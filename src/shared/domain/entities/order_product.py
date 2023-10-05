@@ -1,4 +1,5 @@
 import abc
+from typing import Optional
 
 from src.shared.helpers.errors.domain_errors import EntityError
 
@@ -8,11 +9,14 @@ class OrderProduct(abc.ABC):
     product_id: str
     quantity: int
     PRODUCT_ID_LENGTH = 36
+    observation: Optional[str] = None
 
     def __init__(self,
                  product_name: str,
                  product_id: str,
-                 quantity: int):
+                 quantity: int,
+                 observation:Optional[str] = None
+                 ):
         
         if type(product_name) != str:
             raise EntityError("product_name")
@@ -25,6 +29,11 @@ class OrderProduct(abc.ABC):
         if not self.validate_quantity(quantity=quantity):
             raise EntityError("quantity")
         self.quantity = quantity
+
+        if observation is not None:
+            if type(observation) != str:
+                raise EntityError("observation")
+        self.observation = observation
 
     @staticmethod
     def validate_product_id(product_id: str) -> bool:

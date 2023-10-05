@@ -1,12 +1,11 @@
 from src.modules.change_order_status.app.change_order_status_viewmodel import ChangeOrderViewmodel
-from src.modules.create_order.app.create_order_viewmodel import CreateOrderViewmodel
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 
 
-class Test_CreateOrderViewmodel:
+class Test_ChangeOrderStatusViewmodel:
     def test_change_order_status_viewmodel(self):
         order = Order(
             order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
@@ -18,7 +17,6 @@ class Test_CreateOrderViewmodel:
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=30.00,
-            observation="Capricha no morango",
             aborted_reason=None,
             last_status_update_milliseconds=1692061896
         )
@@ -33,11 +31,11 @@ class Test_CreateOrderViewmodel:
                 "products": [{
                     "product_name": "Hot Dog",
                     "product_id": "c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09",
-                    "quantity": 2
+                    "quantity": 2,
+                    "observation": None
                 }],
                 "creation_time_milliseconds": 1692061296,
                 "restaurant": "CANTINA_DO_MOLEZA",
-                "observation": "Capricha no morango",
                 "status": "READY",
                 "aborted_reason": None,
                 "total_price": 30.00,

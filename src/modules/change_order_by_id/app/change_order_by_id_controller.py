@@ -27,7 +27,6 @@ class ChangeOrderByIdController:
 
             order_id = request.data.get("order_id")
 
-            new_observation = request.data.get("new_observation")
             products_list = request.data.get("new_products")
 
             new_products_list = []
@@ -48,7 +47,6 @@ class ChangeOrderByIdController:
             order = self.usecase(
                 order_id=order_id,
                 user_id=requester_user.user_id,
-                new_observation=new_observation,
                 new_prods_list=new_products_list if products_list is not None else None
             )
             viewmodel = ChangeOrderByIdViewmodel(order)

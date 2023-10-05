@@ -31,26 +31,6 @@ def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_
 
 
 class Test_ChangeOrderByIdController:
-    def test_update_observation(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
-        controller = ChangeOrderByIdController(usecase)
-
-        request = HttpRequest(body={
-            "requester_user": {
-                "sub": user.user_id,
-                "name": user.name,
-                "email": user.email,
-                "custom:isMaua": True
-            },
-            "order_id": order.order_id,
-            "new_observation": "Espero que tenha uma ótima noite de terça-feira - Laura"
-        })
-
-        response = controller(request)
-
-        assert response.status_code == 200
-        assert response.body["message"] == "the order was updated"
-
     def test_update_products_list(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo()
         controller = ChangeOrderByIdController(usecase)

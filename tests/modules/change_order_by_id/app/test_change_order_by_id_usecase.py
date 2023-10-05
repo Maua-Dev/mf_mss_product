@@ -19,7 +19,7 @@ def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_
     user = user_repo.users_list[-1]
     order = order_repo.orders[-1]
     order.status = STATUS.PENDING
-    order.products = [OrderProduct("Pamonha", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 12)]
+    order.products = [OrderProduct("Pamonha", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 12, None)]
 
 
     if is_user_admin:
@@ -48,21 +48,6 @@ class Test_ChangeOrderByIdUsecase:
         )
 
         assert len(response.products) == 1
-        assert response.observation == "Uma bela de uma observação, ein"
-
-    def test_change_order_obeservation(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
-
-        order.observation = "Uma bela de uma observação, ein"
-
-        response: Order = usecase(
-            order_id=order.order_id,
-            user_id=user.user_id,
-            new_observation="Uma nova observação"
-        )
-
-        assert len(response.products) != 0
-        assert response.observation == "Uma nova observação"
 
     def test_order_doesnt_exist(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo()
@@ -71,7 +56,6 @@ class Test_ChangeOrderByIdUsecase:
             response: Order = usecase(
                 order_id="Um id que não existe",
                 user_id=user.user_id,
-                new_observation="Uma nova observação"
             )
 
     def test_user_doesnt_exist(self):
@@ -81,7 +65,6 @@ class Test_ChangeOrderByIdUsecase:
             response: Order = usecase(
                 order_id=order.order_id,
                 user_id="Um id que não existe",
-                new_observation="Uma nova observação"
             )
 
     def test_admin_change_order_whether_is_owner_or_not(self):
@@ -90,10 +73,8 @@ class Test_ChangeOrderByIdUsecase:
         response: Order = usecase(
             order_id=order.order_id,
             user_id=user.user_id,
-            new_observation="Uma nova observação"
         )
 
-        assert response.observation == "Uma nova observação"
         assert response.user_id != user.user_id
         assert user.role == ROLE.ADMIN
 
@@ -104,7 +85,6 @@ class Test_ChangeOrderByIdUsecase:
             response: Order = usecase(
                 order_id=order.order_id,
                 user_id=user.user_id,
-                new_observation="Uma nova observação"
             )
 
     def test_order_cant_be_updated_if_is_not_pending(self):
@@ -116,7 +96,6 @@ class Test_ChangeOrderByIdUsecase:
             response: Order = usecase(
                 order_id=order.order_id,
                 user_id=user.user_id,
-                new_observation="Uma nova observação"
             )
 
     def test_when_updating_list_it_cant_be_empty(self):
@@ -126,7 +105,6 @@ class Test_ChangeOrderByIdUsecase:
             response: Order = usecase(
                 order_id=order.order_id,
                 user_id=user.user_id,
-                new_observation="Uma nova observação",
                 new_prods_list=[]
             )
 
@@ -138,8 +116,6 @@ class Test_ChangeOrderByIdUsecase:
         response: Order = usecase(
                 order_id=order.order_id,
                 user_id=user.user_id,
-                new_observation="Uma nova observação"
             )
 
         assert order.status == STATUS.PREPARING
-        assert order.observation == "Uma nova observação"

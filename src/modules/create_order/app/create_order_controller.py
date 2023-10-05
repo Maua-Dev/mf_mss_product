@@ -32,8 +32,9 @@ class CreateOrderController:
                 product_name = product["product_name"]
                 product_id = product["product_id"]
                 quantity = product["quantity"]
+                observation = product.get("observation")
 
-                products_list.append(OrderProduct(product_name, product_id, quantity))
+                products_list.append(OrderProduct(product_name, product_id, quantity, observation))
 
             if request.data.get('restaurant') is None:
                 raise MissingParameters("restaurant")
@@ -46,7 +47,6 @@ class CreateOrderController:
                                             user_id=str(requester_user.user_id),
                                             products=list(products_list),
                                             restaurant=RESTAURANT[restaurant],
-                                            obervation=str(request.data.get('observation'))
                                             )
             
             viewmodel = CreateOrderViewmodel(order)

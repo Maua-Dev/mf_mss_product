@@ -13,12 +13,14 @@ class OrderProductViewmodel:
         self.order_product = order_product
 
     def to_dict(self) -> dict:
-        return{
-             "product_name": self.order_product.product_name,
-             "product_id": self.order_product.product_id,
-             "quantity": self.order_product.quantity
-            }
-    
+        return {
+            "product_name": self.order_product.product_name,
+            "product_id": self.order_product.product_id,
+            "quantity": self.order_product.quantity,
+            "observation": self.order_product.observation
+        }
+
+
 class OrderViewmodel:
     order_id: str
     user_name: str
@@ -26,7 +28,6 @@ class OrderViewmodel:
     products: List[OrderProduct]
     creation_time_milliseconds: int
     restaurant: RESTAURANT
-    observation: Optional[str] = None
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
@@ -38,26 +39,25 @@ class OrderViewmodel:
         self.products = [OrderProductViewmodel(order_product) for order_product in order.products]
         self.creation_time_milliseconds = order.creation_time_milliseconds
         self.restaurant = order.restaurant
-        self.observation = order.observation
         self.status = order.status
         self.aborted_reason = order.aborted_reason
         self.total_price = order.total_price
         self.last_status_update_milliseconds = order.last_status_update_milliseconds
 
     def to_dict(self) -> dict:
-        return{
-             "order_id": self.order_id,
-             "user_name": self.user_name,
-             "user_id": self.user_id,
-             "products": [order_product.to_dict() for order_product in self.products],
-             "creation_time_milliseconds": self.creation_time_milliseconds,
-             "restaurant": self.restaurant.value,
-             "observation": self.observation,
-             "status": self.status.value,
-             "aborted_reason": self.aborted_reason,
-             "total_price": self.total_price,
-             "last_status_update": self.last_status_update_milliseconds
-            }
+        return {
+            "order_id": self.order_id,
+            "user_name": self.user_name,
+            "user_id": self.user_id,
+            "products": [order_product.to_dict() for order_product in self.products],
+            "creation_time_milliseconds": self.creation_time_milliseconds,
+            "restaurant": self.restaurant.value,
+            "status": self.status.value,
+            "aborted_reason": self.aborted_reason,
+            "total_price": self.total_price,
+            "last_status_update": self.last_status_update_milliseconds
+        }
+
 
 class GetAllOrdersByUserViewmodel:
     all_orders: List[Order]
