@@ -17,7 +17,6 @@ class Test_AbortOrderViewmodel:
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             status=STATUS.PENDING,
             total_price=30.00,
-            observation="Quero que acrescente um vinagrete",
             aborted_reason="Desisti da compra!",
             last_status_update_milliseconds=2799764896
         )
@@ -32,11 +31,11 @@ class Test_AbortOrderViewmodel:
                 "products": [{
                     "product_name": "Hot Dog",
                     "product_id": "c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09",
-                    "quantity": 2
+                    "quantity": 2,
+                    "observation": None
                 }],
                 "creation_time_milliseconds": 2799764896,
                 "restaurant": "SOUZA_DE_ABREU",
-                "observation": "Quero que acrescente um vinagrete",
                 "status": "PENDING",
                 "aborted_reason": "Desisti da compra!",
                 "total_price": 30.00,

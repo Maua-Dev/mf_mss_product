@@ -52,10 +52,9 @@ class Test_CreateOrderPresenter:
                 "products": [{
                     "product_name": repo_product.products[0].name,
                     "product_id": repo_product.products[0].product_id,
-                    "quantity": 2
+                    "quantity": 2,
                 }],
                 "restaurant": repo_product.products[0].restaurant.value,
-                "observation": "Sem tomate"
             },
             "pathParameters": None,
             "isBase64Encoded": None,
@@ -72,7 +71,6 @@ class Test_CreateOrderPresenter:
         assert json.loads(response["body"])["order"]["products"][0]["product_id"] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert json.loads(response["body"])["order"]["products"][0]["quantity"] == 2
         assert json.loads(response["body"])["order"]["restaurant"] == "SOUZA_DE_ABREU"
-        assert json.loads(response["body"])["order"]["observation"] == "Sem tomate"
         assert json.loads(response["body"])["order"]["status"] == "PENDING"
         assert json.loads(response["body"])["order"]["total_price"] == 38.00
 
@@ -122,7 +120,6 @@ class Test_CreateOrderPresenter:
             },
             "body": {
                 "restaurant": repo_product.products[0].restaurant.value,
-                "observation": "Sem tomate"
             },
             "pathParameters": None,
             "isBase64Encoded": None,
@@ -184,7 +181,6 @@ class Test_CreateOrderPresenter:
                     "product_id": repo_product.products[0].product_id,
                     "quantity": 2
                 }],
-                "observation": "Sem tomate"
             },
             "pathParameters": None,
             "isBase64Encoded": None,
@@ -247,7 +243,6 @@ class Test_CreateOrderPresenter:
                     "quantity": 2
                 }],
                 "restaurant": "Tech Food",
-                "observation": "Sem tomate"
             },
             "pathParameters": None,
             "isBase64Encoded": None,

@@ -24,20 +24,21 @@ class Test_PublishOrderControler:
                {
                   'product_id':"8a705b91-c9e9-4353-a755-07f13afafed3",
                   'product_name':'X-Salada',
-                  'quantity':'1'
+                  'quantity':'1',
+                   "observation": None
                },
                {
                   'product_id':"e83289ce-abff-40b6-be52-f756a51ef0b2",
                   'product_name':'Suco de Laranja',
-                  'quantity':'1'
-               }
+                  'quantity':'1',
+                    'observation': "Açúcar no suco",
+        }
             ],
             'restaurant':'CANTINA_DO_MOLEZA',
             'status':'READY',
             'total_price':'30.00',
             'user_name':'Lucas Milas',
             'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
-            'observation': "Açúcar no suco",
             'entity': 'order'
          },
          'old_image':{

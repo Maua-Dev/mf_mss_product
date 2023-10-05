@@ -26,7 +26,7 @@ class OrderRepositoryMock(IOrderRepository):
                     OrderProduct(product_name=products_repo[167].name, product_id=products_repo[167].product_id,
                                  quantity=2)], creation_time_milliseconds=1692061296000,
                   restaurant=RESTAURANT.CANTINA_DO_MOLEZA, status=STATUS.READY, total_price=30.00,
-                  observation="Capricha no morango", aborted_reason=None,
+                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999
                   ),
 
@@ -35,7 +35,7 @@ class OrderRepositoryMock(IOrderRepository):
                     OrderProduct(product_name=products_repo[168].name, product_id=products_repo[168].product_id,
                                  quantity=2)], creation_time_milliseconds=1692061297000,
                   restaurant=RESTAURANT.CANTINA_DO_MOLEZA, status=STATUS.READY, total_price=14.00,
-                  observation=None, aborted_reason=None,
+                    aborted_reason=None,
                   last_status_update_milliseconds=1992061596999
                   ),
 
@@ -44,7 +44,7 @@ class OrderRepositoryMock(IOrderRepository):
                     OrderProduct(product_name=products_repo[17].name, product_id=products_repo[17].product_id,
                                  quantity=1)], creation_time_milliseconds=1692154782000,
                   restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.READY, total_price=28.00,
-                  observation="Sem Frango", aborted_reason=None,
+                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999
                   ),
 
@@ -54,7 +54,7 @@ class OrderRepositoryMock(IOrderRepository):
                                  quantity=1),
                     OrderProduct(product_name=products_repo[42].name, product_id=products_repo[167].product_id,
                                  quantity=2)], creation_time_milliseconds=1692155608000,
-                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.REFUSED, total_price=33.00, observation=None,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.REFUSED, total_price=33.00,
                   aborted_reason="Estamos sem Toddynho",
                   last_status_update_milliseconds=1992061596999),
 
@@ -62,7 +62,7 @@ class OrderRepositoryMock(IOrderRepository):
                   user_id=users_repo[5].user_id, products=[
                     OrderProduct(product_name=products_repo[121].name, product_id=products_repo[121].product_id,
                                  quantity=3)], creation_time_milliseconds=1692156322000,
-                  restaurant=RESTAURANT.CANTINA_DO_MOLEZA, status=STATUS.PREPARING, total_price=25.5, observation=None,
+                  restaurant=RESTAURANT.CANTINA_DO_MOLEZA, status=STATUS.PREPARING, total_price=25.5,
                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999),
 
@@ -71,7 +71,6 @@ class OrderRepositoryMock(IOrderRepository):
                     OrderProduct(product_name=products_repo[102].name, product_id=products_repo[102].product_id,
                                  quantity=1)], creation_time_milliseconds=1692156623000, restaurant=RESTAURANT.HORA_H,
                   status=STATUS.PREPARING, total_price=38.00,
-                  observation="Meus acompanhamentos serão Salada de Tomate e Queijo Branco Temperado com Beringela Caponata",
                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999),
 
@@ -80,7 +79,6 @@ class OrderRepositoryMock(IOrderRepository):
                     OrderProduct(product_name=products_repo[99].name, product_id=products_repo[99].product_id,
                                  quantity=1)], creation_time_milliseconds=1692156833000, restaurant=RESTAURANT.HORA_H,
                   status=STATUS.REFUSED, total_price=39.00,
-                  observation="Vou querer com Arroz Integral, Creme de Milho e Mix Legumes",
                   aborted_reason="São apenas 2 acompanhamentos",
                   last_status_update_milliseconds=1992061596999),
 
@@ -88,7 +86,7 @@ class OrderRepositoryMock(IOrderRepository):
                   user_id="d05bbfae-c06b-4d99-ac03-28945e6c30f3", products=[
                     OrderProduct(product_name=products_repo[115].name, product_id=products_repo[115].product_id,
                                  quantity=2)], creation_time_milliseconds=1692157097000,
-                  restaurant=RESTAURANT.CANTINA_DO_MOLEZA, status=STATUS.CANCELLED, total_price=17.00, observation=None,
+                  restaurant=RESTAURANT.CANTINA_DO_MOLEZA, status=STATUS.CANCELLED, total_price=17.00,
                   aborted_reason="Minha aula já está prestes a começar! :( ",
                   last_status_update_milliseconds=1992061596999),
 
@@ -98,7 +96,7 @@ class OrderRepositoryMock(IOrderRepository):
                                  quantity=1),
                     OrderProduct(product_name=products_repo[48].name, product_id=products_repo[48].product_id,
                                  quantity=1)], creation_time_milliseconds=1692157371000,
-                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.REFUSED, total_price=30.00, observation=None,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.REFUSED, total_price=30.00,
                   aborted_reason="Estamos fechando!",
                   last_status_update_milliseconds=1992061596999),
 
@@ -106,7 +104,7 @@ class OrderRepositoryMock(IOrderRepository):
                   user_id=users_repo[2].user_id, products=[
                     OrderProduct(product_name=products_repo[91].name, product_id=products_repo[91].product_id,
                                  quantity=1)], creation_time_milliseconds=1692157436000,
-                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=24.00, observation=None,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=24.00,
                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999),
 
@@ -118,7 +116,7 @@ class OrderRepositoryMock(IOrderRepository):
                                  quantity=1),
                     OrderProduct(product_name=products_repo[33].name, product_id=products_repo[33].product_id,
                                  quantity=3)], creation_time_milliseconds=1692157822000,
-                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=35.5, observation=None,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=35.5,
                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999),
 
@@ -130,7 +128,7 @@ class OrderRepositoryMock(IOrderRepository):
                                  quantity=1),
                     OrderProduct(product_name=products_repo[33].name, product_id=products_repo[33].product_id,
                                  quantity=3)], creation_time_milliseconds=1692157822000,
-                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.REFUSED, total_price=35.5, observation=None,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.REFUSED, total_price=35.5,
                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999),
 
@@ -142,7 +140,7 @@ class OrderRepositoryMock(IOrderRepository):
                                  quantity=1),
                     OrderProduct(product_name=products_repo[33].name, product_id=products_repo[33].product_id,
                                  quantity=3)], creation_time_milliseconds=1692157822,
-                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.READY, total_price=35.5, observation=None,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.READY, total_price=35.5,
                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999)
         ]
@@ -190,7 +188,7 @@ class OrderRepositoryMock(IOrderRepository):
 
     def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
-                     new_total_price: Optional[float] = None, new_observation: Optional[str] = None,
+                     new_total_price: Optional[float] = None,
                      new_aborted_reason: Optional[str] = None):
 
         order_to_update = self.get_order_by_id(order_id)
@@ -207,13 +205,6 @@ class OrderRepositoryMock(IOrderRepository):
 
         if new_total_price is not None:
             order_to_update.total_price = new_total_price
-
-        if new_observation is not None:  # Como a observação pode possuir valor nulo, estou tratando ela de maneira diferente
-            # Se quisermos atualizar a observação para nula, devemos passar uma string vazia no lugar
-            if new_observation == "":
-                order_to_update.observation = None
-            else:
-                order_to_update.observation = new_observation
 
         if new_aborted_reason is not None:  # Mesma coisa para o motivo de ter abortado o pedido
             if new_aborted_reason == "":

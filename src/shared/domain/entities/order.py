@@ -15,7 +15,6 @@ class Order(abc.ABC):
     products: List[OrderProduct]
     creation_time_milliseconds: int
     restaurant: RESTAURANT
-    observation: Optional[str] = None
     status: STATUS
     aborted_reason: Optional[str] = None
     total_price: float
@@ -33,7 +32,6 @@ class Order(abc.ABC):
                  status: STATUS,
                  total_price: float,
                  last_status_update_milliseconds: int = None,
-                 observation: Optional[str] = None,
                  aborted_reason: Optional[str] = None
                  ):
         
@@ -68,11 +66,6 @@ class Order(abc.ABC):
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")
         self.restaurant = restaurant
-
-        if observation is not None:
-            if type(observation) != str:
-                raise EntityError("observation")
-        self.observation = observation
 
         if type(status) != STATUS:
             raise EntityError("status")
@@ -118,4 +111,4 @@ class Order(abc.ABC):
         return True
     
     def __repr__(self):
-        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, observation={self.observation}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price}, last_status_update={self.last_status_update_milliseconds})"
+        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price}, last_status_update={self.last_status_update_milliseconds})"

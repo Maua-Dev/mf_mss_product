@@ -61,11 +61,12 @@ class Test_GetAllActiveOrdersByRestaurantPresenter:
         expected = {
                     'all_active_orders': [{'aborted_reason': None,
                                            'creation_time_milliseconds': 1692156322000,
-                                           'observation': None,
                                            'order_id': 'd4c63753-5119-4990-b427-926798499924',
                                            'products': [{'product_id':'9589b258-ed44-4c24-b7d6-e96ae221baae', 
                                                          'product_name':'Carteira',
-                                                         'quantity':3}],
+                                                         'quantity':3,
+                                                         "observation": None
+                                                         }],
                                            'restaurant': 'CANTINA_DO_MOLEZA',
                                            'status': 'PREPARING',
                                            'total_price': 25.5,
