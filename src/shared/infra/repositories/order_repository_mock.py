@@ -135,11 +135,17 @@ class OrderRepositoryMock(IOrderRepository):
             Order(order_id="1feef881-1b1f-4f38-a662-8ff7156e6c27", user_name=users_repo[9].name,
                   user_id=users_repo[9].user_id, products=[
                     OrderProduct(product_name=products_repo[71].name, product_id=products_repo[71].product_id,
-                                 quantity=2),
+                                 quantity=2,
+                                observation="Estou observando aqui"
+                                 ),
                     OrderProduct(product_name=products_repo[67].name, product_id=products_repo[67].product_id,
-                                 quantity=1),
+                                 quantity=1,
+                                 observation="Olha eu observando dnv"
+                                 ),
                     OrderProduct(product_name=products_repo[33].name, product_id=products_repo[33].product_id,
-                                 quantity=3)], creation_time_milliseconds=1692157822,
+                                 quantity=3,
+                                 observation="sem comentarios"
+                                 )], creation_time_milliseconds=1692157822,
                   restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.READY, total_price=35.5,
                   aborted_reason=None,
                   last_status_update_milliseconds=1992061596999)
