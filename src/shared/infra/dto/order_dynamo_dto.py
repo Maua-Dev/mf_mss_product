@@ -116,4 +116,4 @@ class OrderDynamoDTO:
         )
 
     def __eq__(self, other):
-        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.observation == other.observation and self.aborted_reason == other.aborted_reason
+        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.aborted_reason == other.aborted_reason
