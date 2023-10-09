@@ -13,14 +13,13 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
             products=[
-                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1),
+                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1, observation="Ketchup para acompanhar"),
                 ],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason=None
         )
 
@@ -31,14 +30,13 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
             products=[
-                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1),
+                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1, observation="Ketchup para acompanhar"),
                 ],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason=None
         )
 
@@ -51,7 +49,6 @@ class Test_OrderDynamoDTO:
         assert order_dynamo_dto.status == expected_order_dynamo_dto.status
         assert order_dynamo_dto.total_price == expected_order_dynamo_dto.total_price
         assert order_dynamo_dto.last_status_update_milliseconds == expected_order_dynamo_dto.last_status_update_milliseconds
-        assert order_dynamo_dto.observation == expected_order_dynamo_dto.observation
         assert order_dynamo_dto.aborted_reason == expected_order_dynamo_dto.aborted_reason
         assert order_dynamo_dto == expected_order_dynamo_dto
 
@@ -61,14 +58,13 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
             products=[
-                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1),
+                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1, observation="Ketchup para acompanhar"),
                 ],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -79,14 +75,14 @@ class Test_OrderDynamoDTO:
             "products":[
                 {"product_name":"X-Salada", 
                 "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", 
-                "quantity":1}
+                "quantity":1,
+                "observation":"Ketchup para acompanhar"}
                 ],
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
             "total_price":50.0,
             "last_status_update_milliseconds":1992061596999,
-            "observation":"Ketchup para acompanhar",
             "aborted_reason":"Recusada",
             "entity": "order"
         }
@@ -116,7 +112,8 @@ class Test_OrderDynamoDTO:
             "products":[
                 {"product_name":"X-Salada", 
                 "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", 
-                "quantity":1}
+                "quantity":1,
+                "observation":None}
                 ],
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
@@ -135,14 +132,13 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
             products=[
-                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1),
+                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1, observation="Ketchup para acompanhar"),
                 ],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar"
         )
 
         expected_dynamo = {
@@ -152,14 +148,14 @@ class Test_OrderDynamoDTO:
             "products":[
                 {"product_name":"X-Salada", 
                 "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", 
-                "quantity":1}
+                "quantity":1,
+                "observation":"Ketchup para acompanhar"}
                 ],
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
             "total_price":50.0,
             "last_status_update_milliseconds":1992061596999,
-            "observation":"Ketchup para acompanhar",
             "entity": "order"
         }
 
@@ -171,13 +167,12 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
             products=[
-                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1),
+                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1, observation="Ketchup para acompanhar"),
                 ],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -188,13 +183,13 @@ class Test_OrderDynamoDTO:
             "products":[
                 {"product_name":"X-Salada", 
                 "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", 
-                "quantity":1}
+                "quantity":1,
+                "observation":"Ketchup para acompanhar"}
                 ],
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
             "total_price":50.0,
-            "observation":"Ketchup para acompanhar",
             "aborted_reason":"Recusada",
             "entity": "order"
         }
@@ -207,14 +202,13 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
             products=[
-                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1),
+                OrderProduct(product_name="X-Salada", product_id="8a705b91-c9e9-4353-a755-07f13afafed3", quantity=1, observation="Ketchup para acompanhar"),
                 ],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -227,14 +221,14 @@ class Test_OrderDynamoDTO:
             "products":[
                 {"product_name":"X-Salada", 
                 "product_id":"8a705b91-c9e9-4353-a755-07f13afafed3", 
-                "quantity":1}
+                "quantity":1,
+                "observation":"Ketchup para acompanhar"}
                 ],
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
             "total_price":50.0,
             "last_status_update_milliseconds":1992061596999,
-            "observation":"Ketchup para acompanhar",
             "aborted_reason":"Recusada",
             "entity": "order"
         }
@@ -249,7 +243,8 @@ class Test_OrderDynamoDTO:
                                 {
                                 'product_name': 'X-Salada',
                                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
-                                "quantity":1
+                                "quantity":1,
+                                "observation":"Ketchup para acompanhar"
                                 }
                             ],
                                 'creation_time_milliseconds': 1692061296000,
@@ -257,7 +252,6 @@ class Test_OrderDynamoDTO:
                                 "status":"READY",
                                 "total_price":50.0,
                                 "last_status_update_milliseconds":1992061596999,
-                                "observation":"Ketchup para acompanhar",
                                 "aborted_reason":"Recusada",
                                 'entity': 'order'},
                        'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
@@ -277,13 +271,12 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
             products=[
-                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1)],
+                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1, observation="Ketchup para acompanhar")],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -297,7 +290,8 @@ class Test_OrderDynamoDTO:
                                 {
                                 'product_name': 'X-Salada',
                                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
-                                "quantity":1
+                                "quantity":1,
+                                "observation":None
                                 }
                             ],
                                 'creation_time_milliseconds': 1692061296000,
@@ -343,7 +337,8 @@ class Test_OrderDynamoDTO:
                                 {
                                 'product_name': 'X-Salada',
                                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
-                                "quantity":1
+                                "quantity":1,
+                                "observation":"Ketchup para acompanhar"
                                 }
                             ],
                                 'creation_time_milliseconds': 1692061296000,
@@ -351,7 +346,6 @@ class Test_OrderDynamoDTO:
                                 "status":"READY",
                                 "total_price":50.0,
                                 "last_status_update_milliseconds":1992061596999,
-                                "observation":"Ketchup para acompanhar",
                                 'entity': 'order'},
                        'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
                                             'HTTPStatusCode': 200,
@@ -370,13 +364,12 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
             products=[
-                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1)],
+                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1, observation="Ketchup para acompanhar")],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar"
         )
 
         assert order_dto == expected_order_dto
@@ -389,14 +382,14 @@ class Test_OrderDynamoDTO:
                                 {
                                 'product_name': 'X-Salada',
                                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
-                                "quantity":1
+                                "quantity":1,
+                                "observation":"Ketchup para acompanhar"
                                 }
                             ],
                                 'creation_time_milliseconds': 1692061296000,
                                 "restaurant":"CANTINA_DO_MOLEZA",
                                 "status":"READY",
                                 "total_price":50.0,
-                                "observation":"Ketchup para acompanhar",
                                 "aborted_reason":"Recusada",
                                 'entity': 'order'},
                        'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
@@ -416,12 +409,11 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
             products=[
-                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1)],
+                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1, observation="Ketchup para acompanhar")],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -431,13 +423,12 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
             products=[
-                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1)],
+                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1, observation="Ketchup para acompanhar")],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -446,13 +437,12 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
             products=[
-                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1)],
+                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1, observation="Ketchup para acompanhar")],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -468,7 +458,6 @@ class Test_OrderDynamoDTO:
         assert expected_order.status == order.status
         assert expected_order.total_price == order.total_price
         assert expected_order.last_status_update_milliseconds == order.last_status_update_milliseconds
-        assert expected_order.observation == order.observation
         assert expected_order.aborted_reason == order.aborted_reason 
 
     def test_from_dynamo_to_entity(self):
@@ -479,7 +468,8 @@ class Test_OrderDynamoDTO:
                                 {
                                 'product_name': 'X-Salada',
                                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
-                                "quantity":1
+                                "quantity":1,
+                                "observation":"Ketchup para acompanhar"
                                 }
                             ],
                                 'creation_time_milliseconds': 1692061296000,
@@ -487,7 +477,6 @@ class Test_OrderDynamoDTO:
                                 "status":"READY",
                                 "total_price":50.0,
                                 "last_status_update_milliseconds":1992061596999,
-                                "observation":"Ketchup para acompanhar",
                                 "aborted_reason":"Recusada",
                                 'entity': 'order'},
                        'ResponseMetadata': {'RequestId': 'aa6a5e5e-943f-4452-8c1f-4e5441ee6042',
@@ -507,13 +496,12 @@ class Test_OrderDynamoDTO:
             user_name="Rodrigo Morales",
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb",
             products=[
-                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1)],
+                OrderProduct(product_name="X-Salada", product_id='8a705b91-c9e9-4353-a755-07f13afafed3', quantity=1, observation="Ketchup para acompanhar")],
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
-            observation="Ketchup para acompanhar",
             aborted_reason="Recusada"
         )
 
@@ -529,7 +517,6 @@ class Test_OrderDynamoDTO:
         assert expected_order.status == order.status
         assert expected_order.total_price == order.total_price
         assert expected_order.last_status_update_milliseconds == order.last_status_update_milliseconds
-        assert expected_order.observation == order.observation
         assert expected_order.aborted_reason == order.aborted_reason 
 
     
