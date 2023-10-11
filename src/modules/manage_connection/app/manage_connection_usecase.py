@@ -16,6 +16,13 @@ class ManageConnectionUsecase:
 
     def __call__(self, connection_id: str, api_id: str, user_id: str, route_key: str = None) -> Connection:
 
+        if route_key == None or route_key == "$disconnect":
+            disconnected = self.repo_order.abort_connection(connection_id=connection_id)
+            if disconnected is None:
+                raise NoItemsFound("connection")
+            
+            return disconnected
+        
         user = self.repo_user.get_user_by_id(user_id=user_id)
 
         if user is None:
@@ -23,13 +30,6 @@ class ManageConnectionUsecase:
     
         if user.role not in [ROLE.OWNER, ROLE.SELLER, ROLE.ADMIN]:
             raise UserNotAllowed()
-        
-        if route_key == None or route_key == "$disconnect":
-            disconnected = self.repo_order.abort_connection(connection_id=connection_id, restaurant=user.restaurant)
-            if disconnected is None:
-                raise NoItemsFound("connection")
-            
-            return disconnected
         
         if route_key == "$default":
             raise WrongTypeRouteKey('$default')

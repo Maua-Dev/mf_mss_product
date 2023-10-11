@@ -227,7 +227,13 @@ class OrderRepositoryMock(IOrderRepository):
         self.connections.append(connection)
         return connection
 
-    def abort_connection(self, connection_id: str, restaurant: RESTAURANT) -> Connection:
+    def abort_connection(self, connection_id: str) -> Connection:
+        connection = self.get_connection_by_connection_id(connection_id=connection_id)
+        if connection is None:
+            return None
+        else:
+            restaurant = connection.restaurant
+        
         for connection in self.connections:
             if connection_id == connection.connection_id and restaurant == connection.restaurant:
                 self.connections.remove(connection)
@@ -268,3 +274,9 @@ class OrderRepositoryMock(IOrderRepository):
 
         else:
             return restaurant_orders[:amount]
+        
+    def get_connection_by_connection_id(self, connection_id: str) -> Optional[Connection]:
+        for connection in self.connections:
+            if connection.connection_id == connection_id:
+                return connection
+        return None

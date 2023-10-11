@@ -23,19 +23,25 @@ class ManageConnectionController:
             if request.data.get('connection_id') is None:
                 raise MissingParameters('connection_id')
 
-        
-            if request.data.get('requester_user') is None:
+            if request.data.get('route_key') is None:
+                raise MissingParameters('route_key')
 
-                raise MissingParameters('requester_user')
+            requester_user = None
 
-            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
+            if request.data.get('route_key') == '$connect':
+            
+                if request.data.get('requester_user') is None:
+
+                    raise MissingParameters('requester_user')
+
+                requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
             if request.data.get('api_id') is None:
                 raise MissingParameters('api_id')
 
             connection = self.ManageConnectionUsecase(connection_id=str(request.data.get('connection_id')),
                                                       api_id=str(request.data.get('api_id')),
-                                                      user_id=str(requester_user.user_id),
+                                                      user_id=str(requester_user.user_id) if requester_user is not None else None,
                                                       route_key=str(request.data.get('route_key')))
 
             viewmodel = ManageConnectionViewmodel(connection)

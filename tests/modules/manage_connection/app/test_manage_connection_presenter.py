@@ -104,12 +104,6 @@ class Test_ManageConnectionPresenter:
                     'userAgent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 OPR/100.0.0.0',
                     'sourceIp':'177.102.86.227'
                 },
-                "authorizer": {
-                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48abb",
-                            "name": "Laura Carolina",
-                            "email": "email.da.laura@gmail.com",
-                            "custom:isMaua": True
-                },
                 'requestId':'Jx-TaE0_GjQFvSw=',
                 'domainName':'e2sl8gy0r4.execute-api.sa-east-1.amazonaws.com',
                 'connectionId':"4b1e0f88-2c34-3t",

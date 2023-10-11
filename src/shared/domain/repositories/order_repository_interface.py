@@ -29,6 +29,7 @@ class IOrderRepository(ABC):
         """
         pass
 
+    @abstractmethod
     def get_order_by_id(self, order_id: str) -> Optional[Order]:
         pass
     
@@ -48,7 +49,10 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def abort_connection(self, connection_id: str, restaurant: RESTAURANT) -> Connection:
+    def abort_connection(self, connection_id: str) -> Connection:
+        """
+        This method gets the connection based on the connection_id and deletes it based on the connection's restaurant.
+        """
         pass
     
     @abstractmethod
@@ -61,4 +65,8 @@ class IOrderRepository(ABC):
         This method return the history of orders of the selected user with pagination. The total of orders per
         page is defined by amount.
         """
+        pass
+
+    @abstractmethod
+    def get_connection_by_connection_id(self, connection_id: str) -> Optional[Connection]:
         pass
