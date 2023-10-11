@@ -64,6 +64,7 @@ class WebSocketStack(Construct):
             ),
             disconnect_route_options=WebSocketRouteOptions(
                 integration=self.manage_connection_function_integration,
+                authorizer=authorizer,
             )
         )
 
