@@ -23,13 +23,7 @@ class ManageConnectionController:
             if request.data.get('connection_id') is None:
                 raise MissingParameters('connection_id')
 
-            if request.data.get('restaurant') is None:
-                raise MissingParameters("restaurant")
-
-            restaurant = request.data.get('restaurant')
-            if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
-                raise RestaurantNotFound(restaurant)
-
+        
             if request.data.get('requester_user') is None:
 
                 raise MissingParameters('requester_user')
@@ -42,7 +36,6 @@ class ManageConnectionController:
             connection = self.ManageConnectionUsecase(connection_id=str(request.data.get('connection_id')),
                                                       api_id=str(request.data.get('api_id')),
                                                       user_id=str(requester_user.user_id),
-                                                      restaurant=RESTAURANT[restaurant],
                                                       route_key=str(request.data.get('route_key')))
 
             viewmodel = ManageConnectionViewmodel(connection)
