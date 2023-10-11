@@ -12,6 +12,9 @@ from aws_cdk.aws_apigatewayv2_authorizers_alpha import WebSocketLambdaAuthorizer
 
 
 class WebSocketStack(Construct):
+    functions_that_need_dynamo_permissions = []
+    functions_that_need_dynamo_user_permissions = []
+
 
     def __init__(self, scope: Construct, construct_id: str, lambda_layer: LayerVersion, environment_variables: dict) -> None:
         super().__init__(scope, construct_id)
@@ -21,7 +24,7 @@ class WebSocketStack(Construct):
         self.dev_auth_system_userpool_arn = os.environ.get(
             "AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
 
-        manage_connection_function = lambda_.Function(
+        self.manage_connection_function = lambda_.Function(
             self, "ManageConnectionFunction",
             code=lambda_.Code.from_asset(f"../src/modules/manage_connection"),
             handler=f"app.manage_connection_presenter.lambda_handler",
@@ -48,7 +51,7 @@ class WebSocketStack(Construct):
 
         self.manage_connection_function_integration = WebSocketLambdaIntegration(
             id="ManageConnectionFunctionIntegration",
-            handler=manage_connection_function
+            handler=self.manage_connection_function
         )
 
         self.web_socket = WebSocketApi(
@@ -70,3 +73,11 @@ class WebSocketStack(Construct):
             stage_name=self.stage,
             auto_deploy=True,
         )
+
+        self.functions_that_need_dynamo_user_permissions = [
+            self.manage_connection_function,
+        ]
+
+        self.functions_that_need_dynamo_product_permissions = [
+            self.manage_connection_function,
+        ]

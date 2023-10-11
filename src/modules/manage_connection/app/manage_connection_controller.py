@@ -12,10 +12,6 @@ from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, In
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 import boto3
 
-client = boto3.client('lambda')
-arn = os.environ.get('GET_USER_ARN')
-
-
 class ManageConnectionController:
 
     def __init__(self, usecase: ManageConnectionUsecase):
@@ -27,8 +23,6 @@ class ManageConnectionController:
             if request.data.get('connection_id') is None:
                 raise MissingParameters('connection_id')
 
-            auth = request.data.get('Authorization')
-
             if request.data.get('restaurant') is None:
                 raise MissingParameters("restaurant")
 
@@ -36,20 +30,11 @@ class ManageConnectionController:
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise RestaurantNotFound(restaurant)
 
-            response_get_user = client.invoke(
-                FunctionName=arn,
-                InvocationType='RequestResponse',
-                Payload=json.dumps(auth)
-            )
+            if request.data.get('requester_user') is None:
 
-            requested_user = json.loads(response_get_user['Payload'].read().decode('utf-8'))
-
-            if requested_user.get('user') is None:
                 raise MissingParameters('requester_user')
 
-            print(os.getenv('GET_USER_URL'))
-
-            requester_user = UserApiGatewayDTO.from_api_gateway(requested_user.get('user'))
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
             if request.data.get('api_id') is None:
                 raise MissingParameters('api_id')
@@ -83,4 +68,5 @@ class ManageConnectionController:
             return BadRequest(body=err.message)
 
         except Exception as err:
+            print(err)
             return InternalServerError(body=err.args[0])

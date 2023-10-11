@@ -14,10 +14,18 @@ class ManageConnectionUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, connection_id: str, restaurant: RESTAURANT, api_id: str, user_id: str, route_key: str = None) -> Connection:
+    def __call__(self, connection_id: str, api_id: str, user_id: str, route_key: str = None) -> Connection:
 
+        user = self.repo_user.get_user_by_id(user_id=user_id)
+
+        if user is None:
+            raise UnregisteredUser()
+    
+        if user.role not in [ROLE.OWNER, ROLE.SELLER, ROLE.ADMIN]:
+            raise UserNotAllowed()
+        
         if route_key == None or route_key == "$disconnect":
-            disconnected = self.repo_order.abort_connection(connection_id=connection_id, restaurant=restaurant)
+            disconnected = self.repo_order.abort_connection(connection_id=connection_id, restaurant=user.restaurant)
             if disconnected is None:
                 raise NoItemsFound("connection")
             
@@ -27,18 +35,11 @@ class ManageConnectionUsecase:
             raise WrongTypeRouteKey('$default')
 
         if route_key == "$connect":
-            user = self.repo_user.get_user_by_id(user_id=user_id)
-
-            if user is None:
-                raise UnregisteredUser()
-        
-            if user.role not in [ROLE.OWNER, ROLE.SELLER, ROLE.ADMIN]:
-                raise UserNotAllowed()
 
             creation_time_seconds = int(datetime.datetime.now().timestamp())
             expire_date_seconds = creation_time_seconds + 3600
 
-            connection = Connection(connection_id=connection_id, api_id=api_id, expire_date_seconds=expire_date_seconds, creation_time_seconds=creation_time_seconds, user_id=user_id, restaurant=restaurant)
+            connection = Connection(connection_id=connection_id, api_id=api_id, expire_date_seconds=expire_date_seconds, creation_time_seconds=creation_time_seconds, user_id=user_id, restaurant=user.restaurant)
             
             connected = self.repo_order.create_connection(connection=connection)
 
