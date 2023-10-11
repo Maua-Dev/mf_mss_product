@@ -97,3 +97,9 @@ class IacStack(Stack):
         self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
                                               lambda_layer=self.lambda_stack.lambda_layer,
                                               environment_variables=ENVIRONMENT_VARIABLES)
+
+        for f in self.websocket_stack.functions_that_need_dynamo_product_permissions:
+            self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
+
+        for f in self.websocket_stack.functions_that_need_dynamo_user_permissions:
+            self.dynamo_stack.dynamo_table_user.grant_read_write_data(f)
