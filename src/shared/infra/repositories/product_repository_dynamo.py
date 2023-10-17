@@ -39,8 +39,8 @@ class ProductRepositoryDynamo(IProductRepository):
                                        region=Environments.get_envs().region,
                                        partition_key=Environments.get_envs().dynamo_partition_key_product,
                                        sort_key=Environments.get_envs().dynamo_sort_key_product,
-                                       gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
-                                       gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
+                                       gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key_product,
+                                       gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key_product)
 
         self.S3_BUCKET_NAME = Environments.get_envs().s3_bucket_name
 

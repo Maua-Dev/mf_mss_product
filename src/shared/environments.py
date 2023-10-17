@@ -50,16 +50,22 @@ class Environments:
             self.region = "sa-east-1"
             self.endpoint_url_product = "http://localhost:8000"
             self.endpoint_url_user = "http://localhost:8000"
+            self.endpoint_url_order = "http://localhost:8000"
             self.dynamo_table_name_product = "mf_mss_product-table"
             self.dynamo_table_name_user = "mf_mss_user-table"
+            self.dynamo_table_name_order = "mf_mss_order-table"
             self.dynamo_partition_key_product = "PK"
             self.dynamo_sort_key_product = "SK"
             self.dynamo_partition_key_user = "PK"
             # self.dynamo_sort_key_user = "SK"
+            self.dynamo_partition_key_order = "PK"
+            self.dynamo_sort_key_order = "SK"
             self.s3_assets_cdn = "https://mauafood-assets.cloudfront.net/"
             self.cloud_front_distribution_domain_assets = "https://d3q9q9q9q9q9q9.cloudfront.net"
-            self.dynamo_gsi_partition_key = "GSI1-PK"
-            self.dynamo_gsi_sort_key = "GSI1-SK"
+            self.dynamo_gsi_partition_key_product = "GSI1-PK"
+            self.dynamo_gsi_sort_key_product = "GSI1-SK"
+            self.dynamo_gsi_partition_key_order = "GSI1-PK"
+            self.dynamo_gsi_sort_key_order = "GSI1-SK"
 
         else:
             self.s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
@@ -67,21 +73,21 @@ class Environments:
             self.region = os.environ.get("AWS_REGION")
             self.endpoint_url_product = os.environ.get("ENDPOINT_URL_PRODUCT")
             self.endpoint_url_user = os.environ.get("ENDPOINT_URL_USER")
-            self.dynamo_table_name_product = os.environ.get(
-                "DYNAMO_TABLE_NAME_PRODUCT")
-            self.dynamo_table_name_user = os.environ.get(
-                "DYNAMO_TABLE_NAME_USER")
-            self.dynamo_partition_key_product = os.environ.get(
-                "DYNAMO_PARTITION_KEY")
+            self.endpoint_url_order = os.environ.get("ENDPOINT_URL_ORDER")
+            self.dynamo_table_name_product = os.environ.get("DYNAMO_TABLE_NAME_PRODUCT")
+            self.dynamo_table_name_user = os.environ.get("DYNAMO_TABLE_NAME_USER")
+            self.dynamo_table_name_order = os.environ.get("DYNAMO_TABLE_NAME_ORDER")
+            self.dynamo_partition_key_product = os.environ.get("DYNAMO_PARTITION_KEY")
             self.dynamo_sort_key_product = os.environ.get("DYNAMO_SORT_KEY")
-            self.dynamo_partition_key_user = os.environ.get(
-                "DYNAMO_PARTITION_KEY")
+            self.dynamo_partition_key_user = os.environ.get("DYNAMO_PARTITION_KEY")
             # self.dynamo_sort_key_user = os.environ.get("DYNAMO_SORT_KEY")
-            self.cloud_front_distribution_domain_assets = os.environ.get(
-                "CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS")
-            self.dynamo_gsi_partition_key = os.environ.get(
-                "DYNAMO_GSI_PARTITION_KEY")
-            self.dynamo_gsi_sort_key = os.environ.get("DYNAMO_GSI_SORT_KEY")
+            self.dynamo_partition_key_order = os.environ.get("DYNAMO_PARTITION_KEY")
+            self.dynamo_sort_key_order = os.environ.get("DYNAMO_SORT_KEY")
+            self.cloud_front_distribution_domain_assets = os.environ.get("CLOUD_FRONT_DISTRIBUTION_DOMAIN_ASSETS")
+            self.dynamo_gsi_partition_key_product = os.environ.get("DYNAMO_GSI_PARTITION_KEY")
+            self.dynamo_gsi_sort_key_product = os.environ.get("DYNAMO_GSI_SORT_KEY")
+            self.dynamo_gsi_partition_key_order = os.environ.get("DYNAMO_GSI_PARTITION_KEY")
+            self.dynamo_gsi_sort_key_order = os.environ.get("DYNAMO_GSI_SORT_KEY")
 
     @staticmethod
     def get_product_repo() -> IProductRepository:
@@ -111,10 +117,8 @@ class Environments:
             from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
             return OrderRepositoryMock
         elif Environments.get_envs().stage in [STAGE.PROD, STAGE.DEV, STAGE.HOMOLOG]:
-            # from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
-            # return OrderRepositoryDynamo
-            from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
-            return OrderRepositoryMock
+            from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
+            return OrderRepositoryDynamo
         else:
             raise Exception("No repository found for this stage")
 
