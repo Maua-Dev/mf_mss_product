@@ -40,16 +40,17 @@ class Test_OrderRepositoryDynamo:
 
         assert len(get_all) == 2
 
-    # def test_update_order(self):
-    #     repo_dynamo = OrderRepositoryDynamo()
-    #     repo_mock = OrderRepositoryMock()
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_update_order(self):
+        repo_dynamo = OrderRepositoryDynamo()
+        repo_mock = OrderRepositoryMock()
 
-    #     order = repo_mock.orders[0]
+        order = repo_mock.orders[0]
 
-    #     update = repo_dynamo.update_order(order.order_id, new_status=STATUS.CANCELLED, new_aborted_reason="Minha aula começou")
+        update = repo_dynamo.update_order(order.order_id, new_status=STATUS.CANCELLED, new_aborted_reason="Minha aula começou")
 
-    #     assert update.status.value == "CANCELLED"
-    #     assert update.aborted_reason == "Minha aula começou"
+        assert update.status.value == "CANCELLED"
+        assert update.aborted_reason == "Minha aula começou"
 
     @pytest.mark.skip("Can't test dynamo in Github")
     def test_get_all_orders_by_user(self):
