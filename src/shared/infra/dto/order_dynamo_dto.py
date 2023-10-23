@@ -59,7 +59,7 @@ class OrderDynamoDTO:
             "products":  [{
                 "product_name": product.product_name,
                 "product_id": product.product_id,
-                "quantity": product.quantity,
+                "quantity": Decimal(str(product.quantity)),
                 "observation": product.observation
             } for product in self.products],
             "creation_time_milliseconds": Decimal(str(self.creation_time_milliseconds)),
@@ -87,14 +87,14 @@ class OrderDynamoDTO:
             products=[OrderProduct(
                 product_name=product["product_name"],
                 product_id=product["product_id"],
-                quantity=product["quantity"],
+                quantity=int(product["quantity"]),
                 observation=product.get("observation")
             ) for product in order_data["products"]],
             creation_time_milliseconds=int(order_data["creation_time_milliseconds"]),
             restaurant=RESTAURANT(order_data.get("restaurant")),
             status=STATUS(order_data.get("status")),
             total_price=float(order_data["total_price"]),
-            last_status_update_milliseconds=order_data.get("last_status_update_milliseconds"),
+            last_status_update_milliseconds=int(order_data.get("last_status_update_milliseconds")),
             aborted_reason=order_data.get("aborted_reason") if order_data.get("aborted_reason") is not None else None
         )
 
