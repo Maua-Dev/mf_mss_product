@@ -112,3 +112,6 @@ class Order(abc.ABC):
     
     def __repr__(self):
         return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price}, last_status_update={self.last_status_update_milliseconds})"
+    
+    def __eq__(self, other):
+        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.aborted_reason == other.aborted_reason and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds
