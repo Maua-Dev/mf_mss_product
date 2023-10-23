@@ -51,25 +51,27 @@ class Test_OrderRepositoryDynamo:
     #     assert update.status.value == "CANCELLED"
     #     assert update.aborted_reason == "Minha aula começou"
 
-    # def test_get_all_orders_by_user(self):
-    #     repo_dynamo = OrderRepositoryDynamo()
-    #     repo_mock = OrderRepositoryMock()
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_orders_by_user(self):
+        repo_dynamo = OrderRepositoryDynamo()
+        repo_mock = OrderRepositoryMock()
 
-    #     order = repo_mock.orders[0]
+        order = repo_mock.orders[0]
 
-    #     get_all = repo_dynamo.get_all_orders_by_user(user_id=order.user_id, exclusive_start_key=order.order_id, amount=2)
+        get_all = repo_dynamo.get_all_orders_by_user(user_id=order.user_id, exclusive_start_key=order.order_id, amount=2)
 
-    #     assert len(get_all) == 2
+        assert len(get_all) == 2
     
-    # def test_get_all_orders_by_restaurant(self):
-    #     repo_dynamo = OrderRepositoryDynamo()
-    #     repo_mock = OrderRepositoryMock()
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_all_orders_by_restaurant(self):
+        repo_dynamo = OrderRepositoryDynamo()
+        repo_mock = OrderRepositoryMock()
 
-    #     order = repo_mock.orders[0]
+        order = repo_mock.orders[0]
 
-    #     get_all = repo_dynamo.get_all_orders_by_restaurant(restaurant=order.restaurant, exclusive_start_key=order.order_id, amount=5)
+        get_all = repo_dynamo.get_all_orders_by_restaurant(restaurant=order.restaurant, exclusive_start_key=order.order_id)
 
-    #     assert len(get_all) == 5
+        assert len(get_all) == 5
 
     @pytest.mark.skip("Can't test dynamo in Github")
     def test_create_connection(self):
