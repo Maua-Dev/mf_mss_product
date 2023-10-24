@@ -108,6 +108,10 @@ class IacStack(Stack):
             timeout=Duration.seconds(15),
         )
 
+        self.lambda_stack.functions_that_need_dynamo_product_permissions.append(dynamo_event_handler_function)
+        
+        self.dynamo_stack.dynamo_table_product.grant_stream_read(dynamo_event_handler_function)
+
         dynamo_event_handler_function.add_event_source_mapping(
             "DynamoEventSourceMapping",
             event_source_arn=self.dynamo_stack.dynamo_table_product.table_stream_arn,
@@ -115,12 +119,7 @@ class IacStack(Stack):
             batch_size=1,
         )
 
-        self.lambda_stack.functions_that_need_dynamo_product_permissions.append(dynamo_event_handler_function)
-        
-        self.dynamo_stack.dynamo_table_product.grantStreamRead(
-            dynamo_event_handler_function
-        )
-
+    
         for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
             self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
 
