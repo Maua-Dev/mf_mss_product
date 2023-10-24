@@ -77,12 +77,7 @@ class IacStack(Stack):
                                                        )]
                                                        )
 
-        self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
-                                              lambda_layer=self.lambda_stack.lambda_layer,
-                                              environment_variables=ENVIRONMENT_VARIABLES)
 
-        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET = ENVIRONMENT_VARIABLES.copy()
-        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET["WEBSOCKET_ENDPOINT"] = self.websocket_stack.web_socket.url
 
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
@@ -91,6 +86,10 @@ class IacStack(Stack):
                                                             authorizer=self.cognito_auth,
                                                             lambda_layer=self.lambda_stack.lambda_layer,
                                                             stage=stage)
+
+        self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
+                                              lambda_layer=self.lambda_stack.lambda_layer,
+                                              environment_variables=ENVIRONMENT_VARIABLES)
 
         for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
             self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
