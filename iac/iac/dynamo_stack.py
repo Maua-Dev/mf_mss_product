@@ -30,7 +30,8 @@ class DynamoStack(Construct):
                     type=aws_dynamodb.AttributeType.STRING
                 ),
                 billing_mode=aws_dynamodb.BillingMode.PAY_PER_REQUEST,
-                removal_policy=REMOVAL_POLICY
+                removal_policy=REMOVAL_POLICY,
+                stream=aws_dynamodb.StreamViewType.NEW_IMAGE
             )
 
             self.dynamo_table_product.add_global_secondary_index(

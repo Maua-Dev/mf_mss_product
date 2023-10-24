@@ -1,7 +1,9 @@
 import os
 from aws_cdk import (
+    aws_lambda as lambda_,
     Stack,
-    aws_cognito
+    aws_cognito,
+    Duration
 )
 from constructs import Construct
 
@@ -90,6 +92,29 @@ class IacStack(Stack):
         self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
                                               lambda_layer=self.lambda_stack.lambda_layer,
                                               environment_variables=ENVIRONMENT_VARIABLES)
+        
+        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET = ENVIRONMENT_VARIABLES.copy()
+        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET["WEBSOCKET_URL"] = self.websocket_stack.web_socket.api_endpoint
+
+
+        dynamo_event_handler_function = lambda_.Function(
+            self, "OrderEventHandlerFunction",
+            code=lambda_.Code.from_asset(f"../src/modules/publish_order"),
+            handler=f"app.publish_order_presenter.lambda_handler",
+            runtime=lambda_.Runtime.PYTHON_3_9,
+            layers=[self.lambda_stack.lambda_layer],
+            memory_size=512,
+            environment=ENVIRONMENT_VARIABLES_WITH_WEBSOCKET,
+            timeout=Duration.seconds(15),
+        )
+
+        dynamo_event_handler_function.add_event_source_mapping(
+            "DynamoEventSourceMapping",
+            event_source_arn=self.dynamo_stack.dynamo_table_product.table_stream_arn,
+            starting_position=lambda_.StartingPosition.TRIM_HORIZON,
+            batch_size=1,
+        )
+
 
         for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
             self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
