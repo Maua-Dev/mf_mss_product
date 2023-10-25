@@ -184,6 +184,9 @@ class OrderRepositoryDynamo(IOrderRepository):
             return restaurant_sorted[:amount]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
+        for connection in connections_list:
+            self.push_data_to_client(connection.connection_id, order)
+
         return True
 
     def create_connection(self, new_connection: Connection) -> Connection:
@@ -250,12 +253,12 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return connection
     
-    def push_data_to_client(connection_id, endpoint_url, feed):
+    def push_data_to_client(connection_id, order:Order):
         apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url=os.environ.get("WEBSOCKET_URL"))
     
-        print('pushToConnection : ' + connection_id + ' feed  : ' + str(feed))
+        print('pushToConnection : ' + connection_id + ' feed  : ' + str(order.order_id))
 
         response = apigw_management_api.post_to_connection(
             ConnectionId=connection_id,
-            Data=feed
+            Data=order.order_id
         )
