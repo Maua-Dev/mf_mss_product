@@ -118,8 +118,8 @@ class OrderRepositoryDynamo(IOrderRepository):
             return None
         
         update_dict={
-            "products": new_products, 
-            "status": new_status, 
+            "products": new_products,
+            "status": new_status.value, 
             "total_price": Decimal(str(new_total_price)) if new_total_price is not None else None, 
             "aborted_reason": new_aborted_reason}
 
