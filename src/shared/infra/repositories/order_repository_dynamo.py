@@ -57,23 +57,23 @@ class OrderRepositoryDynamo(IOrderRepository):
                                        gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key_product,
                                        gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key_product)
 
-    def create_order(self, new_order: Order) -> Order:
-        order_dto = OrderDynamoDTO.from_entity(order=new_order)
+    def create_order(self, order: Order) -> Order:
+        order_dto = OrderDynamoDTO.from_entity(order=order)
         item = order_dto.to_dynamo()
 
         item[self.dynamo.gsi_partition_key] = self.order_gsi_partition_key_format(
-            new_order.order_id)
+            order.order_id)
         item[self.dynamo.gsi_sort_key] = self.order_gsi_sort_key_format(
-            new_order.restaurant)
+            order.restaurant)
 
         resp = self.dynamo.put_item(
-        partition_key=self.order_partition_key_format(new_order.restaurant),
-        sort_key=self.order_sort_key_format(new_order.order_id),
+        partition_key=self.order_partition_key_format(order.restaurant),
+        sort_key=self.order_sort_key_format(order.order_id),
         item=item,
         is_decimal=True
         )
 
-        return new_order
+        return order
 
     def get_order_by_id(self, order_id: str) -> Optional[Order]:
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.order_gsi_partition_key_format(order_id))
@@ -189,23 +189,23 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return True
 
-    def create_connection(self, new_connection: Connection) -> Connection:
-        connection_dto = ConnectionDynamoDTO.from_entity(connection=new_connection)
+    def create_connection(self, connection: Connection) -> Connection:
+        connection_dto = ConnectionDynamoDTO.from_entity(connection=connection)
         item = connection_dto.to_dynamo()
 
         item[self.dynamo.gsi_partition_key] = self.connection_gsi_partition_key_format(
-            new_connection.connection_id)
+            connection.connection_id)
         item[self.dynamo.gsi_sort_key] = self.connection_gsi_sort_key_format(
-            new_connection.restaurant)
+            connection.restaurant)
 
         resp = self.dynamo.put_item(
-        partition_key=self.connection_partition_key_format(new_connection.restaurant),
-        sort_key=self.connection_sort_key_format(new_connection.connection_id),
+        partition_key=self.connection_partition_key_format(connection.restaurant),
+        sort_key=self.connection_sort_key_format(connection.connection_id),
         item=item,
         is_decimal=True
         )
 
-        return new_connection
+        return connection
 
     def abort_connection(self, connection_id: str) -> Connection:
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
