@@ -14,7 +14,7 @@ class Test_OrderRepositoryDynamo:
         order = repo_mock.orders[0]
         order.order_id = "66666666-e8e6-4273-8587-e4a93da66bef"
 
-        new_order = repo_dynamo.create_order(new_order=order)
+        new_order = repo_dynamo.create_order(order=order)
 
         assert new_order == repo_mock.orders[0]
 
@@ -82,7 +82,7 @@ class Test_OrderRepositoryDynamo:
         connection = repo_mock.connections[1]
         connection.connection_id = "4b1e0f88-LLLL-3t"
 
-        new_connection = repo_dynamo.create_connection(connection)
+        new_connection = repo_dynamo.create_connection(connection=connection)
 
         assert new_connection == connection
 

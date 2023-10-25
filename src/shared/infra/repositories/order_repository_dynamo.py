@@ -67,7 +67,7 @@ class OrderRepositoryDynamo(IOrderRepository):
             order.restaurant)
 
         resp = self.dynamo.put_item(
-        partition_key=self.order_partition_key_format(order.restaurant),
+        partition_key=self.order_partition_key_format(order.restaurant.value),
         sort_key=self.order_sort_key_format(order.order_id),
         item=item,
         is_decimal=True
@@ -253,7 +253,7 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return connection
     
-    def push_data_to_client(connection_id, order:Order):
+    def push_data_to_client(self, connection_id, order:Order):
         apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url=os.environ.get("WEBSOCKET_URL"))
     
         print('pushToConnection : ' + connection_id + ' feed  : ' + str(order.order_id))
