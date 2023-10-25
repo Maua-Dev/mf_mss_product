@@ -1,3 +1,4 @@
+import json
 from boto3.dynamodb.conditions import Key, Attr
 from decimal import Decimal
 from typing import List, Optional
@@ -276,4 +277,4 @@ class OrderRepositoryDynamo(IOrderRepository):
             "last_status_update": order.last_status_update_milliseconds
         }
 
-        response = apigw_management_api.post_to_connection(ConnectionId=connection_id,Data=data)
+        response = apigw_management_api.post_to_connection(ConnectionId=connection_id,Data=json.dumps(data))
