@@ -258,7 +258,22 @@ class OrderRepositoryDynamo(IOrderRepository):
     
         print('pushToConnection : ' + connection_id + ' feed  : ' + str(order.order_id))
 
-        response = apigw_management_api.post_to_connection(
-            ConnectionId=connection_id,
-            Data=order.order_id
-        )
+        data = {
+            "order_id": order.order_id,
+            "user_name": order.user_name,
+            "user_id": order.user_id,
+            "products": [{
+            "product_name": order_product.product_name,
+            "product_id": order_product.product_id,
+            "quantity": order_product.quantity,
+            "observation": order_product.observation
+        } for order_product in order.products],
+            "creation_time_milliseconds": order.creation_time_milliseconds,
+            "restaurant": order.restaurant.value,
+            "status": order.status.value,
+            "aborted_reason": order.aborted_reason,
+            "total_price": order.total_price,
+            "last_status_update": order.last_status_update_milliseconds
+        }
+
+        response = apigw_management_api.post_to_connection(ConnectionId=connection_id,Data=data)
