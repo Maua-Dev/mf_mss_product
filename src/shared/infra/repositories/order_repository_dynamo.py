@@ -11,7 +11,7 @@ from src.shared.environments import Environments
 from src.shared.infra.dto.connection_dynamo_dto import ConnectionDynamoDTO
 from src.shared.infra.dto.order_dynamo_dto import OrderDynamoDTO
 from src.shared.infra.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
-
+import boto3
 
 class OrderRepositoryDynamo(IOrderRepository):
 
@@ -248,3 +248,13 @@ class OrderRepositoryDynamo(IOrderRepository):
         connection = ConnectionDynamoDTO.from_dynamo(connection_data.get("Item")).to_entity()
 
         return connection
+    
+    def push_data_to_client(connection_id, endpoint_url, feed):
+        apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url=endpoint_url)
+    
+        print('pushToConnection : ' + connection_id + ' feed  : ' + str(feed))
+
+        response = apigw_management_api.post_to_connection(
+            ConnectionId=connection_id,
+            Data=feed
+        )
