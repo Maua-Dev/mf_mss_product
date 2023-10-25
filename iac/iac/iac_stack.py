@@ -119,6 +119,7 @@ class IacStack(Stack):
             batch_size=1,
         )
 
+        self.websocket_stack.web_socket.grant_manage_connections(dynamo_event_handler_function)
     
         for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
             self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
