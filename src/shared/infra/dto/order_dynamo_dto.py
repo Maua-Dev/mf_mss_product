@@ -60,7 +60,7 @@ class OrderDynamoDTO:
                 "product_name": product.product_name,
                 "product_id": product.product_id,
                 "quantity": Decimal(str(product.quantity)),
-                "observation": product.observation
+                "observation": product.observation if product.observation is not None else None
             } for product in self.products],
             "creation_time_milliseconds": Decimal(str(self.creation_time_milliseconds)),
             "restaurant": self.restaurant.value,
@@ -88,7 +88,7 @@ class OrderDynamoDTO:
                 product_name=product["product_name"],
                 product_id=product["product_id"],
                 quantity=int(product["quantity"]),
-                observation=product.get("observation")
+                observation=product.get("observation") if product.get("observation") is not None else None
             ) for product in order_data["products"]],
             creation_time_milliseconds=int(order_data["creation_time_milliseconds"]),
             restaurant=RESTAURANT(order_data.get("restaurant")),
