@@ -19,7 +19,7 @@ class OrderRepositoryDynamo(IOrderRepository):
 
     @staticmethod
     def order_partition_key_format(restaurant: RESTAURANT) -> str:
-        return f"{restaurant}"
+        return f"{restaurant.value}"
 
     @staticmethod
     def order_sort_key_format(order_id: str) -> str:
@@ -35,7 +35,7 @@ class OrderRepositoryDynamo(IOrderRepository):
     
     @staticmethod
     def connection_partition_key_format(restaurant: RESTAURANT) -> str:
-        return f"{restaurant}"
+        return f"{restaurant.value}"
 
     @staticmethod
     def connection_sort_key_format(connection_id: str) -> str:
@@ -68,7 +68,7 @@ class OrderRepositoryDynamo(IOrderRepository):
             order.restaurant)
 
         resp = self.dynamo.put_item(
-        partition_key=self.order_partition_key_format(order.restaurant.value),
+        partition_key=self.order_partition_key_format(order.restaurant),
         sort_key=self.order_sort_key_format(order.order_id),
         item=item,
         is_decimal=True
@@ -152,19 +152,19 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         user_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
 
-        if amount == None: amount = 20
+        if amount is None: amount = 20
         
         if exclusive_start_key:
             for index, item in enumerate(user_sorted):
                 if item.get('order_id') == exclusive_start_key:
                     order_id_position = index
                     user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-                    return user_sorted[order_id_position:order_id_position + amount]
+            return user_sorted[order_id_position:order_id_position + amount]
 
         else:
             for index, item in enumerate(user_sorted):
                 user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-                return user_sorted[:amount]
+            return user_sorted[:amount]
 
     def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
         query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant))
@@ -172,19 +172,19 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         restaurant_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
 
-        if amount == None: amount = 20
+        if amount is None: amount = 20
         
         if exclusive_start_key:
             for index, item in enumerate(restaurant_sorted):
                 if item.get('order_id') == exclusive_start_key:
                     order_id_position = index
                     restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-                    return restaurant_sorted[order_id_position:order_id_position + amount]
+            return restaurant_sorted[order_id_position:order_id_position + amount]
                 
         else:
             for index, item in enumerate(restaurant_sorted):
                 restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-                return restaurant_sorted[:amount]
+            return restaurant_sorted[:amount]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
