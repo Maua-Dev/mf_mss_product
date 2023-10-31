@@ -86,14 +86,14 @@ def load_mock_to_local_dynamo():
     print('Loading orders...')
     for order in repo_order_mock.orders:
         print(f'Loading order {order.order_id} | {order.products} | {order.restaurant}...')
-        repo_order_dynamo.create_order(new_order=order)
+        repo_order_dynamo.create_order(order=order)
         count += 1
     print(f'{count} orders loaded!\n')
 
     print('Loading connections...')
     for connection in repo_order_mock.connections:
         print(f'Loading connection {connection.connection_id} | {connection.user_id} | {connection.restaurant}...')
-        repo_order_dynamo.create_connection(new_connection=connection)
+        repo_order_dynamo.create_connection(connection=connection)
         count += 1
     print(f'{count} connections loaded!\n')
 
