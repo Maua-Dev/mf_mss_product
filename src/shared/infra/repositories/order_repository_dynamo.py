@@ -162,8 +162,9 @@ class OrderRepositoryDynamo(IOrderRepository):
                     return user_sorted[order_id_position:order_id_position + amount]
 
         else:
-            user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return user_sorted[:amount]
+            for index, item in enumerate(user_sorted):
+                user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
+                return user_sorted[:amount]
 
     def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
         query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant))
@@ -179,10 +180,11 @@ class OrderRepositoryDynamo(IOrderRepository):
                     order_id_position = index
                     restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
                     return restaurant_sorted[order_id_position:order_id_position + amount]
-
+                
         else:
-            restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return restaurant_sorted[:amount]
+            for index, item in enumerate(restaurant_sorted):
+                restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
+                return restaurant_sorted[:amount]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
