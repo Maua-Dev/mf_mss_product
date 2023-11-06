@@ -24,7 +24,9 @@ class AbortOrderUsecase:
         if order_to_update is None:
             raise NoItemsFound("order")
 
-        if order_to_update.status != STATUS.PENDING and user.role != ROLE.ADMIN:
+        allowed_roles = [ROLE.ADMIN, ROLE.OWNER]
+
+        if order_to_update.status != STATUS.PENDING and user.role not in allowed_roles:
             raise OrderAlreadyPreparing()
 
         if user.role == ROLE.ADMIN:
