@@ -80,10 +80,12 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.order_gsi_partition_key_format(order_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
-        for item in resp['Items']:
-            restaurant = item['PK']
+        if len(resp['Items']) == 0:
+            return None
 
-        order_data = self.dynamo.get_item(partition_key=self.order_partition_key_format(restaurant), sort_key=self.order_sort_key_format(order_id))
+        restaurant = resp['Items'][0].get('PK')
+
+        order_data = self.dynamo.get_item(partition_key=self.order_partition_key_format(RESTAURANT(restaurant)), sort_key=self.order_sort_key_format(order_id))
 
         if 'Item' not in order_data:
             return None
@@ -159,18 +161,23 @@ class OrderRepositoryDynamo(IOrderRepository):
                 if item.get('order_id') == exclusive_start_key:
                     order_id_position = index
                     user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return user_sorted[order_id_position:order_id_position + amount]
+                return user_sorted[order_id_position:order_id_position + amount]
 
         else:
             for index, item in enumerate(user_sorted):
                 user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return user_sorted[:amount]
+                return user_sorted[:amount]
 
     def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
         query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
 
-        restaurant_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
+        orders_to_sort = list()
+        for order in resp.get('Items'):
+            if order.get('entity') == 'order':
+                orders_to_sort.append(order)
+
+        restaurant_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
 
         if amount is None: amount = 20
         
@@ -179,12 +186,12 @@ class OrderRepositoryDynamo(IOrderRepository):
                 if item.get('order_id') == exclusive_start_key:
                     order_id_position = index
                     restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return restaurant_sorted[order_id_position:order_id_position + amount]
+                return restaurant_sorted[order_id_position:order_id_position + amount]
                 
         else:
             for index, item in enumerate(restaurant_sorted):
                 restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return restaurant_sorted[:amount]
+                return restaurant_sorted[:amount]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
@@ -214,10 +221,9 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
-        for item in resp['Items']:
-            restaurant = item['PK']
+        restaurant = resp['Items'][0].get('PK')
 
-        abort_connection = self.dynamo.delete_item(partition_key=self.connection_partition_key_format(restaurant), sort_key=self.connection_sort_key_format)
+        abort_connection = self.dynamo.delete_item(partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)), sort_key=self.connection_sort_key_format(connection_id))
 
         if 'Attributes' not in abort_connection:
             return None
@@ -244,10 +250,12 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
-        for item in resp['Items']:
-            restaurant = item['PK']   
+        if len(resp['Items']) == 0:
+            return None
 
-        connection_data = self.dynamo.get_item(partition_key=self.connection_partition_key_format(restaurant), sort_key=self.connection_sort_key_format(connection_id))                 
+        restaurant = resp['Items'][0].get('PK') 
+
+        connection_data = self.dynamo.get_item(partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)), sort_key=self.connection_sort_key_format(connection_id))                 
         
         if 'Item' not in connection_data:
             return None
