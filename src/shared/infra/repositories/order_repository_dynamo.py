@@ -142,12 +142,12 @@ class OrderRepositoryDynamo(IOrderRepository):
     def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
         resp = self.dynamo.get_all_items()
 
-        orders = list()
+        orders = []
         for item in resp.get('Items'):
             if item.get('entity') == "order":
                 orders.append(item)
 
-        orders_to_sort = list()
+        orders_to_sort = []
         for order in orders:
             if order.get('user_id') == user_id:
                 orders_to_sort.append(order)
@@ -158,14 +158,14 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         order_id_position = 0
 
-        # print(user_sorted)
+        print(user_sorted)
         
         if exclusive_start_key:
             for index, item in enumerate(user_sorted):
                 if item.get('order_id') == exclusive_start_key:
                     order_id_position = index
                     user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-                return user_sorted[order_id_position:order_id_position + amount]
+                    return user_sorted[order_id_position:order_id_position + amount]
 
         else:
             for index, item in enumerate(user_sorted):
@@ -176,7 +176,7 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
 
-        orders_to_sort = list()
+        orders_to_sort = []
         for order in resp.get('Items'):
             if order.get('entity') == 'order':
                 orders_to_sort.append(order)
