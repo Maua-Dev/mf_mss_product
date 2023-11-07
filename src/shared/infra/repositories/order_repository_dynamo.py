@@ -181,6 +181,8 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         if amount is None: amount = 20
         
+        order_id_position = 0
+        
         if exclusive_start_key:
             for index, item in enumerate(restaurant_sorted):
                 if item.get('order_id') == exclusive_start_key:
