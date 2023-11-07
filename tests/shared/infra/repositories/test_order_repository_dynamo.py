@@ -63,7 +63,7 @@ class Test_OrderRepositoryDynamo:
 
         assert len(get_all) == 2
     
-    # @pytest.mark.skip("Can't test dynamo in Github")
+    @pytest.mark.skip("Can't test dynamo in Github")
     def test_get_all_orders_by_restaurant(self):
         repo_dynamo = OrderRepositoryDynamo()
         repo_mock = OrderRepositoryMock()
