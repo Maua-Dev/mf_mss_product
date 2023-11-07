@@ -37,7 +37,10 @@ class ChangeOrderByIdUsecase:
 
         updated_order = self.repo_order.update_order(
             order_id=order_id,
-            new_products=new_prods_list
+            new_products=new_prods_list,
+            new_status=None,
+            new_total_price=None,
+            new_aborted_reason=None
         )
 
         return updated_order
