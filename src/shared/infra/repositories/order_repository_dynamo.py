@@ -152,6 +152,8 @@ class OrderRepositoryDynamo(IOrderRepository):
             if order.get('user_id') == user_id:
                 orders_to_sort.append(order)
 
+        print(orders_to_sort)
+
         user_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
 
         if amount is None: amount = 20
@@ -176,10 +178,14 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
 
+        print(resp)
+
         orders_to_sort = []
         for order in resp.get('Items'):
             if order.get('entity') == 'order':
                 orders_to_sort.append(order)
+
+        print(orders_to_sort)
 
         restaurant_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
 
