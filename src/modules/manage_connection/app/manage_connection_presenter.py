@@ -10,9 +10,12 @@ controller = ManageConnectionController(usecase=usecase)
 
 
 def lambda_handler(event, context):
+    
+    print(event)
+    print(context)
 
     httpRequest = LambdaHttpRequest(data=event)
-    httpRequest.data['requester_user'] = event.get('requestContext', {}).get('authorizer', {}).get('claims', None)
+    httpRequest.data['requester_user'] = event.get('requestContext', {}).get('authorizer', None)
     httpRequest.data['route_key'] = event.get('requestContext', {}).get('routeKey', "$default")
     httpRequest.data['api_id'] = event.get('requestContext', {}).get('apiId', "")
     httpRequest.data['connection_id'] = event.get('requestContext', {}).get('connectionId', "")

@@ -167,9 +167,8 @@ class Test_OrderRepositoryMock:
         len_before = len(repo.connections)
 
         connection_id = repo.connections[0].connection_id
-        restaurant = repo.connections[0].restaurant
 
-        repo.abort_connection(connection_id, restaurant)
+        repo.abort_connection(connection_id)
 
         assert len(repo.connections) == len_before - 1
 

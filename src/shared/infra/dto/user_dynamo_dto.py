@@ -81,7 +81,7 @@ class UserDynamoDTO:
         )
 
     def __repr__(self):
-        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, role={self.role.value}, restaurant={self.restaurant.value}, photo={self.photo})"
+        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, role={self.role}, restaurant={self.restaurant}, photo={self.photo})"
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__

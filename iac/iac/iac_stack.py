@@ -1,7 +1,9 @@
 import os
 from aws_cdk import (
+    aws_lambda as lambda_,
     Stack,
-    aws_cognito
+    aws_cognito,
+    Duration
 )
 from constructs import Construct
 
@@ -13,7 +15,6 @@ from .dynamo_stack import DynamoStack
 from .lambda_contact_us_stack import LambdaContactUsStack
 from .lambda_stack import LambdaStack
 from aws_cdk.aws_apigateway import RestApi, Cors, CognitoUserPoolsAuthorizer
-
 
 
 class IacStack(Stack):
@@ -45,7 +46,7 @@ class IacStack(Stack):
             "allow_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": Cors.DEFAULT_HEADERS
         }
-                                                               )
+        )
         self.bucket_stack = BucketStack(self)
 
         if 'prod' in self.github_ref_name:
@@ -78,22 +79,56 @@ class IacStack(Stack):
                                                        )]
                                                        )
 
+
+
         self.lambda_stack = LambdaStack(self, api_gateway_resource=api_gateway_resource,
                                         environment_variables=ENVIRONMENT_VARIABLES, authorizer=self.cognito_auth)
-
-        ENVIRONMENT_VARIABLES['GET_USER_ARN'] = self.lambda_stack.get_user.function_arn
 
         self.contact_us_lambda_stack = LambdaContactUsStack(self, api_gateway_resource=api_gateway_resource,
                                                             authorizer=self.cognito_auth,
                                                             lambda_layer=self.lambda_stack.lambda_layer,
                                                             stage=stage)
 
+        self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
+                                              lambda_layer=self.lambda_stack.lambda_layer,
+                                              environment_variables=ENVIRONMENT_VARIABLES)
+        
+        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET = ENVIRONMENT_VARIABLES.copy()
+        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET["WEBSOCKET_URL"] = self.websocket_stack.web_socket.api_endpoint
+
+
+        dynamo_event_handler_function = lambda_.Function(
+            self, "OrderEventHandlerFunction",
+            code=lambda_.Code.from_asset(f"../src/modules/publish_order"),
+            handler=f"app.publish_order_presenter.lambda_handler",
+            runtime=lambda_.Runtime.PYTHON_3_9,
+            layers=[self.lambda_stack.lambda_layer],
+            memory_size=512,
+            environment=ENVIRONMENT_VARIABLES_WITH_WEBSOCKET,
+            timeout=Duration.seconds(15),
+        )
+
+        self.lambda_stack.functions_that_need_dynamo_product_permissions.append(dynamo_event_handler_function)
+        
+        self.dynamo_stack.dynamo_table_product.grant_stream_read(dynamo_event_handler_function)
+
+        dynamo_event_handler_function.add_event_source_mapping(
+            "DynamoEventSourceMapping",
+            event_source_arn=self.dynamo_stack.dynamo_table_product.table_stream_arn,
+            starting_position=lambda_.StartingPosition.TRIM_HORIZON,
+            batch_size=1,
+        )
+
+        self.websocket_stack.web_socket.grant_manage_connections(dynamo_event_handler_function)
+    
         for f in self.lambda_stack.functions_that_need_dynamo_product_permissions:
             self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
 
         for f in self.lambda_stack.functions_that_need_dynamo_user_permissions:
             self.dynamo_stack.dynamo_table_user.grant_read_write_data(f)
 
-        self.websocket_stack = WebSocketStack(self, construct_id="MauaFood_WebSocketApi",
-                                              lambda_layer=self.lambda_stack.lambda_layer,
-                                              environment_variables=ENVIRONMENT_VARIABLES)
+        for f in self.websocket_stack.functions_that_need_dynamo_product_permissions:
+            self.dynamo_stack.dynamo_table_product.grant_read_write_data(f)
+
+        for f in self.websocket_stack.functions_that_need_dynamo_user_permissions:
+            self.dynamo_stack.dynamo_table_user.grant_read_write_data(f)

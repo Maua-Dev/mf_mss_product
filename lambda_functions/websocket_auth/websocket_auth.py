@@ -1,17 +1,46 @@
+import boto3
+
+client = boto3.client('cognito-idp')
+
+
 def lambda_handler(event, context):
-    
-    #1 - Log the event
-    print('*********** The event is: ***************')
-    print(event)
-    
-    #2 - See if the person's token is valid
-    # if event['authorizationToken'] == 'abc123':
-    #     auth = 'Allow'
-    # else:
-    #     auth = 'Deny'
-    
+    token = event['headers']['Authorization']
+    methodArn = event['methodArn'].split('/')
+    methodArn = methodArn[0] + '/*/*'
+    response = client.get_user(
+        AccessToken=token
+    )
     auth = 'Allow'
+    if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+        auth = 'Deny'
+
+    requested_user = {}
+    for item in response['UserAttributes']:
+        requested_user[item['Name']] = item['Value']
     
-    #3 - Construct and return the response
-    authResponse = { "principalId": "abc123", "policyDocument": { "Version": "2012-10-17", "Statement": [{"Action": "execute-api:Invoke", "Resource": ["arn:aws:execute-api:sa-east-1:264055331071:e2sl8gy0r4/*/*"], "Effect": auth}] }}
-    return authResponse
+    auth_response = {
+    "principalId": response['Username'],
+    "policyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+                {
+                "Action": "execute-api:Invoke",
+                "Effect": auth,
+                "Resource": [methodArn]
+                }
+            ]
+        },
+    "context": {
+            "sub": requested_user["sub"],
+            "name": requested_user["name"],
+            "email": requested_user["email"],
+            "custom:isMaua": requested_user["custom:isMaua"]
+        }
+    }
+
+
+    print(auth_response)
+
+
+
+    return auth_response

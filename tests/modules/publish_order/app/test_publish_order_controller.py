@@ -25,13 +25,13 @@ class Test_PublishOrderControler:
                   'product_id':"8a705b91-c9e9-4353-a755-07f13afafed3",
                   'product_name':'X-Salada',
                   'quantity':'1',
-                   "observation": None
+                  'observation': None
                },
                {
                   'product_id':"e83289ce-abff-40b6-be52-f756a51ef0b2",
                   'product_name':'Suco de Laranja',
                   'quantity':'1',
-                    'observation': "Açúcar no suco",
+                  'observation': "Açúcar no suco",
         }
             ],
             'restaurant':'CANTINA_DO_MOLEZA',

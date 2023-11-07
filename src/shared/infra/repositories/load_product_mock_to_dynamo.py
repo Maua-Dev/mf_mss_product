@@ -1,4 +1,6 @@
 import boto3
+from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
+from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 
 from src.shared.infra.repositories.product_repository_dynamo import ProductRepositoryDynamo
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
@@ -66,18 +68,34 @@ def setup_dynamo_table():
         print('Table already exists!\n')
 
 def load_mock_to_local_dynamo():
-    repo_dynamo = ProductRepositoryDynamo()
-    repo_mock = ProductRepositoryMock()
+    repo_product_dynamo = ProductRepositoryDynamo()
+    repo_product_mock = ProductRepositoryMock()
+    repo_order_dynamo = OrderRepositoryDynamo()
+    repo_order_mock = OrderRepositoryMock()
 
     print('Loading mock data to dynamo...')
 
     print('Loading products...')
     count = 0
-    for product in repo_mock.products:
+    for product in repo_product_mock.products:
         print(f'Loading product {product.product_id} | {product.restaurant} | {product.name}...')
-        repo_dynamo.create_product(new_product=product)
+        repo_product_dynamo.create_product(new_product=product)
         count += 1
     print(f'{count} products loaded!\n')
+
+    print('Loading orders...')
+    for order in repo_order_mock.orders:
+        print(f'Loading order {order.order_id} | {order.products} | {order.restaurant}...')
+        repo_order_dynamo.create_order(order=order)
+        count += 1
+    print(f'{count} orders loaded!\n')
+
+    print('Loading connections...')
+    for connection in repo_order_mock.connections:
+        print(f'Loading connection {connection.connection_id} | {connection.user_id} | {connection.restaurant}...')
+        repo_order_dynamo.create_connection(connection=connection)
+        count += 1
+    print(f'{count} connections loaded!\n')
 
     print('Done!')
 

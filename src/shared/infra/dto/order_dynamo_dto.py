@@ -59,8 +59,8 @@ class OrderDynamoDTO:
             "products":  [{
                 "product_name": product.product_name,
                 "product_id": product.product_id,
-                "quantity": product.quantity,
-                "observation": product.observation
+                "quantity": Decimal(str(product.quantity)),
+                "observation": product.observation if product.observation is not None else None
             } for product in self.products],
             "creation_time_milliseconds": Decimal(str(self.creation_time_milliseconds)),
             "restaurant": self.restaurant.value,
@@ -87,14 +87,14 @@ class OrderDynamoDTO:
             products=[OrderProduct(
                 product_name=product["product_name"],
                 product_id=product["product_id"],
-                quantity=product["quantity"],
-                observation=product.get("observation")
+                quantity=int(product["quantity"]),
+                observation=product.get("observation") if product.get("observation") is not None else None
             ) for product in order_data["products"]],
             creation_time_milliseconds=int(order_data["creation_time_milliseconds"]),
             restaurant=RESTAURANT(order_data.get("restaurant")),
             status=STATUS(order_data.get("status")),
             total_price=float(order_data["total_price"]),
-            last_status_update_milliseconds=order_data.get("last_status_update_milliseconds"),
+            last_status_update_milliseconds=int(order_data.get("last_status_update_milliseconds")) if order_data.get("last_status_update_milliseconds") is not None else None,
             aborted_reason=order_data.get("aborted_reason") if order_data.get("aborted_reason") is not None else None
         )
 
@@ -116,4 +116,4 @@ class OrderDynamoDTO:
         )
 
     def __eq__(self, other):
-        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.observation == other.observation and self.aborted_reason == other.aborted_reason
+        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.aborted_reason == other.aborted_reason
