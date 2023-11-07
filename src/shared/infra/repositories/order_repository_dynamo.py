@@ -155,6 +155,10 @@ class OrderRepositoryDynamo(IOrderRepository):
         user_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
 
         if amount is None: amount = 20
+
+        order_id_position = 0
+
+        print(user_sorted)
         
         if exclusive_start_key:
             for index, item in enumerate(user_sorted):
@@ -188,7 +192,7 @@ class OrderRepositoryDynamo(IOrderRepository):
                 if item.get('order_id') == exclusive_start_key:
                     order_id_position = index
                     restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-                return restaurant_sorted[order_id_position:order_id_position + amount]
+                    return restaurant_sorted[order_id_position:order_id_position + amount]
                 
         else:
             for index, item in enumerate(restaurant_sorted):
