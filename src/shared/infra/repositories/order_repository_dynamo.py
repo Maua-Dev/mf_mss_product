@@ -158,7 +158,7 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         order_id_position = 0
 
-        print(user_sorted)
+        # print(user_sorted)
         
         if exclusive_start_key:
             for index, item in enumerate(user_sorted):
@@ -186,6 +186,8 @@ class OrderRepositoryDynamo(IOrderRepository):
         if amount is None: amount = 20
         
         order_id_position = 0
+
+        print(restaurant_sorted)
         
         if exclusive_start_key:
             for index, item in enumerate(restaurant_sorted):
