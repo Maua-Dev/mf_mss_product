@@ -137,54 +137,31 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return OrderDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
-    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
         resp = self.dynamo.get_all_items()
-
-        orders = list()
-        for item in resp.get('Items'):
-            if item.get('entity') == "order":
-                orders.append(item)
-
-        orders_to_sort = list()
-        for order in orders:
-            if order.get('user_id') == user_id:
-                orders_to_sort.append(order)
-
-        user_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
-
-        if amount is None: amount = 20
-        
+        orders = [item for item in resp.get('Items') if item.get('entity') == "order" and item.get('user_id') == user_id]
+        orders_sorted = sorted(orders, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
         if exclusive_start_key:
-            for index, item in enumerate(user_sorted):
+            for index, item in enumerate(orders_sorted):
                 if item.get('order_id') == exclusive_start_key:
-                    order_id_position = index
-                    user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return user_sorted[order_id_position:order_id_position + amount]
-
+                    result = [OrderDynamoDTO.from_dynamo(order).to_entity()
+                              for order in orders_sorted[index:index + amount]]
+                    return result
         else:
-            for index, item in enumerate(user_sorted):
-                user_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return user_sorted[:amount]
+            return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
-        query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant))
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
+        query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant) & Key(self.dynamo.sort_key).begins_with('order'))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
-
-        restaurant_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
-
-        if amount is None: amount = 20
-        
+        orders_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
         if exclusive_start_key:
-            for index, item in enumerate(restaurant_sorted):
+            for index, item in enumerate(orders_sorted):
                 if item.get('order_id') == exclusive_start_key:
-                    order_id_position = index
-                    restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return restaurant_sorted[order_id_position:order_id_position + amount]
-                
+                    result = [OrderDynamoDTO.from_dynamo(order).to_entity()
+                              for order in orders_sorted[index:index + amount]]
+                    return result
         else:
-            for index, item in enumerate(restaurant_sorted):
-                restaurant_sorted.append(OrderDynamoDTO.from_dynamo(item).to_entity())
-            return restaurant_sorted[:amount]
+            return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
