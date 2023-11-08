@@ -11,7 +11,7 @@ class GetAllOrdersByRestaurantUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, user_id: str, exclusive_start_key: str or None) -> List[Order]:
+    def __call__(self, user_id: str, exclusive_start_key: str or None, amount: str or None) -> List[Order]:
 
         self.amount = 20
 

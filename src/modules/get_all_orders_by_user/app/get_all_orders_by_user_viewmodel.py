@@ -67,7 +67,7 @@ class GetAllOrdersByUserViewmodel:
 
     def to_dict(self):
         return {
-            'all_orders_by_user': [OrderViewmodel(order).to_dict() for order in self.all_orders],
+            'all_orders_by_user': [OrderViewmodel(order).to_dict() for order in self.all_orders] if len(self.all_orders) > 0 else [],
             'last_order_id': self.all_orders[-1].order_id if len(self.all_orders) > 0 else None,
             'message': "the orders were retrieved"
         }

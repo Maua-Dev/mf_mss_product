@@ -23,7 +23,8 @@ class GetAllOrdersByRestaurantController:
             exclusive_start_key = request.data.get('exclusive_start_key')
 
             all_orders = self.GetAllOrdersByRestaurantUsecase(user_id=requester_user.user_id,
-                                                              exclusive_start_key=exclusive_start_key)
+                                                              exclusive_start_key=exclusive_start_key,
+                                                              amount=request.data.get('amount', 20))
 
             viewmodel = GetAllOrdersByRestaurantViewmodel(all_orders=all_orders)
 
