@@ -208,21 +208,20 @@ class OrderRepositoryDynamo(IOrderRepository):
                     break
         
         if order_id_position is not None:
-            restaurant_sorted = restaurant_sorted[order_id_position:order_id_position + amount]
+            restaurant_sorted = restaurant_sorted[order_id_position + 1:]
             for index, item in enumerate(restaurant_sorted):
                 restaurant_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
-            return restaurant_sorted
+            return restaurant_sorted[:amount]
 
         else:
             restaurant_sorted = restaurant_sorted[:amount]
             for index, item in enumerate(restaurant_sorted):
                 restaurant_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
-            return restaurant_sorted
+            return restaurant_sorted[:amount]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
             self.push_data_to_client(connection.connection_id, order)
-
         return True
 
     def create_connection(self, connection: Connection) -> Connection:
