@@ -211,13 +211,13 @@ class OrderRepositoryDynamo(IOrderRepository):
             restaurant_sorted = restaurant_sorted[order_id_position:order_id_position + amount]
             for index, item in enumerate(restaurant_sorted):
                 restaurant_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
+            return restaurant_sorted
 
         else:
             restaurant_sorted = restaurant_sorted[:amount]
             for index, item in enumerate(restaurant_sorted):
                 restaurant_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
-
-        return restaurant_sorted
+            return restaurant_sorted
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
