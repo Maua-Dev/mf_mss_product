@@ -80,10 +80,12 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.order_gsi_partition_key_format(order_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
-        for item in resp['Items']:
-            restaurant = item['PK']
+        if len(resp['Items']) == 0:
+            return None
 
-        order_data = self.dynamo.get_item(partition_key=self.order_partition_key_format(restaurant), sort_key=self.order_sort_key_format(order_id))
+        restaurant = resp['Items'][0].get('PK')
+
+        order_data = self.dynamo.get_item(partition_key=self.order_partition_key_format(RESTAURANT(restaurant)), sort_key=self.order_sort_key_format(order_id))
 
         if 'Item' not in order_data:
             return None
@@ -166,7 +168,6 @@ class OrderRepositoryDynamo(IOrderRepository):
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
             self.push_data_to_client(connection.connection_id, order)
-
         return True
 
     def create_connection(self, connection: Connection) -> Connection:
@@ -191,10 +192,9 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
-        for item in resp['Items']:
-            restaurant = item['PK']
+        restaurant = resp['Items'][0].get('PK')
 
-        abort_connection = self.dynamo.delete_item(partition_key=self.connection_partition_key_format(restaurant), sort_key=self.connection_sort_key_format)
+        abort_connection = self.dynamo.delete_item(partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)), sort_key=self.connection_sort_key_format(connection_id))
 
         if 'Attributes' not in abort_connection:
             return None
@@ -221,10 +221,12 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
-        for item in resp['Items']:
-            restaurant = item['PK']   
+        if len(resp['Items']) == 0:
+            return None
 
-        connection_data = self.dynamo.get_item(partition_key=self.connection_partition_key_format(restaurant), sort_key=self.connection_sort_key_format(connection_id))                 
+        restaurant = resp['Items'][0].get('PK') 
+
+        connection_data = self.dynamo.get_item(partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)), sort_key=self.connection_sort_key_format(connection_id))                 
         
         if 'Item' not in connection_data:
             return None
