@@ -140,7 +140,7 @@ class OrderRepositoryDynamo(IOrderRepository):
         return OrderDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
     def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
-        resp = self.dynamo.get_all_items()
+        resp = self.dynamo.scan_items(filter_expression=Attr("user_id").eq(user_id))
 
         print(resp)
 
