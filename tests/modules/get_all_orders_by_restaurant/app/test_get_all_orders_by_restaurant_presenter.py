@@ -64,7 +64,7 @@ class Test_GetAllOrdersByRestaurantPresenter:
 
         assert response['statusCode'] == 200
         assert json.loads(response['body'])['message'] == "the orders were retrieved"
-        assert [order_id["order_id"] for order_id in json.loads(response['body'])['all_orders']] == expected_all_orders
+        assert [order_id["order_id"] for order_id in json.loads(response['body'])['all_orders_by_restaurant']] == expected_all_orders
 
     def test_lambda_handler_without_exclusive_start_key(self):
         user = UserRepositoryMock().users_list[3]
@@ -122,4 +122,4 @@ class Test_GetAllOrdersByRestaurantPresenter:
 
         assert response['statusCode'] == 200
         assert json.loads(response['body'])['message'] == "the orders were retrieved"
-        assert len(json.loads(response['body'])['all_orders']) == expected_len_all_orders
+        assert len(json.loads(response['body'])['all_orders_by_restaurant']) == expected_len_all_orders

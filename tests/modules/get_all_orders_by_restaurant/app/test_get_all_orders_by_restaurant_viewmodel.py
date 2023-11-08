@@ -16,7 +16,7 @@ class Test_GetAllOrdersByRestaurantViewmodel:
         viewmodel = GetAllOrdersByRestaurantViewmodel(all_orders)
 
         expected = {
-            'all_orders': [
+            'all_orders_by_restaurant': [
                 {
                     "order_id": "1eeef881-1b1f-4f38-a662-8ff7156e6c27",
                     "user_name": "Gabriel G Godoy",
