@@ -208,7 +208,7 @@ class OrderRepositoryDynamo(IOrderRepository):
                     break
         
         if order_id_position is not None:
-            restaurant_sorted = restaurant_sorted[order_id_position + 1:]
+            restaurant_sorted = restaurant_sorted[order_id_position:]
             for index, item in enumerate(restaurant_sorted):
                 restaurant_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
             return restaurant_sorted[:amount]
