@@ -142,8 +142,6 @@ class OrderRepositoryDynamo(IOrderRepository):
     def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
         resp = self.dynamo.scan_items(filter_expression=Attr("user_id").eq(user_id))
 
-        print(resp)
-
         orders_to_sort = []
         for item in resp.get('Items'):
             if item.get('entity') == "order":
