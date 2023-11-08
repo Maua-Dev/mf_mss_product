@@ -15,6 +15,7 @@ from src.shared.infra.external.dynamo.datasources.dynamo_datasource import Dynam
 import boto3
 import os
 
+
 class OrderRepositoryDynamo(IOrderRepository):
 
     @staticmethod
@@ -24,7 +25,7 @@ class OrderRepositoryDynamo(IOrderRepository):
     @staticmethod
     def order_sort_key_format(order_id: str) -> str:
         return f"order#{order_id}"
-    
+
     @staticmethod
     def order_gsi_partition_key_format(order_id: str) -> str:
         return f"{order_id}"
@@ -32,7 +33,7 @@ class OrderRepositoryDynamo(IOrderRepository):
     @staticmethod
     def order_gsi_sort_key_format(restaurant: RESTAURANT) -> str:
         return f"order#{restaurant.value}"
-    
+
     @staticmethod
     def connection_partition_key_format(restaurant: RESTAURANT) -> str:
         return f"{restaurant.value}"
@@ -42,7 +43,7 @@ class OrderRepositoryDynamo(IOrderRepository):
         return f"connection#{connection_id}"
 
     @staticmethod
-    def connection_gsi_partition_key_format(connection_id:str) -> str:
+    def connection_gsi_partition_key_format(connection_id: str) -> str:
         return f"{connection_id}"
 
     @staticmethod
@@ -68,10 +69,10 @@ class OrderRepositoryDynamo(IOrderRepository):
             order.restaurant)
 
         resp = self.dynamo.put_item(
-        partition_key=self.order_partition_key_format(order.restaurant),
-        sort_key=self.order_sort_key_format(order.order_id),
-        item=item,
-        is_decimal=True
+            partition_key=self.order_partition_key_format(order.restaurant),
+            sort_key=self.order_sort_key_format(order.order_id),
+            item=item,
+            is_decimal=True
         )
 
         return order
@@ -85,7 +86,8 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         restaurant = resp['Items'][0].get('PK')
 
-        order_data = self.dynamo.get_item(partition_key=self.order_partition_key_format(RESTAURANT(restaurant)), sort_key=self.order_sort_key_format(order_id))
+        order_data = self.dynamo.get_item(partition_key=self.order_partition_key_format(RESTAURANT(restaurant)),
+                                          sort_key=self.order_sort_key_format(order_id))
 
         if 'Item' not in order_data:
             return None
@@ -110,21 +112,21 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return orders
 
-    def update_order(self, order_id: str, 
+    def update_order(self, order_id: str,
                      new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
                      new_total_price: Optional[float] = None,
                      new_aborted_reason: Optional[str] = None):
-        
+
         order_to_update = self.get_order_by_id(order_id=order_id)
 
         if order_to_update is None:
             return None
-        
-        update_dict={
+
+        update_dict = {
             "products": new_products,
-            "status": new_status.value, 
-            "total_price": Decimal(str(new_total_price)) if new_total_price is not None else None, 
+            "status": new_status.value,
+            "total_price": Decimal(str(new_total_price)) if new_total_price is not None else None,
             "aborted_reason": new_aborted_reason}
 
         update_dict_without_none_values = {k: v for k, v in update_dict.items() if v is not None}
@@ -141,7 +143,8 @@ class OrderRepositoryDynamo(IOrderRepository):
 
     def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
         resp = self.dynamo.get_all_items()
-        orders = [item for item in resp.get('Items') if item.get('entity') == "order" and item.get('user_id') == user_id]
+        orders = [item for item in resp.get('Items') if
+                  item.get('entity') == "order" and item.get('user_id') == user_id]
         orders_sorted = sorted(orders, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
         if exclusive_start_key:
             for index, item in enumerate(orders_sorted):
@@ -152,10 +155,12 @@ class OrderRepositoryDynamo(IOrderRepository):
         else:
             return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
-        query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant) & Key(self.dynamo.sort_key).begins_with('order'))
-        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
-        orders_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> \
+            List[Order]:
+        key_condition = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with('order#')
+        resp = self.dynamo.query(key_condition_expression=key_condition, Select='ALL_ATTRIBUTES')
+        orders_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'),
+                               reverse=False)
         if exclusive_start_key:
             for index, item in enumerate(orders_sorted):
                 if item.get('order_id') == exclusive_start_key:
@@ -180,10 +185,10 @@ class OrderRepositoryDynamo(IOrderRepository):
             connection.restaurant)
 
         resp = self.dynamo.put_item(
-        partition_key=self.connection_partition_key_format(connection.restaurant),
-        sort_key=self.connection_sort_key_format(connection.connection_id),
-        item=item,
-        is_decimal=True
+            partition_key=self.connection_partition_key_format(connection.restaurant),
+            sort_key=self.connection_sort_key_format(connection.connection_id),
+            item=item,
+            is_decimal=True
         )
 
         return connection
@@ -194,7 +199,9 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         restaurant = resp['Items'][0].get('PK')
 
-        abort_connection = self.dynamo.delete_item(partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)), sort_key=self.connection_sort_key_format(connection_id))
+        abort_connection = self.dynamo.delete_item(
+            partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)),
+            sort_key=self.connection_sort_key_format(connection_id))
 
         if 'Attributes' not in abort_connection:
             return None
@@ -224,20 +231,22 @@ class OrderRepositoryDynamo(IOrderRepository):
         if len(resp['Items']) == 0:
             return None
 
-        restaurant = resp['Items'][0].get('PK') 
+        restaurant = resp['Items'][0].get('PK')
 
-        connection_data = self.dynamo.get_item(partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)), sort_key=self.connection_sort_key_format(connection_id))                 
-        
+        connection_data = self.dynamo.get_item(
+            partition_key=self.connection_partition_key_format(RESTAURANT(restaurant)),
+            sort_key=self.connection_sort_key_format(connection_id))
+
         if 'Item' not in connection_data:
             return None
 
         connection = ConnectionDynamoDTO.from_dynamo(connection_data.get("Item")).to_entity()
 
         return connection
-    
-    def push_data_to_client(self, connection_id, order:Order):
+
+    def push_data_to_client(self, connection_id, order: Order):
         apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url=os.environ.get("WEBSOCKET_URL"))
-    
+
         print('pushToConnection : ' + connection_id + ' feed  : ' + str(order.order_id))
 
         data = {
@@ -245,11 +254,11 @@ class OrderRepositoryDynamo(IOrderRepository):
             "user_name": order.user_name,
             "user_id": order.user_id,
             "products": [{
-            "product_name": order_product.product_name,
-            "product_id": order_product.product_id,
-            "quantity": order_product.quantity,
-            "observation": order_product.observation
-        } for order_product in order.products],
+                "product_name": order_product.product_name,
+                "product_id": order_product.product_id,
+                "quantity": order_product.quantity,
+                "observation": order_product.observation
+            } for order_product in order.products],
             "creation_time_milliseconds": order.creation_time_milliseconds,
             "restaurant": order.restaurant.value,
             "status": order.status.value,
@@ -258,4 +267,4 @@ class OrderRepositoryDynamo(IOrderRepository):
             "last_status_update": order.last_status_update_milliseconds
         }
 
-        response = apigw_management_api.post_to_connection(ConnectionId=connection_id,Data=json.dumps(data))
+        response = apigw_management_api.post_to_connection(ConnectionId=connection_id, Data=json.dumps(data))
