@@ -139,69 +139,31 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return OrderDynamoDTO.from_dynamo(response["Attributes"]).to_entity()
 
-    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
-        resp = self.dynamo.scan_items(filter_expression=Attr("user_id").eq(user_id))
-
-        orders_to_sort = []
-        for item in resp.get('Items'):
-            if item.get('entity') == "order":
-                if item.get('user_id') == user_id:
-                    orders_to_sort.append(item)
-
-        user_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
-
-        if amount is None: amount = 20
-
-        order_id_position = None
+    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
+        resp = self.dynamo.get_all_items()
+        orders = [item for item in resp.get('Items') if item.get('entity') == "order" and item.get('user_id') == user_id]
+        orders_sorted = sorted(orders, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
         if exclusive_start_key:
-            for index, item in enumerate(user_sorted):
+            for index, item in enumerate(orders_sorted):
                 if item.get('order_id') == exclusive_start_key:
-                    order_id_position = index
-                    break
-        
-        if order_id_position is not None:
-            user_sorted = user_sorted[order_id_position:]
-            for index, item in enumerate(user_sorted):
-                user_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
-            return user_sorted[:amount]
-
+                    result = [OrderDynamoDTO.from_dynamo(order).to_entity()
+                              for order in orders_sorted[index:index + amount]]
+                    return result
         else:
-            user_sorted = user_sorted[:amount]
-            for index, item in enumerate(user_sorted):
-                user_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
-            return user_sorted[:amount]
+            return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = None) -> List[Order]:
-        query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant))
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
+        query_string = Key(self.dynamo.partition_key).eq(self.order_partition_key_format(restaurant) & Key(self.dynamo.sort_key).begins_with('order'))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
-
-        orders_to_sort = []
-        for order in resp.get('Items'):
-            if order.get('entity') == 'order':
-                orders_to_sort.append(order)
-
-        restaurant_sorted = sorted(orders_to_sort, key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
-
-        if amount is None: amount = 20
-
-        order_id_position = None
+        orders_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
         if exclusive_start_key:
-            for index, item in enumerate(restaurant_sorted):
+            for index, item in enumerate(orders_sorted):
                 if item.get('order_id') == exclusive_start_key:
-                    order_id_position = index
-                    break
-        
-        if order_id_position is not None:
-            restaurant_sorted = restaurant_sorted[order_id_position:]
-            for index, item in enumerate(restaurant_sorted):
-                restaurant_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
-            return restaurant_sorted[:amount]
-
+                    result = [OrderDynamoDTO.from_dynamo(order).to_entity()
+                              for order in orders_sorted[index:index + amount]]
+                    return result
         else:
-            restaurant_sorted = restaurant_sorted[:amount]
-            for index, item in enumerate(restaurant_sorted):
-                restaurant_sorted[index] = OrderDynamoDTO.from_dynamo(item).to_entity()
-            return restaurant_sorted[:amount]
+            return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         for connection in connections_list:
