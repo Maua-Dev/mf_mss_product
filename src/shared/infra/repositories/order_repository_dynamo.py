@@ -153,8 +153,7 @@ class OrderRepositoryDynamo(IOrderRepository):
         else:
             return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> \
-            List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
         key_condition = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with('order#')
         resp = self.dynamo.query(key_condition_expression=key_condition, Select='ALL_ATTRIBUTES')
         orders_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'),
