@@ -22,7 +22,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
         """
         This method return the history of orders of the selected restaurant with pagination. The total of orders per
         page is defined by amount.
