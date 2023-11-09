@@ -259,8 +259,8 @@ class OrderRepositoryMock(IOrderRepository):
         else:
             return user_orders[:amount]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> \
-    List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> List[Order]:
+        
         # Getting all orders from the requested restaurant sorted by creation_time_milliseconds
         restaurant_orders = sorted([order for order in self.orders if order.restaurant == restaurant],
                                    key=lambda order: order.creation_time_milliseconds, reverse=False)

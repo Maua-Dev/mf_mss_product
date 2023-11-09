@@ -28,7 +28,7 @@ class GetAllOrdersByUserUsecase:
             if user.role != ROLE.ADMIN:
                 if order.user_id != user_id:
                     raise UserNotOrderOwner()
-        
-        if amount == None: amount = 20
+
+        if amount is None: amount = 20
 
         return self.repo_order.get_all_orders_by_user(user_id=user_id, exclusive_start_key=exclusive_start_key, amount=amount)

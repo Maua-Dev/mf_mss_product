@@ -10,7 +10,7 @@ from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 class GetAllOrdersByUserController:
     def __init__(self, usecase: GetAllOrdersByUserUsecase):
-        self.GetAllOrdersByUserController = usecase
+        self.GetAllOrdersByUserUsecase = usecase
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
@@ -20,7 +20,7 @@ class GetAllOrdersByUserController:
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
-            all_orders = self.GetAllOrdersByUserController(user_id=requester_user.user_id, exclusive_start_key=request.data.get('exclusive_start_key'), amount=request.data.get('amount'))
+            all_orders = self.GetAllOrdersByUserUsecase(user_id=requester_user.user_id, exclusive_start_key=request.data.get('exclusive_start_key'), amount=request.data.get('amount', 20))
 
             viewmodel = GetAllOrdersByUserViewmodel(all_orders)
 
