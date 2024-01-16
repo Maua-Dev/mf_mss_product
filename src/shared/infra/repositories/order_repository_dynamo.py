@@ -168,8 +168,11 @@ class OrderRepositoryDynamo(IOrderRepository):
             return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
-        for connection in connections_list:
-            self.push_data_to_client(connection.connection_id, order)
+        try:
+            for connection in connections_list:
+                self.push_data_to_client(connection.connection_id, order)
+        except:
+            pass
         return True
 
     def create_connection(self, connection: Connection) -> Connection:
