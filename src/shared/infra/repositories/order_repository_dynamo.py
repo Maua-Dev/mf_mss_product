@@ -242,7 +242,7 @@ class OrderRepositoryDynamo(IOrderRepository):
         return connection
 
     def push_data_to_client(self, connection_id, order: Order):
-        apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url=os.environ.get("WEBSOCKET_URL"))
+        apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url="https://ni19pbgxrg.execute-api.sa-east-1.amazonaws.com/prod/")
 
         print('pushToConnection : ' + connection_id + ' feed  : ' + str(order.order_id))
         endpoint_url=os.environ.get("WEBSOCKET_URL")
