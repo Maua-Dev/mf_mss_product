@@ -94,7 +94,7 @@ class IacStack(Stack):
                                               environment_variables=ENVIRONMENT_VARIABLES)
         
         ENVIRONMENT_VARIABLES_WITH_WEBSOCKET = ENVIRONMENT_VARIABLES.copy()
-        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET["WEBSOCKET_URL"] = https://ni19pbgxrg.execute-api.sa-east-1.amazonaws.com/prod/
+        ENVIRONMENT_VARIABLES_WITH_WEBSOCKET["WEBSOCKET_URL"] = "https://ni19pbgxrg.execute-api.sa-east-1.amazonaws.com/prod/"
 
 
         dynamo_event_handler_function = lambda_.Function(
