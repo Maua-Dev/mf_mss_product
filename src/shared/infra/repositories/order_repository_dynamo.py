@@ -245,7 +245,8 @@ class OrderRepositoryDynamo(IOrderRepository):
         apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url=os.environ.get("WEBSOCKET_URL"))
 
         print('pushToConnection : ' + connection_id + ' feed  : ' + str(order.order_id))
-
+        endpoint_url=os.environ.get("WEBSOCKET_URL")
+        print(endpoint_url)
         data = {
             "order_id": order.order_id,
             "user_name": order.user_name,
