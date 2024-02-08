@@ -299,5 +299,9 @@ class OrderRepositoryMock(IOrderRepository):
         self.feedbacks.append(feedback)
         return feedback
     
-    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> List[Feedback]:
-        pass
+    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
+        feedbacks = [feedback.value for feedback in self.feedbacks if feedback.restaurant == restaurant]
+        if len(feedbacks) == 0:
+            return 0
+        average_feedback = sum(feedbacks) / len(feedbacks)
+        return float(f'{average_feedback:.1f}')

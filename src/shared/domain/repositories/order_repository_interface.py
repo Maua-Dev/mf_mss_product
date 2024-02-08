@@ -77,5 +77,5 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> List[Feedback]:
+    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
         pass
