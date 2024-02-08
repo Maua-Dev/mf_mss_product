@@ -1,22 +1,27 @@
+import os
 import json
-from boto3.dynamodb.conditions import Key, Attr
+import boto3
 from decimal import Decimal
 from typing import List, Optional
-from src.shared.domain.entities.connection import Connection
-from src.shared.domain.entities.order import Order
-from src.shared.domain.entities.order_product import OrderProduct
-from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.shared.domain.enums.status_enum import STATUS
-from src.shared.domain.repositories.order_repository_interface import IOrderRepository
+from boto3.dynamodb.conditions import Key, Attr
+
 from src.shared.environments import Environments
-from src.shared.infra.dto.connection_dynamo_dto import ConnectionDynamoDTO
+from src.shared.domain.entities.order import Order
+from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.entities.connection import Connection
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.dto.order_dynamo_dto import OrderDynamoDTO
+from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.infra.dto.connection_dynamo_dto import ConnectionDynamoDTO
+from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.infra.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
-import boto3
-import os
 
 
 class OrderRepositoryDynamo(IOrderRepository):
+
+    @staticmethod
+    def feedback_partition_key_format(feedback: str) -> str:
+        return f"feedback#{feedback}"
 
     @staticmethod
     def order_partition_key_format(restaurant: RESTAURANT) -> str:
@@ -266,3 +271,20 @@ class OrderRepositoryDynamo(IOrderRepository):
         }
 
         response = apigw_management_api.post_to_connection(ConnectionId=connection_id, Data=json.dumps(data))
+
+    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
+        query_string = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with('feedback#')
+        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
+
+        feedbacks = []
+
+        for item in resp["Items"]:
+            if item["entity"] == "order":
+                feedbacks.append(item.get("feedback"))
+
+        if len(feedbacks) == 0:
+            return 0
+
+        average_feedback = sum(feedbacks) / len(feedbacks)
+
+        return float(f"{average_feedback:.1f}")
