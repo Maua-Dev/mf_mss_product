@@ -9,7 +9,7 @@ class Feedback(abc.ABC):
     order_id: str
     user_id: str
     restaurant: RESTAURANT
-    value : int
+    value: int
     MIN_VALUE = 1
     MAX_VALUE = 5
     ID_LENGTH = 36
