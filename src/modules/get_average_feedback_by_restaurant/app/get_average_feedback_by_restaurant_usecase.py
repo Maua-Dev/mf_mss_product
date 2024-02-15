@@ -21,5 +21,6 @@ class GetAverageFeedbackByRestaurantUsecase:
         average_feedback = self.order_repo.get_average_feedback_by_restaurant(restaurant=user.restaurant)
 
         return {
-            "average_feedback": average_feedback
+            "average_feedback": average_feedback,
+            "message": "the average feedback was retrieved"
         }
