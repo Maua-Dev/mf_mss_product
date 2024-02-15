@@ -23,7 +23,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
         """
         This method return the history of orders of the selected restaurant with pagination. The total of orders per
         page is defined by amount.
@@ -61,7 +61,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
         """
         This method return the history of orders of the selected user with pagination. The total of orders per
         page is defined by amount.

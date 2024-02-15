@@ -257,7 +257,7 @@ class OrderRepositoryMock(IOrderRepository):
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         return True
     
-    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str or None, amount: int) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str,  amount: int, exclusive_start_key: Optional[str] = None,) -> List[Order]:
 
         # Getting all orders from the requested user_id sorted by creation_time_milliseconds
         user_orders = sorted([order for order in self.orders if order.user_id == user_id],
@@ -273,7 +273,7 @@ class OrderRepositoryMock(IOrderRepository):
         else:
             return user_orders[:amount]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int, exclusive_start_key: Optional[str] = None,) -> List[Order]:
         
         # Getting all orders from the requested restaurant sorted by creation_time_milliseconds
         restaurant_orders = sorted([order for order in self.orders if order.restaurant == restaurant],
