@@ -1,13 +1,13 @@
 import json
-from src.modules.create_feedback.create_feedback_presenter import lambda_handler
+from src.modules.create_feedback.app.create_feedback_presenter import lambda_handler
 from src.shared.domain.entities.feedback import Feedback
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter_no_socket
 
 
-class Test_CreateProductPresenter:
-    def test_create_product_presenter(self):
+class Test_CreateFeedbackPresenter:
+    def test_create_feedback_presenter(self):
         repo = UserRepositoryMock()
         user = repo.users_list[0]
 
@@ -70,7 +70,7 @@ class Test_CreateProductPresenter:
         assert json.loads(response["body"])["feedback"]["restaurant"] == "HORA_H"
         assert json.loads(response["body"])["feedback"]["value"] == 4
 
-    def test_create_product_presenter_value_is_missing(self):
+    def test_create_feedback_presenter_value_is_missing(self):
         repo = UserRepositoryMock()
         user = repo.users_list[0]
 
@@ -129,7 +129,7 @@ class Test_CreateProductPresenter:
         assert json.loads(response["body"]) == "Field value is missing"
         assert response["statusCode"] == 400
 
-    def test_create_product_presenter_value_less_than_minimum(self):
+    def test_create_feedback_presenter_value_less_than_minimum(self):
         repo = UserRepositoryMock()
         user = repo.users_list[0]
 
@@ -189,7 +189,7 @@ class Test_CreateProductPresenter:
         assert json.loads(response["body"]) == "value can't be less than one"
         assert response["statusCode"] == 400
         
-    def test_create_product_presenter_value_more_than_maximum(self):
+    def test_create_feedback_presenter_value_more_than_maximum(self):
         repo = UserRepositoryMock()
         user = repo.users_list[0]
 
