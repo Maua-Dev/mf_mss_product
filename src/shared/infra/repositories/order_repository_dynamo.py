@@ -305,7 +305,6 @@ class OrderRepositoryDynamo(IOrderRepository):
         return feedback
     
     def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
-        print(restaurant.value)
         query_string = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with('feedback#')
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
 
