@@ -1,6 +1,7 @@
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.connection import Connection
+from src.shared.domain.entities.feedback import Feedback
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
@@ -179,3 +180,18 @@ class Test_OrderRepositoryMock:
         order_list = repo.get_all_orders_by_user(user_id=order.user_id, exclusive_start_key=order.order_id, amount=2)
 
         assert len(order_list) == 2
+
+    def test_create_feedback(self):
+        repo = OrderRepositoryMock()
+        len_before = len(repo.feedbacks)
+        feedback = Feedback(
+            order_id="1efc0e1a-24ed-4041-a4a0-fe5633711a3f",
+            user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            value=4
+        )
+
+        repo.create_feedback(feedback=feedback)
+
+        assert len(repo.feedbacks) == len_before + 1
+        assert repo.feedbacks[-1] == feedback

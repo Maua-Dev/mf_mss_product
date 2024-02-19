@@ -1,19 +1,22 @@
+import os
 import json
-from boto3.dynamodb.conditions import Key, Attr
+import boto3
 from decimal import Decimal
 from typing import List, Optional
-from src.shared.domain.entities.connection import Connection
-from src.shared.domain.entities.order import Order
-from src.shared.domain.entities.order_product import OrderProduct
-from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.shared.domain.enums.status_enum import STATUS
-from src.shared.domain.repositories.order_repository_interface import IOrderRepository
+from boto3.dynamodb.conditions import Key, Attr
+from src.shared.domain.entities.feedback import Feedback
+
 from src.shared.environments import Environments
-from src.shared.infra.dto.connection_dynamo_dto import ConnectionDynamoDTO
+from src.shared.domain.entities.order import Order
+from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.entities.connection import Connection
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.infra.dto.feedback_dynamo_dto import FeedbackDynamoDTO
 from src.shared.infra.dto.order_dynamo_dto import OrderDynamoDTO
+from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.infra.dto.connection_dynamo_dto import ConnectionDynamoDTO
+from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.infra.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
-import boto3
-import os
 
 
 class OrderRepositoryDynamo(IOrderRepository):
@@ -49,6 +52,22 @@ class OrderRepositoryDynamo(IOrderRepository):
     @staticmethod
     def connection_gsi_sort_key_format(restaurant: RESTAURANT) -> str:
         return f"connection#{restaurant.value}"
+    
+    @staticmethod
+    def feedback_partition_key_format(restaurant: RESTAURANT) -> str:
+        return f"{restaurant.value}"
+    
+    @staticmethod
+    def feedback_sort_key_format(order_id: str) -> str:
+        return f"feedback#{order_id}"
+    
+    @staticmethod
+    def feedback_gsi_partition_key_format(order_id: str) -> str:
+        return f"{order_id}"
+
+    @staticmethod
+    def feedback_gsi_sort_key_format(restaurant: RESTAURANT) -> str:
+        return f"feedback#{restaurant.value}"
 
     def __init__(self):
         self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url_product,
@@ -266,3 +285,39 @@ class OrderRepositoryDynamo(IOrderRepository):
         }
 
         response = apigw_management_api.post_to_connection(ConnectionId=connection_id, Data=json.dumps(data))
+
+    def create_feedback(self, feedback: Feedback) -> Feedback:
+        feedback_dto = FeedbackDynamoDTO.from_entity(feedback=feedback)
+        item = feedback_dto.to_dynamo()
+
+        item[self.dynamo.gsi_partition_key] = self.feedback_gsi_partition_key_format(
+            feedback.order_id)
+        item[self.dynamo.gsi_sort_key] = self.feedback_gsi_sort_key_format(
+            feedback.restaurant)
+
+        resp = self.dynamo.put_item(
+            partition_key=self.feedback_partition_key_format(feedback.restaurant),
+            sort_key=self.feedback_sort_key_format(feedback.order_id),
+            item=item,
+            is_decimal=True
+        )
+
+        return feedback
+    
+    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
+        print(restaurant.value)
+        query_string = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with('feedback#')
+        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
+
+        feedbacks = []
+
+        for item in resp["Items"]:
+            if item["entity"] == "feedback":
+                feedbacks.append(item.get("value"))
+
+        if len(feedbacks) == 0:
+            return 0
+
+        average_feedback = sum(feedbacks) / len(feedbacks)
+
+        return float(f"{average_feedback:.1f}")

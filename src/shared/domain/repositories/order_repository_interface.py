@@ -6,6 +6,7 @@ from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.entities.connection import Connection
+from src.shared.domain.entities.feedback import Feedback
 
 class IOrderRepository(ABC):
 
@@ -22,7 +23,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
         """
         This method return the history of orders of the selected restaurant with pagination. The total of orders per
         page is defined by amount.
@@ -60,7 +61,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
         """
         This method return the history of orders of the selected user with pagination. The total of orders per
         page is defined by amount.
@@ -69,4 +70,12 @@ class IOrderRepository(ABC):
 
     @abstractmethod
     def get_connection_by_connection_id(self, connection_id: str) -> Optional[Connection]:
+        pass
+
+    @abstractmethod
+    def create_feedback(self, feedback: Feedback) -> Feedback:
+        pass
+
+    @abstractmethod
+    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
         pass

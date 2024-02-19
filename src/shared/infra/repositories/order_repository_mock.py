@@ -5,6 +5,7 @@ from typing import List, Optional
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.entities.feedback import Feedback
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
@@ -15,6 +16,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 class OrderRepositoryMock(IOrderRepository):
     orders: List[Order]
     connections: List[Connection]
+    feedbacks: List[Feedback]
 
     def __init__(self):
         users_repo = UserRepositoryMock().users_list
@@ -178,6 +180,18 @@ class OrderRepositoryMock(IOrderRepository):
                        restaurant=RESTAURANT.SOUZA_DE_ABREU),
         ]
 
+        self.feedbacks = [
+            Feedback(order_id="1eeef881-1b1f-4f38-a662-8ff7156e6c27", user_id=users_repo[0].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA, value=5),
+
+            Feedback(order_id="8309d903-55ce-4299-9c70-13fa2e03bcdc", user_id=users_repo[1].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA, value=3),
+
+            Feedback(order_id="f60615cc-d1cd-41d5-8ff2-7406ee5fd214", user_id=users_repo[5].user_id, restaurant=RESTAURANT.CANTINA_DO_MOLEZA, value=1),
+            
+            Feedback(order_id="b3f6c5aa-80ad-4f95-ae16-455b4f874553", user_id=users_repo[3].user_id, restaurant=RESTAURANT.SOUZA_DE_ABREU, value=2),
+
+            Feedback(order_id="d2b29a41-69a6-4ad8-87b9-2444119fbf66", user_id=users_repo[6].user_id, restaurant=RESTAURANT.HORA_H, value=4),
+        ]
+
     def create_order(self, order: Order) -> Order:
         self.orders.append(order)
         return order
@@ -243,7 +257,7 @@ class OrderRepositoryMock(IOrderRepository):
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         return True
     
-    def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str or None, amount: int) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str,  amount: int, exclusive_start_key: Optional[str] = None,) -> List[Order]:
 
         # Getting all orders from the requested user_id sorted by creation_time_milliseconds
         user_orders = sorted([order for order in self.orders if order.user_id == user_id],
@@ -259,7 +273,7 @@ class OrderRepositoryMock(IOrderRepository):
         else:
             return user_orders[:amount]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str or None, amount: int) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int, exclusive_start_key: Optional[str] = None,) -> List[Order]:
         
         # Getting all orders from the requested restaurant sorted by creation_time_milliseconds
         restaurant_orders = sorted([order for order in self.orders if order.restaurant == restaurant],
@@ -280,3 +294,14 @@ class OrderRepositoryMock(IOrderRepository):
             if connection.connection_id == connection_id:
                 return connection
         return None
+    
+    def create_feedback(self, feedback: Feedback) -> Feedback:
+        self.feedbacks.append(feedback)
+        return feedback
+    
+    def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
+        feedbacks = [feedback.value for feedback in self.feedbacks if feedback.restaurant == restaurant]
+        if len(feedbacks) == 0:
+            return 0
+        average_feedback = sum(feedbacks) / len(feedbacks)
+        return float(f'{average_feedback:.1f}')
