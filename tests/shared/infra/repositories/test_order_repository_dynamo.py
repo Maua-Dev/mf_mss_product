@@ -2,6 +2,7 @@ import pytest
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_OrderRepositoryDynamo:
@@ -118,3 +119,27 @@ class Test_OrderRepositoryDynamo:
         get_connection = repo_dynamo.get_connection_by_connection_id(connection.connection_id)
 
         assert get_connection == connection
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_create_feedback(self):
+        repo_dynamo = OrderRepositoryDynamo()
+        repo_mock = OrderRepositoryMock()
+
+        feedback = repo_mock.feedbacks[1]
+        feedback.order_id = "1eeef881-1b1f-4f38-a662-8ff7156e6g69"
+
+        new_feedback = repo_dynamo.create_feedback(feedback=feedback)
+
+        assert new_feedback == feedback
+
+    @pytest.mark.skip("Can't test dynamo in Github")
+    def test_get_average_feedback_by_restaurant(self):
+        repo_dynamo = OrderRepositoryDynamo()
+        repo_mock = UserRepositoryMock()
+
+        user = repo_mock.users_list[2]
+
+        average_feedback = repo_dynamo.get_average_feedback_by_restaurant(restaurant=user.restaurant)
+
+        assert average_feedback == 3.0
+
