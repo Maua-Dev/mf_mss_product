@@ -232,5 +232,7 @@ class LambdaStack(Construct):
             self.get_all_active_orders_by_restaurant,
             self.get_all_orders_by_user,
             self.get_all_orders_by_restaurant,
-            self.change_order_by_id
+            self.change_order_by_id,
+            self.create_feedback,
+            self.get_average_feedback_by_restaurant
         ]
