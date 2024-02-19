@@ -181,6 +181,22 @@ class LambdaStack(Construct):
             authorizer=authorizer
         )
 
+        self.create_feedback = self.create_lambda_api_gateway_integration(
+            module_name="create_feedback",
+            method="POST",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
+        self.get_average_feedback_by_restaurant = self.create_lambda_api_gateway_integration(
+            module_name="get_average_feedback_by_restaurant",
+            method="GET",
+            api_resource=api_gateway_resource,
+            environment_variables=environment_variables,
+            authorizer=authorizer
+        )
+
         self.functions_that_need_dynamo_user_permissions = [
             self.create_user,
             self.update_user,
@@ -197,7 +213,9 @@ class LambdaStack(Construct):
             self.change_order_by_id,
             self.get_all_orders_by_user,
             self.get_all_orders_by_restaurant,
-            self.get_current_order_state_by_id
+            self.get_current_order_state_by_id,
+            self.create_feedback,
+            self.get_average_feedback_by_restaurant
         ]
 
         self.functions_that_need_dynamo_product_permissions = [
