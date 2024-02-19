@@ -1,4 +1,4 @@
-from src.modules.create_feedback.create_feedback_viewmodel import CreateFeedbackViewmodel
+from src.modules.create_feedback.app.create_feedback_viewmodel import CreateFeedbackViewmodel
 from src.shared.domain.entities.feedback import Feedback
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 

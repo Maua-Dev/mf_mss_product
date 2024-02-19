@@ -1,7 +1,7 @@
 import pytest
 
-from src.modules.create_feedback.create_feedback_controller import CreateFeedbackController
-from src.modules.create_feedback.create_feedback_usecase import CreateFeedbackUsecase
+from src.modules.create_feedback.app.create_feedback_controller import CreateFeedbackController
+from src.modules.create_feedback.app.create_feedback_usecase import CreateFeedbackUsecase
 from src.shared.domain.entities.feedback import Feedback
 from src.shared.helpers.errors.controller_errors import MissingParameters
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
