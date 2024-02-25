@@ -3,6 +3,7 @@ import pytest
 from src.modules.change_order_by_id.app.change_order_by_id_usecase import ChangeOrderByIdUsecase
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner, \
@@ -48,6 +49,7 @@ class Test_ChangeOrderByIdUsecase:
         )
 
         assert len(response.products) == 1
+        assert response.action == ACTION.EDITED
 
     def test_order_doesnt_exist(self):
         usecase, order, user = get_usecase_order_repo_and_user_repo()

@@ -1,6 +1,7 @@
 from src.modules.create_order.app.create_order_viewmodel import CreateOrderViewmodel
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 
@@ -18,7 +19,8 @@ class Test_CreateOrderViewmodel:
             status=STATUS.READY, 
             total_price=30.00, 
             aborted_reason=None,
-            last_status_update_milliseconds=1692061896
+            last_status_update_milliseconds=1692061896,
+            action=ACTION.NEW
         )
 
         order_viewmodel = CreateOrderViewmodel(order=order).to_dict()
@@ -39,7 +41,8 @@ class Test_CreateOrderViewmodel:
                  "status": "READY",
                  "aborted_reason": None,
                  "total_price": 30.00,
-                "last_status_update": 1692061896
+                "last_status_update": 1692061896,
+                "action": "NEW"
                 },
             "message": "the order was created"
             }

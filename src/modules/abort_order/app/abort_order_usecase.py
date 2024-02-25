@@ -2,6 +2,7 @@ import datetime
 from src.shared.domain.entities.order import Order
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner, OrderAlreadyPreparing
@@ -31,13 +32,13 @@ class AbortOrderUsecase:
 
         if user.role == ROLE.ADMIN:
             updated_order = self.repo_order.update_order(order_id=order_id, new_aborted_reason=new_aborted_reason,
-                                                         new_status=STATUS.CANCELLED)
+                                                         new_status=STATUS.CANCELLED, new_action=ACTION.DELETED)
             return updated_order
 
         if order_to_update.user_id != user_id:
             raise UserNotOrderOwner()
 
         updated_order = self.repo_order.update_order(order_id=order_id, new_aborted_reason=new_aborted_reason,
-                                                     new_status=STATUS.CANCELLED)
+                                                     new_status=STATUS.CANCELLED, new_action=ACTION.DELETED)
 
         return updated_order

@@ -32,7 +32,8 @@ class Test_GetCurrentOrderStateByIdPresenter:
             "order": {
                 "order_id": order.order_id,
                 "order_status": order.status.value,
-                "aborted_reason": None
+                "aborted_reason": None,
+                "action": order.action.value
             },
             "message": "the order status object was retrieved"
         }

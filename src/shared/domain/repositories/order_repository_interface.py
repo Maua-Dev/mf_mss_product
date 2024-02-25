@@ -5,6 +5,7 @@ from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.feedback import Feedback
 
@@ -38,7 +39,8 @@ class IOrderRepository(ABC):
     def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
                      new_total_price: Optional[float] = None,
-                     new_aborted_reason: Optional[str] = None):
+                     new_aborted_reason: Optional[str] = None,
+                     new_action: Optional[ACTION] = None):
         pass
 
     @abstractmethod

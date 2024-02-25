@@ -3,6 +3,7 @@ from typing import List, Optional
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.status_enum import STATUS
 
 class OrderDynamoDTO:
@@ -13,11 +14,12 @@ class OrderDynamoDTO:
     creation_time_milliseconds: int
     restaurant: RESTAURANT
     status: STATUS
+    action: ACTION
     aborted_reason: Optional[str] = None
     total_price: float
     last_status_update_milliseconds: int = None
 
-    def __init__(self, order_id: str, user_name: str, user_id: str, products: List[OrderProduct], creation_time_milliseconds: int, restaurant: RESTAURANT, status: STATUS, total_price: float, last_status_update_milliseconds: int = None, aborted_reason: Optional[str] = None):
+    def __init__(self, order_id: str, user_name: str, user_id: str, products: List[OrderProduct], creation_time_milliseconds: int, restaurant: RESTAURANT, status: STATUS, action: ACTION, total_price: float, last_status_update_milliseconds: int = None, aborted_reason: Optional[str] = None):
         self.order_id = order_id
         self.user_name = user_name
         self.user_id = user_id
@@ -25,6 +27,7 @@ class OrderDynamoDTO:
         self.creation_time_milliseconds = creation_time_milliseconds
         self.restaurant = restaurant
         self.status = status
+        self.action = action
         self.total_price = total_price
         self.last_status_update_milliseconds = last_status_update_milliseconds
         self.aborted_reason = aborted_reason
@@ -42,6 +45,7 @@ class OrderDynamoDTO:
             creation_time_milliseconds = order.creation_time_milliseconds,
             restaurant = order.restaurant,
             status = order.status, 
+            action = order.action,
             total_price = order.total_price,
             last_status_update_milliseconds = order.last_status_update_milliseconds,
             aborted_reason = order.aborted_reason
@@ -67,7 +71,8 @@ class OrderDynamoDTO:
             "status": self.status.value,
             "total_price": Decimal(str(self.total_price)),
             "last_status_update_milliseconds": Decimal(str(self.last_status_update_milliseconds)) if self.last_status_update_milliseconds is not None else None,
-            "aborted_reason": self.aborted_reason if self.aborted_reason is not None else None
+            "aborted_reason": self.aborted_reason if self.aborted_reason is not None else None,
+            "action": self.action.value
         }
 
         data_without_none_values = {k: v for k, v in data.items() if v is not None}
@@ -95,7 +100,8 @@ class OrderDynamoDTO:
             status=STATUS(order_data.get("status")),
             total_price=float(order_data["total_price"]),
             last_status_update_milliseconds=int(order_data.get("last_status_update_milliseconds")) if order_data.get("last_status_update_milliseconds") is not None else None,
-            aborted_reason=order_data.get("aborted_reason") if order_data.get("aborted_reason") is not None else None
+            aborted_reason=order_data.get("aborted_reason") if order_data.get("aborted_reason") is not None else None,
+            action=ACTION(order_data.get("action"))
         )
 
     def to_entity(self) -> Order:
@@ -112,8 +118,9 @@ class OrderDynamoDTO:
             status=self.status,
             total_price=self.total_price,
             last_status_update_milliseconds=self.last_status_update_milliseconds,
-            aborted_reason=self.aborted_reason
+            aborted_reason=self.aborted_reason,
+            action=self.action
         )
 
     def __eq__(self, other):
-        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.aborted_reason == other.aborted_reason
+        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.aborted_reason == other.aborted_reason and self.action == other.action

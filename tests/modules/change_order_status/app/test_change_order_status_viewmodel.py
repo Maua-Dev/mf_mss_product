@@ -1,6 +1,7 @@
 from src.modules.change_order_status.app.change_order_status_viewmodel import ChangeOrderViewmodel
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 
@@ -18,7 +19,8 @@ class Test_ChangeOrderStatusViewmodel:
             status=STATUS.READY,
             total_price=30.00,
             aborted_reason=None,
-            last_status_update_milliseconds=1692061896
+            last_status_update_milliseconds=1692061896,
+            action=ACTION.EDITED
         )
 
         order_viewmodel = ChangeOrderViewmodel(order=order).to_dict()
@@ -39,7 +41,8 @@ class Test_ChangeOrderStatusViewmodel:
                 "status": "READY",
                 "aborted_reason": None,
                 "total_price": 30.00,
-                "last_status_update": 1692061896
+                "last_status_update": 1692061896,
+                "action": "EDITED"
             },
             "message": "the order status was updated"
         }

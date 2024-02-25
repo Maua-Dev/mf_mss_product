@@ -4,6 +4,7 @@ from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.feedback import Feedback
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 
 
@@ -17,7 +18,7 @@ class Test_OrderRepositoryMock:
                 OrderProduct(product_name="Copo da Felicidade", product_id="4d1716c4-5e51-4d72-ba93-349e31201a22",
                              quantity=1)], creation_time_milliseconds=1692159350000, restaurant=RESTAURANT.SOUZA_DE_ABREU,
             status=STATUS.PENDING, total_price=22.00, aborted_reason=None,
-            last_status_update_milliseconds=1992159359900
+            last_status_update_milliseconds=1992159359900, action=ACTION.NEW
         )
 
         repo.create_order(order=order)

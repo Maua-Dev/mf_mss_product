@@ -3,6 +3,7 @@ from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.action_enum import ACTION
 
 
 class Test_AbortOrderViewmodel:
@@ -16,6 +17,7 @@ class Test_AbortOrderViewmodel:
             creation_time_milliseconds=2799764896,
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
             status=STATUS.PENDING,
+            action=ACTION.DELETED,
             total_price=30.00,
             aborted_reason="Desisti da compra!",
             last_status_update_milliseconds=2799764896
@@ -37,6 +39,7 @@ class Test_AbortOrderViewmodel:
                 "creation_time_milliseconds": 2799764896,
                 "restaurant": "SOUZA_DE_ABREU",
                 "status": "PENDING",
+                "action": "DELETED",
                 "aborted_reason": "Desisti da compra!",
                 "total_price": 30.00,
                 "last_status_update": 2799764896

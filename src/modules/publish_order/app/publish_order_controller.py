@@ -1,5 +1,6 @@
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.external_interfaces.dynamo_event_parser import DynamoEventParser
@@ -37,6 +38,7 @@ class PublishOrderController:
                           creation_time_milliseconds=int(order_dict["creation_time_milliseconds"]),
                           restaurant=RESTAURANT(order_dict["restaurant"]),
                           status=STATUS(order_dict["status"]),
+                          action=ACTION(order_dict["action"]),
                           total_price=float(order_dict["total_price"]),
                           last_status_update_milliseconds=int(order_dict.get("last_status_update_milliseconds")) if order_dict.get("last_status_update_milliseconds") is not None else None,
                           aborted_reason=order_dict.get("aborted_reason"))

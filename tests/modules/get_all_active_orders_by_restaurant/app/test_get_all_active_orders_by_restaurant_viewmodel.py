@@ -25,6 +25,7 @@ class Test_GetAllActiveOrdersByRestaurantViewmodel:
                                            'restaurant': 'CANTINA_DO_MOLEZA',
                                            'status': 'PREPARING',
                                            'total_price': 25.5,
+                                           'action': 'EDITED',
                                            'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9',
                                            'user_name':'Rodrigo Morales'}],
                     'message': 'the active orders were retrieved',
