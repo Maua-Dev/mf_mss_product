@@ -36,6 +36,7 @@ class Test_PublishOrderControler:
             ],
             'restaurant':'CANTINA_DO_MOLEZA',
             'status':'READY',
+            'action':'NEW',
             'total_price':'30.00',
             'user_name':'Lucas Milas',
             'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",

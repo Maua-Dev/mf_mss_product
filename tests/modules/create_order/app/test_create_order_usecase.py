@@ -1,6 +1,7 @@
 import pytest
 from src.modules.create_order.app.create_order_usecase import CreateOrderUsecase
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser
@@ -27,6 +28,7 @@ class Test_CreateOrderUsecase:
         assert repo_order.orders[-1].status == order.status
         assert repo_order.orders[-1].total_price == order.total_price
         assert repo_order.orders[-1].aborted_reason == order.aborted_reason
+        assert repo_order.orders[-1].action == ACTION.NEW
 
     def test_create_order_usecase_several_orders_to_test_total_price(self):
         repo_order = OrderRepositoryMock()

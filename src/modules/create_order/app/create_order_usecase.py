@@ -3,6 +3,7 @@ from typing import List
 import uuid
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
@@ -45,6 +46,6 @@ class CreateOrderUsecase:
         order = Order(order_id=order_id, user_name=user_name, user_id=user_id, products=products,
                       creation_time_milliseconds=creation_time_milliseconds, restaurant=restaurant, status=status,
                       total_price=total_price, aborted_reason=None,
-                      last_status_update_milliseconds=creation_time_milliseconds)
+                      last_status_update_milliseconds=creation_time_milliseconds, action= ACTION.NEW)
 
         return self.repo_order.create_order(order=order)

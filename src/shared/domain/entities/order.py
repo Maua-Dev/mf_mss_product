@@ -3,8 +3,9 @@ import re
 from typing import List, Optional
 from src.shared.domain.entities.order_product import OrderProduct
 
-from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterExcededMaximumValue
 
 
@@ -16,9 +17,10 @@ class Order(abc.ABC):
     creation_time_milliseconds: int
     restaurant: RESTAURANT
     status: STATUS
+    action: ACTION
     aborted_reason: Optional[str] = None
     total_price: float
-    last_status_update_milliseconds: int = None
+    last_status_update_milliseconds: Optional[int] = None
     ID_LENGTH = 36
     MIN_NAME_LENGTH = 2
 
@@ -30,9 +32,10 @@ class Order(abc.ABC):
                  creation_time_milliseconds: int,
                  restaurant: RESTAURANT,
                  status: STATUS,
+                 action: ACTION,
                  total_price: float,
                  last_status_update_milliseconds: int = None,
-                 aborted_reason: Optional[str] = None
+                 aborted_reason: Optional[str] = None,
                  ):
         
         if not Order.validate_id(id=order_id):
@@ -80,6 +83,10 @@ class Order(abc.ABC):
             raise EntityError("total_price")
         self.total_price = total_price
 
+        if type(action) != ACTION:
+            raise EntityError("action")
+        self.action = action
+
     @staticmethod
     def validate_id(id: str) -> bool:
         if type(id) != str:
@@ -111,7 +118,7 @@ class Order(abc.ABC):
         return True
     
     def __repr__(self):
-        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price}, last_status_update={self.last_status_update_milliseconds})"
+        return f"Order(order_id={self.order_id}, user_name={self.user_name}, user_id={self.user_id}, products={self.products}, creation_time_milliseconds={self.creation_time_milliseconds}, restaurant={self.restaurant}, status={self.status}, aborted_reason={self.aborted_reason}, total_price={self.total_price}, last_status_update={self.last_status_update_milliseconds}, action={self.action})"
     
     def __eq__(self, other):
-        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.aborted_reason == other.aborted_reason and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds
+        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.aborted_reason == other.aborted_reason and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.action == other.action

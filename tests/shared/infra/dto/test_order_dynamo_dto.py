@@ -1,6 +1,7 @@
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.infra.dto.order_dynamo_dto import OrderDynamoDTO
 
@@ -18,6 +19,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason=None
@@ -35,6 +37,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason=None
@@ -47,6 +50,7 @@ class Test_OrderDynamoDTO:
         assert order_dynamo_dto.creation_time_milliseconds == expected_order_dynamo_dto.creation_time_milliseconds
         assert order_dynamo_dto.restaurant == expected_order_dynamo_dto.restaurant
         assert order_dynamo_dto.status == expected_order_dynamo_dto.status
+        assert order_dynamo_dto.action == expected_order_dynamo_dto.action
         assert order_dynamo_dto.total_price == expected_order_dynamo_dto.total_price
         assert order_dynamo_dto.last_status_update_milliseconds == expected_order_dynamo_dto.last_status_update_milliseconds
         assert order_dynamo_dto.aborted_reason == expected_order_dynamo_dto.aborted_reason
@@ -63,6 +67,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -81,6 +86,7 @@ class Test_OrderDynamoDTO:
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
+            "action":"NEW",
             "total_price":50.0,
             "last_status_update_milliseconds":1992061596999,
             "aborted_reason":"Recusada",
@@ -100,6 +106,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -118,6 +125,7 @@ class Test_OrderDynamoDTO:
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
+            "action":"NEW",
             "total_price":50.0,
             "last_status_update_milliseconds":1992061596999,
             "aborted_reason":"Recusada",
@@ -137,6 +145,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
         )
@@ -154,6 +163,7 @@ class Test_OrderDynamoDTO:
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
+            "action":"NEW",
             "total_price":50.0,
             "last_status_update_milliseconds":1992061596999,
             "entity": "order"
@@ -172,6 +182,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             aborted_reason="Recusada"
         )
@@ -189,6 +200,7 @@ class Test_OrderDynamoDTO:
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
+            "action":"NEW",
             "total_price":50.0,
             "aborted_reason":"Recusada",
             "entity": "order"
@@ -207,6 +219,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -227,6 +240,7 @@ class Test_OrderDynamoDTO:
             "creation_time_milliseconds":1692061296000,
             "restaurant":"CANTINA_DO_MOLEZA",
             "status":"READY",
+            "action":"NEW",
             "total_price":50.0,
             "last_status_update_milliseconds":1992061596999,
             "aborted_reason":"Recusada",
@@ -250,6 +264,7 @@ class Test_OrderDynamoDTO:
                                 'creation_time_milliseconds': 1692061296000,
                                 "restaurant":"CANTINA_DO_MOLEZA",
                                 "status":"READY",
+                                "action":"NEW",
                                 "total_price":50.0,
                                 "last_status_update_milliseconds":1992061596999,
                                 "aborted_reason":"Recusada",
@@ -275,6 +290,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -297,6 +313,7 @@ class Test_OrderDynamoDTO:
                                 'creation_time_milliseconds': 1692061296000,
                                 "restaurant":"CANTINA_DO_MOLEZA",
                                 "status":"READY",
+                                "action":"NEW",
                                 "total_price":50.0,
                                 "last_status_update_milliseconds":1992061596999,
                                 "aborted_reason":"Recusada",
@@ -322,6 +339,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -344,6 +362,7 @@ class Test_OrderDynamoDTO:
                                 'creation_time_milliseconds': 1692061296000,
                                 "restaurant":"CANTINA_DO_MOLEZA",
                                 "status":"READY",
+                                "action":"NEW",
                                 "total_price":50.0,
                                 "last_status_update_milliseconds":1992061596999,
                                 'entity': 'order'},
@@ -368,6 +387,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
         )
@@ -389,6 +409,7 @@ class Test_OrderDynamoDTO:
                                 'creation_time_milliseconds': 1692061296000,
                                 "restaurant":"CANTINA_DO_MOLEZA",
                                 "status":"READY",
+                                "action":"NEW",
                                 "total_price":50.0,
                                 "aborted_reason":"Recusada",
                                 'entity': 'order'},
@@ -413,6 +434,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             aborted_reason="Recusada"
         )
@@ -427,6 +449,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -441,6 +464,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -456,6 +480,7 @@ class Test_OrderDynamoDTO:
         assert expected_order.creation_time_milliseconds == order.creation_time_milliseconds
         assert expected_order.restaurant == order.restaurant
         assert expected_order.status == order.status
+        assert expected_order.action == order.action
         assert expected_order.total_price == order.total_price
         assert expected_order.last_status_update_milliseconds == order.last_status_update_milliseconds
         assert expected_order.aborted_reason == order.aborted_reason 
@@ -475,6 +500,7 @@ class Test_OrderDynamoDTO:
                                 'creation_time_milliseconds': 1692061296000,
                                 "restaurant":"CANTINA_DO_MOLEZA",
                                 "status":"READY",
+                                "action":"NEW",
                                 "total_price":50.0,
                                 "last_status_update_milliseconds":1992061596999,
                                 "aborted_reason":"Recusada",
@@ -500,6 +526,7 @@ class Test_OrderDynamoDTO:
             creation_time_milliseconds=1692061296000,
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
             status=STATUS.READY,
+            action=ACTION.NEW,
             total_price=50.0,
             last_status_update_milliseconds=1992061596999,
             aborted_reason="Recusada"
@@ -515,6 +542,7 @@ class Test_OrderDynamoDTO:
         assert expected_order.creation_time_milliseconds == order.creation_time_milliseconds
         assert expected_order.restaurant == order.restaurant
         assert expected_order.status == order.status
+        assert expected_order.action == order.action
         assert expected_order.total_price == order.total_price
         assert expected_order.last_status_update_milliseconds == order.last_status_update_milliseconds
         assert expected_order.aborted_reason == order.aborted_reason 

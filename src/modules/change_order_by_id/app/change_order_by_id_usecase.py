@@ -3,6 +3,7 @@ from typing import Optional, List
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner, \
@@ -40,7 +41,8 @@ class ChangeOrderByIdUsecase:
             new_products=new_prods_list,
             new_status=None,
             new_total_price=None,
-            new_aborted_reason=None
+            new_aborted_reason=None, 
+            new_action=ACTION.EDITED
         )
 
         return updated_order

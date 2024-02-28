@@ -3,6 +3,7 @@ import pytest
 from src.modules.abort_order.app.abort_order_usecase import AbortOrderUsecase
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.user import User
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.errors.usecase_errors import UserNotOrderOwner, NoItemsFound, UnregisteredUser, OrderAlreadyPreparing
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
@@ -36,6 +37,7 @@ class Test_AbortOrderUseCase:
         assert type(response) == Order
         assert response.aborted_reason == "Minha aula já está prestes a começar! :( "
         assert response.last_status_update_milliseconds > response.creation_time_milliseconds
+        assert response.action == ACTION.DELETED
 
     def test_abort_order_by_owner(self):
         repo_order = OrderRepositoryMock()

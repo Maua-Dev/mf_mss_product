@@ -46,7 +46,8 @@ class Test_GetAllOrdersByRestaurantViewmodel:
                     "status": "REFUSED",
                     "aborted_reason": None,
                     "total_price": 35.5,
-                    "last_status_update": 1992061596999
+                    "last_status_update": 1992061596999,
+                    "action": "NEW"
                 }
 
             ],

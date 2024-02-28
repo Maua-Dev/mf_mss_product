@@ -68,6 +68,9 @@ class Test_PublishOrderPresenter:
                'restaurant':{
                   'S':'CANTINA_DO_MOLEZA'
                },
+               'action':{
+                  'S':'NEW'
+               },
                'total_price':{
                   'N':'30.00'
                },

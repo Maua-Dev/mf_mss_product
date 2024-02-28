@@ -4,6 +4,7 @@ from typing import List, Optional
 
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.action_enum import ACTION
 
 
 class OrderProductViewmodel:
@@ -29,6 +30,7 @@ class OrderViewmodel:
     creation_time_milliseconds: int
     restaurant: RESTAURANT
     status: STATUS
+    action: ACTION
     aborted_reason: Optional[str] = None
     total_price: float
 
@@ -42,6 +44,7 @@ class OrderViewmodel:
         self.status = order.status
         self.aborted_reason = order.aborted_reason
         self.total_price = order.total_price
+        self.action = order.action
 
     def to_dict(self) -> dict:
         return {
@@ -53,7 +56,8 @@ class OrderViewmodel:
             "restaurant": self.restaurant.value,
             "status": self.status.value,
             "aborted_reason": self.aborted_reason,
-            "total_price": self.total_price
+            "total_price": self.total_price,
+            "action": self.action.value
         }
 
 

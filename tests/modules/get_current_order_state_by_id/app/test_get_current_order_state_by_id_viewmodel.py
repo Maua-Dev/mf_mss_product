@@ -14,7 +14,8 @@ class Test_GetCurrentOrderStateViewmodel:
             "order": {
                 "order_id": order.order_id,
                 "order_status": order.status.value,
-                "aborted_reason": None
+                "aborted_reason": None,
+                "action": order.action.value
             },
             "message": "the order status object was retrieved"
         }
@@ -32,7 +33,8 @@ class Test_GetCurrentOrderStateViewmodel:
             "order": {
                 "order_id": order.order_id,
                 "order_status": STATUS.REFUSED.value,
-                "aborted_reason": order.aborted_reason
+                "aborted_reason": order.aborted_reason,
+                "action": order.action.value
             },
             "message": "the order status object was retrieved"
         }

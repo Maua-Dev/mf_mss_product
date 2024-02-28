@@ -9,6 +9,7 @@ from src.shared.domain.entities.feedback import Feedback
 from src.shared.environments import Environments
 from src.shared.domain.entities.order import Order
 from src.shared.domain.enums.status_enum import STATUS
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.dto.feedback_dynamo_dto import FeedbackDynamoDTO
@@ -131,11 +132,11 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return orders
 
-    def update_order(self, order_id: str,
-                     new_products: Optional[List[OrderProduct]] = None,
+    def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
                      new_total_price: Optional[float] = None,
-                     new_aborted_reason: Optional[str] = None):
+                     new_aborted_reason: Optional[str] = None,
+                     new_action: Optional[ACTION] = None) -> Optional[Order]:
 
         order_to_update = self.get_order_by_id(order_id=order_id)
 
@@ -144,9 +145,11 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         update_dict = {
             "products": new_products,
-            "status": new_status.value,
+            "status": new_status.value if new_status is not None else None,
             "total_price": Decimal(str(new_total_price)) if new_total_price is not None else None,
-            "aborted_reason": new_aborted_reason}
+            "aborted_reason": new_aborted_reason,
+            "action": new_action.value if new_action is not None else None
+        }
 
         update_dict_without_none_values = {k: v for k, v in update_dict.items() if v is not None}
 
@@ -284,7 +287,8 @@ class OrderRepositoryDynamo(IOrderRepository):
             "status": order.status.value,
             "aborted_reason": order.aborted_reason,
             "total_price": order.total_price,
-            "last_status_update": order.last_status_update_milliseconds
+            "last_status_update": order.last_status_update_milliseconds,
+            "action": order.action.value
         }
 
         response = apigw_management_api.post_to_connection(ConnectionId=connection_id, Data=json.dumps(data))

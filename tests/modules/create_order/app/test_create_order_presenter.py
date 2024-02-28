@@ -73,6 +73,7 @@ class Test_CreateOrderPresenter:
         assert json.loads(response["body"])["order"]["restaurant"] == "SOUZA_DE_ABREU"
         assert json.loads(response["body"])["order"]["status"] == "PENDING"
         assert json.loads(response["body"])["order"]["total_price"] == 38.00
+        assert json.loads(response["body"])["order"]["action"] == "NEW"
 
     def test_create_order_presenter_products_none(self):
         repo_product = ProductRepositoryMock()

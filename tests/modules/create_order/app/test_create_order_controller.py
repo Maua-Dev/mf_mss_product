@@ -43,6 +43,7 @@ class Test_CreateOrderController:
         assert response.body["order"]["restaurant"] == "SOUZA_DE_ABREU"
         assert response.body["order"]["status"] == "PENDING"
         assert response.body["order"]["total_price"] == 19.00
+        assert response.body["order"]["action"] == "NEW"
 
     @freeze_time("2023-08-30")
     def test_create_order_controller_several_orders(self):
@@ -93,6 +94,7 @@ class Test_CreateOrderController:
         assert response.body["order"]["creation_time_milliseconds"] == int(datetime.datetime.now().timestamp() * 1000)
         assert response.body["order"]["status"] == "PENDING"
         assert response.body["order"]["total_price"] == 66.00
+        assert response.body["order"]["action"] == "NEW"
 
     def test_create_order_controller_requester_user_none(self):
         repo_order = OrderRepositoryMock()
