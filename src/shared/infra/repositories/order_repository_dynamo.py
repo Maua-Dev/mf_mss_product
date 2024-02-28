@@ -145,10 +145,10 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         update_dict = {
             "products": new_products,
-            "status": new_status.value,
+            "status": new_status.value if new_status is not None else None,
             "total_price": Decimal(str(new_total_price)) if new_total_price is not None else None,
             "aborted_reason": new_aborted_reason,
-            "action": new_action.value
+            "action": new_action.value if new_action is not None else None
         }
 
         update_dict_without_none_values = {k: v for k, v in update_dict.items() if v is not None}
@@ -215,6 +215,9 @@ class OrderRepositoryDynamo(IOrderRepository):
     def abort_connection(self, connection_id: str) -> Connection:
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
+
+        if len(resp['Items']) == 0:
+            return None
 
         restaurant = resp['Items'][0].get('PK')
 

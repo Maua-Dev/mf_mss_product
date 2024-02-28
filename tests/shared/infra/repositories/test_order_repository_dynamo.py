@@ -1,4 +1,5 @@
 import pytest
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.infra.repositories.order_repository_dynamo import OrderRepositoryDynamo
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
@@ -48,9 +49,10 @@ class Test_OrderRepositoryDynamo:
 
         order = repo_mock.orders[0]
 
-        update = repo_dynamo.update_order(order_id=order.order_id, new_status=STATUS.CANCELLED, new_aborted_reason="Minha aula começou")
+        update = repo_dynamo.update_order(order_id=order.order_id, new_status=STATUS.CANCELLED, new_action=ACTION.DELETED, new_aborted_reason="Minha aula começou")
 
         assert update.status.value == "CANCELLED"
+        assert update.action.value == "DELETED"
         assert update.aborted_reason == "Minha aula começou"
 
     @pytest.mark.skip("Can't test dynamo in Github")
