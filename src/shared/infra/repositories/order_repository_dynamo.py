@@ -213,6 +213,9 @@ class OrderRepositoryDynamo(IOrderRepository):
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
+        if len(resp['Items']) == 0:
+            return None
+
         restaurant = resp['Items'][0].get('PK')
 
         abort_connection = self.dynamo.delete_item(
