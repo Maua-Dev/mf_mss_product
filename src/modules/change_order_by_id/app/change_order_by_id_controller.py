@@ -13,7 +13,7 @@ from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 class ChangeOrderByIdController:
     def __init__(self, usecase: ChangeOrderByIdUsecase):
-        self.usecase = usecase
+        self.ChangeOrderByIdUsecase = usecase
 
     def __call__(self, request: IRequest) -> IResponse:
         try:
@@ -30,24 +30,18 @@ class ChangeOrderByIdController:
             products_list = request.data.get("new_products")
 
             new_products_list = []
+            for product in products_list:
+                product_name = product["product_name"]
+                product_id = product["product_id"]
+                quantity = product["quantity"]
+                observation = product.get("observation")
 
-            if products_list is not None:
+                new_products_list.append(OrderProduct(product_name, product_id, quantity, observation))
 
-                for product in products_list:
-                    prod_name = product.get("product_name")
-                    prod_id = product.get("product_id")
-                    quantity = product.get("quantity")
-
-                    new_products_list.append(OrderProduct(
-                        product_name=prod_name,
-                        product_id=prod_id,
-                        quantity=quantity
-                    ))
-
-            order = self.usecase(
-                order_id=order_id,
-                user_id=requester_user.user_id,
-                new_prods_list=new_products_list if products_list is not None else None
+            order = self.ChangeOrderByIdUsecase(
+                order_id=str(order_id),
+                user_id=str(requester_user.user_id),
+                new_prods_list=list(new_products_list) if products_list is not None else None
             )
             viewmodel = ChangeOrderByIdViewmodel(order)
 

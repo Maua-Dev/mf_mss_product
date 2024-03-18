@@ -9,47 +9,26 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_presenter_sockets_tests
 
 
-def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_user_admin: bool = False):
-    order_repo = OrderRepositoryMock()
-    user_repo = UserRepositoryMock()
-    usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
-
-    user = user_repo.users_list[0]
-    order = order_repo.orders[0]
-    order.status = STATUS.PENDING
-
-    if is_user_admin:
-        user.role = ROLE.ADMIN
-    else:
-        user.role = ROLE.USER
-
-    if order_belongs_to_user:
-        order.user_id = user.user_id
-    else:
-        order.user_id = user_repo.users_list[-2]
-
-    return usecase, order, user
-
-
 class Test_ChangeOrderByIdPresenter:
 
     def test_change_order_products(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        user_repo = UserRepositoryMock().users_list
 
         event = get_event_for_presenter_sockets_tests(
             claims={
-                "sub": user.user_id,
-                "name": user.name,
-                "email": user.email,
+                "sub": user_repo[2].user_id,
+                "name": user_repo[2].name,
+                "email": user_repo[2].email,
                 "custom:isMaua": True
             },
             body={
-                "order_id": order.order_id,
+                "order_id": "8309d903-55ce-4299-9c70-13fa2e03bcdc",
                 "new_products": [
-                    {
-                        "product_name": "Pamonha",
-                        "product_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                        "quantity": 12}
+                {
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5,
+                    "observation": "Bem observado!"}
                 ]
             }
         )
@@ -60,26 +39,31 @@ class Test_ChangeOrderByIdPresenter:
         assert json.loads(response["body"])["message"] == "the order was updated"
         assert json.loads(response["body"])["order"]["products"] == [
                 {
-                    "product_name": "Pamonha",
-                    "product_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    "quantity": 12,
-                    "observation": None
-                }
-            ]
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5,
+                    "observation": "Bem observado!"}
+                ]
 
     def test_order_does_not_exist(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        user_repo = UserRepositoryMock().users_list
 
         event = get_event_for_presenter_sockets_tests(
             claims={
-                "sub": user.user_id,
-                "name": user.name,
-                "email": user.email,
+                "sub": user_repo[2].user_id,
+                "name": user_repo[2].name,
+                "email": user_repo[2].email,
                 "custom:isMaua": True
             },
             body={
                 "order_id": "um id que não existe",
-                "new_products": []
+                "new_products": [
+                {
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5,
+                    "observation": "Bem observado!"}
+                ]
             }
         )
 
@@ -88,21 +72,47 @@ class Test_ChangeOrderByIdPresenter:
         assert response['statusCode'] == 404
 
     def test_user_does_not_exist(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        user_repo = UserRepositoryMock().users_list
 
         event = get_event_for_presenter_sockets_tests(
             claims={
                 "sub": "um id inexistente",
-                "name": user.name,
-                "email": user.email,
+                "name": user_repo[2].name,
+                "email": user_repo[2].email,
                 "custom:isMaua": True
             },
             body={
-                "order_id": order.order_id,
-                "new_products": []
+                "order_id": "8309d903-55ce-4299-9c70-13fa2e03bcdc",
+                "new_products": [
+                {
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5,
+                    "observation": "Bem observado!"}
+                ]
             }
         )
 
         response = lambda_handler(event, None)
 
         assert response['statusCode'] == 400
+
+    def test_products_list_cant_be_empty(self):
+        user_repo = UserRepositoryMock().users_list
+
+        event = get_event_for_presenter_sockets_tests(
+            claims={
+                "sub": user_repo[2].user_id,
+                "name": user_repo[2].name,
+                "email": user_repo[2].email,
+                "custom:isMaua": True
+            },
+            body={
+                "order_id": "8309d903-55ce-4299-9c70-13fa2e03bcdc",
+                "new_products": []
+            }
+        )
+
+        response = lambda_handler(event, None)
+
+        assert response['statusCode'] == 403

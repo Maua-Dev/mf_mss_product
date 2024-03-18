@@ -15,8 +15,7 @@ class ChangeOrderByIdUsecase:
         self.repo_order = repo_order
         self.repo_user = repo_user
 
-    def __call__(self, order_id: str, user_id: str,
-                 new_prods_list: Optional[List[OrderProduct]] = None):
+    def __call__(self, order_id: str, user_id: str, new_prods_list: Optional[List[OrderProduct]] = None):
         order = self.repo_order.get_order_by_id(order_id=order_id)
         user = self.repo_user.get_user_by_id(user_id=user_id)
 

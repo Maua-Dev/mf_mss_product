@@ -9,115 +9,100 @@ from src.shared.domain.enums.status_enum import STATUS
 from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserNotOrderOwner, \
     OrderCantBeUpdated, ProducutsListCantBeEmpty
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
+from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
-
-
-def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_user_admin: bool = False):
-    order_repo = OrderRepositoryMock()
-    user_repo = UserRepositoryMock()
-    usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
-
-    user = user_repo.users_list[-1]
-    order = order_repo.orders[-1]
-    order.status = STATUS.PENDING
-    order.products = [OrderProduct("Pamonha", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 12, None)]
-
-
-    if is_user_admin:
-        user.role = ROLE.ADMIN
-    else:
-        user.role = ROLE.USER
-
-    if order_belongs_to_user:
-        order.user_id = user.user_id
-    else:
-        order.user_id = user_repo.users_list[-2]
-
-    return usecase, order, user
 
 
 class Test_ChangeOrderByIdUsecase:
     def test_change_order_products(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
-        order.observation = "Uma bela de uma observação, ein"
+        products_repo = ProductRepositoryMock().products
 
-        response: Order = usecase(
-            order_id=order.order_id,
-            user_id=user.user_id,
-            new_prods_list=[OrderProduct("Pamonha", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 12)]
-        )
+        order = usecase(order_id="8309d903-55ce-4299-9c70-13fa2e03bcdc", user_id=user_repo.users_list[2].user_id, new_prods_list=[OrderProduct(product_name=products_repo[167].name, product_id=products_repo[167].product_id, quantity=3, observation="Uma bela de uma observação, ein")])
 
-        assert len(response.products) == 1
-        assert response.action == ACTION.EDITED
+        assert order_repo.orders[9].products == order.products
+        assert order.action == ACTION.EDITED
 
     def test_order_doesnt_exist(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
         with pytest.raises(NoItemsFound):
             response: Order = usecase(
                 order_id="Um id que não existe",
-                user_id=user.user_id,
+                user_id=user_repo.users_list[2].user_id,
             )
 
     def test_user_doesnt_exist(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
         with pytest.raises(UnregisteredUser):
             response: Order = usecase(
-                order_id=order.order_id,
+                order_id="8309d903-55ce-4299-9c70-13fa2e03bcdc",
                 user_id="Um id que não existe",
             )
 
     def test_admin_change_order_whether_is_owner_or_not(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo(order_belongs_to_user=False, is_user_admin=True)
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
         response: Order = usecase(
-            order_id=order.order_id,
-            user_id=user.user_id,
+            order_id="8309d903-55ce-4299-9c70-13fa2e03bcdc",
+            user_id=user_repo.users_list[0].user_id,
         )
 
-        assert response.user_id != user.user_id
-        assert user.role == ROLE.ADMIN
+        assert response.user_id != user_repo.users_list[0].user_id
+        assert user_repo.users_list[0].role == ROLE.ADMIN
 
     def test_common_user_cant_change_order_if_its_not_the_owner(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo(order_belongs_to_user=False, is_user_admin=False)
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
         with pytest.raises(UserNotOrderOwner):
             response: Order = usecase(
-                order_id=order.order_id,
-                user_id=user.user_id,
+                order_id="8309d903-55ce-4299-9c70-13fa2e03bcdc",
+                user_id=user_repo.users_list[4].user_id,
             )
 
     def test_order_cant_be_updated_if_is_not_pending(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
-
-        order.status = STATUS.PREPARING
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
         with pytest.raises(OrderCantBeUpdated):
             response: Order = usecase(
-                order_id=order.order_id,
-                user_id=user.user_id,
+                order_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53",
+                user_id=user_repo.users_list[4].user_id,
             )
 
     def test_when_updating_list_it_cant_be_empty(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
         with pytest.raises(ProducutsListCantBeEmpty):
             response: Order = usecase(
-                order_id=order.order_id,
-                user_id=user.user_id,
+                order_id="8309d903-55ce-4299-9c70-13fa2e03bcdc",
+                user_id=user_repo.users_list[2].user_id,
                 new_prods_list=[]
             )
 
     def test_order_can_be_updated_if_user_is_admin(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo(is_user_admin=True)
-
-        order.status = STATUS.PREPARING
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
 
         response: Order = usecase(
-                order_id=order.order_id,
-                user_id=user.user_id,
+                order_id="d4c63753-5119-4990-b427-926798499924",
+                user_id=user_repo.users_list[0].user_id,
             )
 
-        assert order.status == STATUS.PREPARING
+        assert response.status == STATUS.PREPARING

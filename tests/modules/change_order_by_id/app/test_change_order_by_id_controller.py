@@ -8,46 +8,26 @@ from src.shared.infra.repositories.order_repository_mock import OrderRepositoryM
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
-def get_usecase_order_repo_and_user_repo(order_belongs_to_user: bool = True, is_user_admin: bool = False):
-    order_repo = OrderRepositoryMock()
-    user_repo = UserRepositoryMock()
-    usecase = ChangeOrderByIdUsecase(repo_order=order_repo, repo_user=user_repo)
-
-    user = user_repo.users_list[-1]
-    order = order_repo.orders[-1]
-    order.status = STATUS.PENDING
-
-    if is_user_admin:
-        user.role = ROLE.ADMIN
-    else:
-        user.role = ROLE.USER
-
-    if order_belongs_to_user:
-        order.user_id = user.user_id
-    else:
-        order.user_id = user_repo.users_list[-2]
-
-    return usecase, order, user
-
-
 class Test_ChangeOrderByIdController:
     def test_update_products_list(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(order_repo, user_repo)
         controller = ChangeOrderByIdController(usecase)
 
         request = HttpRequest(body={
             "requester_user": {
-                "sub": user.user_id,
-                "name": user.name,
-                "email": user.email,
+                "sub": user_repo.users_list[2].user_id,
+                "name": user_repo.users_list[2].name,
+                "email": user_repo.users_list[2].email,
                 "custom:isMaua": True
             },
-            "order_id": order.order_id,
+            "order_id": "8309d903-55ce-4299-9c70-13fa2e03bcdc",
             "new_products": [
                 {
-                    "product_name": "Pamonha",
-                    "product_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    "quantity": 12}
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5}
             ]
         })
 
@@ -57,12 +37,19 @@ class Test_ChangeOrderByIdController:
         assert response.body["message"] == "the order was updated"
 
     def test_request_user_is_missing(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo()
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(order_repo, user_repo)
         controller = ChangeOrderByIdController(usecase)
 
         request = HttpRequest(body={
-            "order_id": order.order_id,
-            "new_products": []
+            "order_id": "8309d903-55ce-4299-9c70-13fa2e03bcdc",
+            "new_products": [
+                {
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5}
+            ]
         })
 
         response = controller(request)
@@ -70,18 +57,25 @@ class Test_ChangeOrderByIdController:
         assert response.status_code == 400
 
     def test_non_owner_user_cant_change_order(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo(order_belongs_to_user=False, is_user_admin=False)
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(order_repo, user_repo)
         controller = ChangeOrderByIdController(usecase)
 
         request = HttpRequest(body={
             "requester_user": {
-                "sub": user.user_id,
-                "name": user.name,
-                "email": user.email,
+                "sub": user_repo.users_list[4].user_id,
+                "name": user_repo.users_list[4].name,
+                "email": user_repo.users_list[4].email,
                 "custom:isMaua": True
             },
-            "order_id": order.order_id,
-            "new_products": []
+            "order_id": "8309d903-55ce-4299-9c70-13fa2e03bcdc",
+            "new_products": [
+                {
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5}
+            ]
         })
 
         response = controller(request)
@@ -89,20 +83,48 @@ class Test_ChangeOrderByIdController:
         assert response.status_code == 403
 
     def test_order_does_not_exist(self):
-        usecase, order, user = get_usecase_order_repo_and_user_repo(order_belongs_to_user=False, is_user_admin=False)
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(order_repo, user_repo)
         controller = ChangeOrderByIdController(usecase)
 
         request = HttpRequest(body={
             "requester_user": {
-                "sub": user.user_id,
-                "name": user.name,
-                "email": user.email,
+                "sub": user_repo.users_list[4].user_id,
+                "name": user_repo.users_list[4].name,
+                "email": user_repo.users_list[4].email,
                 "custom:isMaua": True
             },
             "order_id": "um id que não existe",
-            "new_products": []
+            "new_products": [
+                {
+                    "product_name": "Cimento (400mL)",
+                    "product_id": "4081a83a-516f-442c-85e2-b54bfb192e55",
+                    "quantity": 5}
+            ]
         })
 
         response = controller(request)
 
         assert response.status_code == 404
+
+    def test_products_list_cant_be_empty(self):
+        order_repo = OrderRepositoryMock()
+        user_repo = UserRepositoryMock()
+        usecase = ChangeOrderByIdUsecase(order_repo, user_repo)
+        controller = ChangeOrderByIdController(usecase)
+
+        request = HttpRequest(body={
+            "requester_user": {
+                "sub": user_repo.users_list[2].user_id,
+                "name": user_repo.users_list[2].name,
+                "email": user_repo.users_list[2].email,
+                "custom:isMaua": True
+            },
+            "order_id": "8309d903-55ce-4299-9c70-13fa2e03bcdc",
+            "new_products": []
+        })
+
+        response = controller(request)
+
+        assert response.status_code == 403
