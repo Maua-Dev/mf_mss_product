@@ -4,7 +4,7 @@ from decimal import Decimal
 import uuid
 import boto3
 from botocore.config import Config
-
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
@@ -39,8 +39,8 @@ class ProductRepositoryDynamo(IProductRepository):
                                        region=Environments.get_envs().region,
                                        partition_key=Environments.get_envs().dynamo_partition_key_product,
                                        sort_key=Environments.get_envs().dynamo_sort_key_product,
-                                       gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key,
-                                       gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key)
+                                       gsi_partition_key=Environments.get_envs().dynamo_gsi_partition_key_product,
+                                       gsi_sort_key=Environments.get_envs().dynamo_gsi_sort_key_product)
 
         self.S3_BUCKET_NAME = Environments.get_envs().s3_bucket_name
 
@@ -70,12 +70,13 @@ class ProductRepositoryDynamo(IProductRepository):
 
         try:
             for item in response["Items"]:
-                restaurant = RESTAURANT[item["restaurant"]]
-                if restaurant not in products.keys():
-                    products[restaurant] = list()
-
-                products[restaurant].append(
-                    ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
+                if 'product#' in item[self.dynamo.sort_key]:
+                    restaurant = RESTAURANT[item["restaurant"]]
+                    if restaurant not in products.keys():
+                        products[restaurant] = list()
+    
+                    products[restaurant].append(
+                        ProductDynamoDTO.from_dynamo(product_data=item).to_entity())
 
             return products
         except BaseException as err:
@@ -159,7 +160,10 @@ class ProductRepositoryDynamo(IProductRepository):
 
         key = f"{product_id}/product-{time_created}.jpeg"
         return key
-
+        
+    def batch_get_product(self, products: List[OrderProduct], restaurant: RESTAURANT) -> List[Product]:
+        pass
+        
     def request_upload_product_photo(self, product_id: str, user_id: str) -> dict:
         my_config = Config(
             region_name=Environments.get_envs().region,
@@ -205,3 +209,17 @@ class ProductRepositoryDynamo(IProductRepository):
             "url": presigned_url,
             "metadata": meta
         }
+    
+    def batch_get_product(self, products: List[OrderProduct], restaurant: RESTAURANT) -> List[Product]:
+        get_product_list = list()
+
+        for product in products:
+            keys = [{self.dynamo.partition_key: self.partition_key_format(restaurant), self.dynamo.sort_key: self.sort_key_format(product.product_id)}]
+
+            resp = self.dynamo.batch_get_items(keys=keys)
+
+            for item in resp.get("Responses", { }).get(self.dynamo.dynamo_table.name,[]):
+                if item.get("entity") == "product":
+                    get_product_list.append(ProductDynamoDTO.from_dynamo(item).to_entity())
+
+        return get_product_list

@@ -10,6 +10,9 @@ class EntityParameterExcededMaximumValue(BaseError):
     def __init__(self, field: str, maximum_value: str):
         super().__init__(f'Field {field} must be equal or less than {maximum_value}')
 
+class EntityParameterHaveMinValue(BaseError):
+    def __init__(self, field: str, minimum_value: str):
+        super().__init__(f'Field {field} must be equal or more than {minimum_value}')
 
 class EntityParameterTypeError(EntityError):
     def __init__(self, message: str):

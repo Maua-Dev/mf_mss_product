@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, List
+from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
@@ -33,5 +34,7 @@ class IProductRepository(ABC):
         The method above gives the user a momentary permission to upload a product photo file in our bucket.
         """
         pass
-    
-    
+
+    @abstractmethod
+    def batch_get_product(self, products: List[OrderProduct], restaurant: RESTAURANT) -> List[Product]:
+        pass

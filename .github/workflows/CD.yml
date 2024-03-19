@@ -58,3 +58,6 @@ jobs:
               MSS_NAME: ${{ github.event.repository.name }}
               S3_ASSETS_CDN: ${{ vars.S3_ASSETS_CDN }}
               AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV: ${{ secrets.AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV }}
+              FROM_EMAIL: ${{ vars.FROM_EMAIL }}
+              HIDDEN_COPY: ${{ vars.HIDDEN_COPY }}
+              REPLY_TO_EMAIL: ${{ vars.REPLY_TO_EMAIL }}

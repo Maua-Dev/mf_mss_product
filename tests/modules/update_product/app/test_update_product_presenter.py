@@ -2,7 +2,7 @@ import datetime
 import json
 from src.modules.update_product.app.update_product_presenter import lambda_handler
 from src.shared.domain.entities.product import Product
-from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter
+from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter_no_socket
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -12,7 +12,7 @@ user = user_repo.users_list[0]
 
 class Test_UpdateProductPresenter:
     def test_update_product_presenter(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body=
             {
 
@@ -47,7 +47,7 @@ class Test_UpdateProductPresenter:
         assert json.loads(response["body"])['message'] == "the product was updated"
 
     def test_update_product_presenter_product_id_is_missing(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body=
             {
                 "restaurant": "SOUZA_DE_ABREU",
@@ -66,7 +66,7 @@ class Test_UpdateProductPresenter:
         assert json.loads(response["body"]) == "Field product_id is missing"
 
     def test_update_product_presenter_restaurant_is_missing(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body=
             {
                 "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
@@ -85,7 +85,7 @@ class Test_UpdateProductPresenter:
         assert json.loads(response["body"]) == "Field restaurant is missing"
 
     def test_update_product_presenter_restaurant_not_found(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body=
             {
                 "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
@@ -103,7 +103,7 @@ class Test_UpdateProductPresenter:
         assert json.loads(response["body"]) == "No items found for restaurant"
 
     def test_update_product_presenter_meal_type_not_found(self):
-        event = get_event_for_test_presenter(body=
+        event = get_event_for_test_presenter_no_socket(body=
         {
             "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
             "restaurant": "SOUZA_DE_ABREU",
@@ -136,7 +136,7 @@ class Test_UpdateProductPresenter:
             last_update=product_repo.products[3].last_update
         )
 
-        event = get_event_for_test_presenter({
+        event = get_event_for_test_presenter_no_socket({
             "product_id": product_old_values.product_id,
             "restaurant": product_old_values.restaurant.value,
             "new_name": "Nome Atualizado",
@@ -162,7 +162,7 @@ class Test_UpdateProductPresenter:
 
 
     def test_update_product_with_negative_prepare_time(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",
                 "restaurant": "SOUZA_DE_ABREU",
@@ -189,7 +189,7 @@ class Test_UpdateProductPresenter:
             last_update=product_repo.products[4].last_update
         )
 
-        event = get_event_for_test_presenter({
+        event = get_event_for_test_presenter_no_socket({
             "product_id": product_old_values.product_id,
             "restaurant": product_old_values.restaurant.value,
             "new_name": "Nome Atualizado",

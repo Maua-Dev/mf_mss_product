@@ -5,8 +5,11 @@ from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 import pytest
+from freezegun import freeze_time
 
 class Test_RequestUploadProductPhotoUsecase:
+    
+    @freeze_time("2023-08-24")
     def test_request_upload_product_photo(self):
         repo_product = ProductRepositoryMock()
         repo_user = UserRepositoryMock()

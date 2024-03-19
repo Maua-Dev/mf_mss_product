@@ -1,6 +1,7 @@
 import datetime
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.domain.enums.meal_type_enum import MEAL_TYPE
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
@@ -100,3 +101,14 @@ class Test_ProductRepositoryMock():
         update_product = repo_mock.update_product(product_id="00000000-0000-0000-0000-000000000000", restaurant=RESTAURANT.SOUZA_DE_ABREU, new_available=True, new_price=15.0, new_name='Nome Atualizado', new_description='Descrição Atualizada', new_prepare_time=20, new_meal_type=MEAL_TYPE.DRINKS, new_photo='new_photo', new_last_update=int(datetime.datetime.now().timestamp()*1000))
 
         assert update_product is None
+
+    def test_batch_get_product(self):
+        repo_product = ProductRepositoryMock()
+        repo_order = OrderRepositoryMock()
+
+        batch_get_product = repo_product.batch_get_product(products=repo_order.orders[10].products, restaurant=repo_order.orders[10].restaurant)
+
+        assert type(batch_get_product) == list
+        assert repo_product.products[71] == batch_get_product[0]
+        assert repo_product.products[67] == batch_get_product[1]
+        assert repo_product.products[33] == batch_get_product[2]

@@ -21,3 +21,6 @@ class IUserRepository(ABC):
     @abstractmethod
     def delete_user_by_id(self, user_id: str) -> Optional[User]:
         pass
+
+    def get_average_feedback_by_restaurant(self):
+        pass
