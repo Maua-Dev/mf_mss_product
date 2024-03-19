@@ -70,19 +70,19 @@ class WebSocketStack(Construct):
             )
         )
 
-        self.manage_connection_function.add_permission(
-            "AllowConnectionExecutionFromApiGateway",
-            principal=ServicePrincipal("apigateway.amazonaws.com"),
-            source_arn=f"arn:aws:execute-api:{self.aws_region}:{self.account}:{self.web_socket.api_id}/*/$connect",
-            action="lambda:InvokeFunction"
-        )
+        # self.manage_connection_function.add_permission(
+        #     "AllowConnectionExecutionFromApiGateway",
+        #     principal=ServicePrincipal("apigateway.amazonaws.com"),
+        #     source_arn=f"arn:aws:execute-api:{self.aws_region}:{self.account}:{self.web_socket.api_id}/*/$connect",
+        #     action="lambda:InvokeFunction"
+        # )
 
-        self.manage_connection_function.add_permission(
-            "AllowDisconnectionExecutionFromApiGateway",
-            principal=ServicePrincipal("apigateway.amazonaws.com"),
-            source_arn=f"arn:aws:execute-api:{self.aws_region}:{self.account}:{self.web_socket.api_id}/*/$disconnect",
-            action="lambda:InvokeFunction"
-        )
+        # self.manage_connection_function.add_permission(
+        #     "AllowDisconnectionExecutionFromApiGateway",
+        #     principal=ServicePrincipal("apigateway.amazonaws.com"),
+        #     source_arn=f"arn:aws:execute-api:{self.aws_region}:{self.account}:{self.web_socket.api_id}/*/$disconnect",
+        #     action="lambda:InvokeFunction"
+        # )
 
         self.web_socket_stage = WebSocketStage(
             self, f"MauaFood_WebSocketStage_{self.stage}",
