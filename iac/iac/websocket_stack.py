@@ -5,6 +5,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+from aws_cdk.aws_iam import ServicePrincipal
 from aws_cdk.aws_apigatewayv2_alpha import WebSocketApi, WebSocketStage, WebSocketRouteOptions
 from aws_cdk.aws_lambda import LayerVersion
 from aws_cdk.aws_apigatewayv2_integrations_alpha import WebSocketLambdaIntegration
@@ -20,6 +21,7 @@ class WebSocketStack(Construct):
         super().__init__(scope, construct_id)
         self.github_ref_name = os.environ.get("GITHUB_REF_NAME")
         self.aws_region = os.environ.get("AWS_REGION")
+        self.account = os.environ.get("AWS_ACCOUNT_ID")
         self.stage = 'prod'
         self.dev_auth_system_userpool_arn = os.environ.get(
             "AUTH_DEV_SYSTEM_USERPOOL_ARN_DEV")
@@ -34,6 +36,7 @@ class WebSocketStack(Construct):
             environment=environment_variables,
             timeout=Duration.seconds(15),
         )
+
 
         auth_lambda = lambda_.Function(
             self, "AuthFunction",
@@ -65,6 +68,20 @@ class WebSocketStack(Construct):
             disconnect_route_options=WebSocketRouteOptions(
                 integration=self.manage_connection_function_integration,
             )
+        )
+
+        self.manage_connection_function.add_permission(
+            "AllowConnectionExecutionFromApiGateway",
+            principal=ServicePrincipal("apigateway.amazonaws.com"),
+            source_arn=f"arn:aws:execute-api:{self.aws_region}:{self.account}:{self.web_socket.api_id}/*/$connect",
+            action="lambda:InvokeFunction"
+        )
+
+        self.manage_connection_function.add_permission(
+            "AllowDisconnectionExecutionFromApiGateway",
+            principal=ServicePrincipal("apigateway.amazonaws.com"),
+            source_arn=f"arn:aws:execute-api:{self.aws_region}:{self.account}:{self.web_socket.api_id}/*/$disconnect",
+            action="lambda:InvokeFunction"
         )
 
         self.web_socket_stage = WebSocketStage(
