@@ -4,7 +4,7 @@ from src.shared.domain.entities.user import User
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed
+from src.shared.helpers.errors.usecase_errors import UnregisteredUser, UserNotAllowed, OrderAlreadyHaveFeedback
 
 class CreateFeedbackUsecase:
     def __init__(self, repo_feedback: IOrderRepository, repo_user: IUserRepository):
@@ -17,6 +17,11 @@ class CreateFeedbackUsecase:
 
         if user is None:
             raise UnregisteredUser()
+
+        feedback = self.repo_feedback.get_feedback_by_order_id(order_id)
+
+        if feedback is not None:
+            raise OrderAlreadyHaveFeedback()
 
         feedback = Feedback(order_id=order_id, user_id=user_id, restaurant=restaurant, value=value)
 
