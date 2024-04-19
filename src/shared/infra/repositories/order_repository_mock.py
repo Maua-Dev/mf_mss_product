@@ -310,3 +310,9 @@ class OrderRepositoryMock(IOrderRepository):
             return 0
         average_feedback = sum(feedbacks) / len(feedbacks)
         return float(f'{average_feedback:.1f}')
+
+    def get_feedback_by_order_id(self, order_id: str) -> Optional[Feedback]:
+        for feedback in self.feedbacks:
+            if feedback.order_id == order_id:
+                return feedback
+        return None
