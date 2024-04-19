@@ -69,3 +69,7 @@ class UserNotOrderOwner(BaseError):
     def __init__(self):
         super().__init__("The user_id does not match with the inserted order_id")
 
+class OrderAlreadyHaveFeedback(BaseError):
+    def __init__(self):
+        super().__init__("This order have already been evaluated")
+
