@@ -327,3 +327,5 @@ class OrderRepositoryDynamo(IOrderRepository):
         average_feedback = sum(feedbacks) / len(feedbacks)
 
         return float(f"{average_feedback:.1f}")
+    def get_feedback_by_order_id(self, order_id: str) -> Optional[Feedback]:
+        raise NotImplementedError()
