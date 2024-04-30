@@ -222,8 +222,8 @@ class OrderRepositoryMock(IOrderRepository):
                 return schedule
         return None
 
-    def update_schedule(self, schedule_id: str, new_initial_time: Optional[int] = None,
-                          new_end_time: Optional[int] = None,
+    def update_schedule(self, schedule_id: str, new_initial_time: Optional[float] = None,
+                          new_end_time: Optional[float] = None,
                           new_accepted_reservation: Optional[bool] = None):
         schedule_to_update = self.get_schedule_by_id(schedule_id)
         if schedule_to_update:
