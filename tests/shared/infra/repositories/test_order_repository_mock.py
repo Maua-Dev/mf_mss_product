@@ -2,6 +2,7 @@ from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.feedback import Feedback
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
@@ -196,3 +197,51 @@ class Test_OrderRepositoryMock:
 
         assert len(repo.feedbacks) == len_before + 1
         assert repo.feedbacks[-1] == feedback
+        
+    def test_create_schedule(self):
+        repo = OrderRepositoryMock()
+        len_before = len(repo.schedules)
+        schedule = Schedule(
+            schedule_id="1efc0e1a-24ed-4041-a4a0-fe5633711a3f",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            initial_time=7.0,
+            end_time=20.0,
+            accepted_reservation=True
+        )
+
+        repo.create_schedule(schedule=schedule)
+
+        assert len(repo.schedules) == len_before + 1
+        assert repo.schedules[-1] == schedule 
+        
+    def test_get_all_schedule_by_restaurant(self):
+        repo = OrderRepositoryMock()
+        schedules_list = repo.get_all_schedule_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        assert len(schedules_list) == 1
+        
+    def test_get_schedule_by_id(self):
+        repo = OrderRepositoryMock()
+        schedule_id = repo.schedules[1].schedule_id
+
+        response = repo.get_schedule_by_id(schedule_id=schedule_id)
+
+        assert response.schedule_id == schedule_id
+        assert response is repo.schedules[1]
+    
+    def test_update_schedule(self):
+        repo = OrderRepositoryMock()
+        schedule = repo.schedules[1]
+        schedule_id = schedule.schedule_id
+
+        response = repo.update_schedule(
+            schedule_id=schedule_id,
+            new_initial_time=1693414200,
+            new_end_time=1693418600
+        )
+
+        assert schedule.initial_time == 1693414200
+        assert schedule.end_time == 1693418600
+        
+    
+    
