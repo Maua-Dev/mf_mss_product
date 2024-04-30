@@ -101,7 +101,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def update_schedule(self, schedule_id: str, new_initial_time: Optional[int] = None,
-                          new_end_time: Optional[int] = None,
+    def update_schedule(self, schedule_id: str, new_initial_time: Optional[float] = None,
+                          new_end_time: Optional[float] = None,
                           new_accepted_reservation: Optional[bool] = None):
         pass
