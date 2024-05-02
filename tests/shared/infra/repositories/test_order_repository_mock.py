@@ -1,3 +1,5 @@
+from datetime import time
+
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.connection import Connection
@@ -204,8 +206,10 @@ class Test_OrderRepositoryMock:
         schedule = Schedule(
             schedule_id="1efc0e1a-24ed-4041-a4a0-fe5633711a3f",
             restaurant=RESTAURANT.SOUZA_DE_ABREU,
-            initial_time=7.0,
-            end_time=20.0,
+            hour_initial_time=7,
+            minute_initial_time=0,
+            hour_end_time=20,
+            minute_end_time=0,
             accepted_reservation=True
         )
 
@@ -236,12 +240,13 @@ class Test_OrderRepositoryMock:
 
         response = repo.update_schedule(
             schedule_id=schedule_id,
-            new_initial_time=1693414200,
-            new_end_time=1693418600
+            new_initial_time=time(hour=7, minute=0),
+            new_end_time=time(hour=20, minute=0),
+            new_accepted_reservation=True
         )
 
-        assert schedule.initial_time == 1693414200
-        assert schedule.end_time == 1693418600
+        assert schedule.initial_time == time(7, 0)
+        assert schedule.end_time == time(20, 0)
         
     
     

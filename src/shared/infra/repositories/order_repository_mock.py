@@ -1,6 +1,5 @@
-from ast import Dict
-from datetime import datetime
 from typing import List, Optional
+from datetime import datetime, time
 
 from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.entities.order import Order
@@ -201,12 +200,12 @@ class OrderRepositoryMock(IOrderRepository):
         ]
 
         self.schedules = [
-            Schedule(schedule_id="1eeef881-1b1f-4f38-a662-8ff7156e6c27", initial_time=7.0,
-                     end_time=20.0, restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
-            Schedule(schedule_id="8309d903-55ce-4299-9c70-13fa2e03bcdc", initial_time=7.0,
-                     end_time=20.0, restaurant=RESTAURANT.SOUZA_DE_ABREU, accepted_reservation=False),
-            Schedule(schedule_id="f60615cc-d1cd-41d5-8ff2-7406ee5fd214", initial_time=7.0,
-                     end_time=20.0, restaurant=RESTAURANT.HORA_H, accepted_reservation=True)
+            Schedule(schedule_id="b3f6c5aa-80ad-4f95-ae16-455b4f87fb53", restaurant=RESTAURANT.HORA_H,
+                     hour_initial_time=7, minute_initial_time=0, hour_end_time=22, minute_end_time=0, accepted_reservation=True),
+            Schedule(schedule_id="b3f6c5aa-80ad-4f95-ae16-455b4f874553", restaurant=RESTAURANT.SOUZA_DE_ABREU,
+                        hour_initial_time=7, minute_initial_time=0, hour_end_time=22, minute_end_time=0, accepted_reservation=True),
+            Schedule(schedule_id="d2b29a41-69a6-4ad8-87b9-2444119fbf66", restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
+                        hour_initial_time=7, minute_initial_time=0, hour_end_time=22, minute_end_time=0, accepted_reservation=False),
         ]
 
     def create_schedule(self, schedule: Schedule) -> Schedule:
@@ -222,9 +221,8 @@ class OrderRepositoryMock(IOrderRepository):
                 return schedule
         return None
 
-    def update_schedule(self, schedule_id: str, new_initial_time: Optional[float] = None,
-                          new_end_time: Optional[float] = None,
-                          new_accepted_reservation: Optional[bool] = None):
+    def update_schedule(self, schedule_id: str, new_initial_time: Optional[time] = None, new_end_time: Optional[time] = None,
+                        new_accepted_reservation: Optional[bool] = None) -> Optional[Schedule]:
         schedule_to_update = self.get_schedule_by_id(schedule_id)
         if schedule_to_update:
             if new_initial_time is not None:

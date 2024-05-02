@@ -1,5 +1,6 @@
+from datetime import time
+from typing import List, Optional
 from abc import ABC, abstractmethod
-from typing import Dict, List, Optional
 
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
@@ -26,7 +27,8 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int = 20,
+                                     exclusive_start_key: Optional[str] = None) -> List[Order]:
         """
         This method return the history of orders of the selected restaurant with pagination. The total of orders per
         page is defined by amount.
@@ -65,7 +67,8 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_user(self, user_id: str, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[
+        Order]:
         """
         This method return the history of orders of the selected user with pagination. The total of orders per
         page is defined by amount.
@@ -101,7 +104,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def update_schedule(self, schedule_id: str, new_initial_time: Optional[float] = None,
-                          new_end_time: Optional[float] = None,
-                          new_accepted_reservation: Optional[bool] = None):
+    def update_schedule(self, schedule_id: str, new_initial_time: Optional[time] = None,
+                        new_end_time: Optional[time] = None,
+                        new_accepted_reservation: Optional[bool] = None):
         pass
