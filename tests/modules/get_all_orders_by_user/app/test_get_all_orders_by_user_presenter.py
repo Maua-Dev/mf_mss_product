@@ -71,7 +71,8 @@ class Test_GetAllOrdersByUserPresenter:
                                     'action': 'EDITED',
                                     'total_price': 25.5,
                                     'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9',
-                                    'user_name': 'Rodrigo Morales'}],
+                                    'user_name': 'Rodrigo Morales',
+                                    'time_reserved': None}],
             'last_order_id': 'd4c63753-5119-4990-b427-926798499924',
             'message': 'the orders were retrieved',
            }
@@ -148,7 +149,8 @@ class Test_GetAllOrdersByUserPresenter:
                 'action':'NEW',
                 'total_price': 30.0,
                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
-                'user_name': 'Lucas Milas'},
+                'user_name': 'Lucas Milas',
+                                    'time_reserved': None},
 
                 {
                 'aborted_reason': None,
@@ -165,13 +167,15 @@ class Test_GetAllOrdersByUserPresenter:
                 'action':'EDITED',
                 'total_price': 14.0,
                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf',
-                'user_name': 'Lucas Milas'}],
+                'user_name': 'Lucas Milas',
+                'time_reserved': None}],
             'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f874553',
             'message': 'the orders were retrieved'
            }
         
         assert response["statusCode"] == 200
         assert json.loads(response["body"])["message"] == "the orders were retrieved"
+        print(json.loads(response["body"]))
         assert json.loads(response["body"]) == expected
 
     def test_get_all_orders_by_user_presenter_without_exclusive_start_key(self):
@@ -243,7 +247,8 @@ class Test_GetAllOrdersByUserPresenter:
                 'action':'NEW',
                 'aborted_reason': None, 
                 'total_price': 30.0, 
-                'last_status_update': 1992061596999}], 
+                'last_status_update': 1992061596999,
+                                    'time_reserved': None}], 
             'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f87fb53',
             'message': 'the orders were retrieved'}
         
