@@ -32,6 +32,8 @@ class CreateOrderUsecase:
         if time_reserved:
             if time_reserved < datetime.now() + timedelta(hours=1):
                 raise TimeReservedNeedsToBeAtLeastOneHourAhead()
+            if time_reserved.date() != datetime.now().date():
+                raise TimeReservedNotAvailable()
             shedule = self.repo_order.get_schedule_by_restaurant(restaurant=restaurant)
             if shedule is None:
                 raise NoItemsFound("schedule")
@@ -59,6 +61,7 @@ class CreateOrderUsecase:
         creation_time_milliseconds = int(datetime.now().timestamp() * 1000)
         status = STATUS.PENDING
         total_price = float(price)
+        time_reserved = int(time_reserved.timestamp() * 1000) if time_reserved else None
 
         order = Order(order_id=order_id, user_name=user_name, user_id=user_id, products=products,
                       creation_time_milliseconds=creation_time_milliseconds, restaurant=restaurant, status=status,
