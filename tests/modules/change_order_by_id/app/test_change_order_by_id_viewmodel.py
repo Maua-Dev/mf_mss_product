@@ -42,7 +42,8 @@ class Test_ChangeOrderViewmodel:
                 "aborted_reason": None,
                 "total_price": 30.00,
                 "last_status_update": 1692061896,
-                "action": "EDITED"
+                "action": "EDITED",
+                                    'time_reserved': None
             },
             "message": "the order was updated"
         }
