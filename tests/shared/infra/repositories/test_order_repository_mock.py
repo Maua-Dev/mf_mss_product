@@ -218,11 +218,11 @@ class Test_OrderRepositoryMock:
         assert len(repo.schedules) == len_before + 1
         assert repo.schedules[-1] == schedule 
         
-    def test_get_all_schedule_by_restaurant(self):
+    def test_get_schedule_by_restaurant(self):
         repo = OrderRepositoryMock()
-        schedules_list = repo.get_all_schedule_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+        schedule = repo.get_schedule_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
-        assert len(schedules_list) == 1
+        assert schedule is repo.schedules[1]
         
     def test_get_schedule_by_id(self):
         repo = OrderRepositoryMock()

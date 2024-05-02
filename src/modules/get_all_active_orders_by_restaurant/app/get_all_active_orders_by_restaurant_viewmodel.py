@@ -33,6 +33,7 @@ class OrderViewmodel:
     action: ACTION
     aborted_reason: Optional[str] = None
     total_price: float
+    time_reserved: Optional[int] = None
 
     def __init__(self, order: Order):
         self.order_id = order.order_id
@@ -45,6 +46,7 @@ class OrderViewmodel:
         self.aborted_reason = order.aborted_reason
         self.total_price = order.total_price
         self.action = order.action
+        self.time_reserved = order.time_reserved
 
     def to_dict(self) -> dict:
         return {
@@ -57,7 +59,8 @@ class OrderViewmodel:
             "status": self.status.value,
             "aborted_reason": self.aborted_reason,
             "total_price": self.total_price,
-            "action": self.action.value
+            "action": self.action.value,
+            "time_reserved": self.time_reserved
         }
 
 

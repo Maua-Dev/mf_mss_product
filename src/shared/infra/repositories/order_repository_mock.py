@@ -212,8 +212,10 @@ class OrderRepositoryMock(IOrderRepository):
         self.schedules.append(schedule)
         return schedule
 
-    def get_all_schedule_by_restaurant(self, restaurant: RESTAURANT) -> List[Schedule]:
-        return [schedule for schedule in self.schedules if schedule.restaurant == restaurant]
+    def get_schedule_by_restaurant(self, restaurant: RESTAURANT) -> Optional[Schedule]:
+        for schedule in self.schedules:
+            if schedule.restaurant == restaurant:
+                return schedule
 
     def get_schedule_by_id(self, schedule_id: str) -> Optional[Schedule]:
         for schedule in self.schedules:

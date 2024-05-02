@@ -42,11 +42,16 @@ class CreateOrderController:
             restaurant = request.data.get('restaurant')
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise RestaurantNotFound(restaurant)
+
+            time_reserved = request.data.get('time_reserved')
+            if time_reserved is not None:
+                time_reserved = int(time_reserved)
             
             order = self.CreateOrderUsecase(user_name=str(requester_user.name),
                                             user_id=str(requester_user.user_id),
                                             products=list(products_list),
                                             restaurant=RESTAURANT[restaurant],
+                                            time_reserved=time_reserved
                                             )
             
             viewmodel = CreateOrderViewmodel(order)
