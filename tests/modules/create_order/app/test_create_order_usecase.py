@@ -1,10 +1,12 @@
 import pytest
+from datetime import datetime, timedelta
+
 from src.modules.create_order.app.create_order_usecase import CreateOrderUsecase
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser
+from src.shared.helpers.errors.usecase_errors import MinimumPriceForTimeReserved, NoItemsFound, RestaurantDontPermitSchedule, TimeReservedNeedsToBeAtLeastOneHourAhead, TimeReservedNotAvailable, UnregisteredUser
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -67,3 +69,58 @@ class Test_CreateOrderUsecase:
 
         with pytest.raises(NoItemsFound):
             order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=STATUS.CANCELLED)
+            
+    def test_create_order_with_reservation(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        repo_product = ProductRepositoryMock()
+        usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
+        time_reserved = datetime.now() + timedelta(hours=1, minutes=30)
+
+        order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, time_reserved=time_reserved)
+
+        assert repo_order.orders[-1].time_reserved == int(time_reserved.timestamp() * 1000)
+        assert repo_order.orders[-1].action == ACTION.NEW
+        
+    def test_time_reserved_not_available(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        repo_product = ProductRepositoryMock()
+        usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
+        time_reserved = datetime.now() + timedelta(days=1, hours=1, minutes=30)
+
+        with pytest.raises(TimeReservedNotAvailable):
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, time_reserved=time_reserved)
+        
+    def test_minimum_price_reservation(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        repo_product = ProductRepositoryMock()
+        usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
+        time_reserved = datetime.now() + timedelta(hours=1, minutes=30)
+
+        with pytest.raises(MinimumPriceForTimeReserved):
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=1)], restaurant=RESTAURANT.SOUZA_DE_ABREU, time_reserved=time_reserved)
+        
+    def test_minimum_hours_ahead(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        repo_product = ProductRepositoryMock()
+        usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
+        time_reserved = datetime.now() + timedelta(minutes=30)
+
+        with pytest.raises(TimeReservedNeedsToBeAtLeastOneHourAhead):
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.SOUZA_DE_ABREU, time_reserved=time_reserved)
+            
+    def test_restaurant_not_accept_reservation(self):
+        repo_order = OrderRepositoryMock()
+        repo_user = UserRepositoryMock()
+        repo_product = ProductRepositoryMock()
+        usecase = CreateOrderUsecase(repo_order=repo_order, repo_user=repo_user, repo_product=repo_product)
+        time_reserved = datetime.now() + timedelta(hours=1, minutes=30)
+
+        with pytest.raises(RestaurantDontPermitSchedule):
+            order = usecase(user_name="Lucas Milas", user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[OrderProduct(product_name='Hot Dog', product_id="c4bb21ac-d9f6-4d4b-b56c-215fb0f7aa09", quantity=2)], restaurant=RESTAURANT.CANTINA_DO_MOLEZA, time_reserved=time_reserved)
+            
+        
+    
