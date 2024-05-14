@@ -9,6 +9,8 @@ from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
+from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_OrderRepositoryMock:
@@ -232,6 +234,23 @@ class Test_OrderRepositoryMock:
 
         assert response.schedule_id == schedule_id
         assert response is repo.schedules[1]
+
+    def test_get_all_schedules_by_restaurant(self):
+        repo_order = OrderRepositoryMock()
+
+        order = Order(order_id="135ef881-1b1f-4f38-a662-8ff7156e6fff", user_name="Lucas Milas",
+                  user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[
+                OrderProduct(product_name="X-Calabresa", product_id="8ffcc3ef-6d35-4fef-abf0-85d3649a85d5",
+                             quantity=2)], creation_time_milliseconds=1692157822666,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=48.0,
+                  aborted_reason=None,
+                  last_status_update_milliseconds=1992061596123, action=ACTION.EDITED, time_reserved=8)
+        
+        create_prod = repo_order.create_order(order)
+        
+        response = repo_order.get_all_schedules_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        assert response == [create_prod]
     
     def test_update_schedule(self):
         repo = OrderRepositoryMock()

@@ -48,7 +48,7 @@ class Test_GetAllOrdersByRestaurantViewmodel:
                     "total_price": 35.5,
                     "last_status_update": 1992061596999,
                     "action": "NEW",
-                                    'time_reserved': None
+                    "time_reserved": None
                 }
 
             ],
