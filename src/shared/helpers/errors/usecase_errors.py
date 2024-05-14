@@ -1,6 +1,7 @@
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.base_error import BaseError
 
+
 class OrderCantBeUpdated(BaseError):
     def __init__(self):
         super().__init__(f"You can't update a order after it's preparing has started")
@@ -9,10 +10,12 @@ class OrderCantBeUpdated(BaseError):
 class ProducutsListCantBeEmpty(BaseError):
     def __init__(self):
         super().__init__(f"Products list can't be empty")
-        
+
+
 class NoItemsFound(BaseError):
     def __init__(self, message: str):
         super().__init__(f'No items found for {message}')
+
 
 class OrderAlreadyPreparing(BaseError):
     def __init__(self):
@@ -69,7 +72,27 @@ class UserNotOrderOwner(BaseError):
     def __init__(self):
         super().__init__("The user_id does not match with the inserted order_id")
 
+
 class OrderAlreadyHaveFeedback(BaseError):
     def __init__(self):
         super().__init__("This order have already been evaluated")
 
+
+class RestaurantDontPermitSchedule(BaseError):
+    def __init__(self):
+        super().__init__("This restaurant does not accept reservations")
+
+
+class TimeReservedNeedsToBeAtLeastOneHourAhead(BaseError):
+    def __init__(self):
+        super().__init__("The time reserved must be at least 1 hour ahead of the current time")
+
+
+class MinimumPriceForTimeReserved(BaseError):
+    def __init__(self, minimum_price: int = None):
+        super().__init__(f"The minimum price for a time reserved order is R${minimum_price}")
+
+
+class TimeReservedNotAvailable(BaseError):
+    def __init__(self):
+        super().__init__("The time reserved is not available")

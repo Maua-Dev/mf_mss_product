@@ -30,7 +30,8 @@ class Test_GetAllOrdersByUserViewmodel:
                 'total_price': 30.00,
                 'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
                 'user_name':'Lucas Milas',
-                'last_status_update':1992061596999
+                'last_status_update':1992061596999,
+                'time_reserved': None
             }],
             'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f87fb53',
             'message': 'the orders were retrieved',
@@ -63,7 +64,8 @@ class Test_GetAllOrdersByUserViewmodel:
                 'total_price': 30.00,
                 'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
                 'user_name':'Lucas Milas',
-                'last_status_update':1992061596999
+                'last_status_update':1992061596999,
+                'time_reserved': None
             },
             {
                 'aborted_reason': None,
@@ -81,7 +83,8 @@ class Test_GetAllOrdersByUserViewmodel:
                 'total_price': 14.00,
                 'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
                 'user_name':'Lucas Milas',
-                'last_status_update':1992061596999
+                'last_status_update':1992061596999,
+                                    'time_reserved': None
             }],
             'last_order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f874553',
             'message': 'the orders were retrieved',

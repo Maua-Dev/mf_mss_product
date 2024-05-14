@@ -1,13 +1,16 @@
+from datetime import time
+from typing import List, Optional
 from abc import ABC, abstractmethod
-from typing import Dict, List, Optional
 
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.feedback import Feedback
+
 
 class IOrderRepository(ABC):
 
@@ -24,7 +27,8 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, amount: int = 20,
+                                     exclusive_start_key: Optional[str] = None) -> List[Order]:
         """
         This method return the history of orders of the selected restaurant with pagination. The total of orders per
         page is defined by amount.
@@ -32,9 +36,13 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
+    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
+        pass
+
+    @abstractmethod
     def get_order_by_id(self, order_id: str) -> Optional[Order]:
         pass
-    
+
     @abstractmethod
     def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
@@ -57,13 +65,14 @@ class IOrderRepository(ABC):
         This method gets the connection based on the connection_id and deletes it based on the connection's restaurant.
         """
         pass
-    
+
     @abstractmethod
     def publish_order(self, connections_list: List[Connection], order: Order) -> bool:
         pass
 
     @abstractmethod
-    def get_all_orders_by_user(self, user_id: str, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[Order]:
+    def get_all_orders_by_user(self, user_id: str, amount: int = 20, exclusive_start_key: Optional[str] = None) -> List[
+        Order]:
         """
         This method return the history of orders of the selected user with pagination. The total of orders per
         page is defined by amount.
@@ -84,4 +93,22 @@ class IOrderRepository(ABC):
 
     @abstractmethod
     def get_feedback_by_order_id(self, order_id: str) -> Optional[Feedback]:
+        pass
+
+    @abstractmethod
+    def create_schedule(self, schedule: Schedule) -> Schedule:
+        pass
+
+    @abstractmethod
+    def get_schedule_by_restaurant(self, restaurant: RESTAURANT) -> Optional[Schedule]:
+        pass
+
+    @abstractmethod
+    def get_schedule_by_id(self, schedule_id: str) -> Optional[Schedule]:
+        pass
+
+    @abstractmethod
+    def update_schedule(self, schedule_id: str, new_initial_time: Optional[time] = None,
+                        new_end_time: Optional[time] = None,
+                        new_accepted_reservation: Optional[bool] = None):
         pass

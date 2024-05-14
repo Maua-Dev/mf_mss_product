@@ -1,11 +1,16 @@
+from datetime import time
+
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.feedback import Feedback
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
+from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
 class Test_OrderRepositoryMock:
@@ -135,7 +140,6 @@ class Test_OrderRepositoryMock:
         )
         assert order.total_price == 42.20
 
-
     def test_update_abortation_to_none(self):
         repo = OrderRepositoryMock()
         order = repo.orders[1]
@@ -196,3 +200,71 @@ class Test_OrderRepositoryMock:
 
         assert len(repo.feedbacks) == len_before + 1
         assert repo.feedbacks[-1] == feedback
+        
+    def test_create_schedule(self):
+        repo = OrderRepositoryMock()
+        len_before = len(repo.schedules)
+        schedule = Schedule(
+            schedule_id="1efc0e1a-24ed-4041-a4a0-fe5633711a3f",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            hour_initial_time=7,
+            minute_initial_time=0,
+            hour_end_time=20,
+            minute_end_time=0,
+            accepted_reservation=True
+        )
+
+        repo.create_schedule(schedule=schedule)
+
+        assert len(repo.schedules) == len_before + 1
+        assert repo.schedules[-1] == schedule 
+        
+    def test_get_schedule_by_restaurant(self):
+        repo = OrderRepositoryMock()
+        schedule = repo.get_schedule_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        assert schedule is repo.schedules[1]
+        
+    def test_get_schedule_by_id(self):
+        repo = OrderRepositoryMock()
+        schedule_id = repo.schedules[1].schedule_id
+
+        response = repo.get_schedule_by_id(schedule_id=schedule_id)
+
+        assert response.schedule_id == schedule_id
+        assert response is repo.schedules[1]
+
+    def test_get_all_schedules_by_restaurant(self):
+        repo_order = OrderRepositoryMock()
+
+        order = Order(order_id="135ef881-1b1f-4f38-a662-8ff7156e6fff", user_name="Lucas Milas",
+                  user_id="93bc6ada-c0d1-7054-66ab-e17414c48gbf", products=[
+                OrderProduct(product_name="X-Calabresa", product_id="8ffcc3ef-6d35-4fef-abf0-85d3649a85d5",
+                             quantity=2)], creation_time_milliseconds=1692157822666,
+                  restaurant=RESTAURANT.SOUZA_DE_ABREU, status=STATUS.PENDING, total_price=48.0,
+                  aborted_reason=None,
+                  last_status_update_milliseconds=1992061596123, action=ACTION.EDITED, time_reserved=8)
+        
+        create_prod = repo_order.create_order(order)
+        
+        response = repo_order.get_all_schedules_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
+
+        assert response == [create_prod]
+    
+    def test_update_schedule(self):
+        repo = OrderRepositoryMock()
+        schedule = repo.schedules[1]
+        schedule_id = schedule.schedule_id
+
+        response = repo.update_schedule(
+            schedule_id=schedule_id,
+            new_initial_time=time(hour=7, minute=0),
+            new_end_time=time(hour=20, minute=0),
+            new_accepted_reservation=True
+        )
+
+        assert schedule.initial_time == time(7, 0)
+        assert schedule.end_time == time(20, 0)
+        
+    
+    

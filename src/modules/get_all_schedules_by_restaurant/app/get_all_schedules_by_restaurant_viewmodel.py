@@ -1,10 +1,10 @@
-from src.shared.domain.entities.order import Order
-from src.shared.domain.entities.order_product import OrderProduct
 from typing import List, Optional
 
+from src.shared.domain.entities.order import Order
+from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
-from src.shared.domain.enums.action_enum import ACTION
 
 
 class OrderProductViewmodel:
@@ -64,14 +64,15 @@ class OrderViewmodel:
         }
 
 
-class GetAllActiveOrdersByRestaurantViewmodel:
-    all_active_orders: List[Order]
+class GetAllSchedulesByRestaurantViewmodel:
+    all_orders: List[Order]
 
-    def __init__(self, all_active_orders: List[Order]):
-        self.all_active_orders = all_active_orders
+    def __init__(self, all_orders: List[Order]):
+        self.all_orders = all_orders
 
     def to_dict(self):
         return {
-            'all_active_orders': [OrderViewmodel(order).to_dict() for order in self.all_active_orders],
-            'message': "the active orders were retrieved"
+            'all_schedules_by_restaurant': [OrderViewmodel(order).to_dict() for order in self.all_orders],
+            'message': "the orders were retrieved"
         }
+    

@@ -1,5 +1,5 @@
-import abc
 import re
+import abc
 from typing import List, Optional
 from src.shared.domain.entities.order_product import OrderProduct
 
@@ -21,6 +21,7 @@ class Order(abc.ABC):
     aborted_reason: Optional[str] = None
     total_price: float
     last_status_update_milliseconds: Optional[int] = None
+    time_reserved: Optional[int] = None
     ID_LENGTH = 36
     MIN_NAME_LENGTH = 2
 
@@ -36,6 +37,7 @@ class Order(abc.ABC):
                  total_price: float,
                  last_status_update_milliseconds: int = None,
                  aborted_reason: Optional[str] = None,
+                 time_reserved: Optional[int] = None
                  ):
         
         if not Order.validate_id(id=order_id):
@@ -86,6 +88,13 @@ class Order(abc.ABC):
         if type(action) != ACTION:
             raise EntityError("action")
         self.action = action
+
+        if time_reserved is not None:
+            if type(time_reserved) != int:
+                raise EntityError("time_reserved")
+            if time_reserved < 0:
+                raise EntityParameterExcededMaximumValue(field="time_reserved", maximum_value="0")
+        self.time_reserved = time_reserved
 
     @staticmethod
     def validate_id(id: str) -> bool:

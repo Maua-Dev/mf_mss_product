@@ -27,7 +27,8 @@ class Test_GetAllActiveOrdersByRestaurantViewmodel:
                                            'total_price': 25.5,
                                            'action': 'EDITED',
                                            'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9',
-                                           'user_name':'Rodrigo Morales'}],
+                                           'user_name':'Rodrigo Morales',
+                                    'time_reserved': None}],
                     'message': 'the active orders were retrieved',
                     }
 
