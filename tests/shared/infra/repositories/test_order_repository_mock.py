@@ -140,7 +140,6 @@ class Test_OrderRepositoryMock:
         )
         assert order.total_price == 42.20
 
-
     def test_update_abortation_to_none(self):
         repo = OrderRepositoryMock()
         order = repo.orders[1]
