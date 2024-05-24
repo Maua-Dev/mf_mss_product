@@ -36,6 +36,10 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
+    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
+        pass
+
+    @abstractmethod
     def get_order_by_id(self, order_id: str) -> Optional[Order]:
         pass
 

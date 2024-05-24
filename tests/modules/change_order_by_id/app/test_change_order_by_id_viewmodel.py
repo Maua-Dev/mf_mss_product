@@ -43,7 +43,7 @@ class Test_ChangeOrderViewmodel:
                 "total_price": 30.00,
                 "last_status_update": 1692061896,
                 "action": "EDITED",
-                                    'time_reserved': None
+                "time_reserved": None
             },
             "message": "the order was updated"
         }

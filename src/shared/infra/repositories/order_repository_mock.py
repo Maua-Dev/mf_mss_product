@@ -243,6 +243,9 @@ class OrderRepositoryMock(IOrderRepository):
             if schedule.schedule_id == schedule_id:
                 return schedule
         return None
+    
+    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
+        return [order for order in self.orders if order.restaurant == restaurant and order.time_reserved]
 
     def update_schedule(self, schedule_id: str, new_initial_time: Optional[time] = None,
                         new_end_time: Optional[time] = None,
