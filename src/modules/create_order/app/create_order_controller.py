@@ -1,3 +1,8 @@
+import uuid
+from datetime import time
+from typing import Optional
+
+from src.shared.domain.entities.schedule import Schedule
 from .create_order_usecase import CreateOrderUsecase
 from .create_order_viewmodel import CreateOrderViewmodel
 from src.shared.domain.entities.order_product import OrderProduct
@@ -25,10 +30,9 @@ class CreateOrderController:
             products = request.data.get("products")
             if products is None:
                 raise MissingParameters("products")
-            
+
             products_list = list()
             for product in products:
-                
                 product_name = product["product_name"]
                 product_id = product["product_id"]
                 quantity = product["quantity"]
@@ -43,24 +47,41 @@ class CreateOrderController:
             if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
                 raise RestaurantNotFound(restaurant)
 
-            time_reserved = request.data.get('time_reserved')
-            if time_reserved is not None:
-                time_reserved = int(time_reserved)
-            
+            schedule: Optional[Schedule] = None
+            reservation = request.data.get('reservation')
+            if reservation is not None:
+                if not reservation.get("start"):
+                    raise MissingParameters("reservation.start")
+                if not reservation.get("end"):
+                    raise MissingParameters("reservation.end")
+
+                start: str = reservation.get("start")
+                end: str = reservation.get("end")
+
+                time_start = time(int(start.split(":")[0]), int(start.split(":")[1]))
+                time_end = time(int(end.split(":")[0]), int(end.split(":")[1]))
+
+                schedule = Schedule(
+                    schedule_id=str(uuid.uuid4()),
+                    initial_time=time_start,
+                    end_time=time_end,
+                    restaurant=RESTAURANT[restaurant]
+                )
+
             order = self.CreateOrderUsecase(user_name=str(requester_user.name),
                                             user_id=str(requester_user.user_id),
                                             products=list(products_list),
                                             restaurant=RESTAURANT[restaurant],
-                                            time_reserved=time_reserved
+                                            schedule=schedule if reservation is not None else None
                                             )
-            
+
             viewmodel = CreateOrderViewmodel(order)
 
             return Created(viewmodel.to_dict())
-        
+
         except MissingParameters as err:
             return BadRequest(body=err.message)
-        
+
         except RestaurantNotFound as err:
             return NotFound(body=err.message)
 

@@ -5,6 +5,7 @@ from decimal import Decimal
 from typing import List, Optional
 from boto3.dynamodb.conditions import Key, Attr
 from src.shared.domain.entities.feedback import Feedback
+from src.shared.domain.entities.schedule import Schedule
 
 from src.shared.environments import Environments
 from src.shared.domain.entities.order import Order
@@ -12,9 +13,10 @@ from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
-from src.shared.infra.dto.feedback_dynamo_dto import FeedbackDynamoDTO
 from src.shared.infra.dto.order_dynamo_dto import OrderDynamoDTO
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.infra.dto.feedback_dynamo_dto import FeedbackDynamoDTO
+from src.shared.infra.dto.schedule_dynamo_dto import ScheduleDynamoDto
 from src.shared.infra.dto.connection_dynamo_dto import ConnectionDynamoDTO
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.infra.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
@@ -53,15 +55,15 @@ class OrderRepositoryDynamo(IOrderRepository):
     @staticmethod
     def connection_gsi_sort_key_format(restaurant: RESTAURANT) -> str:
         return f"connection#{restaurant.value}"
-    
+
     @staticmethod
     def feedback_partition_key_format(restaurant: RESTAURANT) -> str:
         return f"{restaurant.value}"
-    
+
     @staticmethod
     def feedback_sort_key_format(order_id: str) -> str:
         return f"feedback#{order_id}"
-    
+
     @staticmethod
     def feedback_gsi_partition_key_format(order_id: str) -> str:
         return f"{order_id}"
@@ -136,7 +138,9 @@ class OrderRepositoryDynamo(IOrderRepository):
                      new_status: Optional[STATUS] = None,
                      new_total_price: Optional[float] = None,
                      new_aborted_reason: Optional[str] = None,
-                     new_action: Optional[ACTION] = None) -> Optional[Order]:
+                     new_action: Optional[ACTION] = None,
+                     new_schedule: Optional[Schedule] = None
+                     ) -> Optional[Order]:
 
         order_to_update = self.get_order_by_id(order_id=order_id)
 
@@ -148,7 +152,8 @@ class OrderRepositoryDynamo(IOrderRepository):
             "status": new_status.value if new_status is not None else None,
             "total_price": Decimal(str(new_total_price)) if new_total_price is not None else None,
             "aborted_reason": new_aborted_reason if new_aborted_reason is not None else None,
-            "action": new_action.value if new_action is not None else None
+            "action": new_action.value if new_action is not None else None,
+            "schedule": new_schedule.to_dict() if new_schedule is not None else None
         }
 
         update_dict_without_none_values = {k: v for k, v in update_dict.items() if v is not None}
@@ -165,7 +170,8 @@ class OrderRepositoryDynamo(IOrderRepository):
 
     def get_all_orders_by_user(self, user_id: str, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
         resp = self.dynamo.scan_items(filter_expression=Attr('user_id').eq(user_id) & Attr('entity').eq('order'))
-        orders_sorted = sorted(resp.get("Items"), key=lambda item: item.get('creation_time_milliseconds'), reverse=False)
+        orders_sorted = sorted(resp.get("Items"), key=lambda order: order.get('creation_time_milliseconds'),
+                               reverse=False)
         if exclusive_start_key:
             for index, item in enumerate(orders_sorted):
                 if item.get('order_id') == exclusive_start_key:
@@ -175,10 +181,12 @@ class OrderRepositoryDynamo(IOrderRepository):
         else:
             return [OrderDynamoDTO.from_dynamo(order).to_entity() for order in orders_sorted[:amount]]
 
-    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> List[Order]:
-        key_condition = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with('order#')
+    def get_all_orders_by_restaurant(self, restaurant: RESTAURANT, exclusive_start_key: str = None, amount: int = 20) -> \
+            List[Order]:
+        key_condition = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with(
+            'order#')
         resp = self.dynamo.query(key_condition_expression=key_condition, Select='ALL_ATTRIBUTES')
-        orders_sorted = sorted(resp.get('Items'), key=lambda item: item.get('creation_time_milliseconds'),
+        orders_sorted = sorted(resp.get('Items'), key=lambda orders: orders.get('creation_time_milliseconds'),
                                reverse=False)
         if exclusive_start_key:
             for index, item in enumerate(orders_sorted):
@@ -212,7 +220,7 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return connection
 
-    def abort_connection(self, connection_id: str) -> Connection:
+    def abort_connection(self, connection_id: str) -> Optional[Connection]:
         query_string = Key(self.dynamo.gsi_partition_key).eq(self.connection_gsi_partition_key_format(connection_id))
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
 
@@ -266,11 +274,13 @@ class OrderRepositoryDynamo(IOrderRepository):
 
         return connection
 
-    def push_data_to_client(self, connection_id, order: Order):
-        apigw_management_api = boto3.client('apigatewaymanagementapi', endpoint_url="https://ni19pbgxrg.execute-api.sa-east-1.amazonaws.com/prod/")
+    @staticmethod
+    def push_data_to_client(connection_id, order: Order):
+        apigw_management_api = boto3.client('apigatewaymanagementapi',
+                                            endpoint_url="https://ni19pbgxrg.execute-api.sa-east-1.amazonaws.com/prod/")
 
         print('pushToConnection : ' + connection_id + ' feed  : ' + str(order.order_id))
-        endpoint_url=os.environ.get("WEBSOCKET_URL")
+        endpoint_url = os.environ.get("WEBSOCKET_URL")
         print(endpoint_url)
         data = {
             "order_id": order.order_id,
@@ -288,10 +298,11 @@ class OrderRepositoryDynamo(IOrderRepository):
             "aborted_reason": order.aborted_reason,
             "total_price": order.total_price,
             "last_status_update": order.last_status_update_milliseconds,
-            "action": order.action.value
+            "action": order.action.value,
+            "schedule": order.schedule.to_dict() if order.schedule is not None else ""
         }
 
-        response = apigw_management_api.post_to_connection(ConnectionId=connection_id, Data=json.dumps(data))
+        apigw_management_api.post_to_connection(ConnectionId=connection_id, Data=json.dumps(data))
 
     def create_feedback(self, feedback: Feedback) -> Feedback:
         feedback_dto = FeedbackDynamoDTO.from_entity(feedback=feedback)
@@ -310,9 +321,10 @@ class OrderRepositoryDynamo(IOrderRepository):
         )
 
         return feedback
-    
+
     def get_average_feedback_by_restaurant(self, restaurant: RESTAURANT) -> float:
-        query_string = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with('feedback#')
+        query_string = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with(
+            'feedback#')
         resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
 
         feedbacks = []
@@ -327,3 +339,115 @@ class OrderRepositoryDynamo(IOrderRepository):
         average_feedback = sum(feedbacks) / len(feedbacks)
 
         return float(f"{average_feedback:.1f}")
+
+    def check_schedule(self, schedule: Schedule) -> bool:
+        query_string = Key(self.dynamo.partition_key).eq(schedule.restaurant.value) & Key(
+            self.dynamo.sort_key).begins_with('schedule#')
+        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
+
+        schedules = []
+
+        for item in resp["Items"]:
+            if item["entity"] == "schedule":
+                schedules.append(item)
+
+        for item in schedules:
+            schedule_dto = ScheduleDynamoDto.from_dynamo(item)
+            if schedule_dto.initial_time == schedule.initial_time and schedule_dto.end_time == schedule.end_time:
+                return True
+
+        return False
+
+    def create_schedule(self, schedule: Schedule) -> Schedule:
+        schedule_dto = ScheduleDynamoDto.from_entity(schedule=schedule)
+        item = schedule_dto.to_dynamo()
+
+        resp = self.dynamo.put_item(
+            partition_key=self.dynamo.partition_key,
+            sort_key=self.dynamo.sort_key,
+            item=item,
+            is_decimal=False
+        )
+
+        return schedule
+
+    def get_schedules_by_restaurant(self, restaurant: RESTAURANT) -> Optional[List[Schedule]]:
+        query_string = Key(self.dynamo.partition_key).eq(restaurant.value) & Key(self.dynamo.sort_key).begins_with(
+            'schedule#')
+        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES')
+
+        schedules = []
+
+        for item in resp["Items"]:
+            if item["entity"] == "schedule":
+                schedules.append(item)
+
+        if len(schedules) == 0:
+            return None
+
+        schedules_list = [ScheduleDynamoDto.from_dynamo(schedule).to_entity() for schedule in schedules]
+
+        return schedules_list
+
+    def get_schedule_by_id(self, schedule_id: str) -> Optional[Schedule]:
+        query_string = Key(self.dynamo.gsi_partition_key).eq(schedule_id)
+        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
+
+        if len(resp['Items']) == 0:
+            return None
+
+        schedule_data = self.dynamo.get_item(partition_key=self.dynamo.partition_key,
+                                             sort_key=self.dynamo.sort_key)
+
+        if 'Item' not in schedule_data:
+            return None
+
+        schedule = ScheduleDynamoDto.from_dynamo(schedule_data.get("Item")).to_entity()
+
+        return schedule
+
+    def update_schedule(self, schedule_id: str, new_initial_time: Optional[str] = None,
+                        new_end_time: Optional[str] = None,
+                        new_accepted_reservation: Optional[bool] = None
+                        ) -> Optional[Schedule]:
+        schedule_to_update = self.get_schedule_by_id(schedule_id=schedule_id)
+
+        if schedule_to_update is None:
+            return None
+
+        update_dict = {
+            "initial_time": new_initial_time if new_initial_time is not None else None,
+            "end_time": new_end_time if new_end_time is not None else None,
+            "accepted_reservation": new_accepted_reservation if new_accepted_reservation is not None else None
+        }
+
+        update_dict_without_none_values = {k: v for k, v in update_dict.items() if v is not None}
+
+        response = self.dynamo.update_item(
+            partition_key=self.dynamo.partition_key,
+            sort_key=self.dynamo.sort_key,
+            update_dict=update_dict_without_none_values)
+
+        if "Attributes" not in response:
+            return None
+
+        return ScheduleDynamoDto.from_dynamo(response["Attributes"]).to_entity()
+
+    def get_feedback_by_order_id(self, order_id: str) -> Optional[Feedback]:
+        query_string = Key(self.dynamo.gsi_partition_key).eq(self.feedback_gsi_partition_key_format(order_id))
+        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
+
+        if len(resp['Items']) == 0:
+            return None
+
+        restaurant = resp['Items'][0].get('PK')
+
+        feedback_data = self.dynamo.get_item(partition_key=self.feedback_partition_key_format(RESTAURANT(restaurant)),
+                                             sort_key=self.feedback_sort_key_format(order_id))
+
+        if 'Item' not in feedback_data:
+            return None
+
+        feedback = FeedbackDynamoDTO.from_dynamo(feedback_data.get("Item")).to_entity()
+
+        return feedback

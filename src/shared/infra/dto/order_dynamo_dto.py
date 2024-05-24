@@ -2,9 +2,11 @@ from decimal import Decimal
 from typing import List, Optional
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.status_enum import STATUS
+
 
 class OrderDynamoDTO:
     order_id: str
@@ -18,8 +20,12 @@ class OrderDynamoDTO:
     aborted_reason: Optional[str] = None
     total_price: float
     last_status_update_milliseconds: int = None
+    schedule: Optional[Schedule] = None
 
-    def __init__(self, order_id: str, user_name: str, user_id: str, products: List[OrderProduct], creation_time_milliseconds: int, restaurant: RESTAURANT, status: STATUS, action: ACTION, total_price: float, last_status_update_milliseconds: int = None, aborted_reason: Optional[str] = None):
+    def __init__(self, order_id: str, user_name: str, user_id: str, products: List[OrderProduct],
+                 creation_time_milliseconds: int, restaurant: RESTAURANT, status: STATUS, action: ACTION,
+                 total_price: float, last_status_update_milliseconds: int = None, aborted_reason: Optional[str] = None,
+                 schedule: Optional[Schedule] = None):
         self.order_id = order_id
         self.user_name = user_name
         self.user_id = user_id
@@ -31,24 +37,26 @@ class OrderDynamoDTO:
         self.total_price = total_price
         self.last_status_update_milliseconds = last_status_update_milliseconds
         self.aborted_reason = aborted_reason
-        
+        self.schedule = schedule
+
     @staticmethod
-    def from_entity(order:Order) -> "OrderDynamoDTO":
+    def from_entity(order: Order) -> "OrderDynamoDTO":
         """
         Parse data from Order to OrderDynamoDTO
         """
         return OrderDynamoDTO(
-            order_id = order.order_id,
-            user_name = order.user_name,    
-            user_id = order.user_id,
-            products = order.products,
-            creation_time_milliseconds = order.creation_time_milliseconds,
-            restaurant = order.restaurant,
-            status = order.status, 
-            action = order.action,
-            total_price = order.total_price,
-            last_status_update_milliseconds = order.last_status_update_milliseconds,
-            aborted_reason = order.aborted_reason
+            order_id=order.order_id,
+            user_name=order.user_name,
+            user_id=order.user_id,
+            products=order.products,
+            creation_time_milliseconds=order.creation_time_milliseconds,
+            restaurant=order.restaurant,
+            status=order.status,
+            action=order.action,
+            total_price=order.total_price,
+            last_status_update_milliseconds=order.last_status_update_milliseconds,
+            aborted_reason=order.aborted_reason,
+            schedule=order.schedule
         )
 
     def to_dynamo(self) -> dict:
@@ -60,7 +68,7 @@ class OrderDynamoDTO:
             "order_id": self.order_id,
             "user_name": self.user_name,
             "user_id": self.user_id,
-            "products":  [{
+            "products": [{
                 "product_name": product.product_name,
                 "product_id": product.product_id,
                 "quantity": Decimal(str(product.quantity)),
@@ -70,15 +78,23 @@ class OrderDynamoDTO:
             "restaurant": self.restaurant.value,
             "status": self.status.value,
             "total_price": Decimal(str(self.total_price)),
-            "last_status_update_milliseconds": Decimal(str(self.last_status_update_milliseconds)) if self.last_status_update_milliseconds is not None else None,
+            "last_status_update_milliseconds": Decimal(
+                str(self.last_status_update_milliseconds)) if self.last_status_update_milliseconds is not None else None,
             "aborted_reason": self.aborted_reason if self.aborted_reason is not None else None,
-            "action": self.action.value
+            "action": self.action.value,
+            "schedule": {
+                "schedule_id": self.schedule.schedule_id,
+                "initial_time": self.schedule.initial_time,
+                "end_time": self.schedule.end_time,
+                "restaurant": self.schedule.restaurant.value,
+                "accepted_reservation": self.schedule.accepted_reservation
+            } if self.schedule is not None else None
         }
 
         data_without_none_values = {k: v for k, v in data.items() if v is not None}
 
         return data_without_none_values
-    
+
     @staticmethod
     def from_dynamo(order_data: dict) -> "OrderDynamoDTO":
         """
@@ -99,9 +115,17 @@ class OrderDynamoDTO:
             restaurant=RESTAURANT(order_data.get("restaurant")),
             status=STATUS(order_data.get("status")),
             total_price=float(order_data["total_price"]),
-            last_status_update_milliseconds=int(order_data.get("last_status_update_milliseconds")) if order_data.get("last_status_update_milliseconds") is not None else None,
+            last_status_update_milliseconds=int(order_data.get("last_status_update_milliseconds")) if order_data.get(
+                "last_status_update_milliseconds") is not None else None,
             aborted_reason=order_data.get("aborted_reason") if order_data.get("aborted_reason") is not None else None,
-            action=ACTION(order_data.get("action"))
+            action=ACTION(order_data.get("action")),
+            schedule=Schedule(
+                schedule_id=order_data["schedule"]["schedule_id"],
+                initial_time=order_data["schedule"]["initial_time"],
+                end_time=order_data["schedule"]["end_time"],
+                restaurant=RESTAURANT(order_data["schedule"]["restaurant"]),
+                accepted_reservation=order_data["schedule"]["accepted_reservation"]
+            ) if order_data.get("schedule") is not None else None
         )
 
     def to_entity(self) -> Order:
@@ -119,8 +143,16 @@ class OrderDynamoDTO:
             total_price=self.total_price,
             last_status_update_milliseconds=self.last_status_update_milliseconds,
             aborted_reason=self.aborted_reason,
-            action=self.action
+            action=self.action,
+            schedule=self.schedule
         )
 
     def __eq__(self, other):
-        return self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id and self.products == other.products and self.creation_time_milliseconds == other.creation_time_milliseconds and self.restaurant == other.restaurant and self.status == other.status and self.total_price == other.total_price and self.last_status_update_milliseconds == other.last_status_update_milliseconds and self.aborted_reason == other.aborted_reason and self.action == other.action
+        return (self.order_id == other.order_id and self.user_name == other.user_name and self.user_id == other.user_id
+                and self.products == other.products
+                and self.creation_time_milliseconds == other.creation_time_milliseconds
+                and self.restaurant == other.restaurant and self.status == other.status
+                and self.total_price == other.total_price
+                and self.last_status_update_milliseconds == other.last_status_update_milliseconds
+                and self.aborted_reason == other.aborted_reason and self.action == other.action
+                and self.schedule == other.schedule)

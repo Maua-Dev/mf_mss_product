@@ -44,7 +44,9 @@ class IOrderRepository(ABC):
                      new_status: Optional[STATUS] = None,
                      new_total_price: Optional[float] = None,
                      new_aborted_reason: Optional[str] = None,
-                     new_action: Optional[ACTION] = None):
+                     new_action: Optional[ACTION] = None,
+                     new_schedule: Optional[Schedule] = None
+                     ) -> Optional[Order]:
         pass
 
     @abstractmethod
@@ -96,7 +98,7 @@ class IOrderRepository(ABC):
         pass
 
     @abstractmethod
-    def get_schedule_by_restaurant(self, restaurant: RESTAURANT) -> Optional[Schedule]:
+    def get_schedules_by_restaurant(self, restaurant: RESTAURANT) -> Optional[List[Schedule]]:
         pass
 
     @abstractmethod
@@ -106,5 +108,13 @@ class IOrderRepository(ABC):
     @abstractmethod
     def update_schedule(self, schedule_id: str, new_initial_time: Optional[time] = None,
                         new_end_time: Optional[time] = None,
-                        new_accepted_reservation: Optional[bool] = None):
+                        new_accepted_reservation: Optional[bool] = None) -> Optional[Schedule]:
         pass
+
+    @abstractmethod
+    def check_schedule(self, schedule: Schedule) -> bool:
+        """
+        This method checks if the schedule is available for reservation.
+        """
+        pass
+

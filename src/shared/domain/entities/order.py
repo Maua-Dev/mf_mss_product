@@ -2,6 +2,7 @@ import re
 import abc
 from typing import List, Optional
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.entities.schedule import Schedule
 
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.domain.enums.status_enum import STATUS
@@ -21,7 +22,7 @@ class Order(abc.ABC):
     aborted_reason: Optional[str] = None
     total_price: float
     last_status_update_milliseconds: Optional[int] = None
-    time_reserved: Optional[int] = None
+    time_reserved: Optional[Schedule] = None
     ID_LENGTH = 36
     MIN_NAME_LENGTH = 2
 
@@ -37,7 +38,7 @@ class Order(abc.ABC):
                  total_price: float,
                  last_status_update_milliseconds: int = None,
                  aborted_reason: Optional[str] = None,
-                 time_reserved: Optional[int] = None
+                 schedule: Optional[Schedule] = None
                  ):
         
         if not Order.validate_id(id=order_id):
@@ -89,12 +90,10 @@ class Order(abc.ABC):
             raise EntityError("action")
         self.action = action
 
-        if time_reserved is not None:
-            if type(time_reserved) != int:
-                raise EntityError("time_reserved")
-            if time_reserved < 0:
-                raise EntityParameterExcededMaximumValue(field="time_reserved", maximum_value="0")
-        self.time_reserved = time_reserved
+        if schedule is not None:
+            if not isinstance(schedule, Schedule):
+                raise EntityError("schedule")
+        self.schedule = schedule
 
     @staticmethod
     def validate_id(id: str) -> bool:

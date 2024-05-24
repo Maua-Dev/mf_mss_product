@@ -8,13 +8,14 @@ from src.shared.domain.repositories.order_repository_interface import IOrderRepo
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.usecase_errors import UnregisteredEmployee, UnregisteredUser, UserNotAllowed
 
+
 class GetAllActiveOrdersByRestaurantUsecase:
     def __init__(self, repo_order: IOrderRepository, repo_user: IUserRepository):
         self.repo_order = repo_order
         self.repo_user = repo_user
 
     def __call__(self, user_id: str) -> List[Order]:
-        
+
         user = self.repo_user.get_user_by_id(user_id)
 
         if user is None:
@@ -22,7 +23,7 @@ class GetAllActiveOrdersByRestaurantUsecase:
 
         if user.role not in [ROLE.OWNER, ROLE.ADMIN, ROLE.SELLER]:
             raise UserNotAllowed()
-        
+
         if user.restaurant is None:
             raise UnregisteredEmployee()
 

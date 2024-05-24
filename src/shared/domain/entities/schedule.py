@@ -7,22 +7,16 @@ from src.shared.helpers.errors.domain_errors import EntityError
 class Schedule(abc.ABC):
     def __init__(self,
                  schedule_id: str,
-                 hour_initial_time: int,
-                 minute_initial_time: int,
-                 hour_end_time: int,
-                 minute_end_time: int,
+                 initial_time: time,
+                 end_time: time,
                  restaurant: RESTAURANT,
-                 accepted_reservation: bool
+                 accepted_reservation: bool = False
                  ):
 
-        self.validate_hour(hour_initial_time)
-        self.validate_hour(hour_end_time)
-        self.validate_minute(minute_initial_time)
-        self.validate_minute(minute_end_time)
-
-        initial_time = time(hour=hour_initial_time, minute=minute_initial_time)
-        end_time = time(hour=hour_end_time, minute=minute_end_time)
-
+        if not isinstance(initial_time, time):
+            raise EntityError("initial_time")
+        if not isinstance(end_time, time):
+            raise EntityError("end_time")
         if initial_time > end_time:
             raise EntityError("initial_time")
 
@@ -33,31 +27,22 @@ class Schedule(abc.ABC):
             raise EntityError("restaurant")
         self.restaurant = restaurant
 
-        if type(accepted_reservation) != bool:
-            raise EntityError("accepted_reservation")
-        self.accepted_reservation = accepted_reservation
-
-        if type(schedule_id) != str:
+        if not isinstance(schedule_id, str):
             raise EntityError("schedule_id")
         self.schedule_id = schedule_id
 
+        if not isinstance(accepted_reservation, bool):
+            raise EntityError("accepted_reservation")
+        self.accepted_reservation = accepted_reservation
+
+    def to_dict(self) -> dict:
+        return {
+            "schedule_id": self.schedule_id,
+            "initial_time": self.initial_time,
+            "end_time": self.end_time,
+            "restaurant": self.restaurant,
+            "accepted_reservation": self.accepted_reservation
+        }
+
     def __repr__(self):
         return f"Schedule(schedule_id={self.schedule_id}, initial_time={self.initial_time}, end_time={self.end_time}, restaurant={self.restaurant}, accepted_reservation={self.accepted_reservation})"
-
-    @staticmethod
-    def validate_hour(hour: int):
-        if type(hour) != int:
-            raise EntityError("hour")
-        if hour < 0:
-            raise EntityError("hour")
-        if hour > 23:
-            raise EntityError("hour")
-
-    @staticmethod
-    def validate_minute(minute: int):
-        if type(minute) != int:
-            raise EntityError("minute")
-        if minute < 0:
-            raise EntityError("minute")
-        if minute > 59:
-            raise EntityError("minute")

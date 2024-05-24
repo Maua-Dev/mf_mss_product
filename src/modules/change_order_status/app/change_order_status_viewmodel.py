@@ -1,6 +1,7 @@
 from typing import List, Optional
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
@@ -33,6 +34,7 @@ class OrderViewmodel:
     total_price: float
     last_status_update: int
     action: ACTION
+    schedule: Optional[Schedule] = None
 
     def __init__(self, order: Order):
         self.order_id = order.order_id
@@ -46,6 +48,7 @@ class OrderViewmodel:
         self.total_price = order.total_price
         self.last_status_update = order.last_status_update_milliseconds
         self.action = order.action
+        self.schedule = order.schedule
 
     def to_dict(self) -> dict:
         return {
@@ -59,7 +62,8 @@ class OrderViewmodel:
             "aborted_reason": self.aborted_reason,
             "total_price": self.total_price,
             "last_status_update": self.last_status_update,
-            "action": self.action.value
+            "action": self.action.value,
+            "schedule": self.schedule.to_dict() if self.schedule else None
         }
 
 
