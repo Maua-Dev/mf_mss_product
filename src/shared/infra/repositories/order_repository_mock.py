@@ -244,8 +244,8 @@ class OrderRepositoryMock(IOrderRepository):
                 return schedule
         return None
     
-    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
-        return [order for order in self.orders if order.restaurant == restaurant and order.time_reserved]
+    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Schedule]:
+        return [schedule for schedule in self.schedules if schedule.restaurant == restaurant]
 
     def update_schedule(self, schedule_id: str, new_initial_time: Optional[time] = None,
                         new_end_time: Optional[time] = None,
@@ -279,8 +279,7 @@ class OrderRepositoryMock(IOrderRepository):
         return None
 
     def get_all_active_orders_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
-        return [order for order in self.orders if
-                order.status in [STATUS.PENDING, STATUS.PREPARING] and order.restaurant == restaurant]
+        return [order for order in self.orders if order.status in [STATUS.PENDING, STATUS.PREPARING] and order.restaurant == restaurant]
 
     def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
