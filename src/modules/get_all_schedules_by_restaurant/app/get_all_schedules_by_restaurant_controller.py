@@ -1,0 +1,50 @@
+from src.shared.helpers.errors.domain_errors import EntityError
+from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
+from src.shared.helpers.errors.controller_errors import MissingParameters
+from .get_all_schedules_by_restaurant_usecase import GetAllSchedulesByRestaurantUsecase
+from .get_all_schedules_by_restaurant_viewmodel import GetAllSchedulesByRestaurantViewmodel
+from src.shared.helpers.errors.usecase_errors import UnregisteredEmployee, UnregisteredUser, UserNotAllowed
+from src.shared.helpers.external_interfaces.http_codes import Forbidden, InternalServerError, OK, BadRequest
+
+
+class GetAllSchedulesByRestaurantController:
+    def __init__(self, usecase: GetAllSchedulesByRestaurantUsecase):
+        self.GetAllSchedulesByRestaurantUsecase = usecase
+
+    def __call__(self, request: IRequest) -> IResponse:
+        
+        try:
+
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
+
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
+
+            exclusive_start_key = request.data.get('exclusive_start_key')
+
+            all_orders = self.GetAllSchedulesByRestaurantUsecase(user_id=requester_user.user_id,
+                                                              exclusive_start_key=exclusive_start_key,
+                                                              amount=request.data.get('amount', 20))
+
+            viewmodel = GetAllSchedulesByRestaurantViewmodel(all_orders=all_orders)
+
+            return OK(viewmodel.to_dict())
+
+        except EntityError as err:
+            return BadRequest(body=err.message)
+
+        except MissingParameters as err:
+            return BadRequest(body=err.message)
+
+        except UserNotAllowed as err:
+            return Forbidden(body=err.message)
+
+        except UnregisteredUser as err:
+            return BadRequest(body=err.message)
+
+        except UnregisteredEmployee as err:
+            return BadRequest(body=err.message)
+
+        except Exception as err:
+            return InternalServerError(body=err.args[0])
