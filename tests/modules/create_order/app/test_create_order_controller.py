@@ -41,7 +41,7 @@ class Test_CreateOrderController:
         assert response.body["order"]["products"][0]["product_id"] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert response.body["order"]["products"][0]["quantity"] == 1
         assert response.body["order"]["restaurant"] == "SOUZA_DE_ABREU"
-        assert response.body["order"]["order_status"] == "PENDING"
+        assert response.body["order"]["status"] == "PENDING"
         assert response.body["order"]["total_price"] == 19.00
         assert response.body["order"]["action"] == "NEW"
 
@@ -92,7 +92,7 @@ class Test_CreateOrderController:
         assert response.body["order"]["products"][2]["quantity"] == 3
         assert response.body["order"]["restaurant"] == "SOUZA_DE_ABREU"
         assert response.body["order"]["creation_time_milliseconds"] == int(datetime.datetime.now().timestamp() * 1000)
-        assert response.body["order"]["order_status"] == "PENDING"
+        assert response.body["order"]["status"] == "PENDING"
         assert response.body["order"]["total_price"] == 66.00
         assert response.body["order"]["action"] == "NEW"
 

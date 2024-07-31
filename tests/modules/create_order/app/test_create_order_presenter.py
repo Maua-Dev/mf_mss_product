@@ -71,7 +71,7 @@ class Test_CreateOrderPresenter:
         assert json.loads(response["body"])["order"]["products"][0]["product_id"] == "8a705b91-c9e9-4353-a755-07f13afafed3"
         assert json.loads(response["body"])["order"]["products"][0]["quantity"] == 2
         assert json.loads(response["body"])["order"]["restaurant"] == "SOUZA_DE_ABREU"
-        assert json.loads(response["body"])["order"]["order_status"] == "PENDING"
+        assert json.loads(response["body"])["order"]["status"] == "PENDING"
         assert json.loads(response["body"])["order"]["total_price"] == 38.00
         assert json.loads(response["body"])["order"]["action"] == "NEW"
 

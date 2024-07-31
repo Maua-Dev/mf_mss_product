@@ -16,7 +16,7 @@ class OrderStatusViewmodel:
     def to_dict(self) -> dict:
         return {
             "order_id": self.order_id,
-            "order_status": self.current_status.value,
+            "status": self.current_status.value,
             "aborted_reason": self.aborted_reason,
             "action": self.action.value
         }

@@ -56,7 +56,7 @@ class OrderViewmodel:
             "products": [order_product.to_dict() for order_product in self.products],
             "creation_time_milliseconds": self.creation_time_milliseconds,
             "restaurant": self.restaurant.value,
-            "order_status": self.status.value,
+            "status": self.status.value,
             "aborted_reason": self.aborted_reason,
             "total_price": self.total_price,
             "last_status_update": self.last_status_update,

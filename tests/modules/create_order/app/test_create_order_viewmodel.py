@@ -38,7 +38,7 @@ class Test_CreateOrderViewmodel:
                  }],
                  "creation_time_milliseconds": 1692061296,
                  "restaurant": "CANTINA_DO_MOLEZA",
-                 "order_status": "READY",
+                 "status": "READY",
                  "aborted_reason": None,
                  "total_price": 30.00,
                 "last_status_update": 1692061896,

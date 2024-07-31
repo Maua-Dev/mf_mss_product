@@ -31,7 +31,7 @@ class Test_GetCurrentOrderStateByIdPresenter:
         expected_body = {
             "order": {
                 "order_id": order.order_id,
-                "order_status": order.status.value,
+                "status": order.status.value,
                 "aborted_reason": None,
                 "action": order.action.value
             },
