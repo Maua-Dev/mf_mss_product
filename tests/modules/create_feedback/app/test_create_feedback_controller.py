@@ -23,7 +23,7 @@ class Test_CreteFeedbackController:
             "email": repo_user.users_list[0].email,
             "custom:isMaua": True
         },
-            "order_id": "d78a47cb-80db-4661-b810-8e7c9419d61b",
+            "order_id": "1feef881-1b1f-4f38-a662-8ff7156e6c27",
             "restaurant": "SOUZA_DE_ABREU",
             "value": 3}
         )
@@ -32,7 +32,7 @@ class Test_CreteFeedbackController:
 
         assert response.status_code == 201
         assert response.body["message"] == "the feedback was created"
-        assert response.body["feedback"]["order_id"] == "d78a47cb-80db-4661-b810-8e7c9419d61b"
+        assert response.body["feedback"]["order_id"] == "1feef881-1b1f-4f38-a662-8ff7156e6c27"
         assert response.body["feedback"]["restaurant"] == "SOUZA_DE_ABREU"
         assert response.body["feedback"]["value"] == 3
 

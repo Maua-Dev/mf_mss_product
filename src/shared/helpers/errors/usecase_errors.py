@@ -73,3 +73,7 @@ class OrderAlreadyHaveFeedback(BaseError):
     def __init__(self):
         super().__init__("This order have already been evaluated")
 
+class FeedbackNotAllowed(BaseError):
+    def __init__(self):
+        super().__init__("Evaluate the order of its same restaurant")
+

@@ -14,7 +14,7 @@ class Test_CreateFeedbackUsecase:
         repo_user = UserRepositoryMock()
         usecase = CreateFeedbackUsecase(repo_feedback=repo_feedback,repo_user=repo_user)
 
-        feedback = usecase(order_id="d78a47cb-80db-4661-b810-8e7c9419d61b", user_id="93bc6ada-c0d1-7054-66ab-e17414c48af9", restaurant=RESTAURANT.CANTINA_DO_MOLEZA, value=3)
+        feedback = usecase(order_id="1feef881-1b1f-4f38-a662-8ff7156e6c27", user_id="93bc6ada-c0d1-7054-66ab-e17414c48af9", restaurant=RESTAURANT.SOUZA_DE_ABREU, value=3)
 
         assert repo_feedback.feedbacks[-1].order_id == feedback.order_id
         assert repo_feedback.feedbacks[-1].user_id == feedback.user_id

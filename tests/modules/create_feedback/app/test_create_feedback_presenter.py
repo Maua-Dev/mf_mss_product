@@ -53,8 +53,8 @@ class Test_CreateFeedbackPresenter:
                 "timeEpoch": 1583348638390
             },
             "body": {
-                    "order_id":"d78a47cb-80db-4661-b810-8e7c9419d61b",
-                    "restaurant": "HORA_H",
+                    "order_id":"1feef881-1b1f-4f38-a662-8ff7156e6c27",
+                    "restaurant": "SOUZA_DE_ABREU",
                     "value": 4
             },
             "pathParameters": None,
@@ -66,8 +66,8 @@ class Test_CreateFeedbackPresenter:
 
         assert response["statusCode"] == 201
         assert json.loads(response["body"])["message"] == "the feedback was created"
-        assert json.loads(response["body"])["feedback"]["order_id"] == "d78a47cb-80db-4661-b810-8e7c9419d61b"
-        assert json.loads(response["body"])["feedback"]["restaurant"] == "HORA_H"
+        assert json.loads(response["body"])["feedback"]["order_id"] == "1feef881-1b1f-4f38-a662-8ff7156e6c27"
+        assert json.loads(response["body"])["feedback"]["restaurant"] == "SOUZA_DE_ABREU"
         assert json.loads(response["body"])["feedback"]["value"] == 4
 
     def test_create_feedback_presenter_value_is_missing(self):
