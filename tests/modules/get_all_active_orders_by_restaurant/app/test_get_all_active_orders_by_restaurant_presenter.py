@@ -58,23 +58,46 @@ class Test_GetAllActiveOrdersByRestaurantPresenter:
 
         response = lambda_handler(event, None)
 
-        expected = {
-                    'all_active_orders': [{'aborted_reason': None,
-                                           'creation_time_milliseconds': 1692156322000,
-                                           'order_id': 'd4c63753-5119-4990-b427-926798499924',
-                                           'products': [{'product_id':'9589b258-ed44-4c24-b7d6-e96ae221baae', 
-                                                         'product_name':'Carteira',
-                                                         'quantity':3,
-                                                         "observation": None
-                                                         }],
-                                           'restaurant': 'CANTINA_DO_MOLEZA',
-                                           'status': 'PREPARING',
-                                           'total_price': 25.5,
-                                           'action': 'EDITED',
-                                           'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9',
-                                           'user_name':'Rodrigo Morales'}],
-                    'message': 'the active orders were retrieved',
-                    }
+        expected = {'all_active_orders': 
+                    [{'order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f87fb53', 
+                      'user_name': 'Lucas Milas', 
+                      'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf', 
+                      'products': [{'product_name': 'Cimento (400mL)', 
+                                    'product_id': '4081a83a-516f-442c-85e2-b54bfb192e55', 
+                                    'quantity': 2, 
+                                    'observation': None}], 
+                      'creation_time_milliseconds': 1692061296000, 
+                      'restaurant': 'CANTINA_DO_MOLEZA', 
+                      'status': 'READY', 
+                      'aborted_reason': None, 
+                      'total_price': 30.0, 
+                      'action': 'NEW'},
+                      {'order_id': 'b3f6c5aa-80ad-4f95-ae16-455b4f874553', 
+                       'user_name': 'Lucas Milas', 
+                       'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48gbf', 
+                       'products': [{'product_name': 'Salada de Frutas', 
+                                     'product_id': '6624e731-1301-4b24-a036-1e7f2553e023', 
+                                     'quantity': 2, 'observation': None}], 
+                        'creation_time_milliseconds': 1692061297000, 
+                        'restaurant': 'CANTINA_DO_MOLEZA', 
+                        'status': 'READY', 
+                        'aborted_reason': None, 
+                        'total_price': 14.0, 
+                        'action': 'EDITED'},                         
+                      {'order_id': 'd4c63753-5119-4990-b427-926798499924', 
+                       'user_name': 'Rodrigo Morales', 
+                       'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af9', 
+                       'products': [{'product_name': 'Carteira', 
+                                     'product_id': '9589b258-ed44-4c24-b7d6-e96ae221baae', 
+                                     'quantity': 3, 
+                                     'observation': None}], 
+                        'creation_time_milliseconds': 1692156322000, 
+                        'restaurant': 'CANTINA_DO_MOLEZA', 
+                        'status': 'PREPARING', 
+                        'aborted_reason': None, 
+                        'total_price': 25.5, 
+                        'action': 'EDITED'}], 
+                    'message': 'the active orders were retrieved'}
 
         assert response["statusCode"] == 200
         assert json.loads(response["body"])["message"] == "the active orders were retrieved"

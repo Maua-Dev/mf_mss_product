@@ -13,7 +13,7 @@ class Test_GetAllProductsGroupByRestaurantUsecase:
         usecase = GetAllActiveOrdersByRestaurantUsecase(repo_order, repo_user)
         orders = usecase(user_id="93bc6ada-c0d1-7054-66ab-e17414c48af4")
         
-        assert len(orders) == 2
+        assert len(orders) == 4
 
     def test_get_all_active_orders_by_restaurant_unregisted_employee(self):
         repo_order = OrderRepositoryMock()

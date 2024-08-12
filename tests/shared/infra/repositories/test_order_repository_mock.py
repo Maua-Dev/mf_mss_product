@@ -79,7 +79,7 @@ class Test_OrderRepositoryMock:
         repo = OrderRepositoryMock()
         orders_list = repo.get_all_active_orders_by_restaurant(restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
-        assert len(orders_list) == 2
+        assert len(orders_list) == 4
 
     def test_get_all_orders_by_restaurant_without_order_id(self):
         repo = OrderRepositoryMock()

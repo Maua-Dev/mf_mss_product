@@ -205,7 +205,7 @@ class OrderRepositoryMock(IOrderRepository):
 
     def get_all_active_orders_by_restaurant(self, restaurant: RESTAURANT) -> List[Order]:
         return [order for order in self.orders if
-                order.status in [STATUS.PENDING, STATUS.PREPARING] and order.restaurant == restaurant]
+                order.status in [STATUS.PENDING, STATUS.PREPARING, STATUS.READY] and order.restaurant == restaurant]
 
     def update_order(self, order_id: str, new_products: Optional[List[OrderProduct]] = None,
                      new_status: Optional[STATUS] = None,
