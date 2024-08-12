@@ -123,7 +123,7 @@ class OrderRepositoryDynamo(IOrderRepository):
         active_orders = []
 
         for item in resp.get('Items'):
-            if item.get('status') == 'PENDING' or item.get('status') == 'PREPARING':
+            if item.get('status') == 'PENDING' or item.get('status') == 'PREPARING' or item.get('status') == 'READY':
                 active_orders.append(item)
 
         orders = list()
