@@ -327,5 +327,22 @@ class OrderRepositoryDynamo(IOrderRepository):
         average_feedback = sum(feedbacks) / len(feedbacks)
 
         return float(f"{average_feedback:.1f}")
+    
     def get_feedback_by_order_id(self, order_id: str) -> Optional[Feedback]:
-        raise NotImplementedError()
+        query_string = Key(self.dynamo.gsi_partition_key).eq(self.feedback_gsi_partition_key_format(order_id))
+        resp = self.dynamo.query(key_condition_expression=query_string, Select='ALL_ATTRIBUTES', IndexName='GSI1')
+
+        if len(resp['Items']) == 0:
+            return None
+
+        restaurant = resp['Items'][0].get('PK')
+
+        feedback_data = self.dynamo.get_item(partition_key=self.feedback_partition_key_format(RESTAURANT(restaurant)),
+                                          sort_key=self.feedback_sort_key_format(order_id))
+
+        if 'Item' not in feedback_data:
+            return None
+
+        feedback = FeedbackDynamoDTO.from_dynamo(feedback_data.get("Item")).to_entity()
+
+        return feedback
