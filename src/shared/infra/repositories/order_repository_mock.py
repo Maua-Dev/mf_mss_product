@@ -323,3 +323,12 @@ class OrderRepositoryMock(IOrderRepository):
             if feedback.order_id == order_id:
                 return feedback
         return None
+    
+    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Schedule]:
+        pass
+
+    def get_schedule_by_id(self, schedule_id: str) -> Optional[Schedule]:
+        pass
+
+    def create_schedule(self, schedule: Schedule) -> Schedule:
+        pass
