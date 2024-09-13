@@ -196,3 +196,12 @@ class Test_OrderRepositoryMock:
 
         assert len(repo.feedbacks) == len_before + 1
         assert repo.feedbacks[-1] == feedback
+
+    def test_get_all_schedule_by_restaurant(self):
+        pass
+
+    def test_get_schedule_by_id(self):
+        pass
+
+    def test_create_schedule(self):
+        pass
