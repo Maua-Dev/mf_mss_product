@@ -1,11 +1,12 @@
 from ast import Dict
-from datetime import datetime
+from datetime import datetime, time
 from typing import List, Optional
 
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.feedback import Feedback
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
@@ -18,6 +19,7 @@ class OrderRepositoryMock(IOrderRepository):
     orders: List[Order]
     connections: List[Connection]
     feedbacks: List[Feedback]
+    schedules: List[Schedule]
 
     def __init__(self):
         users_repo = UserRepositoryMock().users_list
@@ -192,6 +194,11 @@ class OrderRepositoryMock(IOrderRepository):
 
             Feedback(order_id="d2b29a41-69a6-4ad8-87b9-2444119fbf66", user_id=users_repo[6].user_id, restaurant=RESTAURANT.HORA_H, value=4),
         ]
+
+        self.schedules = [
+            Schedule(schedule_id="167f3cde-f75f-492a-9b4b-72fefa97bdf3", initial_time=time(hour=8, minute=0), end_time=time(hour=9, minute=30), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+            Schedule(schedule_id="32e2322a-6b2f-4700-874a-e3e9c8f0870b", initial_time=time(hour=8, minute=30), end_time=time(hour=11, minute=30), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+        ]   
 
     def create_order(self, order: Order) -> Order:
         self.orders.append(order)
