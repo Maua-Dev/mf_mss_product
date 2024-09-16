@@ -197,7 +197,16 @@ class OrderRepositoryMock(IOrderRepository):
 
         self.schedules = [
             Schedule(schedule_id="167f3cde-f75f-492a-9b4b-72fefa97bdf3", initial_time=time(hour=8, minute=0), end_time=time(hour=9, minute=30), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
-            Schedule(schedule_id="32e2322a-6b2f-4700-874a-e3e9c8f0870b", initial_time=time(hour=8, minute=30), end_time=time(hour=11, minute=30), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+            Schedule(schedule_id="32e2322a-6b2f-4700-874a-e3e9c8f0870b", initial_time=time(hour=9, minute=30), end_time=time(hour=11, minute=0), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+            Schedule(schedule_id="a4040742-1de4-4786-a1f8-7622e6e53e9f", initial_time=time(hour=11, minute=0), end_time=time(hour=12, minute=30), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+
+            Schedule(schedule_id="cb49cb56-20f9-4302-a632-2d46ac2e8305", initial_time=time(hour=8, minute=0), end_time=time(hour=9, minute=30), restaurant=RESTAURANT.HORA_H, accepted_reservation=True),
+            Schedule(schedule_id="39d28d49-9893-4899-8f84-cfd454ac50dd", initial_time=time(hour=9, minute=30), end_time=time(hour=11, minute=0), restaurant=RESTAURANT.HORA_H, accepted_reservation=True),
+            Schedule(schedule_id="2a375656-5cea-4314-9b22-47acc222cae0", initial_time=time(hour=11, minute=0), end_time=time(hour=12, minute=30), restaurant=RESTAURANT.HORA_H, accepted_reservation=True),
+
+            Schedule(schedule_id="82b76801-9bb3-4eda-a686-8d189c59ba28", initial_time=time(hour=8, minute=0), end_time=time(hour=9, minute=30), restaurant=RESTAURANT.SOUZA_DE_ABREU, accepted_reservation=True),
+            Schedule(schedule_id="b3f9ecc1-1ac7-40eb-a8dd-54fe7b6f874d", initial_time=time(hour=9, minute=30), end_time=time(hour=11, minute=0), restaurant=RESTAURANT.SOUZA_DE_ABREU, accepted_reservation=True),
+            Schedule(schedule_id="afc910c4-a135-4ce3-9ca8-f7ec5e60f4fe", initial_time=time(hour=11, minute=0), end_time=time(hour=12, minute=30), restaurant=RESTAURANT.SOUZA_DE_ABREU, accepted_reservation=True), 
         ]   
 
     def create_order(self, order: Order) -> Order:
@@ -331,4 +340,5 @@ class OrderRepositoryMock(IOrderRepository):
         pass
 
     def create_schedule(self, schedule: Schedule) -> Schedule:
-        pass
+        self.schedules.append(schedule)
+        return schedule
