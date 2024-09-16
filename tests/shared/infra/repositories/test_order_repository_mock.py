@@ -2,11 +2,13 @@ from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.feedback import Feedback
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 
+from datetime import time
 
 class Test_OrderRepositoryMock:
     def test_create_order(self):
@@ -204,4 +206,18 @@ class Test_OrderRepositoryMock:
         pass
 
     def test_create_schedule(self):
-        pass
+        repo = OrderRepositoryMock()
+        len_before = len(repo.schedules) 
+        schedule = Schedule(
+            schedule_id="afc910c4-a135-4ce3-9ca8-f7ec5e60f4fe",
+            restaurant=RESTAURANT.SOUZA_DE_ABREU,
+            initial_time=time(hour=7, minute=0),
+            end_time=time(hour=21, minute=0),
+            accepted_reservation=True
+        )
+
+        repo.create_schedule(schedule=schedule)
+
+        #verificacao dupla para consistencia
+        assert len(repo.schedules) == len_before + 1 
+        assert repo.schedules[-1] == schedule 
