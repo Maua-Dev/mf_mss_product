@@ -200,7 +200,17 @@ class Test_OrderRepositoryMock:
         assert repo.feedbacks[-1] == feedback
 
     def test_get_all_schedule_by_restaurant(self):
-        pass
+        repo = OrderRepositoryMock()
+
+        schedules = repo.get_all_schedules_by_restaurant(RESTAURANT.SOUZA_DE_ABREU)
+
+        assert len(schedules) == 3
+        assert all([
+            isinstance(schedule, Schedule) for schedule in schedules
+        ])
+        assert all([
+            schedule.restaurant == RESTAURANT.SOUZA_DE_ABREU for schedule in schedules
+        ])
 
     def test_get_schedule_by_id(self):
         repo = OrderRepositoryMock()
