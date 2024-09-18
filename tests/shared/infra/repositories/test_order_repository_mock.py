@@ -203,7 +203,14 @@ class Test_OrderRepositoryMock:
         pass
 
     def test_get_schedule_by_id(self):
-        pass
+        repo = OrderRepositoryMock()
+
+        schedule_id = repo.schedules[1].schedule_id
+
+        response = repo.get_schedule_by_id(schedule_id=schedule_id)
+
+        assert response.schedule_id == schedule_id
+        assert response is repo.schedules[1]
 
     def test_create_schedule(self):
         repo = OrderRepositoryMock()
