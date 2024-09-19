@@ -212,7 +212,7 @@ class Test_OrderRepositoryMock:
             schedule.restaurant == RESTAURANT.SOUZA_DE_ABREU for schedule in schedules
         ])
 
-    def test_get_schedule_by_id(self):
+    def test_get_schedules_by_id(self):
         repo = OrderRepositoryMock()
 
         schedule_id = repo.schedules[1].schedule_id
