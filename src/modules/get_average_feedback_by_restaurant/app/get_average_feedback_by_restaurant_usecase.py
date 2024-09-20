@@ -17,6 +17,8 @@ class GetAverageFeedbackByRestaurantUsecase:
             raise UnregisteredUser()
         if user.role not in [ROLE.ADMIN, ROLE.OWNER, ROLE.SELLER]:
             raise UserNotAllowed()
+        if not user.restaurant:
+            raise UserNotAllowed()
 
         average_feedback = self.order_repo.get_average_feedback_by_restaurant(restaurant=user.restaurant)
 

@@ -316,3 +316,6 @@ class OrderRepositoryMock(IOrderRepository):
             if feedback.order_id == order_id:
                 return feedback
         return None
+
+    def get_all_active_orders_by_user(self, user_id: str) -> List[Order]:
+        return [order for order in self.orders if order.user_id == user_id and order.status in [STATUS.PENDING, STATUS.PREPARING, STATUS.READY]]

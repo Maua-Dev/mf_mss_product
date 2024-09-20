@@ -9,7 +9,7 @@ from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.repositories.order_repository_interface import IOrderRepository
 from src.shared.domain.repositories.product_repository_interface import IProductRepository
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser
+from src.shared.helpers.errors.usecase_errors import NoItemsFound, UnregisteredUser, UserCannotCreateOrder
 
 
 class CreateOrderUsecase:
@@ -25,6 +25,11 @@ class CreateOrderUsecase:
 
         if user is None:
             raise UnregisteredUser()
+
+        user_orders = self.repo_order.get_all_active_orders_by_user(user_id=user_id)
+
+        if user_orders is not None and len(user_orders) > 3:
+            raise UserCannotCreateOrder()
 
         price = 0
 

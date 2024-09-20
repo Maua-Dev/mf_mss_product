@@ -9,7 +9,7 @@ from src.shared.infra.repositories.product_repository_mock import ProductReposit
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 user_repo = UserRepositoryMock()
-user_id = user_repo.users_list[0].user_id
+user_id = user_repo.users_list[1].user_id
 
 
 class Test_UpdateProductUsecase:

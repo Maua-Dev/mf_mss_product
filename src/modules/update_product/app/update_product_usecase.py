@@ -66,6 +66,9 @@ class UpdateProductUsecase:
         if not Product.validate_product_id(product_id=product_id):
             raise EntityError("product_id")
 
+        if user.restaurant != restaurant:
+            raise UserNotAllowed()
+
         product = self.repo_prod.update_product(product_id=product_id, restaurant=restaurant,
                                                 new_available=new_available, new_price=new_price, new_name=new_name,
                                                 new_description=new_description, new_prepare_time=new_prepare_time,

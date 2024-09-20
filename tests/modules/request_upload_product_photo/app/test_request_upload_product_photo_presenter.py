@@ -29,7 +29,7 @@ class Test_RequestUploadProductPhotoPresenter:
                 "authorizer": {
                     "claims":
                         {
-                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48ae3",
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48ae5",
                             "name": "Lucas Duez",
                             "email": "lucas.santos@gmail.com",
                             "custom:isMaua": True

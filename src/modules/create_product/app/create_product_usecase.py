@@ -24,6 +24,9 @@ class CreateProductUsecase:
         if user.role not in [ROLE.OWNER, ROLE.ADMIN]:
             raise UserNotAllowed()
 
+        if user.restaurant and user.restaurant != restaurant:
+            raise UserNotAllowed()
+
         product_id = str(uuid.uuid4())
 
         product = Product(available=available, input_price=price, name=name, description=description, meal_type=meal_type, photo=photo, product_id=product_id, last_update=int(datetime.datetime.now().timestamp() * 1000), restaurant=restaurant, prepare_time=prepare_time)

@@ -3,7 +3,7 @@ from src.shared.infra.repositories.user_repository_mock import UserRepositoryMoc
 
 def get_event_for_test_presenter_no_socket(body: dict, claims: dict = None):
     user_repo = UserRepositoryMock()
-    user = user_repo.users_list[0]
+    user = user_repo.users_list[1]
 
     if claims is None:
         claims = {

@@ -1,6 +1,5 @@
 import json
 from src.modules.delete_product.app.delete_product_presenter import lambda_handler
-from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter_no_socket
 
 
@@ -8,8 +7,8 @@ class Test_DeleteProductPresenter:
     def test_delete_product_presenter(self):
         event = get_event_for_test_presenter_no_socket(
             body={
-                "product_id": "71ede2ce-31c6-4b22-bab5-da2175654308",
-                "restaurant": "HORA_H",
+                "product_id": "2f9ad2af-a751-4adf-81c4-50e6a9b06c8b",
+                "restaurant": "SOUZA_DE_ABREU",
             }
         )
 

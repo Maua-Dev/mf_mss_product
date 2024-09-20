@@ -85,3 +85,7 @@ class IOrderRepository(ABC):
     @abstractmethod
     def get_feedback_by_order_id(self, order_id: str) -> Optional[Feedback]:
         pass
+
+    @abstractmethod
+    def get_all_active_orders_by_user(self, user_id: str) -> List[Order]:
+        pass

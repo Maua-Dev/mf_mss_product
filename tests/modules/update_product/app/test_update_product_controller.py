@@ -12,7 +12,7 @@ from src.shared.infra.repositories.product_repository_mock import ProductReposit
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 repo_user = UserRepositoryMock()
-user_id_with_permission = repo_user.users_list[0].user_id
+user_id_with_permission = repo_user.users_list[1].user_id
 
 
 class Test_UpdateProductController:
@@ -23,9 +23,9 @@ class Test_UpdateProductController:
 
         request = HttpRequest(
             body={"requester_user": {
-                "sub": repo_user.users_list[0].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
+                "sub": repo_user.users_list[1].user_id,
+                "name": repo_user.users_list[1].name,
+                "email": repo_user.users_list[1].email,
                 "custom:isMaua": True
             },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -61,9 +61,9 @@ class Test_UpdateProductController:
 
         request = HttpRequest(
             body={"requester_user": {
-                "sub": repo_user.users_list[0].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
+                "sub": repo_user.users_list[1].user_id,
+                "name": repo_user.users_list[1].name,
+                "email": repo_user.users_list[1].email,
                 "custom:isMaua": True
             },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -150,9 +150,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'restaurant': 'SOUZA_DE_ABREU',
@@ -179,9 +179,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email, 'custom:isMaua': True},
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email, 'custom:isMaua': True},
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
                 'new_available': True,
                 'new_price': 15.0,
@@ -204,8 +204,8 @@ class Test_UpdateProductController:
         controller = UpdateProductController(usecase=usecase)
 
         request = HttpRequest(
-            body={'requester_user': {'sub': repo_user.users_list[0].user_id, 'name': repo_user.users_list[0].name,
-                                     'email': repo_user.users_list[0].email, 'custom:isMaua': True},
+            body={'requester_user': {'sub': repo_user.users_list[1].user_id, 'name': repo_user.users_list[1].name,
+                                     'email': repo_user.users_list[1].email, 'custom:isMaua': True},
                   'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
                   'restaurant': 'Souzinha',
                   'new_available': True,
@@ -230,9 +230,9 @@ class Test_UpdateProductController:
 
         request = HttpRequest(
             body={"requester_user": {
-                "sub": repo_user.users_list[0].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
+                "sub": repo_user.users_list[1].user_id,
+                "name": repo_user.users_list[1].name,
+                "email": repo_user.users_list[1].email,
                 "custom:isMaua": True
             },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -255,9 +255,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -285,9 +285,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -310,9 +310,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -335,9 +335,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -360,9 +360,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -385,9 +385,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -408,9 +408,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -431,9 +431,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -451,20 +451,20 @@ class Test_UpdateProductController:
         usecase = UpdateProductUsecase(repo_prod=repo_prod, repo_user=repo_user)
         controller = UpdateProductController(usecase=usecase)
 
-        product_updated = repo_prod.products[0]
+        product_updated = repo_prod.products[1]
 
         price_before = product_updated.price
 
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
-                'product_id': repo_prod.products[0].product_id,
-                'restaurant': repo_prod.products[0].restaurant.value,
+                'product_id': repo_prod.products[1].product_id,
+                'restaurant': repo_prod.products[1].restaurant.value,
                 'new_price': None
             }
         )
@@ -483,9 +483,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -509,9 +509,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -534,9 +534,9 @@ class Test_UpdateProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    'sub': repo_user.users_list[0].user_id,
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'sub': repo_user.users_list[1].user_id,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',
@@ -560,8 +560,8 @@ class Test_UpdateProductController:
             body={
                 'requester_user': {
                     'sub': "id",
-                    'name': repo_user.users_list[0].name,
-                    'email': repo_user.users_list[0].email,
+                    'name': repo_user.users_list[1].name,
+                    'email': repo_user.users_list[1].email,
                     'custom:isMaua': True
                 },
                 'product_id': '8a705b91-c9e9-4353-a755-07f13afafed3',

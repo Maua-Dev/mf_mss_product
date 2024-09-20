@@ -1,4 +1,6 @@
 import datetime
+
+from src.modules.delete_product.app.delete_product_presenter import repo_product
 from src.shared.domain.entities.product import Product
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
@@ -26,6 +28,12 @@ class RequestUploadProductPhotoUsecase:
             raise UnregisteredUser()
 
         if user.role not in [ROLE.OWNER, ROLE.ADMIN]:
+            raise UserNotAllowed()
+
+        if user.restaurant is None:
+            raise UserNotAllowed()
+
+        if repo_product.get_product(product_id=product_id, restaurant=user.restaurant) is None:
             raise UserNotAllowed()
         
         presigned_post = self.repo_product.request_upload_product_photo(product_id=product_id, user_id=user.user_id)

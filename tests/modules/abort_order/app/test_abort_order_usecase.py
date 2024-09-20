@@ -48,13 +48,11 @@ class Test_AbortOrderUseCase:
 
         usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
 
-        user = repo_user.users_list[-1]
+        user = repo_user.users_list[3]
         user.role = ROLE.OWNER
 
         response: Order = usecase(
-
             order_id=repo_order.orders[-3].order_id,
-
             user_id=user.user_id,
             new_aborted_reason="Minha aula já está prestes a começar! :( ",
         )
@@ -72,13 +70,11 @@ class Test_AbortOrderUseCase:
 
         usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
 
-        user = repo_user.users_list[-1]
+        user = repo_user.users_list[1]
         user.role = ROLE.SELLER
 
         response: Order = usecase(
-
             order_id=repo_order.orders[-3].order_id,
-
             user_id=user.user_id,
             new_aborted_reason="Minha aula já está prestes a começar! :( ",
         )
@@ -173,8 +169,7 @@ class Test_AbortOrderUseCase:
 
         usecase = AbortOrderUsecase(repo_order=repo_order, repo_user=repo_user)
 
-        user = create_test_user(repo_user)
-        user.role = ROLE.ADMIN
+        user = repo_user.users_list[0]
 
         response: Order = usecase(
             order_id=repo_order.orders[-2].order_id,

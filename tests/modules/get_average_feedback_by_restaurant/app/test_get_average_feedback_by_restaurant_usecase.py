@@ -33,4 +33,4 @@ class Test_GetAverageFeedbackByRestaurantUsecase:
         user = user_repo.users_list[1]
         usecase = GetAverageFeedbackByRestaurantUsecase(user_repo=UserRepositoryMock(), order_repo=OrderRepositoryMock())
         response = usecase(user_id=user.user_id)
-        assert response["average_feedback"] == 0.0
+        assert response["average_feedback"] == 2.0

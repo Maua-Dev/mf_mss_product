@@ -346,3 +346,17 @@ class OrderRepositoryDynamo(IOrderRepository):
         feedback = FeedbackDynamoDTO.from_dynamo(feedback_data.get("Item")).to_entity()
 
         return feedback
+
+    def get_all_active_orders_by_user(self, user_id: str) -> List[Order]:
+        resp = self.dynamo.scan_items(filter_expression=Attr('user_id').eq(user_id) & Attr('entity').eq('order'))
+        active_orders = []
+
+        for item in resp.get("Items"):
+            if item.get('status') == 'PENDING' or item.get('status') == 'PREPARING' or item.get('status') == 'READY':
+                active_orders.append(item)
+
+        orders = list()
+        for order in active_orders:
+            orders.append(OrderDynamoDTO.from_dynamo(order).to_entity())
+
+        return orders
