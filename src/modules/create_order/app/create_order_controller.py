@@ -1,3 +1,4 @@
+from src.shared.helpers.errors.usecase_errors import UserCannotCreateOrder, UnregisteredUser
 from .create_order_usecase import CreateOrderUsecase
 from .create_order_viewmodel import CreateOrderViewmodel
 from src.shared.domain.entities.order_product import OrderProduct
@@ -5,7 +6,8 @@ from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.helpers.errors.controller_errors import MissingParameters, RestaurantNotFound
 from src.shared.helpers.errors.domain_errors import EntityError, EntityParameterExcededMaximumValue
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
-from src.shared.helpers.external_interfaces.http_codes import BadRequest, Created, InternalServerError, NotFound
+from src.shared.helpers.external_interfaces.http_codes import BadRequest, Created, InternalServerError, NotFound, \
+    Forbidden, Unauthorized
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 
@@ -52,9 +54,15 @@ class CreateOrderController:
             viewmodel = CreateOrderViewmodel(order)
 
             return Created(viewmodel.to_dict())
+
+        except UnregisteredUser as err:
+            return Forbidden(body=err.message)
         
         except MissingParameters as err:
             return BadRequest(body=err.message)
+
+        except UserCannotCreateOrder as err:
+            return Unauthorized(body=err.message)
         
         except RestaurantNotFound as err:
             return NotFound(body=err.message)

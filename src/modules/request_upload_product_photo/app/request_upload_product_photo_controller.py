@@ -1,7 +1,7 @@
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .request_upload_product_photo_usecase import RequestUploadProductPhotoUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
+from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound, UserNotAllowed
 from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, Forbidden, HttpResponse, InternalServerError, NotFound
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
@@ -33,6 +33,9 @@ class RequestUploadProductPhotoController:
 
         except NoItemsFound as err:
             return NotFound(body=err.message)
+
+        except UserNotAllowed as err:
+            return Forbidden(body=err.message)
 
         except MissingParameters as err:
             return BadRequest(body=err.message)

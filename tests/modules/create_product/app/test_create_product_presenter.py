@@ -59,7 +59,7 @@ class Test_CreateProductPresenter:
                     "description": "Mussarela e Presunto",
                     "meal_type": "SANDWICHES",
                     "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                    "restaurant": "HORA_H",
+                    "restaurant": "SOUZA_DE_ABREU",
                     "prepare_time": 15
             },
             "pathParameters": None,
@@ -78,7 +78,7 @@ class Test_CreateProductPresenter:
         assert json.loads(response["body"])["product"]["meal_type"] == "SANDWICHES"
         assert json.loads(response["body"])["product"][
                    "photo"] == "https://avatars.githubusercontent.com/u/30812461?v=4"
-        assert json.loads(response["body"])["product"]["restaurant"] == "HORA_H"
+        assert json.loads(response["body"])["product"]["restaurant"] == "SOUZA_DE_ABREU"
         assert json.loads(response["body"])["product"]["prepare_time"] == 15
 
     def test_create_product_presenter_price_is_missing(self):
@@ -107,7 +107,7 @@ class Test_CreateProductPresenter:
                          "description": "Mussarela e Presunto",
                          "meal_type": "SANDWICHES",
                          "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                         "restaurant": "HORA_H",
+                         "restaurant": "SOUZA_DE_ABREU",
                          "prepare_time": 15
                  },
                  'pathParameters': None, 'isBase64Encoded': None, 'stageVariables': None}
@@ -142,7 +142,7 @@ class Test_CreateProductPresenter:
                          "description": "Mussarela e Presunto",
                          "meal_type": "SANDWICHES",
                          "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                         "restaurant": "HORA_H",
+                         "restaurant": "SOUZA_DE_ABREU",
                          "prepare_time": 15
                  },
                  'pathParameters': None, 'isBase64Encoded': None, 'stageVariables': None}
@@ -161,7 +161,7 @@ class Test_CreateProductPresenter:
                 "description": "Mussarela e Presunto",
                 "meal_type": "SANDWICHES",
                 "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                "restaurant": "HORA_H",
+                "restaurant": "SOUZA_DE_ABREU",
                 "prepare_time": -15
             }
         )
@@ -179,7 +179,7 @@ class Test_CreateProductPresenter:
                 "description": "Mussarela e Presunto",
                 "meal_type": "SANDWICHES",
                 "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                "restaurant": "HORA_H",
+                "restaurant": "SOUZA_DE_ABREU",
                 "prepare_time": 15
             }
         )
@@ -197,7 +197,7 @@ class Test_CreateProductPresenter:
                 "description": "Mussarela e Presunto",
                 "meal_type": "SANDWICHES",
                 "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                "restaurant": "HORA_H",
+                "restaurant": "SOUZA_DE_ABREU",
                 "prepare_time": 15
             }
         )
@@ -215,7 +215,7 @@ class Test_CreateProductPresenter:
                 "description": "",
                 "meal_type": "SANDWICHES",
                 "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                "restaurant": "HORA_H",
+                "restaurant": "SOUZA_DE_ABREU",
                 "prepare_time": 15
             }
         )
@@ -233,7 +233,7 @@ class Test_CreateProductPresenter:
                 "description": "Mussarela e Presunto",
                 "meal_type": "SANDWICHES",
                 "photo": "https://avatars.githubusercontent.com/u/30812461?v=4",
-                "restaurant": "HORA_H",
+                "restaurant": "SOUZA_DE_ABREU",
                 "prepare_time": 15
             }
         )

@@ -14,7 +14,7 @@ class UserRepositoryMock(IUserRepository):
             User(name="Lucas Duez", email="lucas.santos@gmail.com", role=ROLE.ADMIN,
                  user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3", restaurant=None, photo="https://img.freepik.com/free-photo/red-white-cat-i-white-studio_155003-13189.jpg?w=2000"),
             User(name="Vitor Sollas", email="vitinho.dev@maua.br", role=ROLE.ADMIN,
-                 user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae5", restaurant=None, photo="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80"),
+                 user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae5", restaurant=RESTAURANT.SOUZA_DE_ABREU, photo="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80"),
             User(name="Laura Carolina", email="email.da.laura@gmail.com", role=ROLE.OWNER,
                  user_id="93bc6ada-c0d1-7054-66ab-e17414c48abb", restaurant=RESTAURANT.CANTINA_DO_MOLEZA, photo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/640px-Cat03.jpg"),
             User(name="João Brancas", email="brancas.dev@gmail.com", role=ROLE.OWNER,

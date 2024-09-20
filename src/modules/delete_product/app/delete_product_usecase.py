@@ -28,6 +28,9 @@ class DeleteProductUsecase:
         if type(restaurant) != RESTAURANT:
             raise EntityError("restaurant")
 
+        if user.restaurant != restaurant:
+            raise UserNotAllowed()
+
         product = self.repo_product.delete_product(product_id=product_id,restaurant=restaurant)
 
         if product is None:

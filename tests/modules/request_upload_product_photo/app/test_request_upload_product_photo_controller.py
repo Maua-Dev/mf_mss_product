@@ -15,9 +15,9 @@ class Test_RequestUploadProductPhotoController:
         usecase = RequestUploadProductPhotoUsecase(repo_product, repo_user)
         controller = RequestUploadProductPhotoController(usecase=usecase)
         request = HttpRequest(body={'requester_user': {
-            "sub": repo_user.users_list[0].user_id,
-            "name": repo_user.users_list[0].name,
-            "email": repo_user.users_list[0].email,
+            "sub": repo_user.users_list[1].user_id,
+            "name": repo_user.users_list[1].name,
+            "email": repo_user.users_list[1].email,
             "custom:isMaua": True
         },
             "product_id": "8a705b91-c9e9-4353-a755-07f13afafed3",

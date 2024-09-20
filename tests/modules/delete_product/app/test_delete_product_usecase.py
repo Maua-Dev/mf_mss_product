@@ -15,7 +15,7 @@ class Test_DeleteProductUsecase:
         lenBefore = len(repo_prod.products)
 
         product_id = "8a705b91-c9e9-4353-a755-07f13afafed3"
-        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
+        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
 
         product = usecase(product_id=product_id, restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user_id)
 
@@ -38,7 +38,7 @@ class Test_DeleteProductUsecase:
         repo_user = UserRepositoryMock()
         usecase = DeleteProductUsecase(repo_prod,repo_user)
 
-        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
+        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
 
         with pytest.raises(EntityError):
             product = usecase(product_id=123, restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user_id)
@@ -48,7 +48,7 @@ class Test_DeleteProductUsecase:
         repo_user = UserRepositoryMock()
         usecase = DeleteProductUsecase(repo_prod,repo_user)
 
-        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
+        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
 
         with pytest.raises(EntityError):
             product = usecase(product_id="27cb49f5-4313-49a7-9f84", restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user_id)
@@ -58,7 +58,7 @@ class Test_DeleteProductUsecase:
         repo_user = UserRepositoryMock()
         usecase = DeleteProductUsecase(repo_prod,repo_user)
 
-        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
+        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
 
         with pytest.raises(EntityError):
             product = usecase(product_id="6d6b38c0-927d-4c43-93b7-b33ea9278cba", restaurant="SOUZA_DE_ABREU", user_id=user_id)
@@ -68,7 +68,7 @@ class Test_DeleteProductUsecase:
         repo_user = UserRepositoryMock()
         usecase = DeleteProductUsecase(repo_prod,repo_user)
 
-        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae3"
+        user_id = "93bc6ada-c0d1-7054-66ab-e17414c48ae5"
 
         with pytest.raises(NoItemsFound):
             product = usecase(product_id="6d6b38c0-927d-4c43-93b7-b33ea9278cma", restaurant=RESTAURANT.SOUZA_DE_ABREU, user_id=user_id)

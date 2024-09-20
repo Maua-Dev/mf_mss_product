@@ -15,9 +15,9 @@ class Test_DeleteProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
+                    "sub": repo_user.users_list[1].user_id,
+                    "name": repo_user.users_list[1].name,
+                    "email": repo_user.users_list[1].email,
                     "custom:isMaua": True
                 },
 
@@ -43,13 +43,13 @@ class Test_DeleteProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
+                    "sub": repo_user.users_list[1].user_id,
+                    "name": repo_user.users_list[1].name,
+                    "email": repo_user.users_list[1].email,
                     "custom:isMaua": True
                 },
 
-                "restaurant": repo_product.products[0].restaurant.value
+                "restaurant": repo_product.products[1].restaurant.value
 
             }
         )
@@ -68,12 +68,12 @@ class Test_DeleteProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
+                    "sub": repo_user.users_list[1].user_id,
+                    "name": repo_user.users_list[1].name,
+                    "email": repo_user.users_list[1].email,
                     "custom:isMaua": True
                 },
-                "product_id": repo_product.products[0].product_id,
+                "product_id": repo_product.products[1].product_id,
             }
         )
 
@@ -91,12 +91,12 @@ class Test_DeleteProductController:
         request = HttpRequest(
             body={
                 'requester_user': {
-                    "sub": repo_user.users_list[0].user_id,
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
+                    "sub": repo_user.users_list[1].user_id,
+                    "name": repo_user.users_list[1].name,
+                    "email": repo_user.users_list[1].email,
                     "custom:isMaua": True
                 },
-                "product_id": repo_product.products[0].product_id,
+                "product_id": repo_product.products[1].product_id,
                 "restaurant": "Pimbas"
 
             }
@@ -117,12 +117,12 @@ class Test_DeleteProductController:
             body={
                 'requester_user': {
                     "sub": "id",
-                    "name": repo_user.users_list[0].name,
-                    "email": repo_user.users_list[0].email,
+                    "name": repo_user.users_list[1].name,
+                    "email": repo_user.users_list[1].email,
                     "custom:isMaua": True
                 },
-                "product_id": repo_product.products[0].product_id,
-                "restaurant": repo_product.products[0].restaurant.value
+                "product_id": repo_product.products[1].product_id,
+                "restaurant": repo_product.products[1].restaurant.value
 
             }
         )

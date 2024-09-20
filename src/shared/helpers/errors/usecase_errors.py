@@ -5,6 +5,10 @@ class OrderCantBeUpdated(BaseError):
     def __init__(self):
         super().__init__(f"You can't update a order after it's preparing has started")
 
+class UserCannotCreateOrder(BaseError):
+    def __init__(self):
+        super().__init__(f"This user can't create more than 3 orders")
+
 
 class ProducutsListCantBeEmpty(BaseError):
     def __init__(self):
