@@ -12,6 +12,15 @@ class Test_GetAllSchedulesByRestaurantUseCase:
         repo_order = OrderRepositoryMock()
         usecase = GetAllSchedulesByRestaurantUseCase(repo_user, repo_order)
 
-        get_all_schedules = usecase.execute(user_id = '93bc6ada-c0d1-7054-66ab-e17414c48ae5', restaurant=RESTAURANT.CANTINA_DO_MOLEZA )
+        get_all_schedules = usecase.__call__(user_id = '93bc6ada-c0d1-7054-66ab-e17414c48ae5', restaurant=RESTAURANT.CANTINA_DO_MOLEZA )
 
         assert len(get_all_schedules) == 3
+        assert type(get_all_schedules) == list
+
+    def test_unknown_user(self):
+        repo_user = UserRepositoryMock()
+        repo_order = OrderRepositoryMock()
+        usecase = GetAllSchedulesByRestaurantUseCase(repo_user, repo_order)
+
+        with pytest.raises(UnregisteredUser):
+            get_all_schedules = usecase.__call__(user_id = '93bc6ada-c0d1-7054-66ab-e17414c48ae6', restaurant=RESTAURANT.CANTINA_DO_MOLEZA )

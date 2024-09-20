@@ -10,11 +10,11 @@ class GetAllSchedulesByRestaurantUseCase:
         self.userrepo = userrepo
         self.orderrepo = orderrepo
         
-    def execute(self, user_id: str, restaurant: RESTAURANT) -> List[Schedule]:
+    def __call__(self, user_id: str, restaurant: RESTAURANT) -> List[Schedule]:
         #verifica se o usuario existe no repo de usuarios
         user = self.userrepo.get_user_by_id(user_id)
         if not user:
-            raise UnregisteredUser(f"User with id {user_id} not found")
+            raise UnregisteredUser()
         
         #busca todos os agendamentos do restaurante
         schedules = self.orderrepo.get_all_schedules_by_restaurant(restaurant)
