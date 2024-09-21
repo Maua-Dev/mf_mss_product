@@ -20,10 +20,12 @@ class Test_CreateScheduleUseCase:
 
         user = repo_user.users_list[0]
         user.role = ROLE.OWNER  
-        user.restaurant = RESTAURANT.CANTINA_DO_MOLEZA  
+        user.restaurant = RESTAURANT.CANTINA_DO_MOLEZA 
+
+        schedule_id = 'c78f7935-6cdd-48cf-af87-b6163bcd59a8'
         
         create_schedule = usecase.__call__(
-            schedule_id='c78f7935-6cdd-48cf-af87-b6163bcd59a8',
+            schedule_id=schedule_id,
             initial_time=time(hour=10, minute=0),
             end_time=time(hour=11, minute=30),
             restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
