@@ -11,6 +11,7 @@ class ScheduleViewModel:
     accepted_reservation: bool
 
     def __init__(self, schedule: Schedule):
+        self.schedule = schedule
         self.schedule_id = schedule.schedule_id
         self.initial_time = schedule.initial_time
         self.end_time = schedule.end_time
@@ -19,11 +20,11 @@ class ScheduleViewModel:
 
     def to_dict(self):
         return {
-            "schedule_id": self.get_all_schedules.schedule_id,
-            "initial_time": self.get_all_schedules.initial_time,
-            "end_time": self.get_all_schedules.end_time,
-            "restaurant": self.get_all_schedules.restaurant,
-            "accepted_reservation": self.get_all_schedules.accepted_reservation
+            "schedule_id": self.schedule.schedule_id,
+            "initial_time": str(self.schedule.initial_time),
+            "end_time": str(self.schedule.end_time),
+            "restaurant": self.schedule.restaurant.name,
+            "accepted_reservation": str(self.schedule.accepted_reservation)
         }
 
 class GetScheduleViewModel:
