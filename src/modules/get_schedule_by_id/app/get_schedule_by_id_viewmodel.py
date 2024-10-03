@@ -8,7 +8,7 @@ from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
 
 
-class ScheduleByIdViewmodel:
+class GetScheduleByIdViewmodel:
     schedule_id : str
     initial_time : time
     end_time : time
@@ -23,11 +23,12 @@ class ScheduleByIdViewmodel:
         self.accepted_reservation = schedule.accepted_reservation
 
     def to_dict(self) -> dict:
-        return {
+        return {'schedule':{
             "schedule_id": self.schedule_id,
-            "initial_time": self.initial_time,
-            "end_time": self.end_time,
-            "restaurant": self.restaurant,
-            "accepted_reservation":self.accepted_reservation
+            "initial_time": self.initial_time.strftime("%H:%M"),
+            "end_time": self.end_time.strftime("%H:%M"),
+            "restaurant": self.restaurant.value,
+            "accepted_reservation":self.accepted_reservation},
+            'message': 'the schedule object was retrieved'
         }
 

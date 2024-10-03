@@ -14,19 +14,20 @@ class GetScheduleByIdUsecase:
         self.repo_schedule = repo_schedule
         self.repo_user = repo_user
 
-    def __call__(self, user_id: str,schedule_id: str) -> List[Schedule]:
+    def __call__(self, user_id: str, schedule_id: str):
+        schedule = self.repo_schedule.get_schedule_by_id(schedule_id = schedule_id)
+        user = self.repo_user.get_user_by_id(user_id = user_id)
         
-        user = self.repo_user.get_schedule_by_id(user_id = user_id)
-
+        if schedule is None:
+            raise NoItemsFound(f"schedule with id: {schedule_id}")
+        
         if user is None:
             raise UnregisteredUser()
         
-        if user.restaurant is None:
-            raise UnregisteredEmployee()
+        # if user.restaurant is None:
+        #     raise UnregisteredEmployee()             #precisa dessa verificação???
 
-        schedule = self.repo_schedule.get_schedule_by_id(schedule_id = schedule_id)
-
-        if schedule is None:
-            raise NoItemsFound("product")
+        if user.role == ROLE.ADMIN:
+            return schedule
 
         return schedule

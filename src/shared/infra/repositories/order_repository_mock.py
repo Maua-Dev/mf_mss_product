@@ -341,9 +341,9 @@ class OrderRepositoryMock(IOrderRepository):
         return schedules
 
     def get_schedule_by_id(self, schedule_id: str) -> Optional[Schedule]:
-        for order in self.schedules:
-            if order.schedule_id == schedule_id:
-                return order
+        for schedule in self.schedules:
+            if schedule.schedule_id == schedule_id:
+                return schedule
         return None
 
     def create_schedule(self, schedule: Schedule) -> Schedule:
