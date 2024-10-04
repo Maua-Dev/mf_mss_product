@@ -24,9 +24,6 @@ class CreateScheduleController:
             
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
             
-            if request.data.get('schedule_id') is None:
-                raise MissingParameters('schedule_id')
-            
             if request.data.get("initial_time") is None:
                 raise MissingParameters('initial_time')
             
@@ -37,24 +34,13 @@ class CreateScheduleController:
             
             end_time = datetime.strptime(request.data.get('end_time'), "%H:%M:%S").time()
             
-            if request.data.get("restaurant") is None:
-                raise MissingParameters('restaurant')
-
-            restaurant = request.data.get("restaurant")
-            if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
-                raise EntityError("restaurant")
-                 
-            if request.data.get("accepted_reservation") is None:
-                raise MissingParameters('accepted_reservation')
-            
-            schedule = self.CreateScheduleUsecase(schedule_id=request.data.get('schedule_id'),
+            schedule = self.CreateScheduleUsecase(
                                         initial_time=initial_time,
                                         end_time=end_time,
-                                        restaurant=RESTAURANT[restaurant],
-                                        accepted_reservation=request.data.get('accepted_reservation'),
-                                        user_id=requester_user.user_id)
+                                        user_id=requester_user.user_id
+                                    )
             
-            viewmodel = CreateScheduleViewmodel(schedule)
+            viewmodel = CreateScheduleViewmodel(schedule=schedule)
 
             return Created(viewmodel.to_dict())
         

@@ -12,7 +12,7 @@ class ScheduleViewModel:
             "schedule_id": self.schedule.schedule_id,
             "initial_time": self.schedule.initial_time.strftime("%H:%M:%S"),
             "end_time": self.schedule.end_time.strftime("%H:%M:%S"),
-            "restaurant": self.schedule.restaurant,
+            "restaurant": self.schedule.restaurant.value,
             "accepted_reservation": self.schedule.accepted_reservation
         }
 

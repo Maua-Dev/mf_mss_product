@@ -1,4 +1,5 @@
 from datetime import time
+import uuid
 
 from src.shared.domain.entities.schedule import Schedule
 
@@ -16,9 +17,9 @@ class CreateScheduleUsecase:
         self.repo_schedule = repo_schedule
         self.repo_user = repo_user
 
-    def __call__(self, schedule_id: str, initial_time: time, end_time: time, restaurant: RESTAURANT, accepted_reservation: bool, user_id: str) -> Schedule:
+    def __call__(self, initial_time: time, end_time: time, user_id: str) -> Schedule:
 
-        user = self.repo_user.get_user_by_id(user_id)
+        user = self.repo_user.get_user_by_id(user_id=user_id);
 
         if not user:
             raise UnregisteredUser()
@@ -29,20 +30,22 @@ class CreateScheduleUsecase:
         if user.restaurant is None:
             raise UserNotAllowed()
 
-        schedules = self.repo_schedule.get_all_schedules_by_restaurant(restaurant)
+        schedules = self.repo_schedule.get_all_schedules_by_restaurant(user.restaurant)
         for schedule in schedules:
             if schedule.initial_time == initial_time and schedule.end_time == end_time: #verifica se agendamento atual tem o mesmo intervalo de tempo do novo agendamento
-                raise DuplicatedItem(f'Schedule already exists for the given time interval in restaurant {restaurant}')
+                raise DuplicatedItem(f'{user.restaurant}')
+        
+        schedule_id = str(uuid.uuid4())
             
         if self.repo_schedule.get_schedule_by_id(schedule_id) is not None:
-                raise DuplicatedItem(f'Schedule with id {schedule_id} already exists')
+                raise DuplicatedItem(f'{schedule_id}')
         
         schedule = Schedule(
             schedule_id=schedule_id,
             initial_time=initial_time,
             end_time=end_time,
-            restaurant=restaurant,
-            accepted_reservation=accepted_reservation
+            restaurant=user.restaurant,
+            accepted_reservation=True,
         )
 
         return self.repo_schedule.create_schedule(schedule)
