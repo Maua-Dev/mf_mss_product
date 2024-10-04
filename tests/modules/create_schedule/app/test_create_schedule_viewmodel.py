@@ -24,7 +24,7 @@ class Test_CreateScheduleViewmodel:
                 "schedule_id": "c78f7935-6cdd-48cf-af87-b6163bcd59a8",
                 "initial_time": "08:00:00",
                 "end_time": "10:00:00",
-                "restaurant": RESTAURANT.CANTINA_DO_MOLEZA,
+                "restaurant": "CANTINA_DO_MOLEZA",
                 "accepted_reservation": True
             },
             "message": "Schedule created successfully"

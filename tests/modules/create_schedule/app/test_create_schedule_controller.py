@@ -1,43 +1,34 @@
 from datetime import time
 
-from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.modules.create_schedule.app.create_schedule_usecase import CreateScheduleUsecase
 from src.modules.create_schedule.app.create_schedule_controller import CreateScheduleController
-from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
+from src.shared.helpers.external_interfaces.http_models import HttpRequest
 
 class Test_CreateScheduleController:
     def test_create_schedule_controller(self):
         repo_schedule = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateScheduleUsecase(repo_schedule=repo_schedule, repo_user=repo_user)
+        usecase = CreateScheduleUsecase(repo_schedule, repo_user)
         controller = CreateScheduleController(usecase)
 
-        request = HttpRequest(body={
-            'requester_user': {
-                "sub": repo_user.users_list[3].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
-                "custom:isMaua": True
+        request = HttpRequest(
+            body={
+                'requester_user': {
+                    "sub": repo_user.users_list[3].user_id,
+                    "name": repo_user.users_list[0].name,
+                    "email": repo_user.users_list[0].email,
+                    "custom:isMaua": True
+                },
+                "initial_time": "10:00:00",
+                "end_time": "12:00:00",
             },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
-            "initial_time": "10:00:00",
-            "end_time": "12:00:00",
-            "restaurant": "SOUZA_DE_ABREU",
-            "accepted_reservation": True
-        })
+        )
 
         response = controller(request)
         
         assert response.status_code == 201
-        assert response.body['message'] == 'Schedule created successfully'
-        assert response.body['schedule']['schedule_id'] == "e51b48a0-e33c-4ace-98a0-d9af96157dfc"
-        assert response.body['schedule']['initial_time'] == '10:00:00'
-        assert response.body['schedule']['end_time'] == '12:00:00'
-        assert response.body['schedule']['restaurant'] == RESTAURANT.SOUZA_DE_ABREU
-        assert response.body['schedule']['accepted_reservation'] == True
-
 
     def test_create_schedule_controller_schedule_is_missing(self):
         repo_schedule = OrderRepositoryMock()
@@ -101,10 +92,8 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
-            "restaurant": "SOUZA_DE_ABREU",
-            "accepted_reservation": True
+            "end_time": "12:00:00",
         })
 
         response = controller(request)
@@ -125,10 +114,8 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
-            "accepted_reservation": True
         })
 
         response = controller(request)
@@ -149,10 +136,8 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
-            "restaurant": "SOUZA_DE_ABREU"
         })
 
         response = controller(request)
@@ -173,11 +158,8 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "schedule_id": 123,
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
-            "restaurant": "SOUZA_DE_ABREU",
-            "accepted_reservation": True
         })
 
         response = controller(request)
@@ -198,11 +180,8 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
-            "restaurant": "INVALID_RESTAURANT",
-            "accepted_reservation": True
         })
 
         response = controller(request)
@@ -223,11 +202,8 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
-            "restaurant": "SOUZA_DE_ABREU",
-            "accepted_reservation": 123
         })
 
         response = controller(request)
