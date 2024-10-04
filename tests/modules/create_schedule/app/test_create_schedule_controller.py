@@ -1,4 +1,4 @@
-from datetime import time
+import pytest
 
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
@@ -21,8 +21,11 @@ class Test_CreateScheduleController:
                     "email": repo_user.users_list[0].email,
                     "custom:isMaua": True
                 },
+                "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
                 "initial_time": "10:00:00",
                 "end_time": "12:00:00",
+                "restaurant": "SOUZA_DE_ABREU",
+                "accepted_reservation": True
             },
         )
 
@@ -33,7 +36,7 @@ class Test_CreateScheduleController:
     def test_create_schedule_controller_schedule_is_missing(self):
         repo_schedule = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
-        usecase = CreateScheduleUsecase(repo_schedule=repo_schedule, repo_user=repo_user)
+        usecase = CreateScheduleUsecase(repo_schedule, repo_user)
         controller = CreateScheduleController(usecase)
 
         request = HttpRequest(body={
@@ -43,11 +46,8 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "schedule_id": None,
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
-            "restaurant": "SOUZA_DE_ABREU",
-            "accepted_reservation": True
         })
 
         response = controller(request)
@@ -92,8 +92,10 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "initial_time": "10:00:00",
-            "end_time": "12:00:00",
+            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
+            "initial_time": "12:00:00",
+            "restaurant": "SOUZA_DE_ABREU",
+            "accepted_reservation": True
         })
 
         response = controller(request)
@@ -114,12 +116,14 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "initial_time": "10:00:00",
+            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
+            "initial_time": "12:00:00",
             "end_time": "12:00:00",
+            "accepted_reservation": True
         })
 
         response = controller(request)
-        
+
         assert response.status_code == 400
         assert response.body == 'Field restaurant is missing'
 
@@ -136,8 +140,10 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-            "initial_time": "10:00:00",
+            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
+            "initial_time": "12:00:00",
             "end_time": "12:00:00",
+            "restaurant": "SOUZA_DE_ABREU",
         })
 
         response = controller(request)
@@ -158,8 +164,11 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
+            "schedule_id": 111,
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
+            "restaurant": "SOUZA_DE_ABREU",
+            "accepted_reservation": True
         })
 
         response = controller(request)
@@ -180,8 +189,11 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
+             "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
+            "restaurant": "RESTAURANT[INVALID]",
+            "accepted_reservation": True
         })
 
         response = controller(request)
@@ -202,8 +214,11 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
+            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
             "end_time": "12:00:00",
+            "restaurant": "SOUZA_DE_ABREU",
+            "accepted_reservation": "True"
         })
 
         response = controller(request)
