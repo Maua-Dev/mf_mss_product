@@ -25,10 +25,11 @@ class Schedule(abc.ABC):
     
         if not isinstance(initial_time, time):
             raise EntityError("initial_time")
-        self.initial_time = initial_time
 
         if not isinstance(end_time, time):
             raise EntityError("end_time")
+        
+        self.initial_time = initial_time
         self.end_time = end_time
         
         if initial_time > end_time:
