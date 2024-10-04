@@ -13,7 +13,7 @@ class GetAllSchedulesByRestaurantUseCase:
     def __call__(self, user_id: str, restaurant: RESTAURANT) -> List[Schedule]:
         #verifica se o usuario existe no repo de usuarios
         user = self.userrepo.get_user_by_id(user_id)
-        if not user:
+        if user is None:
             raise UnregisteredUser()
         
         #busca todos os agendamentos do restaurante

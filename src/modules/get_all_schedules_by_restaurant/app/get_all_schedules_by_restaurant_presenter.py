@@ -3,10 +3,9 @@ from .get_all_schedules_by_restaurant_usecase import GetAllSchedulesByRestaurant
 from src.shared.environments import Environments
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 
-
-repo_order = Environments.get_order_repo()()
 repo_user = Environments.get_user_repo()()
-usecase = GetAllSchedulesByRestaurantUseCase(repo_order, repo_user)
+repo_order = Environments.get_order_repo()()
+usecase = GetAllSchedulesByRestaurantUseCase(repo_user, repo_order)
 controller = GetAllSchedulesByRestaurantController(usecase=usecase)
 
 def lambda_handler(event, context):

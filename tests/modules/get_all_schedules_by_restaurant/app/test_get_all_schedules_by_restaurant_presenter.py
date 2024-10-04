@@ -2,13 +2,13 @@ import json
 from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_presenter import lambda_handler
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
+from src.shared.infra.repositories.product_repository_mock import ProductRepositoryMock
+from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 
 
 class Test_GetAllSchedulesByRestaurantPresenter:
     def test_get_all_schedudles_by_restaurant_presenter(self):
-        repo_user = UserRepositoryMock().users_list[0]
-        repo_order = OrderRepositoryMock().schedules[0]
 
         event = {
             "version": "2.0",
@@ -21,11 +21,7 @@ class Test_GetAllSchedulesByRestaurantPresenter:
             ],
             "headers": {
                 "header1": "value1",
-                "header2": "value1,value2",
-                "user_id": repo_user.user_id
-            },
-            "queryStringParameters": {
-                "parameter1": "1"
+                "header2": "value1,value2"
             },
             "requestContext": {
                 "accountId": "123456789012",
@@ -34,8 +30,10 @@ class Test_GetAllSchedulesByRestaurantPresenter:
                 "authorizer": {
                     "claims":
                         {
-                            "user_id": repo_user.user_id,
-                            "restaurant": repo_order.restaurant,
+                            "sub": "93bc6ada-c0d1-7054-66ab-e17414c48gbf",
+                            "name": "Lucas Milas",
+                            "email": "milas@maua.br",
+                            "custom:isMaua": True
                         }
                 },
                 "domainName": "<url-id>.lambda-url.us-west-2.on.aws",
@@ -53,7 +51,9 @@ class Test_GetAllSchedulesByRestaurantPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"restaurant": "SOUZA_DE_ABREU"}',
+            "body": {
+                "restaurant": "HORA_H"
+            },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None

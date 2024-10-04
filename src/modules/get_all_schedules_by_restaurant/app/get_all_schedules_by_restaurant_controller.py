@@ -1,12 +1,13 @@
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, InternalServerError, NotFound
 from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_usecase import GetAllSchedulesByRestaurantUseCase
 from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_viewmodel import GetAllSchedulesViewmodel
-from src.shared.helpers.errors.controller_errors import MissingParameters, WrongTypeParameter
+from src.shared.helpers.errors.controller_errors import MissingParameters, RestaurantNotFound, WrongTypeParameter
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.errors.usecase_errors import NoItemsFound
 from src.shared.helpers.external_interfaces.http_models import HttpRequest, HttpResponse
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 
 class GetAllSchedulesByRestaurantController:
     def __init__(self, usecase: GetAllSchedulesByRestaurantUseCase):
@@ -15,22 +16,18 @@ class GetAllSchedulesByRestaurantController:
     def __call__(self, request: IRequest) -> IResponse:
         try:
             # Verificar se o user_id foi passado nos headers
-            user_id = request.headers.get('user_id', None)
-            if not user_id:
-                return BadRequest(body="Field user_id is missing")
+            if request.data.get('requester_user') is None:
+                raise MissingParameters('requester_user')
+
+            requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
 
             # Verificar se o restaurante foi passado no request
-            if request.data.get('restaurant') is None:
-                raise MissingParameters('restaurant')
-
-            # Validar o restaurante recebido
-            try:
-                restaurant = RESTAURANT[request.data.get('restaurant')]
-            except KeyError:
-                raise WrongTypeParameter("restaurant")
+            restaurant = request.data.get('restaurant')
+            if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
+                raise RestaurantNotFound(restaurant)
 
             # Executa o usecase usando o user_id e o restaurante como parâmetros
-            schedules = self.usecase(user_id=user_id, restaurant=restaurant)
+            schedules = self.usecase(user_id=requester_user.user_id, restaurant=restaurant)
 
             # Converte o resultado em um ViewModel e retorna a resposta de sucesso
             viewmodel = GetAllSchedulesViewmodel(schedules)
@@ -46,4 +43,4 @@ class GetAllSchedulesByRestaurantController:
             return NotFound(body=err.message)
 
         except Exception as err:
-            return InternalServerError(body=str(err))
+            return InternalServerError(body=err.args[0])
