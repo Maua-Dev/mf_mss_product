@@ -57,8 +57,11 @@ class Test_CreateSchedulePresenter:
             "timeEpoch": 1583348638390
           },
           "body": {
+                "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
                 "initial_time": "12:00:00",
                 "end_time": "14:00:00",
+                "restaurant": "SOUZA_DE_ABREU",
+                "accepted_reservation": True
             },
           "pathParameters": None,
           "isBase64Encoded": None,
@@ -66,7 +69,6 @@ class Test_CreateSchedulePresenter:
         }
 
         response = lambda_handler(event, None)
-        print(response)
 
         assert response["statusCode"] == 201
         assert json.loads(response["body"])["message"] == "Schedule created successfully"
