@@ -3,6 +3,7 @@ from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restau
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from datetime import time
 
 class Test_GetAllSchedulesViewModel:
 
@@ -17,33 +18,29 @@ class Test_GetAllSchedulesViewModel:
         expected = {
     'schedules': [
         {
-            'schedule': {
-                'schedule_id': "afc910c4-a135-4ce3-9ca8-f7ec5e60f4fe",
-                'initial_time': "11:00:00",
-                'end_time': "12:30:00",
-                'restaurant': "SOUZA_DE_ABREU",
-                'accepted_reservation': "True"
-            }
+            'schedule_id': "afc910c4-a135-4ce3-9ca8-f7ec5e60f4fe",
+            'initial_time': time(11, 0, 0),
+            'end_time': time(12, 30, 0), 
+            'restaurant': "SOUZA_DE_ABREU",
+            'accepted_reservation': True
         },
         {
-            'schedule': {
-                'schedule_id': "b3f9ecc1-1ac7-40eb-a8dd-54fe7b6f874d",
-                'initial_time': "09:30:00",
-                'end_time': "11:00:00",
-                'restaurant': "SOUZA_DE_ABREU",
-                'accepted_reservation': "True"
-            }
+            'schedule_id': "b3f9ecc1-1ac7-40eb-a8dd-54fe7b6f874d",
+            'initial_time': time(9, 30, 0),  
+            'end_time': time(11, 0, 0),
+            'restaurant': "SOUZA_DE_ABREU",
+            'accepted_reservation': True
         },
         {
-            'schedule': {
-                'schedule_id': "82b76801-9bb3-4eda-a686-8d189c59ba28",
-                'initial_time': "08:00:00",
-                'end_time': "09:30:00",
-                'restaurant': "SOUZA_DE_ABREU",
-                'accepted_reservation': "True"
-            }
+            'schedule_id': "82b76801-9bb3-4eda-a686-8d189c59ba28",
+            'initial_time': time(8, 0, 0),   
+            'end_time': time(9, 30, 0),
+            'restaurant': "SOUZA_DE_ABREU",
+            'accepted_reservation': True
         }
     ],
+    'message': "the schedules were retrieved"
 }
+
         
-        assert sorted(viewmodel['schedules'], key=lambda x: x['schedule']['schedule_id']) == sorted(expected['schedules'], key=lambda x: x['schedule']['schedule_id'])
+        assert sorted(viewmodel['schedules'], key=lambda x: x['schedule_id']) == sorted(expected['schedules'], key=lambda x: x['schedule_id'])
