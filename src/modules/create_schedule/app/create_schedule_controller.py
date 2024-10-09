@@ -33,25 +33,18 @@ class CreateScheduleController:
             if request.data.get("initial_time") is None:
                 raise MissingParameters('initial_time')
             
+            if type(request.data.get("initial_time")) != str:
+                raise EntityError('initial_time')
+            
             initial_time = datetime.strptime(request.data.get('initial_time'), "%H:%M:%S").time()
 
             if request.data.get("end_time") is None:
                 raise MissingParameters('end_time')
             
+            if type(request.data.get("end_time")) != str:
+                raise EntityError('end_time')
+            
             end_time = datetime.strptime(request.data.get('end_time'), "%H:%M:%S").time()
-            
-            if request.data.get("restaurant") is None:
-                raise MissingParameters('restaurant')
-            
-            restaurant = request.data.get("restaurant")
-            if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
-                raise EntityError("restaurant")
-            
-            if request.data.get("accepted_reservation") is None:
-                raise MissingParameters("accepted_reservation")
-            
-            if type(request.data.get("accepted_reservation")) != bool:
-                raise EntityError("accepted_reservation")
             
             schedule = self.CreateScheduleUsecase(
                                         initial_time=initial_time,

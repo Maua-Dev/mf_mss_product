@@ -103,54 +103,6 @@ class Test_CreateScheduleController:
         assert response.status_code == 400
         assert response.body == 'Field end_time is missing'
 
-    def test_create_schedule_controller_restaurant_is_missing(self):
-        repo_schedule = OrderRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = CreateScheduleUsecase(repo_schedule=repo_schedule, repo_user=repo_user)
-        controller = CreateScheduleController(usecase)
-
-        request = HttpRequest(body={
-            'requester_user': {
-                "sub": repo_user.users_list[3].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
-                "custom:isMaua": True
-            },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
-            "initial_time": "12:00:00",
-            "end_time": "12:00:00",
-            "accepted_reservation": True
-        })
-
-        response = controller(request)
-
-        assert response.status_code == 400
-        assert response.body == 'Field restaurant is missing'
-
-    def test_create_schedule_controller_accepted_reservation_is_missing(self):
-        repo_schedule = OrderRepositoryMock()
-        repo_user = UserRepositoryMock()
-        usecase = CreateScheduleUsecase(repo_schedule=repo_schedule, repo_user=repo_user)
-        controller = CreateScheduleController(usecase)
-
-        request = HttpRequest(body={
-            'requester_user': {
-                "sub": repo_user.users_list[3].user_id,
-                "name": repo_user.users_list[0].name,
-                "email": repo_user.users_list[0].email,
-                "custom:isMaua": True
-            },
-            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
-            "initial_time": "12:00:00",
-            "end_time": "12:00:00",
-            "restaurant": "SOUZA_DE_ABREU",
-        })
-
-        response = controller(request)
-        
-        assert response.status_code == 400
-        assert response.body == 'Field accepted_reservation is missing'
-
     def test_create_schedule_controller_invalid_schedule_id(self):
         repo_schedule = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
@@ -176,7 +128,7 @@ class Test_CreateScheduleController:
         assert response.status_code == 400
         assert response.body == 'Field schedule_id is not valid'
 
-    def test_create_schedule_controller_invalid_restaurant_invalid(self):
+    def test_create_schedule_controller_invalid_initial_time(self):
         repo_schedule = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = CreateScheduleUsecase(repo_schedule=repo_schedule, repo_user=repo_user)
@@ -189,19 +141,19 @@ class Test_CreateScheduleController:
                 "email": repo_user.users_list[0].email,
                 "custom:isMaua": True
             },
-             "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
-            "initial_time": "10:00:00",
+            "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
+            "initial_time": 111,
             "end_time": "12:00:00",
-            "restaurant": "RESTAURANT[INVALID]",
+            "restaurant": "SOUZA_DE_ABREU",
             "accepted_reservation": True
         })
 
         response = controller(request)
         
         assert response.status_code == 400
-        assert response.body == 'Field restaurant is not valid'
+        assert response.body == 'Field initial_time is not valid'
 
-    def test_create_schedule_controller_invalid_accepted_reservation(self):
+    def test_create_schedule_controller_invalid_end_time(self):
         repo_schedule = OrderRepositoryMock()
         repo_user = UserRepositoryMock()
         usecase = CreateScheduleUsecase(repo_schedule=repo_schedule, repo_user=repo_user)
@@ -216,13 +168,13 @@ class Test_CreateScheduleController:
             },
             "schedule_id": "e51b48a0-e33c-4ace-98a0-d9af96157dfc",
             "initial_time": "10:00:00",
-            "end_time": "12:00:00",
+            "end_time": 111,
             "restaurant": "SOUZA_DE_ABREU",
-            "accepted_reservation": "True"
+            "accepted_reservation": True
         })
 
         response = controller(request)
         
         assert response.status_code == 400
-        assert response.body == 'Field accepted_reservation is not valid'
+        assert response.body == 'Field end_time is not valid'
     
