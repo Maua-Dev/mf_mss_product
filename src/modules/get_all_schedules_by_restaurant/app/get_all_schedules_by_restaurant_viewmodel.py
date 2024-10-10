@@ -26,7 +26,7 @@ class ScheduleViewmodel:
             "accepted_reservation": self.accepted_reservation
         }
     
-class GetAllSchedulesViewmodel:
+class GetAllSchedulesByRestaurantViewmodel:
     schedules: List[Schedule]
 
     def __init__(self, schedules: List[Schedule]):

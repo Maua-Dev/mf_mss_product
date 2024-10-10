@@ -1,6 +1,6 @@
 from src.shared.helpers.external_interfaces.http_codes import OK, BadRequest, InternalServerError, NotFound
 from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_usecase import GetAllSchedulesByRestaurantUseCase
-from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_viewmodel import GetAllSchedulesViewmodel
+from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_viewmodel import GetAllSchedulesByRestaurantViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters, RestaurantNotFound, WrongTypeParameter
 from src.shared.helpers.external_interfaces.external_interface import IRequest, IResponse
 from src.shared.helpers.errors.usecase_errors import NoItemsFound
@@ -30,7 +30,7 @@ class GetAllSchedulesByRestaurantController:
             schedules = self.usecase(user_id=requester_user.user_id, restaurant=restaurant)
 
             # Converte o resultado em um ViewModel e retorna a resposta de sucesso
-            viewmodel = GetAllSchedulesViewmodel(schedules)
+            viewmodel = GetAllSchedulesByRestaurantViewmodel(schedules)
             return OK(viewmodel.to_dict())
 
         except MissingParameters as err:

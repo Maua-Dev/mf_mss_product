@@ -1,11 +1,11 @@
 from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_usecase import GetAllSchedulesByRestaurantUseCase
-from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_viewmodel import GetAllSchedulesViewmodel
+from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_viewmodel import GetAllSchedulesByRestaurantViewmodel
 from src.shared.infra.repositories.order_repository_mock import OrderRepositoryMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from datetime import time
 
-class Test_GetAllSchedulesViewModel:
+class Test_GetAllSchedulesByRestaurantViewmodel:
 
     def test_get_all_schedules_viewmodel(self):
         userrepo = UserRepositoryMock()
@@ -13,7 +13,7 @@ class Test_GetAllSchedulesViewModel:
         usecase = GetAllSchedulesByRestaurantUseCase(userrepo=userrepo, orderrepo=orderrepo)
         schedules = usecase("93bc6ada-c0d1-ab53-66ab-e17414c48af1", restaurant=RESTAURANT.SOUZA_DE_ABREU)
 
-        viewmodel = GetAllSchedulesViewmodel(schedules).to_dict()
+        viewmodel = GetAllSchedulesByRestaurantViewmodel(schedules).to_dict()
         print(viewmodel)
         expected = {
     'schedules': [
