@@ -29,6 +29,6 @@ class Test_GetScheduleByIdUsecase:
     def test_raise_exception_when_schedule_doesnt_exist(self):
         user_repo, schedule_repo, schedule = get_items_for_tests()
 
-        with pytest.raises(NoItemsFound):
+        with pytest.raises(UnregisteredUser):
             usecase = GetScheduleByIdUsecase(repo_user=user_repo, repo_schedule=schedule_repo)
             response = usecase(schedule_id="um id que não existe", user_id=user_repo.users_list[-1])

@@ -18,16 +18,12 @@ class GetScheduleByIdUsecase:
         schedule = self.repo_schedule.get_schedule_by_id(schedule_id = schedule_id)
         user = self.repo_user.get_user_by_id(user_id = user_id)
         
+        if user is None:
+            raise UnregisteredUser()
+
         if schedule is None:
             raise NoItemsFound(f"schedule with id: {schedule_id}")
         
-        if user is None:
-            raise UnregisteredUser()
+
         
-        # if user.restaurant is None:
-        #     raise UnregisteredEmployee()             #precisa dessa verificação???
-
-        if user.role == ROLE.ADMIN:
-            return schedule
-
         return schedule
