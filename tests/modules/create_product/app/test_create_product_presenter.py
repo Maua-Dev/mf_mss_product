@@ -3,7 +3,7 @@ from src.modules.create_product.app.create_product_presenter import lambda_handl
 from src.shared.domain.entities.product import Product
 from src.shared.domain.enums.role_enum import ROLE
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
-from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter
+from tests.shared.helpers.get_event_for_presenter_tests import get_event_for_test_presenter_no_socket
 
 
 class Test_CreateProductPresenter:
@@ -153,7 +153,7 @@ class Test_CreateProductPresenter:
         assert response["statusCode"] == 400
 
     def test_create_product_with_negative_prepare_time(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "available": True,
                 "name": "Misto",
@@ -171,7 +171,7 @@ class Test_CreateProductPresenter:
         assert response["statusCode"] == 400
 
     def test_create_product_with_negative_price(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "available": True,
                 "name": "Misto",
@@ -189,7 +189,7 @@ class Test_CreateProductPresenter:
         assert response["statusCode"] == 400
 
     def test_create_product_with_none_price(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "available": True,
                 "name": "Misto",
@@ -207,7 +207,7 @@ class Test_CreateProductPresenter:
         assert response["statusCode"] == 400
 
     def test_create_product_with_void_description(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "available": True,
                 "name": "Misto",
@@ -225,7 +225,7 @@ class Test_CreateProductPresenter:
         assert response["statusCode"] == 201
 
     def test_create_product_with_too_high_price(self):
-        event = get_event_for_test_presenter(
+        event = get_event_for_test_presenter_no_socket(
             body={
                 "available": True,
                 "name": "Misto",

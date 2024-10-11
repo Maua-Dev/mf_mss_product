@@ -8,7 +8,7 @@ from typing import Optional
 
 class Product(abc.ABC):
     available: bool
-    _price: float
+    input_price: float
     name: str
     description: str
     meal_type: MEAL_TYPE
@@ -96,4 +96,7 @@ class Product(abc.ABC):
         return True
 
     def __repr__(self):
-        return f"Product(available={self.available}, _price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepare_time={self.prepare_time})"
+        return f"Product(available={self.available}, input_price={self.price}, name='{self.name}', description='{self.description}', meal_type='{self.meal_type.value}', photo='{self.photo}', product_id={self.product_id}, last_update={self.last_update}, restaurant='{self.restaurant.value}', prepare_time={self.prepare_time})"
+    
+    def __eq__(self, other):
+        return self.available == other.available and self.price == other.price and self.name == other.name and self.description == other.description and self.meal_type == other.meal_type and self.photo == other.photo and self.product_id == other.product_id and self.last_update == other.last_update and self.restaurant == other.restaurant and self.prepare_time == other.prepare_time
