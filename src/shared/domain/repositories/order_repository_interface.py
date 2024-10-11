@@ -3,6 +3,7 @@ from typing import Dict, List, Optional
 
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.order_product import OrderProduct
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
@@ -84,4 +85,16 @@ class IOrderRepository(ABC):
 
     @abstractmethod
     def get_feedback_by_order_id(self, order_id: str) -> Optional[Feedback]:
+        pass
+
+    @abstractmethod
+    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Schedule]:
+        pass
+
+    @abstractmethod
+    def get_schedule_by_id(self, schedule_id: str) -> Optional[Schedule]:
+        pass
+
+    @abstractmethod
+    def create_schedule(self, schedule: Schedule) -> Schedule:
         pass

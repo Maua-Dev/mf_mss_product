@@ -1,11 +1,12 @@
 from ast import Dict
-from datetime import datetime
+from datetime import datetime, time
 from typing import List, Optional
 
 from src.shared.domain.entities.order import Order
 from src.shared.domain.entities.connection import Connection
 from src.shared.domain.entities.order_product import OrderProduct
 from src.shared.domain.entities.feedback import Feedback
+from src.shared.domain.entities.schedule import Schedule
 from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.domain.enums.status_enum import STATUS
 from src.shared.domain.enums.action_enum import ACTION
@@ -18,6 +19,7 @@ class OrderRepositoryMock(IOrderRepository):
     orders: List[Order]
     connections: List[Connection]
     feedbacks: List[Feedback]
+    schedules: List[Schedule]
 
     def __init__(self):
         users_repo = UserRepositoryMock().users_list
@@ -193,6 +195,20 @@ class OrderRepositoryMock(IOrderRepository):
             Feedback(order_id="d2b29a41-69a6-4ad8-87b9-2444119fbf66", user_id=users_repo[6].user_id, restaurant=RESTAURANT.HORA_H, value=4),
         ]
 
+        self.schedules = [
+            Schedule(schedule_id="167f3cde-f75f-492a-9b4b-72fefa97bdf3", initial_time=time(hour=8, minute=0), end_time=time(hour=9, minute=30), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+            Schedule(schedule_id="32e2322a-6b2f-4700-874a-e3e9c8f0870b", initial_time=time(hour=9, minute=30), end_time=time(hour=11, minute=0), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+            Schedule(schedule_id="a4040742-1de4-4786-a1f8-7622e6e53e9f", initial_time=time(hour=11, minute=0), end_time=time(hour=12, minute=30), restaurant=RESTAURANT.CANTINA_DO_MOLEZA, accepted_reservation=True),
+
+            Schedule(schedule_id="cb49cb56-20f9-4302-a632-2d46ac2e8305", initial_time=time(hour=8, minute=0), end_time=time(hour=9, minute=30), restaurant=RESTAURANT.HORA_H, accepted_reservation=True),
+            Schedule(schedule_id="39d28d49-9893-4899-8f84-cfd454ac50dd", initial_time=time(hour=9, minute=30), end_time=time(hour=11, minute=0), restaurant=RESTAURANT.HORA_H, accepted_reservation=True),
+            Schedule(schedule_id="2a375656-5cea-4314-9b22-47acc222cae0", initial_time=time(hour=11, minute=0), end_time=time(hour=12, minute=30), restaurant=RESTAURANT.HORA_H, accepted_reservation=True),
+
+            Schedule(schedule_id="82b76801-9bb3-4eda-a686-8d189c59ba28", initial_time=time(hour=8, minute=0), end_time=time(hour=9, minute=30), restaurant=RESTAURANT.SOUZA_DE_ABREU, accepted_reservation=True),
+            Schedule(schedule_id="b3f9ecc1-1ac7-40eb-a8dd-54fe7b6f874d", initial_time=time(hour=9, minute=30), end_time=time(hour=11, minute=0), restaurant=RESTAURANT.SOUZA_DE_ABREU, accepted_reservation=True),
+            Schedule(schedule_id="afc910c4-a135-4ce3-9ca8-f7ec5e60f4fe", initial_time=time(hour=11, minute=0), end_time=time(hour=12, minute=30), restaurant=RESTAURANT.SOUZA_DE_ABREU, accepted_reservation=True), 
+        ]   
+
     def create_order(self, order: Order) -> Order:
         self.orders.append(order)
         return order
@@ -316,3 +332,20 @@ class OrderRepositoryMock(IOrderRepository):
             if feedback.order_id == order_id:
                 return feedback
         return None
+    
+    def get_all_schedules_by_restaurant(self, restaurant: RESTAURANT) -> List[Schedule]:
+        schedules = []
+        for schedule in self.schedules:
+            if schedule.restaurant == restaurant:
+                schedules.append(schedule)
+        return schedules
+
+    def get_schedule_by_id(self, schedule_id: str) -> Optional[Schedule]:
+        for schedule in self.schedules:
+            if schedule.schedule_id == schedule_id:
+                return schedule
+        return None
+
+    def create_schedule(self, schedule: Schedule) -> Schedule:
+        self.schedules.append(schedule)
+        return schedule
