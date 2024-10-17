@@ -14,9 +14,9 @@ class User(abc.ABC):
     user_id: str
     USER_ID_LENGTH = 36
     photo: Optional[str] = None
-    validate_user: bool
+    confirm_user: bool
 
-    def __init__(self, name: str, email: str, role: ROLE, user_id: str, validate_user: bool, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
+    def __init__(self, name: str, email: str, role: ROLE, user_id: str, confirm_user: bool, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
         if not User.validate_name(name):
             raise EntityError("name")
         self.name = name
@@ -46,9 +46,9 @@ class User(abc.ABC):
             raise EntityError("photo")
         self.photo = photo
 
-        if type(validate_user) != bool:
+        if type(confirm_user) != bool:
             raise EntityError("validate_user")
-        self.validate_user = validate_user
+        self.confirm_user = confirm_user
 
     @staticmethod
     def validate_name(name: str) -> bool:
@@ -83,6 +83,3 @@ class User(abc.ABC):
         if photo is None: return True
         if type(photo) != str: return False
         return True
-
-    def __repr__(self):
-        return f"User(name={self.name}, email={self.email}, user_id={self.user_id}, state={self.role}, restaurant={self.restaurant})"

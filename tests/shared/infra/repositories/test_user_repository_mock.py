@@ -13,7 +13,7 @@ class Test_UserRepositoryMock:
         length_before_creation = len(repo_mock.users_list)
 
         new_user = User(name="Jorge Santos", email="jorge.santos@gmail.com", role=ROLE.ADMIN,
-                        user_id="93bc6ada-c0d1-7054-66ab-e17414c48af5", restaurant=None)
+                        user_id="93bc6ada-c0d1-7054-66ab-e17414c48af5", confirm_user=True, restaurant=None)
 
         response = repo_mock.create_user(new_user)
 
