@@ -26,7 +26,7 @@ class UserRepositoryMock(IUserRepository):
             User(name="José", email="ze@porteiros.br", role=ROLE.USER,
                  user_id="93bc6ada-c0d1-7054-66ab-e17414c48af1", confirm_user=True, restaurant=None, photo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0oeGAfSu9iKLTHqTxUM77GOOftgh6D-cTtQ&usqp=CAU"),
             User(name="Vilardi Bruno", email="deus@aws.br", role=ROLE.SELLER,
-                 user_id="93bc6ada-c0d1-7054-66ab-egu923c48af1", restaurant=RESTAURANT.HORA_H, photo="https://img.freepik.com/fotos-premium/cachorro-araffe-usando-oculos-em-forma-de-coracao-em-um-cobertor-vermelho-ai-generativo_900321-60981.jpg?w=826"),
+                 user_id="93bc6ada-c0d1-7054-66ab-egu923c48af1", confirm_user=True, restaurant=RESTAURANT.HORA_H, photo="https://img.freepik.com/fotos-premium/cachorro-araffe-usando-oculos-em-forma-de-coracao-em-um-cobertor-vermelho-ai-generativo_900321-60981.jpg?w=826"),
             User(name="Hector Guerrini", email="mago@ronaldo.br", role=ROLE.SELLER,
                  user_id="93bc6ada-c0d1-ab53-66ab-e17414c48af1", confirm_user=True, restaurant=RESTAURANT.CANTINA_DO_MOLEZA, photo="https://img.freepik.com/fotos-premium/cachorrinho-dachshund-vestido-com-fantasia-engracada-de-halloween-de-bruxa_220770-4618.jpg?w=1380"),
             User(name="Gabriel G Godoy", email="warrior@ww2.flutter", role=ROLE.USER,
@@ -43,7 +43,7 @@ class UserRepositoryMock(IUserRepository):
                 return user
         return None
 
-    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None, new_photo: Optional[str] = None):
+    def update_user_by_id(self, user_id: str, new_name: Optional[str] = None, new_photo: Optional[str] = None, new_confirm_user: Optional[bool] = None):
         user_to_update = self.get_user_by_id(user_id)
 
         if user_to_update is None:
@@ -55,8 +55,8 @@ class UserRepositoryMock(IUserRepository):
         if new_photo is not None:
             user_to_update.photo = new_photo
 
-        # if new_email is not None:
-        #     user_to_update.email = new_email
+        if new_confirm_user is not None:
+            user_to_update.confirm_user = new_confirm_user    
 
         return user_to_update
 
