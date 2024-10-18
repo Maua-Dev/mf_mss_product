@@ -25,7 +25,8 @@ class UpdateUserUsecase:
             email=user_to_update.email,
             role=user_to_update.role,
             restaurant=user_to_update.restaurant,
-            photo=user_to_update.photo
+            photo=user_to_update.photo,
+            confirm_user=user_to_update.confirm_user
         )
 
         if new_name is not None:
