@@ -11,6 +11,7 @@ class UserViewmodel:
     restaurant: Optional[RESTAURANT] = None
     role: str
     photo: str = None
+    confirm_user: bool
 
     def __init__(self, user: User):
         self.user_id = user.user_id
@@ -19,6 +20,7 @@ class UserViewmodel:
         self.restaurant = user.restaurant
         self.role = user.role.value
         self.photo = user.photo
+        self.confirm_user = user.confirm_user
 
     def to_dict(self) -> dict:
         return {
@@ -27,7 +29,8 @@ class UserViewmodel:
             'email': self.email,
             'restaurant': self.restaurant,
             'role': self.role,
-            'photo': self.photo
+            'photo': self.photo,
+            'confirm_user': self.confirm_user,
         }
     
 class DeleteUserViewmodel:
