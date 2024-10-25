@@ -1,3 +1,5 @@
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.external_interfaces.external_interface import IResponse, IRequest
 from src.shared.infra.dto.user_api_gateway_dto import UserApiGatewayDTO
 from .create_user_usecase import CreateUserUsecase
@@ -18,11 +20,25 @@ class CreateUserController:
                 raise MissingParameters('requester_user')
             
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
+
+            if request.data.get('role') is None:
+                raise MissingParameters('role')
+            
+            role = request.data.get('role')
+            if role not in [role.value for role in ROLE]:
+                raise EntityError('role')
+            
+            restaurant = request.data.get('restaurant')
+            if restaurant is not None:
+                if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
+                    raise EntityError('restaurant')
             
             user = self.CreateUserUsecase(
                 name = requester_user.name,
                 email= requester_user.email,
-                user_id=requester_user.user_id
+                user_id=requester_user.user_id,
+                role=ROLE[role],
+                restaurant=RESTAURANT[restaurant] if restaurant is not None else None #informa no body
             )
 
             viewmodel = CreateUserViewmodel(user)

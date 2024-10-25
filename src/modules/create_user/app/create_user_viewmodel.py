@@ -20,6 +20,8 @@ class CreateUserViewmodel:
         self.restaurant = user.restaurant
         self.role = user.role
         self.photo = user.photo
+        self.confirm_user = user.confirm_user
+        self.restaurant = user.restaurant
 
     def to_dict(self):
         return {
@@ -27,9 +29,10 @@ class CreateUserViewmodel:
                 'user_id': self.user_id,
                 'name': self.name,
                 'email': self.email,
-                'restaurant': self.restaurant.value if self.restaurant is not None else None,
                 'role': self.role.value,
-                'photo': self.photo
+                'photo': self.photo,
+                'confirm_user': self.confirm_user,
+                'restaurant': self.restaurant.value if self.restaurant is not None else None,
             },
 
             'message': "the user was created successfully"
