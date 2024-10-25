@@ -1,5 +1,6 @@
 from src.modules.create_user.app.create_user_controller import CreateUserController
 from src.modules.create_user.app.create_user_usecase import CreateUserUsecase
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.external_interfaces.http_models import HttpRequest
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -10,12 +11,14 @@ class Test_CreateUserControler:
         usecase = CreateUserUsecase(repo=repo)
         controller = CreateUserController(usecase=usecase)
 
-        request = HttpRequest(headers={"requester_user":{"sub":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "name":"Rodas Morales", "email":"rodas.morales@gmail.com", "custom:isMaua": True}})
+        role = repo.users_list[4].role.value
+
+        request = HttpRequest(headers={"requester_user":{"sub":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "name":"Rodas Morales", "email":"rodas.morales@gmail.com", "custom:isMaua": True,}, "role": role, "restaurant": None})
 
         response = controller(request)
 
         assert response.status_code == 201
-
+ 
     def test_create_user_controller_requester_user_none(self):
         repo = UserRepositoryMock()
         usecase = CreateUserUsecase(repo=repo)

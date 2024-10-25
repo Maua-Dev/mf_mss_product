@@ -8,19 +8,21 @@ class Test_CreateUserViewModel:
             user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3",
             name="Rodrigo",
             email="rodrigo.morales@gmail.com",
-            restaurant=None,
             role=ROLE.USER,
-            photo=None
-        )
+            photo=None,
+            confirm_user=True,
+            restaurant=None
+            )
         userViewmodel = CreateUserViewmodel(user=user).to_dict()
         expected = {
             "user": {
                 'user_id': "93bc6ada-c0d1-7054-66ab-e17414c48ae3",
                 'name': 'Rodrigo',
                 'email': 'rodrigo.morales@gmail.com',
-                'restaurant': None,
                 'role':'USER',
-                'photo': None
+                'photo': None,
+                'confirm_user': True,
+                'restaurant': None
             },
             'message': 'the user was created successfully'
         }

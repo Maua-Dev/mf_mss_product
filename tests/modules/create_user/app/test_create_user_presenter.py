@@ -47,7 +47,10 @@ class Test_CreateUserPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": "Hello from client!",
+            "body": {
+                "role": "OWNER",
+                "restaurant": "HORA_H"
+            },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -56,6 +59,7 @@ class Test_CreateUserPresenter:
         response = lambda_handler(event, None)
 
         assert response["statusCode"] == 201
+        assert json.loads(response["body"])["user"]["confirm_user"] == False
 
     def test_create_user_invalid_id(self):
         event = {

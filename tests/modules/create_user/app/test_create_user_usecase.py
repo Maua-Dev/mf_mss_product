@@ -1,6 +1,7 @@
 import pytest
 
 from src.modules.create_user.app.create_user_usecase import CreateUserUsecase
+from src.shared.domain.enums.role_enum import ROLE
 from src.shared.helpers.errors.usecase_errors import DuplicatedItem
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -11,7 +12,7 @@ class Test_CreateUserUsecase:
         repo = UserRepositoryMock()
         usecase = CreateUserUsecase(repo)
 
-        user = usecase(name="Rodas Morales", email="rodrigo.morales@gmail.com", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ag7")
+        user = usecase(name="Rodas Morales", email="rodrigo.morales@gmail.com", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ag7", role=ROLE.USER, restaurant=None)
 
         assert repo.users_list[-1] == user
         assert user.photo == None
@@ -21,5 +22,5 @@ class Test_CreateUserUsecase:
         usecase = CreateUserUsecase(repo)
 
         with pytest.raises(DuplicatedItem):
-            user = usecase(name="Rodrigo", email="rodrigo.morales@gmail.com", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3")
+            user = usecase(name="Rodrigo", email="rodrigo.morales@gmail.com", user_id="93bc6ada-c0d1-7054-66ab-e17414c48ae3", role=ROLE.USER, restaurant=None)
         
