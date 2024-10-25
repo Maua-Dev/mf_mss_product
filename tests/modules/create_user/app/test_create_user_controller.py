@@ -17,8 +17,6 @@ class Test_CreateUserControler:
 
         response = controller(request)
 
-        print(response)
-
         assert response.status_code == 201
  
     def test_create_user_controller_requester_user_none(self):
