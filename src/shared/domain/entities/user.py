@@ -36,7 +36,7 @@ class User(abc.ABC):
         self.user_id = user_id
 
         if type(role) != ROLE:
-            raise EntityError("state")
+            raise EntityError("role")
         self.role = role
 
         if type(user_id) != str:
