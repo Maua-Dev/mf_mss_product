@@ -10,7 +10,7 @@ class DeleteUserUsecase:
     def __init__(self, repo: IUserRepository):
         self.repo = repo
 
-    def __call__(self, user_id: str, restaurant: Optional[RESTAURANT] = None) -> Optional[User]:
+    def __call__(self, user_id: str, restaurant: Optional[RESTAURANT] = None, validate_user: bool = False) -> Optional[User]:
         if not User.validate_user_id(user_id=user_id):
             raise EntityError("user_id")
         
