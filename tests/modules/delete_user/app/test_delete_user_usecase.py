@@ -2,7 +2,6 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound
 import pytest
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.modules.delete_user.app.delete_user_usecase import DeleteUserUsecase
-from src.shared.domain.enums.restaurant_enum import RESTAURANT
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -32,13 +31,3 @@ class Test_DeleteUserUsecase:
 
         with pytest.raises(NoItemsFound):
             user = usecase(user_id="6d6b38c0-927d-4c43-93b7-b33ea9278cma")
-
-    def test_delete_user_not_validated(self):
-        repo = UserRepositoryMock()
-        usecase = DeleteUserUsecase(repo=repo)
-
-        repo.users_list[0].confirm_user = False
-        user_id = repo.users_list[0].user_id
-
-        with pytest.raises(NoItemsFound):  
-            usecase(user_id=user_id, restaurant=None)

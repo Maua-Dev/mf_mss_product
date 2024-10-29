@@ -5,12 +5,11 @@ class UserApiGatewayDTO:
     user_id: str
     is_maua: bool
 
-    def __init__(self, name: str, email:str, user_id: str, is_maua: bool, validate_user):
+    def __init__(self, name: str, email:str, user_id: str, is_maua: bool):
         self.name = name
         self.email = email
         self.user_id = user_id
         self.is_maua = is_maua
-        self.validate_user = validate_user
 
     @staticmethod
     def from_api_gateway(user_data: dict) -> 'UserApiGatewayDTO':
@@ -21,8 +20,7 @@ class UserApiGatewayDTO:
             name=user_data['name'],
             email=user_data['email'] ,
             is_maua=eval(str(user_data['custom:isMaua']).title()),
-            user_id=user_data['sub'],
-            validate_user=user_data.get("validate_user", False)
+            user_id=user_data['sub']
         )
     
     def __eq__(self, other):

@@ -13,13 +13,12 @@ class Test_DeleteUserController:
         user = repo.users_list[0]
 
         request = HttpRequest(
-            body={
+            headers={
                 'requester_user': {
                     "sub": user.user_id,
                     "name": user.name,
                     "email": user.email,
-                    "custom:isMaua": True,
-                    "validate_user": True
+                    "custom:isMaua": True
                 }
             }
         )
@@ -31,9 +30,7 @@ class Test_DeleteUserController:
                 "role": user.role.value,
                 "user_id": user.user_id,
                 "restaurant": user.restaurant,
-                "photo": user.photo,
-                "confirm_user": user.confirm_user
-                
+                "photo": user.photo
             },
             "message": "the user was deleted"
         }
@@ -55,8 +52,7 @@ class Test_DeleteUserController:
                     "sub": 666,
                     "name": user.name,
                     "email": user.email,
-                    "custom:isMaua": True,
-                    "validate_user": True
+                    "custom:isMaua": True
                 }
             }
         )
@@ -77,8 +73,7 @@ class Test_DeleteUserController:
                     "sub": None,
                     "name": user.name,
                     "email": user.email,
-                    "custom:isMaua": True,
-                    "validate_user": True
+                    "custom:isMaua": True
                 }
             }
         )
@@ -99,8 +94,7 @@ class Test_DeleteUserController:
                     "sub": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     "name": user.name,
                     "email": user.email,
-                    "custom:isMaua": True,
-                    "validate_user": True
+                    "custom:isMaua": True
                 }
             }
         )
@@ -108,25 +102,3 @@ class Test_DeleteUserController:
         response = controller(request=request)
 
         assert response.status_code == 404
-
-    def test_delete_controller_missing_validate_user(self):
-        repo = UserRepositoryMock()
-        usecase = DeleteUserUsecase(repo=repo)
-        controller = DeleteUserController(usecase=usecase)
-        user = repo.users_list[0]
-
-        request = HttpRequest(
-            headers={
-                'requester_user': {
-                    "sub": user.user_id,
-                    "name": user.name,
-                    "email": user.email,
-                    "custom:isMaua": True,
-                }
-            }
-        )
-
-        response = controller(request=request)
-
-        assert response.status_code == 400
-        assert "Field validate_user is missing" in response.body
