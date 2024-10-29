@@ -10,6 +10,7 @@ class UserViewmodel:
     restaurant: Optional[RESTAURANT] = None
     user_id: str
     photo: str = None
+    confirm_user: bool
 
     def __init__(self, user: User):
         self.user_name = user.name
@@ -18,6 +19,7 @@ class UserViewmodel:
         self.user_id = user.user_id
         self.restaurant = user.restaurant
         self.photo = user.photo
+        self.confirm_user = user.confirm_user
 
     def to_dict(self):
         return {
@@ -26,7 +28,8 @@ class UserViewmodel:
             "role": self.role.value,
             "user_id": self.user_id,
             "restaurant": self.restaurant.value if self.restaurant is not None else None,
-            "photo": self.photo
+            "photo": self.photo,
+            'confirm_user': self.confirm_user,
         }
 
 
