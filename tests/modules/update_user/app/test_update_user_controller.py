@@ -32,6 +32,7 @@ class Test_UpdateUserController:
                 "user_id": first_user.user_id,
                 "restaurant": first_user.restaurant,
                 "confirm_user": first_user.confirm_user,
+                "new_confirm_user": first_user.new_confirm_user,
                 "photo": "https://www.thestatesman.com/wp-content/uploads/2022/07/AmericanBullysobakabarobaka-4ce0d4dc0e144dccadb5159b222e275e-e1657808052501.jpg"
             },
             "message": "the user was updated"
@@ -69,7 +70,8 @@ class Test_UpdateUserController:
                 "user_id": first_user.user_id,
                 "restaurant": first_user.restaurant,
                 "photo": first_user.photo,
-                "confirm_user": first_user.confirm_user
+                "confirm_user": first_user.confirm_user,
+                "new_confirm_user": first_user.new_confirm_user
             },
             "message": "the user was updated"
         }

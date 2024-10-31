@@ -15,8 +15,9 @@ class User(abc.ABC):
     USER_ID_LENGTH = 36
     photo: Optional[str] = None
     confirm_user: bool
+    new_confirm_user: bool
 
-    def __init__(self, name: str, email: str, role: ROLE, user_id: str, confirm_user: bool, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
+    def __init__(self, name: str, email: str, role: ROLE, user_id: str, confirm_user: bool, new_confirm_user: bool, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
         if not User.validate_name(name):
             raise EntityError("name")
         self.name = name
@@ -49,6 +50,10 @@ class User(abc.ABC):
         if type(confirm_user) != bool:
             raise EntityError("validate_user")
         self.confirm_user = confirm_user
+
+        if type(new_confirm_user) != bool:
+            raise EntityError("new_confirm_user")
+        self.new_confirm_user = new_confirm_user
 
     @staticmethod
     def validate_name(name: str) -> bool:

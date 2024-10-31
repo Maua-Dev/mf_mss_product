@@ -2,9 +2,9 @@ from src.modules.update_user.app.update_user_viewmodel import UpdateUserViewmode
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.role_enum import ROLE
 
-user_1 = User(name="Lucas Duez", email="lucas.santos@maua.br", user_id="93bc6ada-c0d1-7054-66ab-e17414c48bbb", confirm_user = True,
+user_1 = User(name="Lucas Duez", email="lucas.santos@maua.br", user_id="93bc6ada-c0d1-7054-66ab-e17414c48bbb", confirm_user = True, new_confirm_user=True,
             role=ROLE.USER, photo="https://www.thestatesman.com/wp-content/uploads/2022/07/AmericanBullysobakabarobaka-4ce0d4dc0e144dccadb5159b222e275e-e1657808052501.jpg")
-user_2 = User(name="Lucas Duez", email="lucas.santos@maua.br", user_id="93bc6ada-c0d1-7054-66ab-e17414c48bbb", confirm_user = False,
+user_2 = User(name="Lucas Duez", email="lucas.santos@maua.br", user_id="93bc6ada-c0d1-7054-66ab-e17414c48bbb", confirm_user = False, new_confirm_user=True,
             role=ROLE.USER)
 
 
@@ -23,7 +23,8 @@ class Test_UserViewmodel:
                 "user_id": "93bc6ada-c0d1-7054-66ab-e17414c48bbb",
                 "restaurant": None,
                 "photo": "https://www.thestatesman.com/wp-content/uploads/2022/07/AmericanBullysobakabarobaka-4ce0d4dc0e144dccadb5159b222e275e-e1657808052501.jpg",
-                "confirm_user": True
+                "confirm_user": True,
+                "new_confirm_user": True
             },
             "message": "the user was updated"
         }
@@ -41,7 +42,8 @@ class Test_UserViewmodel:
                 "user_id": "93bc6ada-c0d1-7054-66ab-e17414c48bbb",
                 "restaurant": None,
                 "photo": None,
-                "confirm_user": False
+                "confirm_user": False,
+                "new_confirm_user": True
             },
             "message": "the user was updated"
         }
