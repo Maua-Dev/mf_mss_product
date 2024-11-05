@@ -66,3 +66,10 @@ class UserRepositoryMock(IUserRepository):
                 self.users_list.remove(user)
                 return user
         return None
+    
+    def get_all_users_by_restaurant(self, restaurant) -> List[User]:
+        users = []
+        for user in self.users_list:
+            if user.restaurant == restaurant:
+                users.append(user)
+        return users

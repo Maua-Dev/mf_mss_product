@@ -77,3 +77,6 @@ class FeedbackNotAllowed(BaseError):
     def __init__(self):
         super().__init__("Evaluate the order of its same restaurant")
 
+class UserNeedsRestaurant(BaseError):
+    def __init__(self):
+        super().__init__("User needs a restaurant to perform this action")

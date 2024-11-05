@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import List, Optional
 
 from src.shared.domain.entities.user import User
+from src.shared.domain.enums.restaurant_enum import RESTAURANT
 
 
 class IUserRepository(ABC):
@@ -23,4 +24,8 @@ class IUserRepository(ABC):
         pass
 
     def get_average_feedback_by_restaurant(self):
+        pass
+
+    @abstractmethod
+    def get_all_users_by_restaurant(self, restaurant: RESTAURANT) -> List[User]:
         pass
