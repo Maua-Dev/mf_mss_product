@@ -19,18 +19,10 @@ class GetAllUsersByRestaurantController:
                 raise MissingParameters('requester_user')
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
-
-            if request.data.get("restaurant") is None:
-                raise MissingParameters('restaurant')
-
-            restaurant = request.data.get('restaurant')
-            if restaurant not in [restaurant_value.value for restaurant_value in RESTAURANT]:
-                raise RestaurantNotFound(restaurant)
             
             users = self.usecase(
-                user_id=requester_user.user_id, 
-                restaurant=restaurant
-            ) #como o usuario ira criar um restaurante, ta certo passar pelo requester_user?
+                user_id=requester_user.user_id
+            ) 
 
             viewmodel = GetAllUsersByRestaurantViewModel(users=users)
             

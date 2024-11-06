@@ -1,7 +1,7 @@
 import json
 from urllib import response
 
-from src.modules.get_all_schedules_by_restaurant.app.get_all_schedules_by_restaurant_presenter import lambda_handler
+from src.modules.get_all_users_by_restaurant.app.get_all_users_by_restaurant_presenter import lambda_handler
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -9,7 +9,7 @@ class Test_GetAllUsersByRestaurantPresenter:
     def test_get_all_users_by_restaurant_presenter(self):
         repo_user = UserRepositoryMock()
 
-        user = repo_user.users_list[0]
+        user = repo_user.users_list[2]
 
         event = {
           "version": "2.0",
@@ -54,14 +54,13 @@ class Test_GetAllUsersByRestaurantPresenter:
             "time": "12/Mar/2020:19:03:58 +0000",
             "timeEpoch": 1583348638390
           },
-          "body":{
-              "restaurant": "SOUZA_DE_ABREU"
-          },
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
         }
 
         response = lambda_handler(event, None)
+
+        print(response)
 
         assert response['statusCode'] == 200

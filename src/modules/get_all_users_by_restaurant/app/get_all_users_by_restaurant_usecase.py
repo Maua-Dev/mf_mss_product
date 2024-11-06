@@ -12,7 +12,7 @@ class GetAllUsersByRestaurantUseCase:
         self.user_repo = user_repo
         self.order_repo = order_repo
 
-    def __call__(self, user_id: str, restaurant: RESTAURANT) -> List[User]:
+    def __call__(self, user_id: str) -> List[User]:
 
         user = self.user_repo.get_user_by_id(user_id)
 
@@ -25,7 +25,7 @@ class GetAllUsersByRestaurantUseCase:
         if user.restaurant is None:
             raise UserNeedsRestaurant()
         
-        users = self.user_repo.get_all_users_by_restaurant(restaurant)
+        users = self.user_repo.get_all_users_by_restaurant(user.restaurant)
 
         return users
         

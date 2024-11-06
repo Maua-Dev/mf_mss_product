@@ -15,13 +15,11 @@ class Test_GetAllUsersByRestaurantUseCase:
         
         user = repo_user.users_list[3]
         user.role = ROLE.OWNER
-        user_restaurant = RESTAURANT.SOUZA_DE_ABREU
 
-        get_all_users_by_restaurant = usecase.__call__(user_id='93bc6ada-c0d1-7054-66ab-e17414c48af4', restaurant=user_restaurant)
+        get_all_users_by_restaurant = usecase.__call__(user_id='93bc6ada-c0d1-7054-66ab-e17414c48af4')
 
         assert repo_user.users_list[3].user_id == get_all_users_by_restaurant[0].user_id
         assert repo_user.users_list[3].role == get_all_users_by_restaurant[0].role
-        assert repo_user.users_list[3].restaurant == get_all_users_by_restaurant[0].restaurant
 
     def test_get_all_users_by_restaurant_user_is_none(self):
         repo_user = UserRepositoryMock()
@@ -30,10 +28,9 @@ class Test_GetAllUsersByRestaurantUseCase:
 
         user = repo_user.users_list[3]
         user.role = ROLE.OWNER
-        user_restaurant = RESTAURANT.SOUZA_DE_ABREU
 
         with pytest.raises(UnregisteredUser):
-            usecase.__call__(user_id=None, restaurant=user_restaurant)
+            usecase.__call__(user_id=None)
 
     def test_get_all_users_by_restaurant_user_not_allowed(self):
         repo_user = UserRepositoryMock()
@@ -43,7 +40,7 @@ class Test_GetAllUsersByRestaurantUseCase:
         user = repo_user.users_list[4]
 
         with pytest.raises(UserNotAllowed):
-            usecase.__call__(user_id=user.user_id, restaurant=user.restaurant)
+            usecase.__call__(user_id=user.user_id)
 
     def test_get_all_users_by_restaurant_user_restaurant_is_none(self):
         repo_user = UserRepositoryMock()
@@ -53,7 +50,7 @@ class Test_GetAllUsersByRestaurantUseCase:
         user = repo_user.users_list[0]
 
         with pytest.raises(UserNeedsRestaurant):
-            usecase.__call__(user_id=user.user_id, restaurant=user.restaurant)
+            usecase.__call__(user_id=user.user_id)
 
 
         
