@@ -11,14 +11,16 @@ class UserDynamoDTO:
     restaurant: Optional[RESTAURANT] = None
     user_id: str
     photo: Optional[str] = None
+    confirm_user: bool
 
-    def __init__(self, name: str, email: str, role: ROLE, user_id: str, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
+    def __init__(self, name: str, email: str, role: ROLE, user_id: str, confirm_user: bool, restaurant: Optional[RESTAURANT] = None, photo: Optional[str] = None):
         self.name = name
         self.email = email
         self.role = role
         self.restaurant = restaurant
         self.user_id = user_id
         self.photo = photo
+        self.confirm_user = confirm_user
 
     @staticmethod
     def from_entity(user: User) -> "UserDynamoDTO":
@@ -31,7 +33,8 @@ class UserDynamoDTO:
             role = user.role,
             restaurant = user.restaurant,
             user_id = user.user_id,
-            photo = user.photo
+            photo = user.photo,
+            confirm_user= user.confirm_user
         )
 
     def to_dynamo(self) -> dict:
@@ -45,7 +48,8 @@ class UserDynamoDTO:
             "user_id": self.user_id,
             "role": self.role.value,
             "restaurant": self.restaurant.value if self.restaurant is not None else None,
-            "photo": self.photo
+            "photo": self.photo,
+            "confirm_user": self.confirm_user
         }
 
         data_without_none_values = {k: v for k, v in data.items() if v is not None}
@@ -77,8 +81,7 @@ class UserDynamoDTO:
             user_id=self.user_id,
             role=self.role,
             restaurant=self.restaurant,
-            photo=self.photo,
-            confirm_user=True
+            photo=self.photo
         )
 
     def __repr__(self):

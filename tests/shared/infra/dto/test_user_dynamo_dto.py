@@ -17,7 +17,8 @@ class Test_UserDynamoDto:
             user_id=repo.users_list[0].user_id,
             role=repo.users_list[0].role,
             restaurant=repo.users_list[0].restaurant,
-            photo=repo.users_list[0].photo
+            photo=repo.users_list[0].photo,
+            confirm_user=repo.users_list[0].confirm_user
         )
 
         assert user_dto == expected_user_dto
@@ -31,7 +32,8 @@ class Test_UserDynamoDto:
             user_id=repo.users_list[2].user_id,
             role=repo.users_list[2].role,
             restaurant=repo.users_list[2].restaurant,
-            photo=repo.users_list[2].photo
+            photo=repo.users_list[2].photo,
+            confirm_user=repo.users_list[2].confirm_user
         )
 
         user_dynamo = user_dto.to_dynamo()
@@ -43,7 +45,8 @@ class Test_UserDynamoDto:
             "user_id": repo.users_list[2].user_id,
             "role": repo.users_list[2].role.value,
             "restaurant": repo.users_list[2].restaurant.value,
-            "photo": repo.users_list[2].photo
+            "photo": repo.users_list[2].photo,
+            "confirm_user": repo.users_list[2].confirm_user
         }
 
         assert user_dynamo == expected_dict
@@ -87,7 +90,8 @@ class Test_UserDynamoDto:
             "user_id": repo.users_list[2].user_id,
             "role": repo.users_list[2].role.value,
             "restaurant": repo.users_list[2].restaurant.value,
-            "photo": repo.users_list[2].photo
+            "photo": repo.users_list[2].photo,
+            "confirm_user": repo.users_list[2].confirm_user
         }
 
         assert user_dynamo == expected_dict
