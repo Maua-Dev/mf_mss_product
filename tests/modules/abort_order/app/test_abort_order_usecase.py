@@ -14,7 +14,8 @@ def create_test_user(repo_user):
         name="Fernandão",
         email="fernandao@outlook.com",
         role=ROLE.USER,
-        user_id="d05bbfae-c06b-4d99-ac03-28945e6c30f3"
+        user_id="d05bbfae-c06b-4d99-ac03-28945e6c30f3",
+        confirm_user=True
     ))
 
 class Test_AbortOrderUseCase:

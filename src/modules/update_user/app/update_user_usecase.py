@@ -10,7 +10,7 @@ class UpdateUserUsecase:
     def __init__(self, repo: IUserRepository):
         self.repository = repo
 
-    def __call__(self, user_id: str, new_name: Optional[str] = None, new_photo: Optional[str] = None):
+    def __call__(self, user_id: str, new_name: Optional[str] = None, new_photo: Optional[str] = None, new_confirm_user: Optional[str] = None):
         if not User.validate_user_id(user_id):
             raise EntityError("user_id")
 
@@ -18,6 +18,9 @@ class UpdateUserUsecase:
 
         if user_to_update is None:
             raise NoItemsFound("user")
+        
+        if new_confirm_user is not None:
+            user_to_update.confirm_user = new_confirm_user
 
         new_user = User(
             user_id=user_to_update.user_id,
@@ -26,8 +29,7 @@ class UpdateUserUsecase:
             role=user_to_update.role,
             restaurant=user_to_update.restaurant,
             photo=user_to_update.photo,
-            confirm_user=user_to_update.confirm_user,
-            new_confirm_user= user_to_update.new_confirm_user
+            confirm_user=user_to_update.confirm_user
         )
 
         if new_name is not None:

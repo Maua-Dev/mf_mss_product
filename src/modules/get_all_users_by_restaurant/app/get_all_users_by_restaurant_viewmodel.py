@@ -21,7 +21,6 @@ class UserViewModel:
         self.restaurant = user.restaurant
         self.photo = user.photo
         self.confirm_user = user.confirm_user
-        self.new_confirm_user = user.new_confirm_user
 
     def to_dict(self):
         return {
@@ -31,8 +30,7 @@ class UserViewModel:
             'role': self.role.value,
             'photo': self.photo,
             'confirm_user': self.confirm_user,
-            'restaurant': self.restaurant.value,
-            'new_confirm_user': self.new_confirm_user
+            'restaurant': self.restaurant.value
         }
     
 class GetAllUsersByRestaurantViewModel:

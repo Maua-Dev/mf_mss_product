@@ -17,7 +17,8 @@ def create_test_user(repo_user):
         email="lucas@gmail.com",
         restaurant=RESTAURANT.CANTINA_DO_MOLEZA,
         role=ROLE.OWNER,
-        user_id="93bc6ada-c0d1-7054-66ab-e17414c48af5"
+        user_id="93bc6ada-c0d1-7054-66ab-e17414c48af5",
+        confirm_user=True
     ))
 
 

@@ -26,8 +26,7 @@ class Test_GetAllUsersByRestaurantViewmodel:
                     'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48af4',
                     'email': 'brancas.dev@gmail.com',
                     'photo': 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*',
-                    'confirm_user': True,
-                    'new_confirm_user': True
+                    'confirm_user': True
                 }
             ],
             'message': 'the users with restaurant were retrieved'

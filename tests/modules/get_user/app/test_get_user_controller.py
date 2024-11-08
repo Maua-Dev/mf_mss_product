@@ -29,7 +29,8 @@ class Test_GetUserController:
                 "role": self.first_user.role.value,
                 "user_id": self.first_user.user_id,
                 "restaurant": self.first_user.restaurant,
-                "photo": self.first_user.photo
+                "photo": self.first_user.photo,
+                "confirm_user": self.first_user.confirm_user
             },
             "message": "the user was retrieved"
         }

@@ -18,10 +18,12 @@ class UpdateUserController:
                 raise MissingParameters('requester_user')
 
             requester_user = UserApiGatewayDTO.from_api_gateway(request.data.get('requester_user'))
+            new_confirm_user = request.data.get("new_confirm_user")
 
             user = self.usecase(user_id=requester_user.user_id,
                                 new_name=request.data.get("new_name"),
-                                new_photo=request.data.get("new_photo"))
+                                new_photo=request.data.get("new_photo"),
+                                new_confirm_user=bool(new_confirm_user) if new_confirm_user is not None else None)
 
             viewmodel = UpdateUserViewmodel(user).to_dict()
 

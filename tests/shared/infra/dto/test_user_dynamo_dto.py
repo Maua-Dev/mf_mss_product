@@ -193,7 +193,8 @@ class Test_UserDynamoDto:
             email='ze@porteiros.br',
             user_id='93bc6ada-c0d1-7054-66ab-e17414c48af1',
             role=ROLE.USER,
-            photo="https://i.imgur.com/3Gv7kc8.jpg"
+            photo="https://i.imgur.com/3Gv7kc8.jpg",
+            confirm_user=True
         )
 
         assert user.name == expected_user.name

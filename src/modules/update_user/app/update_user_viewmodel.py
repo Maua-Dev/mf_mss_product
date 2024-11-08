@@ -20,7 +20,6 @@ class UserViewmodel:
         self.restaurant = user.restaurant.value if user.restaurant is not None else None
         self.photo = user.photo
         self.confirm_user = user.confirm_user
-        self.new_confirm_user = user.new_confirm_user
 
     def to_dict(self):
         return {
@@ -30,8 +29,7 @@ class UserViewmodel:
             "user_id": self.user_id,
             "restaurant": self.restaurant,
             "photo": self.photo,
-            "confirm_user": self.confirm_user,
-            "new_confirm_user": self.new_confirm_user
+            "confirm_user": self.confirm_user
         }
 
 

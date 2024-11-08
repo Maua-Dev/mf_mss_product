@@ -77,7 +77,8 @@ class UserDynamoDTO:
             user_id=self.user_id,
             role=self.role,
             restaurant=self.restaurant,
-            photo=self.photo
+            photo=self.photo,
+            confirm_user=True
         )
 
     def __repr__(self):

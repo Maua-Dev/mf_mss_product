@@ -48,10 +48,10 @@ class Test_UserRepositoryMock:
         first_user_id = UserRepositoryMock().users_list[0].user_id
         repo_mock = UserRepositoryMock()
 
-        response = repo_mock.update_user_by_id(first_user_id, new_confirm_user=False)
+        response = repo_mock.update_user_by_id(first_user_id)
 
         assert repo_mock.users_list[0].name == "Lucas Duez"
-        assert repo_mock.users_list[0].confirm_user == False
+        assert repo_mock.users_list[0].confirm_user == True
     
     def test_delete_user_by_id(self):
         first_user_id = UserRepositoryMock().users_list[0].user_id
